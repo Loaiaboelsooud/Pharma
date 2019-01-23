@@ -6,12 +6,11 @@
     android:background="@null"
     android:elevation="4dp"
     android:gravity="center_vertical|start"
-    app:contentInsetStartWithNavigation="0dp"
     app:contentInsetStart="0dp"
-    >
+    app:contentInsetStartWithNavigation="0dp">
 
     <android.support.v7.widget.ActionMenuView
-        android:id="@+id/menu"
+        android:id="@+id/menu_main"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 

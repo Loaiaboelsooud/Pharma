@@ -1,7 +1,6 @@
 package com.example.loaiaboelsooud.pharma;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,11 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class MenuInt extends AppCompatActivity {
+public class NavMenuInt extends AppCompatActivity {
 
 
-   public void intToolBar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+    public void intNavToolBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar_nav);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -24,7 +23,7 @@ public class MenuInt extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main, menu);
+        menuInflater.inflate(R.menu.menu_nav, menu);
 
         final MenuItem item = menu.findItem(R.id.action_favorite);
         item.getActionView().setOnClickListener(new View.OnClickListener() {
@@ -37,6 +36,8 @@ public class MenuInt extends AppCompatActivity {
         item2.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(NavMenuInt.this, WebViewActivity.class);
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(), "hobaaa2", Toast.LENGTH_SHORT).show();
             }
         });
