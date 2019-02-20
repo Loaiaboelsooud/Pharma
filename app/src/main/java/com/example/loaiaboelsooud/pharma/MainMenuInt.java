@@ -1,5 +1,6 @@
 package com.example.loaiaboelsooud.pharma;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -42,6 +43,8 @@ public class MainMenuInt extends AppCompatActivity {
         switch (id) {
             case R.id.settings_icon:
                 Toast.makeText(getApplicationContext(), "hobaaa1", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainMenuInt.this, LoginActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

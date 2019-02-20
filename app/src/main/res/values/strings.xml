@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Drug Deal</string>
     <string name="test_head">Application</string>
+    <string name="job">job</string>
+    <string name="offer">offer</string>
+    <string name="drug_interactions">Drug Interactions</string>
+    <string name="prescription">prescription</string>
+    <string name="buy_sell">Buy and sell</string>
+    <string name="drug_index">Drug Index</string>
+    <string name="facebook_app_id">241355193451426</string>
+    <string name="fb_login_protocol_scheme">fb241355193451426</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

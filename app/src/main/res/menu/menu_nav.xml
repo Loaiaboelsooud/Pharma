@@ -3,47 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/menu_nav">
     <item
-        android:id="@+id/action_favorite"
+        android:id="@+id/action_offers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/image_menu"
-        android:title="test"
+        app:actionLayout="@layout/toolbar_offers_image"
+        android:title=""
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_favorite2"
+        android:id="@+id/action_buysell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/image_menu"
-        android:title="test2"
+        app:actionLayout="@layout/toolbar_buysell_image"
+        android:title=""
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_favorite3"
+        android:id="@+id/action_job"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/image_menu"
-        android:title="test3"
+        app:actionLayout="@layout/toolbar_job_image"
+        android:title=""
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_favorite4"
+        android:id="@+id/action_presecription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/image_menu"
-        android:title="test4"
+        app:actionLayout="@layout/toolbar_presecription_iamge"
+        android:title=""
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_favorite5"
+        android:id="@+id/action_druginteraction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/image_menu"
-        android:title="test4"
+        app:actionLayout="@layout/toolbar_druginteraction_image"
+        android:title=""
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_favorite6"
+        android:id="@+id/action_drugindex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/ic_action_name2"
-        android:title="test4"
+        app:actionLayout="@layout/toolbar_drugindex_image"
+        android:title=""
         app:showAsAction="always" />
 
 </menu>

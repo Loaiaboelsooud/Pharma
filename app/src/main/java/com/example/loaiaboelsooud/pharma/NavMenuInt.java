@@ -11,92 +11,72 @@ import android.widget.Toast;
 
 public class NavMenuInt extends AppCompatActivity {
 
-
     public void intNavToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar_nav);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_nav, menu);
 
-        final MenuItem item = menu.findItem(R.id.action_favorite);
-        item.getActionView().setOnClickListener(new View.OnClickListener() {
+        final MenuItem offersItem = menu.findItem(R.id.action_offers);
+        offersItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "hobaaa1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
+                offersItem.setActionView(
+                        R.layout.toolbar_druginteraction_image);
             }
         });
-        final MenuItem item2 = menu.findItem(R.id.action_favorite2);
-        item2.getActionView().setOnClickListener(new View.OnClickListener() {
+        final MenuItem buysellItem = menu.findItem(R.id.action_buysell);
+        buysellItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NavMenuInt.this, WebViewActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "hobaaa2", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
             }
         });
-        final MenuItem item3 = menu.findItem(R.id.action_favorite3);
-        item3.getActionView().setOnClickListener(new View.OnClickListener() {
+        final MenuItem jobItem = menu.findItem(R.id.action_job);
+        jobItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "hobaaa3", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
             }
         });
-        final MenuItem item4 = menu.findItem(R.id.action_favorite4);
-        item4.getActionView().setOnClickListener(new View.OnClickListener() {
+        final MenuItem presecriptionItem = menu.findItem(R.id.action_presecription);
+        presecriptionItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "hobaaa4", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
             }
         });
-        final MenuItem item5 = menu.findItem(R.id.action_favorite5);
-        item5.getActionView().setOnClickListener(new View.OnClickListener() {
+        final MenuItem druginteractionItem = menu.findItem(R.id.action_druginteraction);
+        druginteractionItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "hobaaa5", Toast.LENGTH_SHORT).show();
+                if (!NavMenuInt.this.getClass().getSimpleName().equals("WebViewActivity")) {
+                    Intent intent = new Intent(NavMenuInt.this, WebViewActivity.class);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(getApplicationContext(), "unable to go", Toast.LENGTH_SHORT).show();
             }
         });
-        final MenuItem item6 = menu.findItem(R.id.action_favorite5);
-        item6.getActionView().setOnClickListener(new View.OnClickListener() {
+        final MenuItem drugindexItem = menu.findItem(R.id.action_drugindex);
+        drugindexItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "hobaaa5", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
             }
         });
-
-
+        switch (NavMenuInt.this.getClass().getSimpleName()) {
+            case "WebViewActivity":
+                druginteractionItem.setActionView(
+                        R.layout.toolbar_buysell_image);
+                break;
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
-  /*  @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_favorite:
-                Toast.makeText(getApplicationContext(), "hobaaa1", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.action_favorite2:
-                Toast.makeText(getApplicationContext(), "hobaaa2", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.action_favorite3:
-                Toast.makeText(getApplicationContext(), "hobaaa3", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.action_favorite4:
-                Toast.makeText(getApplicationContext(), "hobaaa4", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.action_favorite5:
-                Toast.makeText(getApplicationContext(), "hobaaa5", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.action_favorite6:
-                Toast.makeText(getApplicationContext(), "hobaaa6", Toast.LENGTH_LONG).show();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 }
