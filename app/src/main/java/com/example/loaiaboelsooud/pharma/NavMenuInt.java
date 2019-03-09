@@ -27,8 +27,6 @@ public class NavMenuInt extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
-                offersItem.setActionView(
-                        R.layout.toolbar_druginteraction_image);
             }
         });
         final MenuItem buysellItem = menu.findItem(R.id.action_buysell);
@@ -57,6 +55,8 @@ public class NavMenuInt extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!NavMenuInt.this.getClass().getSimpleName().equals("WebViewActivity")) {
+                    druginteractionItem.setActionView(
+                            R.layout.toolbar_druginteraction_image_active);
                     Intent intent = new Intent(NavMenuInt.this, WebViewActivity.class);
                     startActivity(intent);
                 } else
@@ -73,7 +73,7 @@ public class NavMenuInt extends AppCompatActivity {
         switch (NavMenuInt.this.getClass().getSimpleName()) {
             case "WebViewActivity":
                 druginteractionItem.setActionView(
-                        R.layout.toolbar_buysell_image);
+                        R.layout.toolbar_druginteraction_image_active);
                 break;
         }
         return super.onCreateOptionsMenu(menu);

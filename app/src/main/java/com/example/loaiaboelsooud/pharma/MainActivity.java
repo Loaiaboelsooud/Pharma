@@ -89,5 +89,11 @@ public class MainActivity extends MainMenuInt {
             return view1;
 
         }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

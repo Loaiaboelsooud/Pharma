@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -32,15 +33,17 @@ import com.android.volley.VolleyError;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +55,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
+    ImageView imgAvatar;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -111,20 +114,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);*/
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+
+
         setContentView(R.layout.activity_login);
         callbackManager = CallbackManager.Factory.create();
         intFacebook();
+        imgAvatar = findViewById(R.id.avatar);
+    }
 
-        sendRequest();
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void sendRequest() {
         final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             @Override
             public void notifySuccess(String response) {
-                Log.e("responce", response);
+                Log.e("response", response);
             }
 
             @Override
@@ -152,7 +161,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         callbackManager = CallbackManager.Factory.create();
         txtStat = (TextView) findViewById(R.id.stat);
         login_button = findViewById(R.id.facebook_button);
-        login_button.setReadPermissions(Arrays.asList(EMAIL));
         final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             @Override
             public void notifySuccess(String response) {
@@ -163,21 +171,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void notifyError(VolleyError error) {
             }
         });
-
+        login_button.setReadPermissions(Arrays.asList("public_profile", "email"));
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                txtStat.setText("login success \n token " + loginResult.getAccessToken().getToken() + "\n name" + loginResult.getAccessToken().getPermissions());
+                final String fbToken = loginResult.getAccessToken().getToken();
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject jsonObject,
                                                     GraphResponse response) {
-                                httpRequests.sendFBPostRequest(jsonObject);
+                                httpRequests.sendPostRequest(jsonObject, fbToken);
+                                try {
+                                    URL profilePic = new URL("https://graph.facebook.com/" +
+                                            jsonObject.getString("id") + "/picture?width=250&height=250");
+                                    Picasso.with(LoginActivity.this).load(profilePic.toString()).into(imgAvatar);
+                                } catch (MalformedURLException e) {
+                                    e.printStackTrace();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                //   Intent intent = new Intent(LoginActivity.this, EditAccActivity.class);
+                                // startActivity(intent);
+                                //finish();
                             }
                         });
+
                 request.executeAsync();
+
+
             }
 
 
