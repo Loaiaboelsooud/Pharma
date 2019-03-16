@@ -6,12 +6,14 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class PrefUtil {
+
+
     private Activity activity;
 
-    // Constructor
     public PrefUtil(Activity activity) {
         this.activity = activity;
     }
+
 
     public void saveAccessToken(String token) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
@@ -19,7 +21,6 @@ public class PrefUtil {
         editor.putString("fb_access_token", token);
         editor.apply(); // This line is IMPORTANT !!!
     }
-
 
     public String getToken() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
@@ -33,21 +34,30 @@ public class PrefUtil {
         editor.apply(); // This line is IMPORTANT !!!
     }
 
-    public void saveFacebookUserInfo(String first_name, String last_name, String email, String gender, String profileURL) {
+    public void saveFacebookUserInfo(String name, String email, String qualification, String avatar, String job, String city, long expiresIn) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("fb_first_name", first_name);
-        editor.putString("fb_last_name", last_name);
-        editor.putString("fb_email", email);
-        editor.putString("fb_gender", gender);
-        editor.putString("fb_profileURL", profileURL);
+        editor.putString("name", name);
+        editor.putString("email", email);
+        editor.putString("qualification", qualification);
+        editor.putString("avatar", avatar);
+        editor.putString("job", job);
+        editor.putString("city", city);
+        editor.putLong("expires_in", expiresIn);
         editor.apply(); // This line is IMPORTANT !!!
-        Log.d("MyApp", "Shared Name : " + first_name + "\nLast Name : " + last_name + "\nEmail : " + email + "\nGender : " + gender + "\nProfile Pic : " + profileURL);
+        Log.d("MyApp", "Shared Name : " + name + "\nEmail : " + email);
     }
 
-    public void getFacebookUserInfo() {
+    public User getFacebookUserInfo() {
+        User user = new User();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        Log.d("MyApp", "Name : " + prefs.getString("fb_name", null) + "\nEmail : " + prefs.getString("fb_email", null));
+        user.setName(prefs.getString("name", null));
+        user.setEmail(prefs.getString("email", null));
+        user.setAvatar(prefs.getString("avatar", null));
+        user.setQualification(prefs.getString("qualification", null));
+        user.setJob(prefs.getString("job", null));
+        user.setCity(prefs.getString("city", null));
+        return user;
     }
 
 }

@@ -20,10 +20,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,15 +35,10 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -129,28 +122,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         startActivity(intent);
     }
 
-    private void sendRequest() {
-        final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
-            @Override
-            public void notifySuccess(String response) {
-                Log.e("response", response);
-            }
-
-            @Override
-            public void notifyError(VolleyError error) {
-            }
-        });
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                httpRequests.sendRequest();
-            }
-        });
-
-    }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -171,7 +142,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void notifyError(VolleyError error) {
             }
         });
-        login_button.setReadPermissions(Arrays.asList("public_profile", "email"));
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -182,28 +152,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             @Override
                             public void onCompleted(JSONObject jsonObject,
                                                     GraphResponse response) {
-                                httpRequests.sendPostRequest(jsonObject, fbToken);
-                                try {
-                                    URL profilePic = new URL("https://graph.facebook.com/" +
-                                            jsonObject.getString("id") + "/picture?width=250&height=250");
-                                    Picasso.with(LoginActivity.this).load(profilePic.toString()).into(imgAvatar);
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                //   Intent intent = new Intent(LoginActivity.this, EditAccActivity.class);
-                                // startActivity(intent);
-                                //finish();
+                                httpRequests.sendFBPostRequest(jsonObject, fbToken, LoginActivity.this);
+                                Intent intent = new Intent(LoginActivity.this, EditAccActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         });
-
                 request.executeAsync();
-
-
             }
-
 
             @Override
             public void onCancel() {

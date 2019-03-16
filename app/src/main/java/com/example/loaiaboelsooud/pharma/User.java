@@ -1,23 +1,46 @@
 package com.example.loaiaboelsooud.pharma;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
+    @SerializedName("id")
+    private String id;
+    @SerializedName("avatar")
+    private String avatar;
     @SerializedName("facebook_id")
-    public int facebook_id;
+    private String facebookID;
     @SerializedName("name")
-    public String name;
+    private String name;
     @SerializedName("email")
-    public String email;
+    private String email;
     @SerializedName("qualification")
-    public String qualification;
+    private String qualification;
     @SerializedName("job")
-    public String job;
+    private String job;
     @SerializedName("city")
-    public String city;
+    private String city;
     @SerializedName("facebook_token")
-    public String facebook_token;
+    private String facebookToken;
+    @SerializedName("token")
+    private String token;
+    @SerializedName("expires_in")
+    private long expiresIn;
+
+    public long getExpiresIn() {
+        return expiresIn;
+    }
+
+    public void setExpiresIn(long expiresIn) {
+        this.expiresIn = expiresIn;
+    }
+
+    public String getFacebookID() {
+        return facebookID;
+    }
+
+    public void setFacebookID(String facebookID) {
+        this.facebookID = facebookID;
+    }
 
     public String getName() {
         return name;
@@ -59,12 +82,28 @@ public class User {
         this.city = city;
     }
 
-    public String getFacebook_token() {
-        return facebook_token;
+    public String getFacebookToken() {
+        return facebookToken;
     }
 
-    public void setFacebook_token(String facebook_token) {
-        this.facebook_token = facebook_token;
+    public void setFacebookToken(String facebookToken) {
+        this.facebookToken = facebookToken;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAvatar() {
@@ -75,26 +114,5 @@ public class User {
         this.avatar = avatar;
     }
 
-    public int getExpires_in() {
-        return expires_in;
-    }
 
-    public void setExpires_in(int expires_in) {
-        this.expires_in = expires_in;
-    }
-
-    @SerializedName("avatar")
-    @Expose
-    public String avatar;
-    @SerializedName("expires_in")
-    @Expose
-    public int expires_in;
-
-    public int getFacebook_id() {
-        return facebook_id;
-    }
-
-    public void setFacebook_id(int facebook_id) {
-        this.facebook_id = facebook_id;
-    }
 }
