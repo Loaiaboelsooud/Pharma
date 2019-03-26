@@ -29,6 +29,7 @@ public class NavMenuInt extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
             }
         });
+
         final MenuItem buysellItem = menu.findItem(R.id.action_buysell);
         buysellItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +37,7 @@ public class NavMenuInt extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
             }
         });
+
         final MenuItem jobItem = menu.findItem(R.id.action_job);
         jobItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +45,7 @@ public class NavMenuInt extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
             }
         });
+
         final MenuItem presecriptionItem = menu.findItem(R.id.action_presecription);
         presecriptionItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +53,7 @@ public class NavMenuInt extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
             }
         });
+
         final MenuItem druginteractionItem = menu.findItem(R.id.action_druginteraction);
         druginteractionItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +67,7 @@ public class NavMenuInt extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "unable to go", Toast.LENGTH_SHORT).show();
             }
         });
+
         final MenuItem drugindexItem = menu.findItem(R.id.action_drugindex);
         drugindexItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override

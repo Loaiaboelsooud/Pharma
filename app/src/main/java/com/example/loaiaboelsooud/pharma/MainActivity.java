@@ -23,7 +23,7 @@ public class MainActivity extends MainMenuInt {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        intMainToolBar();
+        intMainToolBar(MainActivity.this);
         gridView = findViewById(R.id.menugridview);
 
         CustomAdapter customAdapter = new CustomAdapter();
