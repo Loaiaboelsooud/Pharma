@@ -40,7 +40,8 @@ public class MainActivity extends MainMenuInt {
                         startActivity(intent);
                         break;
                     case 2:
-                        Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();
+                        Intent intent2 = new Intent(getApplicationContext(), ViewPrescriptionsActivity.class);
+                        startActivity(intent2);
                         break;
                     case 3:
                         Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();

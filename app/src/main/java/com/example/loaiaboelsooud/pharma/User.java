@@ -11,7 +11,7 @@ public class User {
     private String facebookID;
     @SerializedName("name")
     private String name;
-    @SerializedName("email")
+    @SerializedName("username")
     private String email;
     @SerializedName("qualification")
     private String qualification;

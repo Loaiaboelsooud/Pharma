@@ -10,13 +10,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
+import com.squareup.picasso.Picasso;
 
 public class MainMenuInt extends AppCompatActivity {
-    ImageView avatar;
+    ImageView profileAvatar;
     Activity activity;
 
     public void intMainToolBar(Activity activity) {
@@ -47,17 +48,43 @@ public class MainMenuInt extends AppCompatActivity {
 
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.toolbar_profile_image, null);
-            //FrameLayout item = (FrameLayout) view.findViewById(R.id.layout_profile_picture);
+            FrameLayout item = (FrameLayout) view.findViewById(R.id.layout_profile_picture);
 
-            avatar = view.findViewById(R.id.toolbar_profile_picture);
+            profileAvatar = item.findViewById(R.id.toolbar_profile_picture);
             //  Picasso.with(activity).setLoggingEnabled(true);
-            // Picasso.with(activity).load(user.getAvatar() + "picture?width=250&height=250").into(avatar);
-            Glide.with(activity)
-                    .load(user.getAvatar() + "picture?width=250&height=250")
-                    .into(avatar);
-            //profileItem.setActionView(R.layout.toolbar_profile_image);
-        }
+            Picasso.with(this).load(user.getAvatar() + "picture?width=60&height=60").into(profileAvatar);
 
+            // Glide.with(this).load(user.getAvatar() + "picture?width=250&height=250").into(profileAvatar);
+           /* final ActionBar ab = getSupportActionBar();
+            Picasso.with(this)
+                    .load(user.getAvatar() + "picture?width=150&height=150")
+                    .into(new Target()
+                    {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+                        {
+                           // Drawable d = new BitmapDrawable(getResources(), bitmap);
+                           // Bitmap imageBitmap = ((BitmapDrawable) profileAvatar.getDrawable()).getBitmap();
+                            RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+                            imageDrawable.setCircular(true);
+                            imageDrawable.setCornerRadius(Math.max(bitmap.getWidth(), bitmap.getHeight()) / 2.0f);
+                            ab.setIcon(imageDrawable);
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable)
+                        {
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable)
+                        {
+                        }
+                    });
+*/
+
+        }
+        profileItem.setActionView(R.layout.toolbar_profile_image);
         profileItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,10 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static RetrofitClient mInstance;
     private Retrofit retrofit;
-    private String FBURL = "http://drugdealapp.com/api/auth/";
+    private String URL = "http://drugdealapp.com/api/";
 
     private RetrofitClient() {
-        retrofit = new Retrofit.Builder().baseUrl(FBURL).
+        retrofit = new Retrofit.Builder().baseUrl(URL).
                 addConverterFactory(GsonConverterFactory.create()).build();
     }
 

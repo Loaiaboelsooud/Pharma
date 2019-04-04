@@ -10,4 +10,7 @@
     <string name="drug_index">فهرس الادوية</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>
+    <string name="prescriptions_gallery_button_string">تحميا من معرض الصور</string>
+    <string name="prescriptions_camera_button_string">تحميل من الكاميرا</string>
+    <string name="prescriptions_post_button_string">نشر روشتة</string>
 </resources>

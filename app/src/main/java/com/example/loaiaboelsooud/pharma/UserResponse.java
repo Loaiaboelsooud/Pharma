@@ -3,7 +3,7 @@ package com.example.loaiaboelsooud.pharma;
 import com.google.gson.annotations.SerializedName;
 
 public class UserResponse {
-    ;
+
     @SerializedName("data")
     private User user;
 

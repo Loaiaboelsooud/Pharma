@@ -50,7 +50,9 @@ public class NavMenuInt extends AppCompatActivity {
         presecriptionItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
+                finish();
+                Intent intent = new Intent(NavMenuInt.this, ViewPrescriptionsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -61,6 +63,7 @@ public class NavMenuInt extends AppCompatActivity {
                 if (!NavMenuInt.this.getClass().getSimpleName().equals("WebViewActivity")) {
                     druginteractionItem.setActionView(
                             R.layout.toolbar_druginteraction_image_active);
+                    finish();
                     Intent intent = new Intent(NavMenuInt.this, WebViewActivity.class);
                     startActivity(intent);
                 } else
@@ -79,6 +82,9 @@ public class NavMenuInt extends AppCompatActivity {
             case "WebViewActivity":
                 druginteractionItem.setActionView(
                         R.layout.toolbar_druginteraction_image_active);
+                break;
+            case "ViewPrescriptionsActivity":
+                presecriptionItem.setActionView(R.layout.toolbar_presecription_image_active);
                 break;
         }
         return super.onCreateOptionsMenu(menu);

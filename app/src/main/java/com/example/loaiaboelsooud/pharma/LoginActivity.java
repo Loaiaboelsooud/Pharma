@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -139,7 +138,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             @Override
-            public void notifyError(VolleyError error) {
+            public void notifyError(Exception error) {
+
             }
         });
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {

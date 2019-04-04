@@ -5,21 +5,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.volley.VolleyError;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HTTPRequests extends AppCompatActivity {
-
-    private String FBURL = "http://drugdealapp.com/api/auth/";
-    private final String TAG = HTTPRequests.class.getName();
     IResult result;
     Context context;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +38,7 @@ public class HTTPRequests extends AppCompatActivity {
             Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().createUser(user);
             userCall.enqueue(new Callback<UserResponse>() {
                 @Override
-                public void onResponse(Call<UserResponse> call, retrofit2.Response<UserResponse> response) {
+                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                     UserResponse userResponse = response.body();
                     String token = userResponse.getUser().getToken();
                     prefUtil.saveAccessToken(token);
@@ -57,12 +54,12 @@ public class HTTPRequests extends AppCompatActivity {
         }
     }
 
-    public void sendFBGetRequest(final String fbToken, Activity activity) {
+    public void sendFBGetRequest(Activity activity) {
         final PrefUtil prefUtil = new PrefUtil(activity);
-        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().getUser(fbToken);
+        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().getUser("Bearer " + prefUtil.getToken());
         userCall.enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, retrofit2.Response<UserResponse> response) {
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.body() != null) {
                     User user = response.body().getUser();
                     String name = user.getName();
@@ -82,12 +79,12 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendFBPutRequest(final String fbToken, Activity activity) {
+    public void sendFBPutRequest(Activity activity) {
         final PrefUtil prefUtil = new PrefUtil(activity);
-        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().refreshToken(fbToken);
+        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().refreshToken("Bearer " + prefUtil.getToken());
         userCall.enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, retrofit2.Response<UserResponse> response) {
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.body() != null) {
                     User user = response.body().getUser();
                     String name = user.getName();
@@ -108,10 +105,10 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendFBDelRequest(final String fbToken) {
-        Call<Void> userCall = RetrofitClient.getInstance().getApi().logoutUser(fbToken);
+        Call<Void> userCall = RetrofitClient.getInstance().getApi().logoutUser("Bearer " + fbToken);
         userCall.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
             }
 
             @Override
@@ -120,10 +117,42 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
+    public void sendPrescriptionsPostRequest(MultipartBody.Part imagePart, RequestBody description, String token) {
+        Call<PrescriptionsResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, "Bearer " + token);
+        userCall.enqueue(new Callback<PrescriptionsResponse>() {
+            @Override
+            public void onResponse(Call<PrescriptionsResponse> call, Response<PrescriptionsResponse> response) {
+                if (response.body() != null) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PrescriptionsResponse> call, Throwable t) {
+            }
+        });
+    }
+
+    public void sendPrescriptionsGetRequest() {
+        Call<PrescriptionsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions();
+        userCall.enqueue(new Callback<PrescriptionsResponse>() {
+            @Override
+            public void onResponse(Call<PrescriptionsResponse> call, Response<PrescriptionsResponse> response) {
+                if (response.body() != null) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PrescriptionsResponse> call, Throwable t) {
+            }
+        });
+    }
+
     public interface IResult {
         public void notifySuccess(String response);
 
-        public void notifyError(VolleyError error);
+        public void notifyError(Exception error);
     }
 
 }
