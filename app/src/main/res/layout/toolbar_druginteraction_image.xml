@@ -7,6 +7,6 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="37dp"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:clickable="false"
         android:src="@drawable/drug_interactions_toolbar" />
 </FrameLayout>

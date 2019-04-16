@@ -1,24 +1,23 @@
 package com.example.loaiaboelsooud.pharma;
 
-import android.graphics.Bitmap;
-
 import com.google.gson.annotations.SerializedName;
 
 public class PrescriptionsItem {
-    //@SerializedName("uploader")
-    //  UserResponse userResponse;
-    @SerializedName("image")
-    Bitmap image;
+    @SerializedName("uploader")
+    UserResponse userResponse;
+    @SerializedName("image_url")
+    String image;
     @SerializedName("description")
     String description;
-    @SerializedName("token")
-    String token;
 
-    public Bitmap getImage() {
+    @SerializedName("id")
+    String id;
+
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -26,15 +25,24 @@ public class PrescriptionsItem {
         return description;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public UserResponse getUserResponse() {
+        return userResponse;
+    }
+
+    public void setUserResponse(UserResponse userResponse) {
+        this.userResponse = userResponse;
     }
 }

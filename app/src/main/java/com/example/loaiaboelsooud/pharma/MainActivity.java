@@ -23,9 +23,11 @@ public class MainActivity extends MainMenuInt {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
+        });
+        //httpRequests.sendFBPutRequest(this);
         intMainToolBar(MainActivity.this);
         gridView = findViewById(R.id.menugridview);
-
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

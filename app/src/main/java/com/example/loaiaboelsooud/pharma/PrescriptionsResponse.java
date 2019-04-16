@@ -2,16 +2,29 @@ package com.example.loaiaboelsooud.pharma;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class PrescriptionsResponse {
 
     @SerializedName("data")
-    private PrescriptionsItem prescriptionsItem;
+    private List<PrescriptionsItem> prescriptionsItems;
 
-    public PrescriptionsItem getPrescriptionsItem() {
-        return prescriptionsItem;
+    @SerializedName("meta")
+    private MetaData metaData;
+
+    public MetaData getMetaData() {
+        return metaData;
     }
 
-    public void setPrescriptionsItem(PrescriptionsItem prescriptionsItem) {
-        this.prescriptionsItem = prescriptionsItem;
+    public void setMetaData(MetaData metaData) {
+        this.metaData = metaData;
+    }
+
+    public List<PrescriptionsItem> getPrescriptionsItems() {
+        return prescriptionsItems;
+    }
+
+    public void setPrescriptionsItems(List<PrescriptionsItem> prescriptionsItems) {
+        this.prescriptionsItems = prescriptionsItems;
     }
 }

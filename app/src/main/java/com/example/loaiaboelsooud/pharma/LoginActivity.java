@@ -18,7 +18,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -26,7 +25,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -74,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private LoginButton login_button;
     private CallbackManager callbackManager;
     private static final String EMAIL = "email";
-    private RequestQueue mRequestQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,15 +130,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         txtStat = (TextView) findViewById(R.id.stat);
         login_button = findViewById(R.id.facebook_button);
         final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
-            @Override
-            public void notifySuccess(String response) {
-                Log.e("responce", response);
-            }
-
-            @Override
-            public void notifyError(Exception error) {
-
-            }
         });
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override

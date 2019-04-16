@@ -11,14 +11,12 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Url;
 
 public interface JsonPostPlaceHolderApi {
     @POST("auth/facebook")
     Call<UserResponse> createUser(@Body User user);
 
-
-    // @FormUrlEncoded
-    //@HTTP(method = "DELETE", path = "auth/logout", hasBody = true)
     @DELETE("auth/logout")
     Call<Void> logoutUser(@Header("Authorization") String token);
 
@@ -30,9 +28,9 @@ public interface JsonPostPlaceHolderApi {
 
     @Multipart
     @POST("prescriptions")
-    Call<PrescriptionsResponse> addPrescriptions(@Part MultipartBody.Part picture, @Part("description") RequestBody description, @Header("Authorization") String token);
+    Call<Void> addPrescriptions(@Part MultipartBody.Part picture, @Part("description") RequestBody description, @Header("Authorization") String token);
 
-    @GET("prescriptions")
-    Call<PrescriptionsResponse> getAllPrescriptions();
+    @GET
+    Call<PrescriptionsResponse> getAllPrescriptions(@Header("Authorization") String token, @Url String url);
 
 }

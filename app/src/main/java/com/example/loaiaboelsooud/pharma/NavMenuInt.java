@@ -60,15 +60,15 @@ public class NavMenuInt extends AppCompatActivity {
         druginteractionItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!NavMenuInt.this.getClass().getSimpleName().equals("WebViewActivity")) {
+               /* if (!NavMenuInt.this.getClass().getSimpleName().equals("WebViewActivity")) {
                     druginteractionItem.setActionView(
-                            R.layout.toolbar_druginteraction_image_active);
-                    finish();
-                    Intent intent = new Intent(NavMenuInt.this, WebViewActivity.class);
-                    startActivity(intent);
-                } else
+                            R.layout.toolbar_druginteraction_image_active);*/
+                finish();
+                Intent intent = new Intent(NavMenuInt.this, WebViewActivity.class);
+                startActivity(intent);
+            }/* else
                     Toast.makeText(getApplicationContext(), "unable to go", Toast.LENGTH_SHORT).show();
-            }
+            }*/
         });
 
         final MenuItem drugindexItem = menu.findItem(R.id.action_drugindex);

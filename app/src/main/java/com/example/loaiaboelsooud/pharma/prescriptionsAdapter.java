@@ -8,16 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
 public class prescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
-    String[] items;
+    private List<PrescriptionsItem> prescriptionsItems;
     User user;
 
-    public prescriptionsAdapter(Context context, String[] items) {
+    public prescriptionsAdapter(Context context, List<PrescriptionsItem> prescriptionsItems) {
 
         this.context = context;
-        this.items = items;
+        this.prescriptionsItems = prescriptionsItems;
 
     }
 
@@ -31,27 +35,35 @@ public class prescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        ((Prescriptions) holder).userName.setText(items[position]);
-        // ((Item) holder).stemPressingBox.setText(items[position]);
-        //((Item) holder).dryCleanBox.setText(items[position]);
+        PrescriptionsItem prescriptionsItem = prescriptionsItems.get(position);
+        ((Prescriptions) holder).uploaderName.setText(prescriptionsItem.getUserResponse().getUser().getName());
+        Glide.with(context).load((prescriptionsItem.getUserResponse().getUser().getAvatar())).
+                into(((Prescriptions) holder).uploaderAvatar);
+        Glide.with(context).load((prescriptionsItem.getImage())).
+                into(((Prescriptions) holder).picture);
+        ((Prescriptions) holder).description.setText(prescriptionsItem.getDescription());
+
     }
 
     @Override
     public int getItemCount() {
-        return items.length;
+        return prescriptionsItems.size();
     }
 
     public class Prescriptions extends RecyclerView.ViewHolder {
-        TextView userName;
-        ImageView avatar;
-        TextView textView2;
+        TextView uploaderName;
+        ImageView uploaderAvatar;
+        ImageView picture;
+        TextView description;
 
 
         public Prescriptions(View prescriptionsView) {
             super(prescriptionsView);
-            //  userName = prescriptionsView.findViewById(R.id.presecription_user_name);
-            // avatar = prescriptionsView.findViewById(R.id.presecription_profile_picture);
-            //textView2 = prescriptionsView.findViewById(R.id.name2);
+            uploaderName = prescriptionsView.findViewById(R.id.presecription_user_name);
+            uploaderAvatar = prescriptionsView.findViewById(R.id.presecription_user_profile_picture);
+            picture = prescriptionsView.findViewById(R.id.presecription_image);
+            description = prescriptionsView.findViewById(R.id.presecription_description);
+
         }
     }
 }

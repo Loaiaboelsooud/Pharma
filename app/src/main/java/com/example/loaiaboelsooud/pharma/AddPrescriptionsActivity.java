@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import okhttp3.MediaType;
@@ -25,6 +29,8 @@ public class AddPrescriptionsActivity extends NavMenuInt {
     private HTTPRequests httpRequests;
     private PrescriptionsItem prescriptionsItem;
     private MultipartBody.Part imagePart;
+    private File photoFile;
+    private Uri photoURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,41 +45,36 @@ public class AddPrescriptionsActivity extends NavMenuInt {
         description = findViewById(R.id.presecription_description);
         prescriptionsItem.setDescription(description.getText().toString());
         RequestBody descriptionPart = RequestBody.create(MultipartBody.FORM, description.getText().toString());
-        if (prescriptionsItem.getDescription() != null) {
+        if (prescriptionsItem.getDescription() != null && photoFile != null) {
             final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
-                @Override
-                public void notifySuccess(String response) {
-                    Log.e("responce", response);
-                }
-
-                @Override
-                public void notifyError(Exception error) {
-
-                }
-
             });
 
 
             httpRequests.sendPrescriptionsPostRequest(imagePart, descriptionPart, prefUtil.getToken());
             Intent intent = new Intent(AddPrescriptionsActivity.this, ViewPrescriptionsActivity.class);
             startActivity(intent);
+        } else {
+
+            Toast.makeText(this, "Please choose an image and write a description", Toast.LENGTH_SHORT);
         }
     }
 
-    public void openGalleryIntent(View view) {
-        Intent intent = new Intent();
+    public void openGalleryIntent(View view) throws IOException {
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GALLERY_IMAGE);
+        //intent.putExtra(MediaStore.EXTRA_OUTPUT, createFile());
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GALLERY_IMAGE);
+        }
     }
 
-    public void openCameraIntent(View view) {
-        Intent pictureIntent = new Intent(
-                MediaStore.ACTION_IMAGE_CAPTURE
-        );
+    public void openCameraIntent(View view) throws IOException {
+        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (pictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(pictureIntent,
-                    REQUEST_CAPTURE_IMAGE);
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, createFile());
+            startActivityForResult(pictureIntent, REQUEST_CAPTURE_IMAGE);
         }
     }
 
@@ -83,38 +84,67 @@ public class AddPrescriptionsActivity extends NavMenuInt {
         if (resultCode == RESULT_OK) {
             Bitmap imageBitmap = null;
             if (requestCode == REQUEST_CAPTURE_IMAGE) {
-                if (data != null && data.getExtras() != null) {
-                    imageBitmap = (Bitmap) data.getExtras().get("data");
-                    uploadedPic = findViewById(R.id.uploaded_pic);
-                    uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
-                }
-            } else if (requestCode == REQUEST_GALLERY_IMAGE) {
                 try {
-                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                    uploadedPic = findViewById(R.id.uploaded_pic);
-                    uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
+                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoURI);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                uploadedPic = findViewById(R.id.uploaded_pic);
+                uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
+
+            } else if (requestCode == REQUEST_GALLERY_IMAGE) {
+
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                uploadedPic = findViewById(R.id.uploaded_pic);
+                uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
             }
-            prescriptionsItem.setImage(imageBitmap);
             try {
-                imagePart = castImage(data.getData());
+                imagePart = imageToFile(imageBitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private MultipartBody.Part castImage(Uri image) throws IOException {
+    private Uri createFile() throws IOException {
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        photoFile = File.createTempFile("file", ".jpg", storageDir);
+        photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
+        return photoURI;
 
-        File orginalFile = new File(image.getPath());
+    }
 
-        RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(image)), orginalFile);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("image", orginalFile.getName(), reqFile);
+    private MultipartBody.Part imageToFile(Bitmap bitmap) throws IOException {
+
+        createFile();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+        byte[] bitmapdata = bos.toByteArray();
+        try {
+            FileOutputStream fos = new FileOutputStream(photoFile);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), photoFile);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image", photoFile.getName(), reqFile);
 
         return body;
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
 
     }
+
 }

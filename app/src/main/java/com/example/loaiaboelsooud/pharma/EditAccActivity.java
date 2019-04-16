@@ -3,6 +3,7 @@ package com.example.loaiaboelsooud.pharma;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -12,7 +13,7 @@ public class EditAccActivity extends NavMenuInt {
     private AccessTokenTracker tokenTracker;
     private HTTPRequests httpRequests;
     private ImageView avatar;
-
+    private TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,10 @@ public class EditAccActivity extends NavMenuInt {
     }
 
     private void viewUserData(User user) {
-        avatar = (ImageView) findViewById(R.id.profile_picture);
+        avatar = findViewById(R.id.profile_picture);
+        userName = findViewById(R.id.user_name);
         Picasso.with(this).load(user.getAvatar() + "picture?width=250&height=250").into(avatar);
+        userName.setText(user.getName());
         /*Picasso.with(this)
                 .load(user.getAvatar()).resize(250, 250)
                 .into(profileAvatar, new Callback() {
@@ -60,7 +63,6 @@ public class EditAccActivity extends NavMenuInt {
     }
 
     private void loadUserData() {
-        //getHTTPRequestsInstance().sendFBPutRequest(EditAccActivity.this);
         getHTTPRequestsInstance().sendFBGetRequest(EditAccActivity.this);
     }
 
@@ -68,18 +70,10 @@ public class EditAccActivity extends NavMenuInt {
         getHTTPRequestsInstance().sendFBDelRequest(fbAccess);
     }
 
+
     private HTTPRequests getHTTPRequestsInstance() {
         if (httpRequests == null) {
             HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
-                @Override
-                public void notifySuccess(String response) {
-                }
-
-                @Override
-                public void notifyError(Exception error) {
-
-                }
-
             });
             return httpRequests;
         }

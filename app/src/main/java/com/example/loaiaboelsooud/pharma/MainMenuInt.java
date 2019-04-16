@@ -51,8 +51,7 @@ public class MainMenuInt extends AppCompatActivity {
             FrameLayout item = (FrameLayout) view.findViewById(R.id.layout_profile_picture);
 
             profileAvatar = item.findViewById(R.id.toolbar_profile_picture);
-            //  Picasso.with(activity).setLoggingEnabled(true);
-            Picasso.with(this).load(user.getAvatar() + "picture?width=60&height=60").into(profileAvatar);
+            Picasso.with(activity).load(user.getAvatar()).into(profileAvatar);
 
             // Glide.with(this).load(user.getAvatar() + "picture?width=250&height=250").into(profileAvatar);
            /* final ActionBar ab = getSupportActionBar();

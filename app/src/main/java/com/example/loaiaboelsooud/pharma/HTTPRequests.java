@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -94,6 +96,8 @@ public class HTTPRequests extends AppCompatActivity {
                     String job = user.getJob();
                     String city = user.getCity();
                     long expiresIn = user.getExpiresIn();
+                    String token = user.getToken();
+                    prefUtil.saveAccessToken(token);
                     prefUtil.saveFacebookUserInfo(name, email, qualification, avatar, job, city, expiresIn);
                 }
             }
@@ -118,12 +122,30 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendPrescriptionsPostRequest(MultipartBody.Part imagePart, RequestBody description, String token) {
-        Call<PrescriptionsResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, "Bearer " + token);
+        Call<Void> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, "Bearer " + token);
+        userCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.body() != null) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void sendPrescriptionsGetRequest(String token, final getPrescriptionsList getPrescriptionsList, int i) {
+        Call<PrescriptionsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions("Bearer " + token
+                , "prescriptions?page=" + i);
         userCall.enqueue(new Callback<PrescriptionsResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsResponse> call, Response<PrescriptionsResponse> response) {
                 if (response.body() != null) {
-
+                    getPrescriptionsList.notifyList(response.body().getPrescriptionsItems(), response.body().getMetaData());
                 }
             }
 
@@ -133,26 +155,13 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendPrescriptionsGetRequest() {
-        Call<PrescriptionsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions();
-        userCall.enqueue(new Callback<PrescriptionsResponse>() {
-            @Override
-            public void onResponse(Call<PrescriptionsResponse> call, Response<PrescriptionsResponse> response) {
-                if (response.body() != null) {
+    public interface getPrescriptionsList {
+        void notifyList(List<PrescriptionsItem> prescriptionsItems, MetaData metaData);
 
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PrescriptionsResponse> call, Throwable t) {
-            }
-        });
     }
 
     public interface IResult {
-        public void notifySuccess(String response);
 
-        public void notifyError(Exception error);
     }
 
 }
