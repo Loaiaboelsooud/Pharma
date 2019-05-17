@@ -1,7 +1,10 @@
 package com.example.loaiaboelsooud.pharma;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,10 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 
 public class MainActivity extends MainMenuInt {
 
     GridView gridView;
+    ImageView avatar;
 
     int[] menuImages = {R.drawable.drug_index_menu, R.drawable.drug_interactions_menu, R.drawable.prescription_menu,
             R.drawable.job_menu, R.drawable.buy_sell_menu, R.drawable.offers_menu};
@@ -26,7 +32,11 @@ public class MainActivity extends MainMenuInt {
         final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
         //httpRequests.sendFBPutRequest(this);
-        intMainToolBar(MainActivity.this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.toolbar_profile_image, null);
+        item = view.findViewById(R.id.layout_profile_picture);
+        avatar = item.findViewById(R.id.toolbar_profile_picture);
+        intMainToolBar(MainActivity.this, avatar);
         gridView = findViewById(R.id.menugridview);
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);
@@ -59,6 +69,19 @@ public class MainActivity extends MainMenuInt {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        PrefUtil prefUtil = new PrefUtil(activity);
+        User user = prefUtil.getFacebookUserInfo();
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.toolbar_profile_image, null);
+        item = view.findViewById(R.id.layout_profile_picture);
+        avatar = item.findViewById(R.id.toolbar_profile_picture);
+        Picasso.with(this).load(user.getAvatar()).into(avatar);
+        return super.onCreateOptionsMenu(menu);
+
+    }
 
     private class CustomAdapter extends BaseAdapter {
         String[] menuNames = {getResources().getString(R.string.drug_index), getResources().getString(R.string.drug_interactions),

@@ -25,8 +25,6 @@ public class MetaData {
         private int currentPage;
         @SerializedName("total_pages")
         private int TotalPages;
-        @SerializedName("links")
-        private Links links;
 
         public int getTotal() {
             return total;
@@ -58,14 +56,6 @@ public class MetaData {
 
         public void setTotalPages(int totalPages) {
             TotalPages = totalPages;
-        }
-
-        public Links getLinks() {
-            return links;
-        }
-
-        public void setLinks(Links links) {
-            this.links = links;
         }
 
         public int getCurrentPage() {

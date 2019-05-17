@@ -12,6 +12,7 @@
     <string name="prescriptions_gallery_button_string">Upload from gallery</string>
     <string name="prescriptions_camera_button_string">Open camera</string>
     <string name="prescriptions_post_button_string">POST</string>
+    <string name="comments_button_string">Comment</string>
 
 
     <string name="title_activity_login">Sign in</string>

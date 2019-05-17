@@ -48,32 +48,31 @@ public class AddPrescriptionsActivity extends NavMenuInt {
         if (prescriptionsItem.getDescription() != null && photoFile != null) {
             final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             });
-
-
+            finish();
             httpRequests.sendPrescriptionsPostRequest(imagePart, descriptionPart, prefUtil.getToken());
             Intent intent = new Intent(AddPrescriptionsActivity.this, ViewPrescriptionsActivity.class);
             startActivity(intent);
+            finish();
         } else {
-
-            Toast.makeText(this, "Please choose an image and write a description", Toast.LENGTH_SHORT);
+            Toast.makeText(AddPrescriptionsActivity.this, "Please choose an image and write a description", Toast.LENGTH_LONG);
         }
     }
 
     public void openGalleryIntent(View view) throws IOException {
-        Intent intent = new Intent(Intent.ACTION_PICK,
+        Intent pictureIntent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        pictureIntent.setType("image/*");
+        pictureIntent.setAction(Intent.ACTION_GET_CONTENT);
         //intent.putExtra(MediaStore.EXTRA_OUTPUT, createFile());
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GALLERY_IMAGE);
+        if (pictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(Intent.createChooser(pictureIntent, "Select Picture"), REQUEST_GALLERY_IMAGE);
         }
     }
 
     public void openCameraIntent(View view) throws IOException {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (pictureIntent.resolveActivity(getPackageManager()) != null) {
-            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, createFile());
+            //pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, createFile());
             startActivityForResult(pictureIntent, REQUEST_CAPTURE_IMAGE);
         }
     }
@@ -84,16 +83,12 @@ public class AddPrescriptionsActivity extends NavMenuInt {
         if (resultCode == RESULT_OK) {
             Bitmap imageBitmap = null;
             if (requestCode == REQUEST_CAPTURE_IMAGE) {
-                try {
-                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoURI);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                imageBitmap = (Bitmap) data.getExtras().get("data");
+                //imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), URI);
                 uploadedPic = findViewById(R.id.uploaded_pic);
                 uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
 
             } else if (requestCode == REQUEST_GALLERY_IMAGE) {
-
                 try {
                     imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
 
@@ -120,7 +115,6 @@ public class AddPrescriptionsActivity extends NavMenuInt {
     }
 
     private MultipartBody.Part imageToFile(Bitmap bitmap) throws IOException {
-
         createFile();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);

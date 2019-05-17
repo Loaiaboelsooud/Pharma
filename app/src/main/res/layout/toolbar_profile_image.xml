@@ -8,8 +8,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/toolbar_profile_picture"
-        android:layout_width="45dp"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:clickable="false"
         tools:srcCompat="@tools:sample/avatars" />
 </FrameLayout>

@@ -138,21 +138,66 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendPrescriptionsGetRequest(String token, final getPrescriptionsList getPrescriptionsList, int i) {
-        Call<PrescriptionsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions("Bearer " + token
-                , "prescriptions?page=" + i);
-        userCall.enqueue(new Callback<PrescriptionsResponse>() {
+    public void sendPrescriptionsGetRequest(String token, final getPrescriptionsList getPrescriptionsList, int pageNumber) {
+        Call<PrescriptionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions("Bearer " + token
+                , "prescriptions?page=" + pageNumber);
+        userCall.enqueue(new Callback<PrescriptionsItemsResponse>() {
             @Override
-            public void onResponse(Call<PrescriptionsResponse> call, Response<PrescriptionsResponse> response) {
+            public void onResponse(Call<PrescriptionsItemsResponse> call, Response<PrescriptionsItemsResponse> response) {
                 if (response.body() != null) {
                     getPrescriptionsList.notifyList(response.body().getPrescriptionsItems(), response.body().getMetaData());
                 }
             }
 
             @Override
-            public void onFailure(Call<PrescriptionsResponse> call, Throwable t) {
+            public void onFailure(Call<PrescriptionsItemsResponse> call, Throwable t) {
             }
         });
+    }
+
+    public void sendPrescriptionsCommentGetRequest(String token, final GetPrescriptionsCommentsList getPrescriptionsCommentsList, int prescriptionId, int pageNumber) {
+        Call<PrescriptionsCommentsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptionsComments(
+                "Bearer " + token, "prescriptions/" + prescriptionId + "/comments?page=" + pageNumber);
+        userCall.enqueue(new Callback<PrescriptionsCommentsResponse>() {
+            @Override
+            public void onResponse(Call<PrescriptionsCommentsResponse> call, Response<PrescriptionsCommentsResponse> response) {
+                if (response.body() != null) {
+                    getPrescriptionsCommentsList.notifyList(response.body().getPrescriptionsComments(),
+                            response.body().getMetaData());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PrescriptionsCommentsResponse> call, Throwable t) {
+            }
+        });
+    }
+
+    public void sendPrescriptionsCommentPostRequest(String token, final GetPrescriptionsComment getPrescriptionsComment, int prescriptionId, String comment) {
+        Call<PrescriptionsCommentResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptionsComments(
+                "Bearer " + token, "prescriptions/" + prescriptionId + "/comments", comment);
+        userCall.enqueue(new Callback<PrescriptionsCommentResponse>() {
+            @Override
+            public void onResponse(Call<PrescriptionsCommentResponse> call, Response<PrescriptionsCommentResponse> response) {
+                if (response.body() != null) {
+                    getPrescriptionsComment.notifyList(response.body().getPrescriptionsComment());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PrescriptionsCommentResponse> call, Throwable t) {
+            }
+        });
+    }
+
+    public interface GetPrescriptionsCommentsList {
+
+        void notifyList(List<PrescriptionsComments> prescriptionsComments, MetaData metaData);
+    }
+
+    public interface GetPrescriptionsComment {
+
+        void notifyList(PrescriptionsComments prescriptionsComments);
     }
 
     public interface getPrescriptionsList {
@@ -165,3 +210,4 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
 }
+

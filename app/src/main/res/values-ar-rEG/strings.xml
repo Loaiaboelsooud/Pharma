@@ -13,4 +13,6 @@
     <string name="prescriptions_gallery_button_string">تحميا من معرض الصور</string>
     <string name="prescriptions_camera_button_string">تحميل من الكاميرا</string>
     <string name="prescriptions_post_button_string">نشر روشتة</string>
+    <string name="comments_button_string">تعليق</string>
+
 </resources>

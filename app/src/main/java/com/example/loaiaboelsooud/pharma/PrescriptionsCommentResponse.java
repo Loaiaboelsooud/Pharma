@@ -2,12 +2,10 @@ package com.example.loaiaboelsooud.pharma;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class PrescriptionsResponse {
+public class PrescriptionsCommentResponse {
 
     @SerializedName("data")
-    private List<PrescriptionsItem> prescriptionsItems;
+    private PrescriptionsComments prescriptionsComment;
 
     @SerializedName("meta")
     private MetaData metaData;
@@ -20,11 +18,11 @@ public class PrescriptionsResponse {
         this.metaData = metaData;
     }
 
-    public List<PrescriptionsItem> getPrescriptionsItems() {
-        return prescriptionsItems;
+    public PrescriptionsComments getPrescriptionsComment() {
+        return prescriptionsComment;
     }
 
-    public void setPrescriptionsItems(List<PrescriptionsItem> prescriptionsItems) {
-        this.prescriptionsItems = prescriptionsItems;
+    public void setPrescriptionsComments(PrescriptionsComments prescriptionsComment) {
+        this.prescriptionsComment = prescriptionsComment;
     }
 }

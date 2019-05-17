@@ -11,6 +11,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface JsonPostPlaceHolderApi {
@@ -31,6 +32,12 @@ public interface JsonPostPlaceHolderApi {
     Call<Void> addPrescriptions(@Part MultipartBody.Part picture, @Part("description") RequestBody description, @Header("Authorization") String token);
 
     @GET
-    Call<PrescriptionsResponse> getAllPrescriptions(@Header("Authorization") String token, @Url String url);
+    Call<PrescriptionsItemsResponse> getAllPrescriptions(@Header("Authorization") String token, @Url String url);
+
+    @GET
+    Call<PrescriptionsCommentsResponse> getAllPrescriptionsComments(@Header("Authorization") String token, @Url String url);
+
+    @POST
+    Call<PrescriptionsCommentResponse> addPrescriptionsComments(@Header("Authorization") String token, @Url String url, @Query("comment") String comment);
 
 }
