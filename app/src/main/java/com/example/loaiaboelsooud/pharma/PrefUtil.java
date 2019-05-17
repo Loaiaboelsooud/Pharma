@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.facebook.AccessToken;
+
 public class PrefUtil {
 
 
@@ -14,6 +16,13 @@ public class PrefUtil {
         this.activity = activity;
     }
 
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if (accessToken != null && !accessToken.isExpired()) {
+            return true;
+        }
+        return false;
+    }
 
     public void saveAccessToken(String token) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);

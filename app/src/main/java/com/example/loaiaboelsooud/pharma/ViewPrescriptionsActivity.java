@@ -40,14 +40,17 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         prescriptionsRecyclerView = findViewById(R.id.presecription_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewPrescriptionsActivity.this, AddPrescriptionsActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        if (!prefUtil.isLoggedIn()) {
+            fab.hide();
+        } else {
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ViewPrescriptionsActivity.this, AddPrescriptionsActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
@@ -82,12 +85,9 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
                         && (actualPage <= metaData.getPagination().getTotalPages())) {
                     loadMore(metaData);
                     isScrolling = false;
-
                 }
             }
         });
-
-
     }
 
     private void loadMore(MetaData metaData) {
@@ -100,6 +100,5 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
     @Override
     public void onBackPressed() {
         finish();
-
     }
 }

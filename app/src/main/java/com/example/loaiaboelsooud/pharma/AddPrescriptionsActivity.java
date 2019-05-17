@@ -45,7 +45,7 @@ public class AddPrescriptionsActivity extends NavMenuInt {
         description = findViewById(R.id.presecription_description);
         prescriptionsItem.setDescription(description.getText().toString());
         RequestBody descriptionPart = RequestBody.create(MultipartBody.FORM, description.getText().toString());
-        if (prescriptionsItem.getDescription() != null && photoFile != null) {
+        if (prescriptionsItem.getDescription() != null && !prescriptionsItem.getDescription().isEmpty() && photoFile != null) {
             final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             });
             finish();
@@ -54,7 +54,8 @@ public class AddPrescriptionsActivity extends NavMenuInt {
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(AddPrescriptionsActivity.this, "Please choose an image and write a description", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Please choose an image and write a description",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -137,6 +138,7 @@ public class AddPrescriptionsActivity extends NavMenuInt {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
 
     }

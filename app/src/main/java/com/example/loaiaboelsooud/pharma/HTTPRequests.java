@@ -139,8 +139,8 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendPrescriptionsGetRequest(String token, final getPrescriptionsList getPrescriptionsList, int pageNumber) {
-        Call<PrescriptionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions("Bearer " + token
-                , "prescriptions?page=" + pageNumber);
+        Call<PrescriptionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions(
+                "Bearer " + token, "prescriptions?page=" + pageNumber);
         userCall.enqueue(new Callback<PrescriptionsItemsResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsItemsResponse> call, Response<PrescriptionsItemsResponse> response) {

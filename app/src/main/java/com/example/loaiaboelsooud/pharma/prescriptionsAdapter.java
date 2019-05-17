@@ -37,6 +37,14 @@ public class prescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        /*RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.ic_pic_error)
+                .priority(Priority.HIGH);
+*/
+
+
         final PrescriptionsItem prescriptionsItem = prescriptionsItems.get(position);
         ((Prescriptions) holder).uploaderName.setText(prescriptionsItem.getUserResponse().getUser().getName());
         Glide.with(context).load((prescriptionsItem.getUserResponse().getUser().getAvatar())).
