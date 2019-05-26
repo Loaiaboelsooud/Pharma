@@ -13,6 +13,11 @@
     <string name="prescriptions_camera_button_string">Open camera</string>
     <string name="prescriptions_post_button_string">POST</string>
     <string name="comments_button_string">Comment</string>
+    <string name="Signin_comment_toast">You must Sign-in to add a comment</string>
+    <string name="Signin_prescriptions_toast">You must Sign-in to add a prescription</string>
+    <string name="add_comment_toast">You must add a comment</string>
+    <string name="no_internet">Please check your internet connection</string>
+    <string name="post_prescriptions_success">Your prescription is added successfully</string>
 
 
     <string name="title_activity_login">Sign in</string>

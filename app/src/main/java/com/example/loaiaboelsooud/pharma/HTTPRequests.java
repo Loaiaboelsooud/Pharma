@@ -121,26 +121,28 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendPrescriptionsPostRequest(MultipartBody.Part imagePart, RequestBody description, String token) {
-        Call<Void> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, "Bearer " + token);
-        userCall.enqueue(new Callback<Void>() {
+    public void sendPrescriptionsPostRequest(MultipartBody.Part imagePart, RequestBody description,
+                                             final GetPrescriptionPostResult getPrescriptionPostResult, String token) {
+        Call<PrescriptionsItemResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, "Bearer " + token);
+        userCall.enqueue(new Callback<PrescriptionsItemResponse>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<PrescriptionsItemResponse> call, Response<PrescriptionsItemResponse> response) {
                 if (response.body() != null) {
-
+                    getPrescriptionPostResult.success();
+                } else {
+                    getPrescriptionPostResult.failed();
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
+            public void onFailure(Call<PrescriptionsItemResponse> call, Throwable t) {
+                getPrescriptionPostResult.failed();
             }
         });
     }
 
-    public void sendPrescriptionsGetRequest(String token, final getPrescriptionsList getPrescriptionsList, int pageNumber) {
-        Call<PrescriptionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions(
-                "Bearer " + token, "prescriptions?page=" + pageNumber);
+    public void sendPrescriptionsGetRequest(final GetPrescriptionsList getPrescriptionsList, int pageNumber) {
+        Call<PrescriptionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions("prescriptions?page=" + pageNumber);
         userCall.enqueue(new Callback<PrescriptionsItemsResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsItemsResponse> call, Response<PrescriptionsItemsResponse> response) {
@@ -151,6 +153,7 @@ public class HTTPRequests extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PrescriptionsItemsResponse> call, Throwable t) {
+                getPrescriptionsList.failed();
             }
         });
     }
@@ -169,6 +172,7 @@ public class HTTPRequests extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PrescriptionsCommentsResponse> call, Throwable t) {
+                getPrescriptionsCommentsList.failed();
             }
         });
     }
@@ -186,6 +190,7 @@ public class HTTPRequests extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PrescriptionsCommentResponse> call, Throwable t) {
+                getPrescriptionsComment.failed();
             }
         });
     }
@@ -193,16 +198,27 @@ public class HTTPRequests extends AppCompatActivity {
     public interface GetPrescriptionsCommentsList {
 
         void notifyList(List<PrescriptionsComments> prescriptionsComments, MetaData metaData);
+
+        void failed();
     }
 
     public interface GetPrescriptionsComment {
-
         void notifyList(PrescriptionsComments prescriptionsComments);
+
+        void failed();
     }
 
-    public interface getPrescriptionsList {
+    public interface GetPrescriptionsList {
         void notifyList(List<PrescriptionsItem> prescriptionsItems, MetaData metaData);
 
+        void failed();
+
+    }
+
+    public interface GetPrescriptionPostResult {
+        void success();
+
+        void failed();
     }
 
     public interface IResult {

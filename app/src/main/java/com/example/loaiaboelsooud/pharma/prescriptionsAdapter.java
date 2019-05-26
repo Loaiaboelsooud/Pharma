@@ -48,8 +48,9 @@ public class prescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
         final PrescriptionsItem prescriptionsItem = prescriptionsItems.get(position);
         ((Prescriptions) holder).uploaderName.setText(prescriptionsItem.getUserResponse().getUser().getName());
         Glide.with(context).load((prescriptionsItem.getUserResponse().getUser().getAvatar())).
+                placeholder(R.drawable.ic_loading).dontAnimate().
                 into(((Prescriptions) holder).uploaderAvatar);
-        Glide.with(context).load((prescriptionsItem.getImage())).
+        Glide.with(context).load((prescriptionsItem.getImage())).placeholder(R.drawable.ic_loading).dontAnimate().
                 into(((Prescriptions) holder).picture);
         ((Prescriptions) holder).description.setText(prescriptionsItem.getDescription());
         ((Prescriptions) holder).commentButton.setOnClickListener(new View.OnClickListener() {

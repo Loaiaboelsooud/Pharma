@@ -14,5 +14,9 @@
     <string name="prescriptions_camera_button_string">تحميل من الكاميرا</string>
     <string name="prescriptions_post_button_string">نشر روشتة</string>
     <string name="comments_button_string">تعليق</string>
-
+    <string name="Signin_comment_toast">يجب تسجيل الدخول لاضافة تعليق</string>
+    <string name="Signin_prescriptions_toast">يجب تسجيل الدخول لاضافة روشتة</string>
+    <string name="add_comment_toast">يجب اضافة تعليق</string>
+    <string name="no_internet">يرجي التأكد من وجود انترنت</string>
+    <string name="post_prescriptions_success">تم اضافة الروشتة بنجاح</string>
 </resources>

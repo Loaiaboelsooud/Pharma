@@ -29,10 +29,10 @@ public interface JsonPostPlaceHolderApi {
 
     @Multipart
     @POST("prescriptions")
-    Call<Void> addPrescriptions(@Part MultipartBody.Part picture, @Part("description") RequestBody description, @Header("Authorization") String token);
+    Call<PrescriptionsItemResponse> addPrescriptions(@Part MultipartBody.Part picture, @Part("description") RequestBody description, @Header("Authorization") String token);
 
     @GET
-    Call<PrescriptionsItemsResponse> getAllPrescriptions(@Header("Authorization") String token, @Url String url);
+    Call<PrescriptionsItemsResponse> getAllPrescriptions(@Url String url);
 
     @GET
     Call<PrescriptionsCommentsResponse> getAllPrescriptionsComments(@Header("Authorization") String token, @Url String url);

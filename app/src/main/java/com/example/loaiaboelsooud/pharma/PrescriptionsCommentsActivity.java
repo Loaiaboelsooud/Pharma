@@ -8,14 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.ablanco.zoomy.Zoomy;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class PrescriptionsCommentsActivity extends NavMenuInt implements HTTPRequests.GetPrescriptionsCommentsList, HTTPRequests.GetPrescriptionsComment {
+public class PrescriptionsCommentsActivity extends NavMenuInt implements
+        HTTPRequests.GetPrescriptionsCommentsList, HTTPRequests.GetPrescriptionsComment {
     public RecyclerView prescriptionsRecyclerView;
     public List<PrescriptionsComments> prescriptionsComments;
     private Boolean isScrolling = false;
@@ -25,9 +28,10 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements HTTPReq
     private PrefUtil prefUtil;
     private RecyclerView.Adapter adapter;
     private boolean testbol = false;
-    private EditText comment;
+    private EditText commentText;
     private ImageView picture;
     private String imageUrl;
+    private ImageButton addCommentButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +51,30 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements HTTPReq
         prescriptionsRecyclerView = findViewById(R.id.presecription_comment_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
         picture = findViewById(R.id.presecription_image);
-        comment = findViewById(R.id.commentText);
+        Zoomy.Builder builder = new Zoomy.Builder(this).target(picture);
+        builder.register();
+        commentText = findViewById(R.id.commentText);
         Glide.with(this).load(imageUrl).into(picture);
+        if (!prefUtil.isLoggedIn()) {
+            addCommentButton = findViewById(R.id.addCommentButton);
+            addCommentButton.setVisibility(View.GONE);
+            commentText.setVisibility(View.GONE);
+            Toast.makeText(this, getString(R.string.Signin_comment_toast), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void addComment(View view) {
-        if (comment.getText().toString() != null || comment.getText().toString() != "") {
-            httpRequests.sendPrescriptionsCommentPostRequest(prefUtil.getToken(), this, postId, comment.getText().toString());
+        if (commentText.getText().toString().length() != 0) {
+            httpRequests.sendPrescriptionsCommentPostRequest(prefUtil.getToken(), this,
+                    postId, commentText.getText().toString());
         } else {
-            Toast.makeText(this, "please add a comment", Toast.LENGTH_SHORT);
+            Toast.makeText(this, getString(R.string.add_comment_toast), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void notifyList(PrescriptionsComments prescriptionsComment) {
+        commentText.setText("");
         this.prescriptionsComments.add(prescriptionsComment);
         adapter.notifyDataSetChanged();
     }
@@ -73,6 +87,9 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements HTTPReq
             this.prescriptionsComments = prescriptionsComments;
             adapter = new PrescriptionsCommentsAdapter(this, this.prescriptionsComments);
             prescriptionsRecyclerView.setAdapter(adapter);
+        }
+        if (actualPage != 1) {
+            this.prescriptionsComments.addAll(prescriptionsComments);
         }
         actualPage++;
         // this.prescriptionsComments.addAll(prescriptionsComments);
@@ -99,6 +116,11 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements HTTPReq
                 }
             }
         });
+    }
+
+    @Override
+    public void failed() {
+        Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
     }
 
     private void loadMore(MetaData metaData) {

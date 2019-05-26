@@ -10,6 +10,7 @@ import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -21,7 +22,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class AddPrescriptionsActivity extends NavMenuInt {
+public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests.GetPrescriptionPostResult {
     private static final int REQUEST_CAPTURE_IMAGE = 100;
     private static final int REQUEST_GALLERY_IMAGE = 1234;
     private ImageView uploadedPic;
@@ -31,12 +32,14 @@ public class AddPrescriptionsActivity extends NavMenuInt {
     private MultipartBody.Part imagePart;
     private File photoFile;
     private Uri photoURI;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prescriptions);
         intNavToolBar();
+        progressBar = findViewById(R.id.presecription_post_progress);
         prescriptionsItem = new PrescriptionsItem();
     }
 
@@ -46,13 +49,11 @@ public class AddPrescriptionsActivity extends NavMenuInt {
         prescriptionsItem.setDescription(description.getText().toString());
         RequestBody descriptionPart = RequestBody.create(MultipartBody.FORM, description.getText().toString());
         if (prescriptionsItem.getDescription() != null && !prescriptionsItem.getDescription().isEmpty() && photoFile != null) {
+            progressBar.setVisibility(View.VISIBLE);
             final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             });
-            finish();
-            httpRequests.sendPrescriptionsPostRequest(imagePart, descriptionPart, prefUtil.getToken());
-            Intent intent = new Intent(AddPrescriptionsActivity.this, ViewPrescriptionsActivity.class);
-            startActivity(intent);
-            finish();
+            httpRequests.sendPrescriptionsPostRequest(imagePart, descriptionPart, this, prefUtil.getToken());
+
         } else {
             Toast.makeText(this, "Please choose an image and write a description",
                     Toast.LENGTH_LONG).show();
@@ -112,7 +113,6 @@ public class AddPrescriptionsActivity extends NavMenuInt {
         photoFile = File.createTempFile("file", ".jpg", storageDir);
         photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
         return photoURI;
-
     }
 
     private MultipartBody.Part imageToFile(Bitmap bitmap) throws IOException {
@@ -128,19 +128,30 @@ public class AddPrescriptionsActivity extends NavMenuInt {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), photoFile);
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", photoFile.getName(), reqFile);
-
         return body;
-
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-
     }
 
+    @Override
+    public void success() {
+        finish();
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(this, getString(R.string.post_prescriptions_success), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(AddPrescriptionsActivity.this, ViewPrescriptionsActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void failed() {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+    }
 }

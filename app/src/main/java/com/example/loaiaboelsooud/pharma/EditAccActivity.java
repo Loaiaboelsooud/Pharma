@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
-import com.squareup.picasso.Picasso;
 
 public class EditAccActivity extends NavMenuInt {
     private AccessTokenTracker tokenTracker;
@@ -40,7 +40,8 @@ public class EditAccActivity extends NavMenuInt {
     private void viewUserData(User user) {
         avatar = findViewById(R.id.profile_picture);
         userName = findViewById(R.id.user_name);
-        Picasso.with(this).load(user.getAvatar() + "picture?width=250&height=250").into(avatar);
+        String imageUrl = user.getAvatar() + "picture?width=250&height=250";
+        Glide.with(this).load(imageUrl).placeholder(R.drawable.ic_loading).dontAnimate().into(avatar);
         userName.setText(user.getName());
         /*Picasso.with(this)
                 .load(user.getAvatar()).resize(250, 250)

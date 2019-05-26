@@ -10,10 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.Toast;
 
 import java.util.List;
 
-public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequests.getPrescriptionsList {
+public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequests.GetPrescriptionsList {
     public RecyclerView prescriptionsRecyclerView;
     public List<PrescriptionsItem> prescriptionsItems;
     private Boolean isScrolling = false;
@@ -30,7 +31,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         prefUtil = new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
-        httpRequests.sendPrescriptionsGetRequest(prefUtil.getToken(), this, 1);
+        httpRequests.sendPrescriptionsGetRequest(this, 1);
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_view_prescriptions);
@@ -42,6 +43,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         FloatingActionButton fab = findViewById(R.id.fab);
         if (!prefUtil.isLoggedIn()) {
             fab.hide();
+            Toast.makeText(this, getString(R.string.Signin_prescriptions_toast), Toast.LENGTH_SHORT).show();
         } else {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -62,8 +64,10 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
             adapter = new prescriptionsAdapter(this, this.prescriptionsItems);
             prescriptionsRecyclerView.setAdapter(adapter);
         }
+        if (actualPage != 1) {
+            this.prescriptionsItems.addAll(prescriptionsItems);
+        }
         actualPage++;
-        this.prescriptionsItems.addAll(prescriptionsItems);
         adapter.notifyDataSetChanged();
         prescriptionsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -90,9 +94,14 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         });
     }
 
+    @Override
+    public void failed() {
+        Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+    }
+
     private void loadMore(MetaData metaData) {
         if (metaData.getPagination().getTotalPages() > metaData.getPagination().getCurrentPage()) {
-            httpRequests.sendPrescriptionsGetRequest(prefUtil.getToken(), this, metaData.getPagination().getCurrentPage() + 1);
+            httpRequests.sendPrescriptionsGetRequest(this, metaData.getPagination().getCurrentPage() + 1);
             adapter.notifyDataSetChanged();
         }
     }
@@ -101,4 +110,5 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
     public void onBackPressed() {
         finish();
     }
+
 }
