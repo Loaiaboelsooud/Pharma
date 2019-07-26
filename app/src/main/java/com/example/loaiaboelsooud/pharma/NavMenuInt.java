@@ -30,11 +30,14 @@ public class NavMenuInt extends AppCompatActivity {
             }
         });
 
-        final MenuItem buysellItem = menu.findItem(R.id.action_buysell);
-        buysellItem.getActionView().setOnClickListener(new View.OnClickListener() {
+        final MenuItem propertiesItem = menu.findItem(R.id.action_buysell);
+        propertiesItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
+                finish();
+                Intent intent = new Intent(NavMenuInt.this, ViewPropertiesActivity.class);
+                intent.putExtra("isFiltered", false);
+                startActivity(intent);
             }
         });
 
@@ -85,6 +88,9 @@ public class NavMenuInt extends AppCompatActivity {
                 break;
             case "ViewPrescriptionsActivity":
                 presecriptionItem.setActionView(R.layout.toolbar_presecription_image_active);
+                break;
+            case "ViewPropertiesActivity":
+                propertiesItem.setActionView(R.layout.toolbar_properties_image_active);
                 break;
         }
         return super.onCreateOptionsMenu(menu);

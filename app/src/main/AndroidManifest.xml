@@ -22,13 +22,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PrescriptionsCommentsActivity"></activity>
+        <activity android:name=".ViewPropertyActivity"></activity>
+        <activity android:name=".FilterPropertiesActivity" />
+        <activity
+            android:name=".PrescriptionsCommentsActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ViewPrescriptionsActivity" />
-        <activity android:name=".AddPrescriptionsActivity" />
+        <activity android:name=".ViewPropertiesActivity" />
+        <activity android:name=".AddPropertiesActivity" />
+        <activity
+            android:name=".AddPrescriptionsActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".EditAccActivity" />
         <activity android:name=".HTTPRequests" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

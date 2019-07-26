@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
     private Adapter adapter;
     private boolean testbol = false;
     private int actualPage;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         prescriptionsRecyclerView = findViewById(R.id.presecription_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
         FloatingActionButton fab = findViewById(R.id.fab);
+        progressBar = findViewById(R.id.presecription_get_progress);
+        progressBar.setVisibility(View.VISIBLE);
         if (!prefUtil.isLoggedIn()) {
             fab.hide();
             Toast.makeText(this, getString(R.string.Signin_prescriptions_toast), Toast.LENGTH_SHORT).show();
@@ -69,6 +73,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         }
         actualPage++;
         adapter.notifyDataSetChanged();
+        progressBar.setVisibility(View.GONE);
         prescriptionsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -96,11 +101,13 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
 
     @Override
     public void failed() {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
     }
 
     private void loadMore(MetaData metaData) {
         if (metaData.getPagination().getTotalPages() > metaData.getPagination().getCurrentPage()) {
+            progressBar.setVisibility(View.VISIBLE);
             httpRequests.sendPrescriptionsGetRequest(this, metaData.getPagination().getCurrentPage() + 1);
             adapter.notifyDataSetChanged();
         }

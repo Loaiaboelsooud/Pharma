@@ -10,7 +10,7 @@
     <string name="drug_index">فهرس الادوية</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>
-    <string name="prescriptions_gallery_button_string">تحميا من معرض الصور</string>
+    <string name="prescriptions_gallery_button_string">تحميل من معرض الصور</string>
     <string name="prescriptions_camera_button_string">تحميل من الكاميرا</string>
     <string name="prescriptions_post_button_string">نشر روشتة</string>
     <string name="comments_button_string">تعليق</string>
@@ -19,4 +19,38 @@
     <string name="add_comment_toast">يجب اضافة تعليق</string>
     <string name="no_internet">يرجي التأكد من وجود انترنت</string>
     <string name="post_prescriptions_success">تم اضافة الروشتة بنجاح</string>
+    <string name="post_prescriptions_fail">يجب اضافة صورة و تعليق لاضافة روشتة</string>
+    <string name="post_properties_success">تم اضافة الاعلان بنجاح</string>
+    <string name="properties_city">المحافظة</string>
+    <string name="properties_region">المنطقة</string>
+    <string name="properties_name">الاسم</string>
+    <string name="properties_size">المساحة</string>
+    <string name="properties_profit">العائد</string>
+    <string name="properties_address">العنوان بالتفصيل</string>
+    <string name="properties_mobile">الموبيل</string>
+    <string name="properties_land_number">الرقم الارضي</string>
+    <string name="properties_notes">ملاحظات</string>
+    <string name="properties_listed_for">سبب البيع</string>
+    <string name="properties_type">النوع</string>
+    <string name="properties_price">السعر</string>
+    <string name="properties_description">الوصف</string>
+    <string name="post_properties_fail">برجاء ادخال جميع البينات المطلوبة</string>
+    <string-array name="properties_listed_for_array">
+        <item>selling</item>
+        <item>buying</item>
+        <item>renting</item>
+    </string-array>
+    <string-array name="properties_type_array">
+        <item>pharmacy</item>
+        <item>warehouse</item>
+        <item>factory</item>
+        <item>hospital</item>
+    </string-array>
+    <string name="properties_filter_button_string">بحث</string>
+    <string name="properties_filter_sell_string">بيع</string>
+    <string name="properties_filter_rent_string">ايجار</string>
+    <string name="properties_filter_pharmacy_string">صيدلية</string>
+    <string name="properties_filter_warehouse_string">مخزن ادوية</string>
+    <string name="properties_filter_factory_string">مصنع ادوية</string>
+    <string name="properties_filter_hospital_string">مستشفي</string>
 </resources>

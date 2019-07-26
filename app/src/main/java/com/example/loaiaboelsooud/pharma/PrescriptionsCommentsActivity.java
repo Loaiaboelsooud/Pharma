@@ -10,6 +10,7 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ablanco.zoomy.Zoomy;
@@ -32,6 +33,7 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
     private ImageView picture;
     private String imageUrl;
     private ImageButton addCommentButton;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +53,12 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
         prescriptionsRecyclerView = findViewById(R.id.presecription_comment_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
         picture = findViewById(R.id.presecription_image);
+        progressBar = findViewById(R.id.presecriptions_comments_progress);
         Zoomy.Builder builder = new Zoomy.Builder(this).target(picture);
         builder.register();
         commentText = findViewById(R.id.commentText);
         Glide.with(this).load(imageUrl).into(picture);
+        progressBar.setVisibility(View.VISIBLE);
         if (!prefUtil.isLoggedIn()) {
             addCommentButton = findViewById(R.id.addCommentButton);
             addCommentButton.setVisibility(View.GONE);
@@ -65,8 +69,11 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
 
     public void addComment(View view) {
         if (commentText.getText().toString().length() != 0) {
+            progressBar.setVisibility(View.VISIBLE);
             httpRequests.sendPrescriptionsCommentPostRequest(prefUtil.getToken(), this,
                     postId, commentText.getText().toString());
+            commentText.setText("");
+            prefUtil.hideKeyboard(this);
         } else {
             Toast.makeText(this, getString(R.string.add_comment_toast), Toast.LENGTH_SHORT).show();
         }
@@ -74,7 +81,7 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
 
     @Override
     public void notifyList(PrescriptionsComments prescriptionsComment) {
-        commentText.setText("");
+        progressBar.setVisibility(View.GONE);
         this.prescriptionsComments.add(prescriptionsComment);
         adapter.notifyDataSetChanged();
     }
@@ -94,6 +101,7 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
         actualPage++;
         // this.prescriptionsComments.addAll(prescriptionsComments);
         adapter.notifyDataSetChanged();
+        progressBar.setVisibility(View.GONE);
         prescriptionsRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -120,11 +128,13 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
 
     @Override
     public void failed() {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
     }
 
     private void loadMore(MetaData metaData) {
         if (metaData.getPagination().getTotalPages() > metaData.getPagination().getCurrentPage()) {
+            progressBar.setVisibility(View.VISIBLE);
             httpRequests.sendPrescriptionsCommentGetRequest(prefUtil.getToken(), this, postId,
                     metaData.getPagination().getCurrentPage() + 1);
             adapter.notifyDataSetChanged();

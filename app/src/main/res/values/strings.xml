@@ -18,8 +18,43 @@
     <string name="add_comment_toast">You must add a comment</string>
     <string name="no_internet">Please check your internet connection</string>
     <string name="post_prescriptions_success">Your prescription is added successfully</string>
+    <string name="post_prescriptions_fail">Please choose an image and write a description</string>
+    <string name="post_properties_success">Your property is added successfully</string>
+    <string name="properties_city">City</string>
+    <string name="properties_region">region</string>
+    <string name="properties_name">Name</string>
+    <string name="properties_size">Area</string>
+    <string name="properties_profit">Profit</string>
+    <string name="properties_address">Address</string>
+    <string name="properties_mobile">Mobile</string>
+    <string name="properties_land_number">Land Line Number</string>
+    <string name="properties_notes">Notes</string>
+    <string name="properties_listed_for">Listed For</string>
+    <string name="properties_type">Type</string>
+    <string name="properties_price">Price</string>
+    <string name="properties_description">Description</string>
+    <string name="post_properties_fail">Please fill all the required fields</string>
+    <string-array name="properties_listed_for_array">
+        <item>selling</item>
+        <item>buying</item>
+        <item>renting</item>
+    </string-array>
+    <string-array name="properties_type_array">
+        <item>pharmacy</item>
+        <item>warehouse</item>
+        <item>factory</item>
+        <item>hospital</item>
+    </string-array>
+    <string name="properties_filter_button_string">Search</string>
+    <string name="properties_filter_sell_string">Properties for sale</string>
+    <string name="properties_filter_rent_string">Properties for rent</string>
+    <string name="properties_filter_pharmacy_string">Pharmacy</string>
+    <string name="properties_filter_warehouse_string">Warehouse</string>
+    <string name="properties_filter_factory_string">Factory</string>
+    <string name="properties_filter_hospital_string">Hospital</string>
 
 
+    properties_filter_sell_check_box
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

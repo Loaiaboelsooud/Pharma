@@ -50,7 +50,7 @@ public class prescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
         Glide.with(context).load((prescriptionsItem.getUserResponse().getUser().getAvatar())).
                 placeholder(R.drawable.ic_loading).dontAnimate().
                 into(((Prescriptions) holder).uploaderAvatar);
-        Glide.with(context).load((prescriptionsItem.getImage())).placeholder(R.drawable.ic_loading).dontAnimate().
+        Glide.with(context).load((prescriptionsItem.getImage())).placeholder(R.drawable.ic_loading).
                 into(((Prescriptions) holder).picture);
         ((Prescriptions) holder).description.setText(prescriptionsItem.getDescription());
         ((Prescriptions) holder).commentButton.setOnClickListener(new View.OnClickListener() {
@@ -80,11 +80,9 @@ public class prescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class Prescriptions extends RecyclerView.ViewHolder {
-        TextView uploaderName;
-        ImageView uploaderAvatar;
-        ImageView picture;
-        TextView description;
-        Button commentButton;
+        private TextView uploaderName, description;
+        private ImageView uploaderAvatar, picture;
+        private Button commentButton;
 
 
         public Prescriptions(View prescriptionsView) {

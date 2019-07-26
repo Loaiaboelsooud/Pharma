@@ -14,7 +14,7 @@
         android:id="@+id/action_buysell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/toolbar_buysell_image"
+        app:actionLayout="@layout/toolbar_properties_image"
         android:title=""
         app:showAsAction="always" />
     <item

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView avatar;
 
     int[] menuImages = {R.drawable.drug_index_menu, R.drawable.drug_interactions_menu, R.drawable.prescription_menu,
-            R.drawable.job_menu, R.drawable.buy_sell_menu, R.drawable.offers_menu};
+            R.drawable.job_menu, R.drawable.properties_menu, R.drawable.offers_menu};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
         final PrefUtil prefUtil = new PrefUtil(this);
         User user = prefUtil.getFacebookUserInfo();
         Glide.with(this).load(user.getAvatar()).into(avatar);
-        // item = view.findViewById(R.id.layout_profile_picture);
-        //avatar = item.findViewById(R.id.toolbar_profile_picture);
-        //intMainToolBar(MainActivity.this, avatar);
         gridView = findViewById(R.id.menugridview);
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);
@@ -72,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();
                         break;
                     case 4:
-                        Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();
+                        Intent intent3 = new Intent(getApplicationContext(), ViewPropertiesActivity.class);
+                        intent3.putExtra("isFiltered", false);
+                        startActivity(intent3);
                         break;
                     case 5:
                         Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();

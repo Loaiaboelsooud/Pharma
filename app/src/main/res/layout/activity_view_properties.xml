@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ViewPrescriptionsActivity">
+    tools:context=".ViewPropertiesActivity">
 
     <include
         android:id="@+id/toolbar_nav"
@@ -17,12 +17,12 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/presecription_recycler"
+            android:id="@+id/properties_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
         <ProgressBar
-            android:id="@+id/presecription_get_progress"
+            android:id="@+id/properties_get_progress"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,11 +32,19 @@
             android:visibility="gone" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/add_properties_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
             android:src="@drawable/add_button" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/filter_properties_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/filter_button" />
     </FrameLayout>
 </LinearLayout>

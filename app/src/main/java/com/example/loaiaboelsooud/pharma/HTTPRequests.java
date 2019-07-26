@@ -19,6 +19,7 @@ import retrofit2.Response;
 public class HTTPRequests extends AppCompatActivity {
     IResult result;
     Context context;
+    private final String BEARER = "Bearer ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendFBGetRequest(Activity activity) {
         final PrefUtil prefUtil = new PrefUtil(activity);
-        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().getUser("Bearer " + prefUtil.getToken());
+        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().getUser(BEARER + prefUtil.getToken());
         userCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -83,7 +84,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendFBPutRequest(Activity activity) {
         final PrefUtil prefUtil = new PrefUtil(activity);
-        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().refreshToken("Bearer " + prefUtil.getToken());
+        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().refreshToken(BEARER + prefUtil.getToken());
         userCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -109,7 +110,7 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendFBDelRequest(final String fbToken) {
-        Call<Void> userCall = RetrofitClient.getInstance().getApi().logoutUser("Bearer " + fbToken);
+        Call<Void> userCall = RetrofitClient.getInstance().getApi().logoutUser(BEARER + fbToken);
         userCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -123,7 +124,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPrescriptionsPostRequest(MultipartBody.Part imagePart, RequestBody description,
                                              final GetPrescriptionPostResult getPrescriptionPostResult, String token) {
-        Call<PrescriptionsItemResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, "Bearer " + token);
+        Call<PrescriptionsItemResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, BEARER + token);
         userCall.enqueue(new Callback<PrescriptionsItemResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsItemResponse> call, Response<PrescriptionsItemResponse> response) {
@@ -160,7 +161,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPrescriptionsCommentGetRequest(String token, final GetPrescriptionsCommentsList getPrescriptionsCommentsList, int prescriptionId, int pageNumber) {
         Call<PrescriptionsCommentsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptionsComments(
-                "Bearer " + token, "prescriptions/" + prescriptionId + "/comments?page=" + pageNumber);
+                BEARER + token, "prescriptions/" + prescriptionId + "/comments?page=" + pageNumber);
         userCall.enqueue(new Callback<PrescriptionsCommentsResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsCommentsResponse> call, Response<PrescriptionsCommentsResponse> response) {
@@ -179,7 +180,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPrescriptionsCommentPostRequest(String token, final GetPrescriptionsComment getPrescriptionsComment, int prescriptionId, String comment) {
         Call<PrescriptionsCommentResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptionsComments(
-                "Bearer " + token, "prescriptions/" + prescriptionId + "/comments", comment);
+                BEARER + token, "prescriptions/" + prescriptionId + "/comments", comment);
         userCall.enqueue(new Callback<PrescriptionsCommentResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsCommentResponse> call, Response<PrescriptionsCommentResponse> response) {
@@ -193,6 +194,105 @@ public class HTTPRequests extends AppCompatActivity {
                 getPrescriptionsComment.failed();
             }
         });
+    }
+
+    public void sendPropertiesGetRequest(final GetPropertiesList getPropertiesList, int pageNumber) {
+        Call<PropertiesItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllProperties("properties?page=" + pageNumber);
+        userCall.enqueue(new Callback<PropertiesItemsResponse>() {
+            @Override
+            public void onResponse(Call<PropertiesItemsResponse> call, Response<PropertiesItemsResponse> response) {
+                if (response.body() != null) {
+                    getPropertiesList.notifyList(response.body().getPropertiesItems(), response.body().getMetaData());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PropertiesItemsResponse> call, Throwable t) {
+                getPropertiesList.failed();
+            }
+        });
+    }
+
+    public void sendPropertiesPostRequest(String token, String name,
+                                          String city, String region, String address,
+                                          String area, String listedFor, String type,
+                                          int price, String description, String notes,
+                                          List<String> mobileNumbers, List<String> landLineNumbers,
+                                          final GetPropertiesPostResult getPropertiesPostResult) {
+        Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().addProperties
+                (BEARER + token, name, city, region, address, area, listedFor,
+                        type, price, description, notes, mobileNumbers, landLineNumbers);
+        userCall.enqueue(new Callback<PropertiesItemResponse>() {
+            @Override
+            public void onResponse(Call<PropertiesItemResponse> call, Response<PropertiesItemResponse> response) {
+                if (response.body() != null) {
+                    getPropertiesPostResult.success();
+                } else {
+                    getPropertiesPostResult.failed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PropertiesItemResponse> call, Throwable t) {
+                getPropertiesPostResult.failed();
+            }
+        });
+    }
+
+
+    public void sendPropertiesFilterGetRequest(String token, String selling, String renting, String pharmacy,
+                                               String wareHouse, String factory, String hospital,
+                                               final GetPropertiesList getPropertiesList, int pageNumber) {
+        Call<PropertiesItemsResponse> userCall = RetrofitClient.getInstance().getApi().getFilteredProperties
+                ("properties/filter?page=" + pageNumber, BEARER + token, selling, renting,
+                        pharmacy, wareHouse, factory, hospital);
+        userCall.enqueue(new Callback<PropertiesItemsResponse>() {
+            @Override
+            public void onResponse(Call<PropertiesItemsResponse> call, Response<PropertiesItemsResponse> response) {
+                if (response.body() != null) {
+                    getPropertiesList.notifyList(response.body().getPropertiesItems(), response.body().getMetaData());
+                } else {
+                    getPropertiesList.failed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PropertiesItemsResponse> call, Throwable t) {
+                getPropertiesList.failed();
+            }
+        });
+    }
+
+    public void sendPropertyGetRequest(final GetProperty getProperty, String token, int id) {
+        Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().getPropertyById(
+                BEARER + token, "properties/" + id);
+        userCall.enqueue(new Callback<PropertiesItemResponse>() {
+            @Override
+            public void onResponse(Call<PropertiesItemResponse> call, Response<PropertiesItemResponse> response) {
+                if (response.body() != null) {
+                    getProperty.notifyItem(response.body().getPropertiesItem());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PropertiesItemResponse> call, Throwable t) {
+                getProperty.failed();
+            }
+        });
+    }
+
+    public interface GetPropertiesList {
+        void notifyList(List<PropertiesItem> propertiesItems, MetaData metaData);
+
+        void failed();
+
+    }
+
+    public interface GetProperty {
+        void notifyItem(PropertiesItem propertiesItems);
+
+        void failed();
+
     }
 
     public interface GetPrescriptionsCommentsList {
@@ -220,6 +320,13 @@ public class HTTPRequests extends AppCompatActivity {
 
         void failed();
     }
+
+    public interface GetPropertiesPostResult {
+        void success();
+
+        void failed();
+    }
+
 
     public interface IResult {
 
