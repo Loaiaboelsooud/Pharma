@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -20,6 +21,12 @@ public class HTTPRequests extends AppCompatActivity {
     IResult result;
     Context context;
     private final String BEARER = "Bearer ";
+    private final String PROPERTIES = "properties/";
+    private final String IMAGES = "/images";
+    private final String JOBADS = "job-ads/";
+    private final String NAME = "name";
+    private final String ID = "id";
+    private final String PRESCRIPTIONS = "prescriptions/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +41,8 @@ public class HTTPRequests extends AppCompatActivity {
     public void sendFBPostRequest(JSONObject jsonObject, final String fbToken, Activity activity) {
         try {
             User user = new User();
-            user.setName(jsonObject.getString("name"));
-            user.setFacebookID(jsonObject.getString("id"));
+            user.setName(jsonObject.getString(NAME));
+            user.setFacebookID(jsonObject.getString(ID));
             user.setFacebookToken(fbToken);
             final PrefUtil prefUtil = new PrefUtil(activity);
             Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().createUser(user);
@@ -159,9 +166,9 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendPrescriptionsCommentGetRequest(String token, final GetPrescriptionsCommentsList getPrescriptionsCommentsList, int prescriptionId, int pageNumber) {
+    public void sendPrescriptionsCommentGetRequest(final GetPrescriptionsCommentsList getPrescriptionsCommentsList, int prescriptionId, int pageNumber) {
         Call<PrescriptionsCommentsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptionsComments(
-                BEARER + token, "prescriptions/" + prescriptionId + "/comments?page=" + pageNumber);
+                PRESCRIPTIONS + prescriptionId + "/comments?page=" + pageNumber);
         userCall.enqueue(new Callback<PrescriptionsCommentsResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsCommentsResponse> call, Response<PrescriptionsCommentsResponse> response) {
@@ -180,7 +187,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPrescriptionsCommentPostRequest(String token, final GetPrescriptionsComment getPrescriptionsComment, int prescriptionId, String comment) {
         Call<PrescriptionsCommentResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptionsComments(
-                BEARER + token, "prescriptions/" + prescriptionId + "/comments", comment);
+                BEARER + token, PRESCRIPTIONS + prescriptionId + "/comments", comment);
         userCall.enqueue(new Callback<PrescriptionsCommentResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsCommentResponse> call, Response<PrescriptionsCommentResponse> response) {
@@ -213,11 +220,11 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendPropertiesPostRequest(String token, String name,
+    public void sendPropertiesPostRequest(final String token, String name,
                                           String city, String region, String address,
                                           String area, String listedFor, String type,
                                           int price, String description, String notes,
-                                          List<String> mobileNumbers, List<String> landLineNumbers,
+                                          List<String> mobileNumbers, List<String> landLineNumbers, final List<MultipartBody.Part> images,
                                           final GetPropertiesPostResult getPropertiesPostResult) {
         Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().addProperties
                 (BEARER + token, name, city, region, address, area, listedFor,
@@ -226,7 +233,7 @@ public class HTTPRequests extends AppCompatActivity {
             @Override
             public void onResponse(Call<PropertiesItemResponse> call, Response<PropertiesItemResponse> response) {
                 if (response.body() != null) {
-                    getPropertiesPostResult.success();
+                    sendPropertiesImagePostRequest(images, token, response.body().getPropertiesItem().getId(), getPropertiesPostResult);
                 } else {
                     getPropertiesPostResult.failed();
                 }
@@ -240,11 +247,11 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
 
-    public void sendPropertiesFilterGetRequest(String token, String selling, String renting, String pharmacy,
+    public void sendPropertiesFilterGetRequest(String selling, String renting, String pharmacy,
                                                String wareHouse, String factory, String hospital,
                                                final GetPropertiesList getPropertiesList, int pageNumber) {
         Call<PropertiesItemsResponse> userCall = RetrofitClient.getInstance().getApi().getFilteredProperties
-                ("properties/filter?page=" + pageNumber, BEARER + token, selling, renting,
+                (PROPERTIES + "filter?page=" + pageNumber, selling, renting,
                         pharmacy, wareHouse, factory, hospital);
         userCall.enqueue(new Callback<PropertiesItemsResponse>() {
             @Override
@@ -263,9 +270,9 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendPropertyGetRequest(final GetProperty getProperty, String token, int id) {
+    public void sendPropertyGetRequest(final GetProperty getProperty, int id) {
         Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().getPropertyById(
-                BEARER + token, "properties/" + id);
+                PROPERTIES + id);
         userCall.enqueue(new Callback<PropertiesItemResponse>() {
             @Override
             public void onResponse(Call<PropertiesItemResponse> call, Response<PropertiesItemResponse> response) {
@@ -280,6 +287,88 @@ public class HTTPRequests extends AppCompatActivity {
             }
         });
     }
+
+    public void sendPropertiesImagePostRequest(List<MultipartBody.Part> images, String token, int id,
+                                               final GetPropertiesPostResult getPropertiesPostResult) {
+        Call<PropertiesImageResponse> userCall = RetrofitClient.getInstance().getApi().addPropertiesImages
+                (images, BEARER + token, PROPERTIES + id + IMAGES);
+        userCall.enqueue(new Callback<PropertiesImageResponse>() {
+            @Override
+            public void onResponse(Call<PropertiesImageResponse> call, Response<PropertiesImageResponse> response) {
+                if (response.body() != null) {
+                    getPropertiesPostResult.success();
+                } else {
+                    getPropertiesPostResult.failed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PropertiesImageResponse> call, Throwable t) {
+                getPropertiesPostResult.failed();
+            }
+        });
+    }
+
+    public void sendJobsGetRequest(final GetJobsList getJobsList, int pageNumber) {
+        Call<JobsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllJobs("job-ads?page=" + pageNumber);
+        userCall.enqueue(new Callback<JobsItemsResponse>() {
+            @Override
+            public void onResponse(Call<JobsItemsResponse> call, Response<JobsItemsResponse> response) {
+                if (response.body() != null) {
+                    getJobsList.notifyList(response.body().getJobsItems(), response.body().getMetaData());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobsItemsResponse> call, Throwable t) {
+                getJobsList.failed();
+            }
+        });
+    }
+
+    public void sendJobPostRequest(final String token, String name, String description, int from, int to,
+                                   String workPlace, String position, String city, String region, String address,
+                                   List<String> mobileNumbers, final GetJobPostResult getJobPostResult) {
+        Call<JobsItemResponse> userCall = RetrofitClient.getInstance().getApi().addJob
+                (BEARER + token, name, description, from, to,
+                        workPlace, position, city, region, address, mobileNumbers, "per_hour");
+        userCall.enqueue(new Callback<JobsItemResponse>() {
+            @Override
+            public void onResponse(Call<JobsItemResponse> call, Response<JobsItemResponse> response) {
+                if (response.body() != null) {
+                    getJobPostResult.success();
+                } else {
+                    getJobPostResult.failed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobsItemResponse> call, Throwable t) {
+                getJobPostResult.failed();
+            }
+        });
+    }
+
+    public void sendJobFilterGetRequest(Map jobsParam, final GetJobsList getJobsList, int pageNumber) {
+        Call<JobsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getFilteredJobs
+                (JOBADS + "filter?page=" + pageNumber, jobsParam);
+        userCall.enqueue(new Callback<JobsItemsResponse>() {
+            @Override
+            public void onResponse(Call<JobsItemsResponse> call, Response<JobsItemsResponse> response) {
+                if (response.body() != null) {
+                    getJobsList.notifyList(response.body().getJobsItems(), response.body().getMetaData());
+                } else {
+                    getJobsList.failed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobsItemsResponse> call, Throwable t) {
+                getJobsList.failed();
+            }
+        });
+    }
+
 
     public interface GetPropertiesList {
         void notifyList(List<PropertiesItem> propertiesItems, MetaData metaData);
@@ -327,6 +416,19 @@ public class HTTPRequests extends AppCompatActivity {
         void failed();
     }
 
+
+    public interface GetJobsList {
+        void notifyList(List<JobsItem> jobsItems, MetaData metaData);
+
+        void failed();
+
+    }
+
+    public interface GetJobPostResult {
+        void success();
+
+        void failed();
+    }
 
     public interface IResult {
 

@@ -43,7 +43,7 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
         prefUtil = new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
-        httpRequests.sendPrescriptionsCommentGetRequest(prefUtil.getToken(), this, postId, 1);
+        httpRequests.sendPrescriptionsCommentGetRequest(this, postId, 1);
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_prescriptions_comments);
@@ -135,7 +135,7 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
     private void loadMore(MetaData metaData) {
         if (metaData.getPagination().getTotalPages() > metaData.getPagination().getCurrentPage()) {
             progressBar.setVisibility(View.VISIBLE);
-            httpRequests.sendPrescriptionsCommentGetRequest(prefUtil.getToken(), this, postId,
+            httpRequests.sendPrescriptionsCommentGetRequest(this, postId,
                     metaData.getPagination().getCurrentPage() + 1);
             adapter.notifyDataSetChanged();
         }

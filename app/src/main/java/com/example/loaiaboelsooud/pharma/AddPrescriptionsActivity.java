@@ -27,11 +27,8 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
     private static final int REQUEST_GALLERY_IMAGE = 1234;
     private ImageView uploadedPic;
     private EditText description;
-    private HTTPRequests httpRequests;
     private PrescriptionsItem prescriptionsItem;
     private MultipartBody.Part imagePart;
-    private File photoFile;
-    private Uri photoURI;
     private ProgressBar progressBar;
 
     @Override
@@ -48,7 +45,7 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
         description = findViewById(R.id.presecription_description);
         prescriptionsItem.setDescription(description.getText().toString());
         RequestBody descriptionPart = RequestBody.create(MultipartBody.FORM, description.getText().toString());
-        if (prescriptionsItem.getDescription() != null && !prescriptionsItem.getDescription().isEmpty() && photoFile != null) {
+        if (prescriptionsItem.getDescription() != null && !prescriptionsItem.getDescription().isEmpty() && imagePart != null) {
             progressBar.setVisibility(View.VISIBLE);
             final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             });
@@ -109,6 +106,8 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
     }
 
     private Uri createFile() throws IOException {
+        File photoFile;
+        Uri photoURI;
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         photoFile = File.createTempFile("file", ".jpg", storageDir);
         photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
@@ -116,7 +115,11 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
     }
 
     private MultipartBody.Part imageToFile(Bitmap bitmap) throws IOException {
-        createFile();
+        File photoFile;
+        Uri photoURI;
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        photoFile = File.createTempFile("file", ".jpg", storageDir);
+        photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
         byte[] bitmapdata = bos.toByteArray();

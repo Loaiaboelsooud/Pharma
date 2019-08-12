@@ -9,7 +9,6 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,30 +29,32 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     private static final int REQUEST_CAPTURE_IMAGE = 100;
     private static final int REQUEST_GALLERY_IMAGE = 1234;
     private static final String ISFILTERED = "isFiltered";
-    private ImageView uploadedPic;
-    private EditText name, city, region, address, area, price, description, notes, mobileNumbers, landLineNumbers;
-    private Spinner listedForSpinner, typeSpinner;
-    private HTTPRequests httpRequests;
-    private PropertiesItem propertiesItem;
-    private MultipartBody.Part imagePart;
-    private File photoFile;
-    private Uri photoURI;
+    private final String SELLING = "selling";
+    private final String BUYING = "buying";
+    private final String RENTING = "renting";
+    private final String PHARMACY = "pharmacy";
+    private final String WAREHOUSE = "warehouse";
+    private final String FACTORY = "factory";
+    private final String HOSPITAL = "hospital";
+    private List<MultipartBody.Part> images;
     private ProgressBar progressBar;
-    private List<String> mobileNumbersList, landLineNumbersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_properties);
         intNavToolBar();
-        progressBar = findViewById(R.id.presecription_post_progress);
-        propertiesItem = new PropertiesItem();
-        mobileNumbersList = new ArrayList<String>();
-        landLineNumbersList = new ArrayList<String>();
+        progressBar = findViewById(R.id.properties_post_progress);
+
     }
 
     public void addProperties(View view) {
+        EditText name, city, region, address, area, price, description, notes, mobileNumbers, landLineNumbers;
+        Spinner listedForSpinner, typeSpinner;
         PrefUtil prefUtil = new PrefUtil(this);
+        List<String> mobileNumbersList, landLineNumbersList;
+        mobileNumbersList = new ArrayList<String>();
+        landLineNumbersList = new ArrayList<String>();
         name = findViewById(R.id.properties_name);
         city = findViewById(R.id.properties_city);
         region = findViewById(R.id.properties_region);
@@ -66,23 +67,62 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         notes = findViewById(R.id.properties_notes);
         mobileNumbers = findViewById(R.id.properties_mobile);
         landLineNumbers = findViewById(R.id.properties_land_number);
+        final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
+        });
         if (city.getText().toString() != null && !city.getText().toString().isEmpty() &&
                 region.getText().toString() != null && !region.getText().toString().isEmpty() &&
                 name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
                 mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()) {
+            mobileNumbersList.clear();
             mobileNumbersList.add(mobileNumbers.getText().toString());
+            if (landLineNumbers.getText().toString() != null && !landLineNumbers.getText().toString().equals("")) {
+                landLineNumbersList.clear();
+                landLineNumbersList.add(landLineNumbers.getText().toString());
+            }
             progressBar.setVisibility(View.VISIBLE);
-            final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
-            });
+
+            int paresedPrice = 1;
+            if (!price.getText().toString().equals("")) {
+                paresedPrice = Integer.parseInt(price.getText().toString());
+            }
+
             httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), city.getText().toString(), region.getText().toString()
-                    , address.getText().toString(), area.getText().toString(), listedForSpinner.getSelectedItem().toString(), typeSpinner.getSelectedItem().toString()
-                    , Integer.parseInt(price.getText().toString()), description.getText().toString(), notes.getText().toString(), mobileNumbersList,
-                    landLineNumbersList, this);
+                    , address.getText().toString(), area.getText().toString(), getListedFor((new Long(listedForSpinner.getSelectedItemId())).intValue()),
+                    getType((new Long(typeSpinner.getSelectedItemId())).intValue()), paresedPrice, description.getText().toString(),
+                    notes.getText().toString(), mobileNumbersList, landLineNumbersList, images, this);
 
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),
                     Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String getListedFor(int id) {
+        switch (id) {
+            case 0:
+                return SELLING;
+            case 1:
+                return BUYING;
+            case 2:
+                return RENTING;
+            default:
+                return null;
+        }
+    }
+
+    private String getType(int id) {
+        switch (id) {
+            case 0:
+                return PHARMACY;
+            case 1:
+                return WAREHOUSE;
+            case 2:
+                return FACTORY;
+            case 3:
+                return HOSPITAL;
+            default:
+                return null;
         }
     }
 
@@ -98,66 +138,52 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         }
     }
 
-    public void openCameraIntent(View view) throws IOException {
-        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (pictureIntent.resolveActivity(getPackageManager()) != null) {
-            //pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, createFile());
-            startActivityForResult(pictureIntent, REQUEST_CAPTURE_IMAGE);
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-        if (resultCode == RESULT_OK) {
-            Bitmap imageBitmap = null;
-            if (requestCode == REQUEST_CAPTURE_IMAGE) {
-                imageBitmap = (Bitmap) data.getExtras().get("data");
-                //imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), URI);
-                uploadedPic = findViewById(R.id.uploaded_pic);
-                uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
+        if (resultCode == RESULT_OK && requestCode == REQUEST_GALLERY_IMAGE) {
+            List<Bitmap> imageBitmap = new ArrayList<>();
 
-            } else if (requestCode == REQUEST_GALLERY_IMAGE) {
-                try {
-                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                uploadedPic = findViewById(R.id.uploaded_pic);
-                uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
-            }
             try {
-                imagePart = imageToFile(imageBitmap);
+                if (data.getClipData() != null) {
+                    for (int i = 0; i < data.getClipData().getItemCount(); i++) {
+                        imageBitmap.add(MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getClipData().getItemAt(i).getUri()));
+                    }
+                } else {
+                    imageBitmap.add(MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData()));
+                }
+                images = imageToFile(imageBitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
     }
 
-    private Uri createFile() throws IOException {
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        photoFile = File.createTempFile("file", ".jpg", storageDir);
-        photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
-        return photoURI;
-    }
-
-    private MultipartBody.Part imageToFile(Bitmap bitmap) throws IOException {
-        createFile();
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-        byte[] bitmapdata = bos.toByteArray();
-        try {
-            FileOutputStream fos = new FileOutputStream(photoFile);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private List<MultipartBody.Part> imageToFile(List<Bitmap> bitmapList) throws IOException {
+        List<MultipartBody.Part> images = new ArrayList<>();
+        for (int i = 0; i < bitmapList.size(); i++) {
+            File photoFile;
+            Uri photoURI;
+            File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            photoFile = File.createTempFile("file", ".jpg", storageDir);
+            photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmapList.get(i).compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+            try {
+                FileOutputStream fos = new FileOutputStream(photoFile);
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), photoFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("images[]", photoFile.getName(), reqFile);
+            images.add(body);
         }
-        RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), photoFile);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("image", photoFile.getName(), reqFile);
-        return body;
+        return images;
     }
 
     @Override

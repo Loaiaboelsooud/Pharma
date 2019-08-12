@@ -21,30 +21,30 @@
     <string name="post_prescriptions_success">تم اضافة الروشتة بنجاح</string>
     <string name="post_prescriptions_fail">يجب اضافة صورة و تعليق لاضافة روشتة</string>
     <string name="post_properties_success">تم اضافة الاعلان بنجاح</string>
-    <string name="properties_city">المحافظة</string>
-    <string name="properties_region">المنطقة</string>
-    <string name="properties_name">الاسم</string>
+    <string name="properties_city"><font color='#cc0029'>*</font>المحافظة</string>
+    <string name="properties_region"><font color='#cc0029'>*</font>المنطقة</string>
+    <string name="properties_name"><font color='#cc0029'>*</font>الاسم</string>
     <string name="properties_size">المساحة</string>
     <string name="properties_profit">العائد</string>
-    <string name="properties_address">العنوان بالتفصيل</string>
-    <string name="properties_mobile">الموبيل</string>
+    <string name="properties_address"><font color='#cc0029'>*</font>العنوان بالتفصيل</string>
+    <string name="properties_mobile">الموبيل<font color='#cc0029'>*</font></string>
     <string name="properties_land_number">الرقم الارضي</string>
     <string name="properties_notes">ملاحظات</string>
     <string name="properties_listed_for">سبب البيع</string>
     <string name="properties_type">النوع</string>
     <string name="properties_price">السعر</string>
-    <string name="properties_description">الوصف</string>
+    <string name="properties_description">المواصفات</string>
     <string name="post_properties_fail">برجاء ادخال جميع البينات المطلوبة</string>
     <string-array name="properties_listed_for_array">
-        <item>selling</item>
-        <item>buying</item>
-        <item>renting</item>
+        <item>شراء</item>
+        <item>بيع</item>
+        <item>ايجار</item>
     </string-array>
     <string-array name="properties_type_array">
-        <item>pharmacy</item>
-        <item>warehouse</item>
-        <item>factory</item>
-        <item>hospital</item>
+        <item>صيدلية</item>
+        <item>شركات توزيع ادوية و مخازن</item>
+        <item>مصانع ادوية</item>
+        <item>مستشفيات</item>
     </string-array>
     <string name="properties_filter_button_string">بحث</string>
     <string name="properties_filter_sell_string">بيع</string>
@@ -53,4 +53,52 @@
     <string name="properties_filter_warehouse_string">مخزن ادوية</string>
     <string name="properties_filter_factory_string">مصنع ادوية</string>
     <string name="properties_filter_hospital_string">مستشفي</string>
+
+    <string name="job_city">المدينة<font color='#cc0029'>*</font></string>
+    <string name="job_address">العنوان<font color='#cc0029'>*</font></string>
+    <string name="job_region">المنطقة<font color='#cc0029'>*</font></string>
+    <string name="job_name">الاسم<font color='#cc0029'>*</font></string>
+    <string name="job_mobile">الموبيل<font color='#cc0029'>*</font></string>
+    <string name="job_description">التفاصيل<font color='#cc0029'>*</font></string>
+    <string name="job_position">الوظيفة<font color='#cc0029'>*</font></string>
+    <string name="job_work_place">المكان<font color='#cc0029'>*</font></string>
+    <string name="job_range_salary">حدود المرتب</string>
+    <string name="job_to_salary">الي</string>
+    <string name="job_from_salary">من</string>
+    <string name="job_post_button">نشر</string>
+    <string-array name="job_work_place_array">
+        <item>صيدلية</item>
+        <item>شركات ادوية</item>
+        <item>مصانع ادوية</item>
+        <item>شركات توزيع ادوية و مخازن</item>
+    </string-array>
+    <string-array name="job_position_array">
+        <item>مدير</item>
+        <item>صيدلي ثان</item>
+        <item>مدير فتح و اغلاق</item>
+        <item>صيدلي للتدريب</item>
+        <item>مساعد صيدلي</item>
+        <item>صيدلي</item>
+    </string-array>
+    <string name="post_job_success">تم اضافة الوظيفة بنجاح</string>
+
+    <string name="job_filter_position">الوظيفة</string>
+    <string name="job_filter_work_place">المكان</string>
+    <string-array name="job_filter_work_place_array">
+        <item></item>
+        <item>صيدلية</item>
+        <item>شركات ادوية</item>
+        <item>مصانع ادوية</item>
+        <item>شركات توزيع ادوية و مخازن</item>
+    </string-array>
+    <string-array name="job_filter_position_array">
+        <item></item>
+        <item>مدير</item>
+        <item>صيدلي ثان</item>
+        <item>مدير فتح و اغلاق</item>
+        <item>صيدلي للتدريب</item>
+        <item>مساعد صيدلي</item>
+        <item>صيدلي</item>
+    </string-array>
+
 </resources>

@@ -66,12 +66,14 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent2);
                         break;
                     case 3:
-                        Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();
-                        break;
-                    case 4:
-                        Intent intent3 = new Intent(getApplicationContext(), ViewPropertiesActivity.class);
+                        Intent intent3 = new Intent(getApplicationContext(), ViewJobActivity.class);
                         intent3.putExtra("isFiltered", false);
                         startActivity(intent3);
+                        break;
+                    case 4:
+                        Intent intent4 = new Intent(getApplicationContext(), ViewPropertiesActivity.class);
+                        intent4.putExtra("isFiltered", false);
+                        startActivity(intent4);
                         break;
                     case 5:
                         Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();

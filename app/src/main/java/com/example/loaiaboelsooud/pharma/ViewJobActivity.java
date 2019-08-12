@@ -12,111 +12,90 @@ import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.GetPropertiesList, PropertiesAdapter.OnPropertiesClickListener {
-    public RecyclerView propertiesRecyclerView;
-    public List<PropertiesItem> propertiesItems;
+public class ViewJobActivity extends NavMenuInt implements HTTPRequests.GetJobsList {
+
+    public RecyclerView jobRecyclerView;
+    public List<JobsItem> jobsItem;
     private Boolean isScrolling = false, testbol = false, isFiltered;
     private int currentItems, totalItems, scrollOutItems, actualPage;
     private LinearLayoutManager manager;
     private HTTPRequests httpRequests;
     private PrefUtil prefUtil;
     private RecyclerView.Adapter adapter;
-    private FloatingActionButton addPropertiesButton, filterPropertiesButton;
+    private FloatingActionButton addJobButton, filterJobButton;
     private ProgressBar progressBar;
-    private ArrayList<String> listedForList, typeList;
-    private HashMap<String, Boolean> propertiesParam;
-    private String SELLING = "selling", RENTING = "renting", PHARMACY = "pharmacy", WAREHOUSE = "warehouse", FACTORY = "factory", HOSPITAL = "hospital";
+    private Map<String, String> jobParam;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         prefUtil = new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
         isFiltered = getIntent().getExtras().getBoolean("isFiltered");
+        jobParam = new HashMap();
+        jobParam = (HashMap<String, String>) getIntent().getExtras().getSerializable("jobParam");
         if (isFiltered) {
-            listedForList = new ArrayList<>();
-            typeList = new ArrayList<>();
-            propertiesParam = new HashMap<>();
-            propertiesParam = (HashMap<String, Boolean>) getIntent().getSerializableExtra("propertiesParam");
-            if (!propertiesParam.get(SELLING)) {
-                SELLING = null;
-            }
-            if (!propertiesParam.get(RENTING)) {
-                RENTING = null;
-            }
-            if (!propertiesParam.get(PHARMACY)) {
-                PHARMACY = null;
-            }
-            if (!propertiesParam.get(WAREHOUSE)) {
-                WAREHOUSE = null;
-            }
-            if (!propertiesParam.get(HOSPITAL)) {
-                HOSPITAL = null;
-            }
-            if (!propertiesParam.get(FACTORY)) {
-                FACTORY = null;
-            }
-            httpRequests.sendPropertiesFilterGetRequest(SELLING, RENTING, PHARMACY, WAREHOUSE, HOSPITAL, FACTORY, this, 1);
+            httpRequests.sendJobFilterGetRequest(jobParam,
+                    this, 1);
         } else {
-            httpRequests.sendPropertiesGetRequest(this, 1);
+            httpRequests.sendJobsGetRequest(this, 1);
         }
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.activity_view_properties);
+        setContentView(R.layout.activity_view_job);
         intNavToolBar();
-        adapter = new PropertiesAdapter(this, propertiesItems, this);
+        adapter = new JobAdapter(this, jobsItem);
         manager = new LinearLayoutManager(this);
-        propertiesRecyclerView = findViewById(R.id.properties_recycler);
-        propertiesRecyclerView.setLayoutManager(manager);
-        addPropertiesButton = findViewById(R.id.add_properties_button);
-        progressBar = findViewById(R.id.properties_get_progress);
+        jobRecyclerView = findViewById(R.id.job_recycler);
+        jobRecyclerView.setLayoutManager(manager);
+        addJobButton = findViewById(R.id.add_job_button);
+        progressBar = findViewById(R.id.job_get_progress);
         progressBar.setVisibility(View.VISIBLE);
-        filterPropertiesButton = findViewById(R.id.filter_properties_button);
+        filterJobButton = findViewById(R.id.filter_job_button);
         if (!prefUtil.isLoggedIn()) {
-            addPropertiesButton.hide();
+            addJobButton.hide();
             //change to properties
             Toast.makeText(this, getString(R.string.Signin_prescriptions_toast), Toast.LENGTH_SHORT).show();
         } else {
-            addPropertiesButton.setOnClickListener(new View.OnClickListener() {
+            addJobButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     finish();
-                    Intent intent = new Intent(ViewPropertiesActivity.this, AddPropertiesActivity.class);
+                    Intent intent = new Intent(ViewJobActivity.this, AddJobActivity.class);
                     startActivity(intent);
                 }
             });
         }
-        filterPropertiesButton.setOnClickListener(new View.OnClickListener() {
+        filterJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent intent = new Intent(ViewPropertiesActivity.this, FilterPropertiesActivity.class);
+                Intent intent = new Intent(ViewJobActivity.this, FilterJobActivity.class);
                 startActivity(intent);
             }
         });
     }
 
     @Override
-    public void notifyList(final List<PropertiesItem> propertiesItems, final MetaData metaData) {
+    public void notifyList(final List<JobsItem> jobsItem, final MetaData metaData) {
         if (!testbol) {
             testbol = true;
             actualPage = metaData.getPagination().getCurrentPage();
-            this.propertiesItems = propertiesItems;
-            adapter = new PropertiesAdapter(this, this.propertiesItems, this);
-            propertiesRecyclerView.setAdapter(adapter);
+            this.jobsItem = jobsItem;
+            adapter = new JobAdapter(this, this.jobsItem);
+            jobRecyclerView.setAdapter(adapter);
         }
         if (actualPage != 1) {
-            this.propertiesItems.addAll(propertiesItems);
+            this.jobsItem.addAll(jobsItem);
         }
         actualPage++;
         adapter.notifyDataSetChanged();
         progressBar.setVisibility(View.GONE);
-        propertiesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        jobRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -151,10 +130,11 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
         if (metaData.getPagination().getTotalPages() > metaData.getPagination().getCurrentPage()) {
             progressBar.setVisibility(View.VISIBLE);
             if (isFiltered) {
-                httpRequests.sendPropertiesFilterGetRequest(SELLING, RENTING, PHARMACY, WAREHOUSE, HOSPITAL, FACTORY,
+                httpRequests.sendJobFilterGetRequest(jobParam,
                         this, metaData.getPagination().getCurrentPage() + 1);
+
             } else {
-                httpRequests.sendPropertiesGetRequest(this, metaData.getPagination().getCurrentPage() + 1);
+                httpRequests.sendJobsGetRequest(this, metaData.getPagination().getCurrentPage() + 1);
             }
             adapter.notifyDataSetChanged();
         }
@@ -165,11 +145,4 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
         finish();
     }
 
-    @Override
-    public void onPropertiesClick(int propertiesPosition) {
-        Intent intent = new Intent(ViewPropertiesActivity.this, ViewPropertyActivity.class);
-        intent.putExtra("id", propertiesItems.get(propertiesPosition).getId());
-        startActivity(intent);
-        Toast.makeText(this, "test " + propertiesPosition, Toast.LENGTH_SHORT).show();
-    }
 }

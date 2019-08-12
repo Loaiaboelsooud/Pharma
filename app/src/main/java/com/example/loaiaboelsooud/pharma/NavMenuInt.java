@@ -45,7 +45,10 @@ public class NavMenuInt extends AppCompatActivity {
         jobItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
+                finish();
+                Intent intent = new Intent(NavMenuInt.this, ViewJobActivity.class);
+                intent.putExtra("isFiltered", false);
+                startActivity(intent);
             }
         });
 
@@ -91,6 +94,9 @@ public class NavMenuInt extends AppCompatActivity {
                 break;
             case "ViewPropertiesActivity":
                 propertiesItem.setActionView(R.layout.toolbar_properties_image_active);
+                break;
+            case "ViewJobActivity":
+                jobItem.setActionView(R.layout.toolbar_job_image_active);
                 break;
         }
         return super.onCreateOptionsMenu(menu);

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".AddPropertiesActivity">
+    tools:context=".AddJobActivity">
 
     <include
         android:id="@+id/toolbar_nav"
@@ -21,17 +21,16 @@
             android:layout_height="wrap_content"
             android:stretchColumns="1">
 
-
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_name_text"
+                    android:id="@+id/job_name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_name" />
+                    android:text="@string/job_name" />
 
                 <EditText
-                    android:id="@+id/properties_name"
+                    android:id="@+id/job_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -40,29 +39,13 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_price_text"
+                    android:id="@+id/job_description_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_price" />
+                    android:text="@string/job_description" />
 
                 <EditText
-                    android:id="@+id/properties_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/properties_city_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/properties_city" />
-
-                <EditText
-                    android:id="@+id/properties_city"
+                    android:id="@+id/job_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -71,13 +54,23 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_region_text"
+                    android:id="@+id/job_salary_range_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_region" />
+                    android:text="@string/job_range_salary" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/job_from_salary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_from_salary" />
 
                 <EditText
-                    android:id="@+id/properties_region"
+                    android:id="@+id/job_from_salary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -86,13 +79,13 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_address_text"
+                    android:id="@+id/job_to_salary_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_address" />
+                    android:text="@string/job_to_salary" />
 
                 <EditText
-                    android:id="@+id/properties_address"
+                    android:id="@+id/job_to_salary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -101,76 +94,46 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_area_text"
+                    android:id="@+id/job_work_place_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_size" />
-
-                <EditText
-                    android:id="@+id/properties_area"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/properties_listed_for_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/properties_listed_for" />
+                    android:text="@string/job_work_place" />
 
                 <Spinner
-                    android:id="@+id/properties_listed_for"
+                    android:id="@+id/job_work_place"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/properties_listed_for_array" />
+                    android:entries="@array/job_work_place_array" />
 
             </TableRow>
-
 
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_type_text"
+                    android:id="@+id/job_position_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_type" />
+                    android:text="@string/job_position" />
 
                 <Spinner
-                    android:id="@+id/properties_type"
+                    android:id="@+id/job_position"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/properties_type_array" />
+                    android:entries="@array/job_position_array" />
+
             </TableRow>
+
 
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_description_text"
+                    android:id="@+id/job_city_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_description" />
+                    android:text="@string/job_city" />
 
                 <EditText
-                    android:id="@+id/properties_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/properties_notes_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/properties_notes" />
-
-                <EditText
-                    android:id="@+id/properties_notes"
+                    android:id="@+id/job_city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -179,29 +142,43 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_mobile_text"
+                    android:id="@+id/job_region_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_mobile" />
+                    android:text="@string/job_region" />
 
                 <EditText
-                    android:id="@+id/properties_mobile"
+                    android:id="@+id/job_region"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone" />
+                    android:layout_height="wrap_content" />
 
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:id="@+id/properties_land_number_text"
+                    android:id="@+id/job_address_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/properties_land_number" />
+                    android:text="@string/job_address" />
 
                 <EditText
-                    android:id="@+id/properties_land_number"
+                    android:id="@+id/job_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/job_mobile_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_mobile" />
+
+                <EditText
+                    android:id="@+id/job_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone" />
@@ -209,27 +186,18 @@
             </TableRow>
 
             <Button
-                android:id="@+id/properties_gallery_button"
+                android:id="@+id/job_post_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:onClick="openPropertiesGalleryIntent"
-                android:text="@string/prescriptions_gallery_button_string" />
-
-
-            <Button
-                android:id="@+id/properties_post_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:onClick="addProperties"
-                android:text="@string/prescriptions_post_button_string" />
+                android:onClick="addJob"
+                android:text="@string/job_post_button" />
 
         </TableLayout>
     </ScrollView>
 
     <ProgressBar
-        android:id="@+id/properties_post_progress"
+        android:id="@+id/job_post_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

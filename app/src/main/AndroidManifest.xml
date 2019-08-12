@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -22,7 +23,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewPropertyActivity"></activity>
+        <activity android:name=".FilterJobActivity"></activity>
+        <activity android:name=".ViewJobActivity" />
+        <activity android:name=".AddJobActivity" />
+        <activity android:name=".ViewPropertyActivity" />
         <activity android:name=".FilterPropertiesActivity" />
         <activity
             android:name=".PrescriptionsCommentsActivity"

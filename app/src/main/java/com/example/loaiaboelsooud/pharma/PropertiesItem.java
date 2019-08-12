@@ -18,9 +18,9 @@ public class PropertiesItem {
     @SerializedName("listed_for")
     private String listedFor;
     @SerializedName("mobile_numbers")
-    private String[] mobileNumber;
+    private List<String> mobileNumber;
     @SerializedName("landline_numbers")
-    private String[] landLineNumbers;
+    private List<String> landLineNumbers;
     @SerializedName("name")
     private String name;
     @SerializedName("notes")
@@ -37,6 +37,8 @@ public class PropertiesItem {
     private Images images;
     @SerializedName("updated_at")
     private String updatedAt;
+    @SerializedName("area")
+    private String area;
 
     public class Images {
         @SerializedName("data")
@@ -172,14 +174,6 @@ public class PropertiesItem {
         this.createdAt = createdAt;
     }
 
-    public String[] getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String[] mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
     public String getRegion() {
         return region;
     }
@@ -196,11 +190,27 @@ public class PropertiesItem {
         this.updatedAt = updatedAt;
     }
 
-    public String[] getLandLineNumbers() {
+    public List<String> getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(List<String> mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public List<String> getLandLineNumbers() {
         return landLineNumbers;
     }
 
-    public void setLandLineNumbers(String[] landLineNumbers) {
+    public void setLandLineNumbers(List<String> landLineNumbers) {
         this.landLineNumbers = landLineNumbers;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

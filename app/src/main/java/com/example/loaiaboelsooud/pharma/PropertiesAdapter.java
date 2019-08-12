@@ -42,13 +42,14 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Glide.with(context).load((propertiesItem.getUserResponse().getUser().getAvatar())).
                 placeholder(R.drawable.ic_loading).dontAnimate().
                 into(((Properties) holder).uploaderAvatar);
-        if (propertiesItem.getImages().getData().size() != 0) {
+        /*if (propertiesItem.getImages().getData().size() != 0) {
             Glide.with(context).load((propertiesItem.getImages().getData().get(0).getUrl())).placeholder(R.drawable.ic_loading).
                     into(((PropertiesAdapter.Properties) holder).picture);
-        }
+        }*/
         ((Properties) holder).propertiesName.setText(propertiesItem.getName());
         ((Properties) holder).listedFor.setText(propertiesItem.getListedFor());
         ((Properties) holder).type.setText(propertiesItem.getType());
+        ((Properties) holder).updatedAt.setText(propertiesItem.getUpdatedAt());
     }
 
     @Override
@@ -59,7 +60,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class Properties extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView uploaderName, propertiesName, listedFor, type;
+        private TextView uploaderName, propertiesName, listedFor, type, updatedAt;
         private ImageView uploaderAvatar, picture;
         private OnPropertiesClickListener onPropertiesClickListener;
 
@@ -69,6 +70,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             this.onPropertiesClickListener = propertiesClickListener;
             uploaderName = propertiesView.findViewById(R.id.properties_user_name);
             uploaderAvatar = propertiesView.findViewById(R.id.properties_user_profile_picture);
+            updatedAt = propertiesView.findViewById(R.id.properties_adapter_updated_at);
             // picture = propertiesView.findViewById(R.id.properties_image);
             propertiesName = propertiesView.findViewById(R.id.properties_adapter_name);
             type = propertiesView.findViewById(R.id.properties_adapter_type);

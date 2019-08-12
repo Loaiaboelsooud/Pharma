@@ -1,6 +1,7 @@
 package com.example.loaiaboelsooud.pharma;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -14,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface JsonPostPlaceHolderApi {
@@ -39,7 +41,7 @@ public interface JsonPostPlaceHolderApi {
     Call<PrescriptionsItemsResponse> getAllPrescriptions(@Url String url);
 
     @GET
-    Call<PrescriptionsCommentsResponse> getAllPrescriptionsComments(@Header(AUTHORIZATION) String token, @Url String url);
+    Call<PrescriptionsCommentsResponse> getAllPrescriptionsComments(@Url String url);
 
     @POST
     Call<PrescriptionsCommentResponse> addPrescriptionsComments(@Header(AUTHORIZATION) String token, @Url String url, @Query("comment") String comment);
@@ -55,11 +57,27 @@ public interface JsonPostPlaceHolderApi {
                                                @Query("mobile_numbers[]") List<String> mobileNumber, @Query("landline_numbers[]") List<String> landLineNumbers);
 
     @GET()
-    Call<PropertiesItemsResponse> getFilteredProperties(@Url String url, @Header(AUTHORIZATION) String token, @Query("listed_for[]") String selling,
+    Call<PropertiesItemsResponse> getFilteredProperties(@Url String url, @Query("listed_for[]") String selling,
                                                         @Query("listed_for[]") String renting, @Query("type") String pharmacy, @Query("type") String wareHouse,
                                                         @Query("type") String hospital, @Query("type") String factory);
 
     @GET
-    Call<PropertiesItemResponse> getPropertyById(@Header(AUTHORIZATION) String token, @Url String url);
+    Call<PropertiesItemResponse> getPropertyById(@Url String url);
 
+    @Multipart
+    @POST()
+    Call<PropertiesImageResponse> addPropertiesImages(@Part List<MultipartBody.Part> images, @Header(AUTHORIZATION) String token, @Url String url);
+
+    @GET
+    Call<JobsItemsResponse> getAllJobs(@Url String url);
+
+    @POST("job-ads")
+    Call<JobsItemResponse> addJob(@Header(AUTHORIZATION) String token, @Query("name") String name, @Query("description") String description,
+                                  @Query("min_salary") int from, @Query("max_salary") int to,
+                                  @Query("workplace") String workPlace, @Query("position") String position,
+                                  @Query("city") String city, @Query("region") String region, @Query("address") String address,
+                                  @Query("mobile_numbers[]") List<String> mobileNumber, @Query("salary_type") String salaryTypeToBeRemved);
+
+    @GET()
+    Call<JobsItemsResponse> getFilteredJobs(@Url String url, @QueryMap() Map<String, String> jobsParam);
 }

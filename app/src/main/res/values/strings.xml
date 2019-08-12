@@ -20,13 +20,13 @@
     <string name="post_prescriptions_success">Your prescription is added successfully</string>
     <string name="post_prescriptions_fail">Please choose an image and write a description</string>
     <string name="post_properties_success">Your property is added successfully</string>
-    <string name="properties_city">City</string>
-    <string name="properties_region">region</string>
-    <string name="properties_name">Name</string>
+    <string name="properties_city">City<font color='#cc0029'>*</font></string>
+    <string name="properties_region">region<font color='#cc0029'>*</font></string>
+    <string name="properties_name">Name<font color='#cc0029'>*</font></string>
     <string name="properties_size">Area</string>
     <string name="properties_profit">Profit</string>
-    <string name="properties_address">Address</string>
-    <string name="properties_mobile">Mobile</string>
+    <string name="properties_address">Address<font color='#cc0029'>*</font></string>
+    <string name="properties_mobile">Mobile<font color='#cc0029'>*</font></string>
     <string name="properties_land_number">Land Line Number</string>
     <string name="properties_notes">Notes</string>
     <string name="properties_listed_for">Listed For</string>
@@ -52,9 +52,53 @@
     <string name="properties_filter_warehouse_string">Warehouse</string>
     <string name="properties_filter_factory_string">Factory</string>
     <string name="properties_filter_hospital_string">Hospital</string>
+    <string name="job_city">City<font color='#cc0029'>*</font></string>
+    <string name="job_address">Address<font color='#cc0029'>*</font></string>
+    <string name="job_region">Region<font color='#cc0029'>*</font></string>
+    <string name="job_name">Name<font color='#cc0029'>*</font></string>
+    <string name="job_mobile">Mobile<font color='#cc0029'>*</font></string>
+    <string name="job_description">Description<font color='#cc0029'>*</font></string>
+    <string name="job_position">Position<font color='#cc0029'>*</font></string>
+    <string name="job_work_place">Workplace<font color='#cc0029'>*</font></string>
+    <string name="job_range_salary">Salary ٍRange</string>
+    <string name="job_to_salary">to</string>
+    <string name="job_from_salary">from</string>
+    <string name="job_post_button">POST</string>
+    <string-array name="job_work_place_array">
+        <item>pharmacy</item>
+        <item>company</item>
+        <item>factory</item>
+        <item>warehouse</item>
+    </string-array>
+    <string-array name="job_position_array">
+        <item>manager</item>
+        <item>second_pharmacist</item>
+        <item>open_close</item>
+        <item>intern</item>
+        <item>assistant</item>
+        <item>pharmacist</item>
+    </string-array>
+    <string name="post_job_success">Your job is added successfully</string>
+    <string name="job_filter_position">Position</string>
+    <string name="job_filter_work_place">Workplace</string>
+    <string-array name="job_filter_work_place_array">
+        <item></item>
+        <item>pharmacy</item>
+        <item>company</item>
+        <item>factory</item>
+        <item>warehouse</item>
+    </string-array>
+    <string-array name="job_filter_position_array">
+        <item></item>
+        <item>manager</item>
+        <item>second_pharmacist</item>
+        <item>open_close</item>
+        <item>intern</item>
+        <item>assistant</item>
+        <item>pharmacist</item>
+    </string-array>
 
 
-    properties_filter_sell_check_box
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
