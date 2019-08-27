@@ -23,7 +23,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FilterJobActivity"></activity>
+        <activity android:name=".PropertiesImagesAdapter"></activity>
+        <activity android:name=".PromotionsAdapter" />
+        <activity android:name=".ViewPromotionsActivity" />
+        <activity android:name=".FilterJobActivity" />
         <activity android:name=".ViewJobActivity" />
         <activity android:name=".AddJobActivity" />
         <activity android:name=".ViewPropertyActivity" />

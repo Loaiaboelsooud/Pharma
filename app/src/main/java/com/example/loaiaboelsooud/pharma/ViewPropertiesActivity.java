@@ -170,6 +170,5 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
         Intent intent = new Intent(ViewPropertiesActivity.this, ViewPropertyActivity.class);
         intent.putExtra("id", propertiesItems.get(propertiesPosition).getId());
         startActivity(intent);
-        Toast.makeText(this, "test " + propertiesPosition, Toast.LENGTH_SHORT).show();
     }
 }

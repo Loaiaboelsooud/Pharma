@@ -34,49 +34,11 @@ public class PropertiesItem {
     @SerializedName("type")
     private String type;
     @SerializedName("images")
-    private Images images;
+    private PropertiesImage images;
     @SerializedName("updated_at")
     private String updatedAt;
     @SerializedName("area")
     private String area;
-
-    public class Images {
-        @SerializedName("data")
-        private List<Data> data;
-
-        public List<Data> getData() {
-            return data;
-        }
-
-        public void setData(List<Data> data) {
-            this.data = data;
-        }
-
-        public class Data {
-            @SerializedName("id")
-            private int id;
-
-            @SerializedName("url")
-            private String url;
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-        }
-    }
 
     public String getCity() {
         return city;
@@ -150,11 +112,11 @@ public class PropertiesItem {
         this.notes = notes;
     }
 
-    public Images getImages() {
+    public PropertiesImage getImages() {
         return images;
     }
 
-    public void setImages(Images images) {
+    public void setImages(PropertiesImage images) {
         this.images = images;
     }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tools:FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="0.5"
+    tools:context=".ViewPropertyActivity">
+
+    <ImageView
+        android:id="@+id/properties_image_adapter_picture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true" />
+
+</tools:FrameLayout>

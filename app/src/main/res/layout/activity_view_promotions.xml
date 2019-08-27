@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ViewPropertiesActivity">
+    tools:context=".ViewPromotionsActivity">
 
     <include
         android:id="@+id/toolbar_nav"
@@ -17,12 +17,12 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/properties_recycler"
+            android:id="@+id/promotions_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
         <ProgressBar
-            android:id="@+id/properties_get_progress"
+            android:id="@+id/promotions_get_progress"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,26 +31,5 @@
             android:layout_gravity="center"
             android:visibility="gone" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_properties_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:src="@drawable/add_button" />
-
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Switch" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/filter_properties_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|bottom"
-            android:layout_margin="16dp"
-            android:src="@drawable/filter_button" />
     </FrameLayout>
 </LinearLayout>

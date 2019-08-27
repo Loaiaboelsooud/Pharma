@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -12,14 +14,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.GetProperty {
+public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.GetProperty, PropertiesImagesAdapter.OnPropertiesClickListener {
     private HTTPRequests httpRequests;
     private ProgressBar progressBar;
     private FloatingActionButton callPropertiesButton;
     private String phoneNumber;
+    private RecyclerView.Adapter adapter;
+    private LinearLayoutManager manager;
+    public RecyclerView propertiesImagesRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         PrefUtil prefUtil = new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
@@ -38,12 +44,18 @@ public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.Get
                 startActivity(callIntent);
             }
         });
+        manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        propertiesImagesRecyclerView = findViewById(R.id.properties_image_recycler);
+        propertiesImagesRecyclerView.setLayoutManager(manager);
     }
 
     @Override
     public void notifyItem(PropertiesItem propertiesItem) {
         TextView uploaderName, propertyDescription, propertyAddress, propertyArea, propertyNotes;
         ImageView uploaderAvatar, picture;
+        PropertiesImage propertiesImage = propertiesItem.getImages();
+        adapter = new PropertiesImagesAdapter(this, propertiesImage, this);
+        propertiesImagesRecyclerView.setAdapter(adapter);
         propertyDescription = findViewById(R.id.property_description);
         propertyAddress = findViewById(R.id.property_address);
         propertyArea = findViewById(R.id.property_area);
@@ -66,5 +78,10 @@ public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.Get
     public void failed() {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPropertiesClick(int propertiesPosition) {
+
     }
 }

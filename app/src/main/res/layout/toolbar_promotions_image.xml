@@ -8,5 +8,5 @@
         android:layout_width="37dp"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:src="@drawable/offers_toolbar" />
+        android:src="@drawable/promotions_toolbar" />
 </FrameLayout>

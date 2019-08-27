@@ -80,4 +80,7 @@ public interface JsonPostPlaceHolderApi {
 
     @GET()
     Call<JobsItemsResponse> getFilteredJobs(@Url String url, @QueryMap() Map<String, String> jobsParam);
+
+    @GET
+    Call<PromotionsItemsResponse> getAllPromotions(@Url String url);
 }

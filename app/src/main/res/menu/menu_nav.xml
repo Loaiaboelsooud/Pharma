@@ -6,7 +6,7 @@
         android:id="@+id/action_offers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/toolbar_offers_image"
+        app:actionLayout="@layout/toolbar_promotions_image"
         android:title=""
         app:showAsAction="always" />
 

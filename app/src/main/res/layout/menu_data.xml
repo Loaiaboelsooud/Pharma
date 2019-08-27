@@ -25,6 +25,6 @@
             android:layout_height="90dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/offers_menu" />
+            android:src="@drawable/promotions_menu" />
     </RelativeLayout>
 </RelativeLayout>

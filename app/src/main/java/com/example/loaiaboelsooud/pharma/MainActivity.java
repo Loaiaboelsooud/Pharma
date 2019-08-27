@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView avatar;
 
     int[] menuImages = {R.drawable.drug_index_menu, R.drawable.drug_interactions_menu, R.drawable.prescription_menu,
-            R.drawable.job_menu, R.drawable.properties_menu, R.drawable.offers_menu};
+            R.drawable.job_menu, R.drawable.properties_menu, R.drawable.promotions_menu};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent4);
                         break;
                     case 5:
-                        Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();
+                        Intent intent5 = new Intent(getApplicationContext(), ViewPromotionsActivity.class);
+                        startActivity(intent5);
                         break;
                 }
             }
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     private class CustomAdapter extends BaseAdapter {
         String[] menuNames = {getResources().getString(R.string.drug_index), getResources().getString(R.string.drug_interactions),
                 getResources().getString(R.string.prescription), getResources().getString(R.string.job),
-                getResources().getString(R.string.buy_sell), getResources().getString(R.string.offer)};
+                getResources().getString(R.string.buy_sell), getResources().getString(R.string.promotions)};
 
         @Override
         public int getCount() {

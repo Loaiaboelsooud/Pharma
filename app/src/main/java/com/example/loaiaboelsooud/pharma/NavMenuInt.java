@@ -22,11 +22,13 @@ public class NavMenuInt extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_nav, menu);
 
-        final MenuItem offersItem = menu.findItem(R.id.action_offers);
-        offersItem.getActionView().setOnClickListener(new View.OnClickListener() {
+        final MenuItem promotionsItem = menu.findItem(R.id.action_offers);
+        promotionsItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
+                finish();
+                Intent intent = new Intent(NavMenuInt.this, ViewPromotionsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -97,6 +99,9 @@ public class NavMenuInt extends AppCompatActivity {
                 break;
             case "ViewJobActivity":
                 jobItem.setActionView(R.layout.toolbar_job_image_active);
+                break;
+            case "ViewPromotionsActivity":
+                promotionsItem.setActionView(R.layout.toolbar_promotions_image_active);
                 break;
         }
         return super.onCreateOptionsMenu(menu);

@@ -369,9 +369,32 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
+    public void sendPromotionsGetRequest(final GetPromotionsList getPromotionsList, int pageNumber) {
+        Call<PromotionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPromotions("promotions?page=" + pageNumber);
+        userCall.enqueue(new Callback<PromotionsItemsResponse>() {
+            @Override
+            public void onResponse(Call<PromotionsItemsResponse> call, Response<PromotionsItemsResponse> response) {
+                if (response.body() != null) {
+                    getPromotionsList.notifyList(response.body().getPromotionsItem(), response.body().getMetaData());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PromotionsItemsResponse> call, Throwable t) {
+                getPromotionsList.failed();
+            }
+        });
+    }
 
     public interface GetPropertiesList {
         void notifyList(List<PropertiesItem> propertiesItems, MetaData metaData);
+
+        void failed();
+
+    }
+
+    public interface GetPromotionsList {
+        void notifyList(List<PromotionsItem> promotionsItems, MetaData metaData);
 
         void failed();
 
