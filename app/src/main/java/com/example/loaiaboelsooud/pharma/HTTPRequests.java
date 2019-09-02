@@ -28,6 +28,8 @@ public class HTTPRequests extends AppCompatActivity {
     private final String ID = "id";
     private final String PRESCRIPTIONS = "prescriptions/";
 
+    //response.errorBody().string()
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -247,12 +249,10 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
 
-    public void sendPropertiesFilterGetRequest(String selling, String renting, String pharmacy,
-                                               String wareHouse, String factory, String hospital,
+    public void sendPropertiesFilterGetRequest(Map propertiesParam,
                                                final GetPropertiesList getPropertiesList, int pageNumber) {
         Call<PropertiesItemsResponse> userCall = RetrofitClient.getInstance().getApi().getFilteredProperties
-                (PROPERTIES + "filter?page=" + pageNumber, selling, renting,
-                        pharmacy, wareHouse, factory, hospital);
+                (PROPERTIES + "filter?page=" + pageNumber, propertiesParam);
         userCall.enqueue(new Callback<PropertiesItemsResponse>() {
             @Override
             public void onResponse(Call<PropertiesItemsResponse> call, Response<PropertiesItemsResponse> response) {

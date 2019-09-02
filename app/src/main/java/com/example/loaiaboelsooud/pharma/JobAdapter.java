@@ -28,6 +28,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public JobAdapter.Jobs onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
+        PharmaConstants pharmaConstants = new PharmaConstants(this.context);
         View row = inflater.inflate(R.layout.job_adapter_content, parent, false);
         JobAdapter.Jobs job = new JobAdapter.Jobs(row);
         return job;
@@ -50,8 +51,8 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 into(((Jobs) holder).uploaderAvatar);
         ((Jobs) holder).name.setText(jobsItem.getName());
         ((Jobs) holder).description.setText(jobsItem.getDescription());
-        ((Jobs) holder).position.setText(jobsItem.getPosition());
-        ((Jobs) holder).workPlace.setText(jobsItem.getWorkPlace());
+        ((Jobs) holder).position.setText(PharmaConstants.positionMapView.get(jobsItem.getPosition()));
+        ((Jobs) holder).workPlace.setText(PharmaConstants.workPlaceMapView.get(jobsItem.getWorkPlace()));
         ((Jobs) holder).city.setText(jobsItem.getCity());
         ((Jobs) holder).region.setText(jobsItem.getRegion());
         ((Jobs) holder).address.setText(jobsItem.getAddress());

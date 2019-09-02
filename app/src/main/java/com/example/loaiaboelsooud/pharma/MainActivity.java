@@ -67,12 +67,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 3:
                         Intent intent3 = new Intent(getApplicationContext(), ViewJobActivity.class);
-                        intent3.putExtra("isFiltered", false);
+                        intent3.putExtra(PharmaConstants.ISFILTERED, false);
                         startActivity(intent3);
                         break;
                     case 4:
                         Intent intent4 = new Intent(getApplicationContext(), ViewPropertiesActivity.class);
-                        intent4.putExtra("isFiltered", false);
+                        intent4.putExtra(PharmaConstants.ISFILTERED, false);
                         startActivity(intent4);
                         break;
                     case 5:

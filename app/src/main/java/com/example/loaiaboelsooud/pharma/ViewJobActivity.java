@@ -35,7 +35,7 @@ public class ViewJobActivity extends NavMenuInt implements HTTPRequests.GetJobsL
         prefUtil = new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
-        isFiltered = getIntent().getExtras().getBoolean("isFiltered");
+        isFiltered = getIntent().getExtras().getBoolean(PharmaConstants.ISFILTERED);
         jobParam = new HashMap();
         jobParam = (HashMap<String, String>) getIntent().getExtras().getSerializable("jobParam");
         if (isFiltered) {
@@ -143,6 +143,9 @@ public class ViewJobActivity extends NavMenuInt implements HTTPRequests.GetJobsL
     @Override
     public void onBackPressed() {
         finish();
+        Intent intent = new Intent(ViewJobActivity.this, MainActivity.class);
+        startActivity(intent);
+
     }
 
 }

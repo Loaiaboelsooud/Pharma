@@ -72,8 +72,8 @@
     </string-array>
     <string-array name="job_position_array">
         <item>manager</item>
-        <item>second_pharmacist</item>
-        <item>open_close</item>
+        <item>second pharmacist</item>
+        <item>open and close</item>
         <item>intern</item>
         <item>assistant</item>
         <item>pharmacist</item>
@@ -91,13 +91,25 @@
     <string-array name="job_filter_position_array">
         <item></item>
         <item>manager</item>
-        <item>second_pharmacist</item>
-        <item>open_close</item>
+        <item>second pharmacist</item>
+        <item>open and close</item>
         <item>intern</item>
         <item>assistant</item>
         <item>pharmacist</item>
     </string-array>
-
+    <string-array name="properties_filter_listed_for_array">
+        <item></item>
+        <item>selling</item>
+        <item>buying</item>
+        <item>renting</item>
+    </string-array>
+    <string-array name="properties_filter_type_array">
+        <item></item>
+        <item>pharmacy</item>
+        <item>warehouse</item>
+        <item>factory</item>
+        <item>hospital</item>
+    </string-array>
 
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->

@@ -40,6 +40,7 @@
         <item>بيع</item>
         <item>ايجار</item>
     </string-array>
+
     <string-array name="properties_type_array">
         <item>صيدلية</item>
         <item>شركات توزيع ادوية و مخازن</item>
@@ -99,6 +100,20 @@
         <item>صيدلي للتدريب</item>
         <item>مساعد صيدلي</item>
         <item>صيدلي</item>
+    </string-array>
+
+    <string-array name="properties_filter_listed_for_array">
+        <item></item>
+        <item>شراء</item>
+        <item>بيع</item>
+        <item>ايجار</item>
+    </string-array>
+    <string-array name="properties_filter_type_array">
+        <item></item>
+        <item>صيدلية</item>
+        <item>شركات توزيع ادوية و مخازن</item>
+        <item>مصانع ادوية</item>
+        <item>مستشفيات</item>
     </string-array>
 
 </resources>

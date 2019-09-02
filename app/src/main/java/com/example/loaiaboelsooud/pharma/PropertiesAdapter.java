@@ -18,9 +18,9 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private List<PropertiesItem> propertiesItems;
     private User user;
     private OnPropertiesClickListener onPropertiesClickListener;
+    private PharmaConstants pharmaConstants;
 
     public PropertiesAdapter(Context context, List<PropertiesItem> propertiesItems, OnPropertiesClickListener onPropertiesClickListener) {
-
         this.context = context;
         this.propertiesItems = propertiesItems;
         this.onPropertiesClickListener = onPropertiesClickListener;
@@ -29,6 +29,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public PropertiesAdapter.Properties onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
+        PharmaConstants pharmaConstants = new PharmaConstants(this.context);
         View row = inflater.inflate(R.layout.properties_adapter_content, parent, false);
         PropertiesAdapter.Properties properties = new PropertiesAdapter.Properties(row, onPropertiesClickListener);
         return properties;
@@ -49,8 +50,8 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             Glide.with(context).clear(((PropertiesAdapter.Properties) holder).picture);
         }
         ((Properties) holder).propertiesName.setText(propertiesItem.getName());
-        ((Properties) holder).listedFor.setText(propertiesItem.getListedFor());
-        ((Properties) holder).type.setText(propertiesItem.getType());
+        ((Properties) holder).listedFor.setText(pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()));
+        ((Properties) holder).type.setText(pharmaConstants.typeMapView.get(propertiesItem.getType()));
         ((Properties) holder).updatedAt.setText(propertiesItem.getUpdatedAt());
     }
 

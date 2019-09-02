@@ -12,43 +12,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <CheckBox
-        android:id="@+id/properties_filter_sell_check_box"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/properties_filter_sell_string"
+        android:stretchColumns="1">
 
-        />
+        <TableRow>
 
-    <CheckBox
-        android:id="@+id/properties_filter_rent_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/properties_filter_rent_string" />
+            <TextView
+                android:id="@+id/properties_filter_listed_for_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/properties_listed_for" />
 
-    <CheckBox
-        android:id="@+id/properties_filter_pharmacy_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/properties_filter_pharmacy_string" />
+            <Spinner
+                android:id="@+id/properties_filter_listed_for"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/properties_filter_listed_for_array" />
 
-    <CheckBox
-        android:id="@+id/properties_filter_warehouse_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/properties_filter_warehouse_string" />
+        </TableRow>
 
-    <CheckBox
-        android:id="@+id/properties_filter_factory_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/properties_filter_factory_string" />
+        <TableRow>
 
-    <CheckBox
-        android:id="@+id/properties_filter_hospital_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/properties_filter_hospital_string" />
+            <TextView
+                android:id="@+id/properties_filter_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/properties_type" />
+
+            <Spinner
+                android:id="@+id/properties_filter_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/properties_filter_type_array" />
+        </TableRow>
+    </TableLayout>
 
     <Button
         android:id="@+id/properties_search_button"

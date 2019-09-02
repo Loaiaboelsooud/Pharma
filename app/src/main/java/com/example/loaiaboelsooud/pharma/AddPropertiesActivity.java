@@ -28,16 +28,9 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
 
     private static final int REQUEST_CAPTURE_IMAGE = 100;
     private static final int REQUEST_GALLERY_IMAGE = 1234;
-    private static final String ISFILTERED = "isFiltered";
-    private final String SELLING = "selling";
-    private final String BUYING = "buying";
-    private final String RENTING = "renting";
-    private final String PHARMACY = "pharmacy";
-    private final String WAREHOUSE = "warehouse";
-    private final String FACTORY = "factory";
-    private final String HOSPITAL = "hospital";
     private List<MultipartBody.Part> images;
     private ProgressBar progressBar;
+    private PharmaConstants pharmaConstants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +38,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         setContentView(R.layout.activity_add_properties);
         intNavToolBar();
         progressBar = findViewById(R.id.properties_post_progress);
-
+        pharmaConstants = new PharmaConstants(this);
     }
 
     public void addProperties(View view) {
@@ -88,41 +81,13 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
             }
 
             httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), city.getText().toString(), region.getText().toString()
-                    , address.getText().toString(), area.getText().toString(), getListedFor((new Long(listedForSpinner.getSelectedItemId())).intValue()),
-                    getType((new Long(typeSpinner.getSelectedItemId())).intValue()), paresedPrice, description.getText().toString(),
+                    , address.getText().toString(), area.getText().toString(), pharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString()),
+                    pharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()), paresedPrice, description.getText().toString(),
                     notes.getText().toString(), mobileNumbersList, landLineNumbersList, images, this);
 
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),
                     Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private String getListedFor(int id) {
-        switch (id) {
-            case 0:
-                return SELLING;
-            case 1:
-                return BUYING;
-            case 2:
-                return RENTING;
-            default:
-                return null;
-        }
-    }
-
-    private String getType(int id) {
-        switch (id) {
-            case 0:
-                return PHARMACY;
-            case 1:
-                return WAREHOUSE;
-            case 2:
-                return FACTORY;
-            case 3:
-                return HOSPITAL;
-            default:
-                return null;
         }
     }
 
@@ -190,7 +155,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     public void onBackPressed() {
         finish();
         Intent intent = new Intent(AddPropertiesActivity.this, ViewPropertiesActivity.class);
-        intent.putExtra(ISFILTERED, false);
+        intent.putExtra(PharmaConstants.ISFILTERED, false);
         startActivity(intent);
     }
 
@@ -200,7 +165,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         progressBar.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.post_properties_success), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(AddPropertiesActivity.this, ViewPropertiesActivity.class);
-        intent.putExtra(ISFILTERED, false);
+        intent.putExtra(PharmaConstants.ISFILTERED, false);
         startActivity(intent);
     }
 

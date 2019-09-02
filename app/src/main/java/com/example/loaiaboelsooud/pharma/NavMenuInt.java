@@ -38,7 +38,7 @@ public class NavMenuInt extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 Intent intent = new Intent(NavMenuInt.this, ViewPropertiesActivity.class);
-                intent.putExtra("isFiltered", false);
+                intent.putExtra(PharmaConstants.ISFILTERED, false);
                 startActivity(intent);
             }
         });
@@ -49,7 +49,7 @@ public class NavMenuInt extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 Intent intent = new Intent(NavMenuInt.this, ViewJobActivity.class);
-                intent.putExtra("isFiltered", false);
+                intent.putExtra(PharmaConstants.ISFILTERED, false);
                 startActivity(intent);
             }
         });

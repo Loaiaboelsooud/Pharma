@@ -116,6 +116,8 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
     @Override
     public void onBackPressed() {
         finish();
+        Intent intent = new Intent(ViewPrescriptionsActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
 }

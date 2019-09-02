@@ -57,9 +57,7 @@ public interface JsonPostPlaceHolderApi {
                                                @Query("mobile_numbers[]") List<String> mobileNumber, @Query("landline_numbers[]") List<String> landLineNumbers);
 
     @GET()
-    Call<PropertiesItemsResponse> getFilteredProperties(@Url String url, @Query("listed_for[]") String selling,
-                                                        @Query("listed_for[]") String renting, @Query("type") String pharmacy, @Query("type") String wareHouse,
-                                                        @Query("type") String hospital, @Query("type") String factory);
+    Call<PropertiesItemsResponse> getFilteredProperties(@Url String url, @QueryMap() Map<String, String> propertiesParam);
 
     @GET
     Call<PropertiesItemResponse> getPropertyById(@Url String url);

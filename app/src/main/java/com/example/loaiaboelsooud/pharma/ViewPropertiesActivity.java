@@ -12,7 +12,6 @@ import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,41 +26,18 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
     private RecyclerView.Adapter adapter;
     private FloatingActionButton addPropertiesButton, filterPropertiesButton;
     private ProgressBar progressBar;
-    private ArrayList<String> listedForList, typeList;
-    private HashMap<String, Boolean> propertiesParam;
-    private String SELLING = "selling", RENTING = "renting", PHARMACY = "pharmacy", WAREHOUSE = "warehouse", FACTORY = "factory", HOSPITAL = "hospital";
+    private HashMap<String, String> propertiesParam;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         prefUtil = new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
-        isFiltered = getIntent().getExtras().getBoolean("isFiltered");
+        isFiltered = getIntent().getExtras().getBoolean(PharmaConstants.ISFILTERED);
         if (isFiltered) {
-            listedForList = new ArrayList<>();
-            typeList = new ArrayList<>();
             propertiesParam = new HashMap<>();
-            propertiesParam = (HashMap<String, Boolean>) getIntent().getSerializableExtra("propertiesParam");
-            if (!propertiesParam.get(SELLING)) {
-                SELLING = null;
-            }
-            if (!propertiesParam.get(RENTING)) {
-                RENTING = null;
-            }
-            if (!propertiesParam.get(PHARMACY)) {
-                PHARMACY = null;
-            }
-            if (!propertiesParam.get(WAREHOUSE)) {
-                WAREHOUSE = null;
-            }
-            if (!propertiesParam.get(HOSPITAL)) {
-                HOSPITAL = null;
-            }
-            if (!propertiesParam.get(FACTORY)) {
-                FACTORY = null;
-            }
-            httpRequests.sendPropertiesFilterGetRequest(SELLING, RENTING, PHARMACY, WAREHOUSE, HOSPITAL, FACTORY, this, 1);
+            propertiesParam = (HashMap<String, String>) getIntent().getSerializableExtra("propertiesParam");
+            httpRequests.sendPropertiesFilterGetRequest(propertiesParam, this, 1);
         } else {
             httpRequests.sendPropertiesGetRequest(this, 1);
         }
@@ -151,7 +127,7 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
         if (metaData.getPagination().getTotalPages() > metaData.getPagination().getCurrentPage()) {
             progressBar.setVisibility(View.VISIBLE);
             if (isFiltered) {
-                httpRequests.sendPropertiesFilterGetRequest(SELLING, RENTING, PHARMACY, WAREHOUSE, HOSPITAL, FACTORY,
+                httpRequests.sendPropertiesFilterGetRequest(propertiesParam,
                         this, metaData.getPagination().getCurrentPage() + 1);
             } else {
                 httpRequests.sendPropertiesGetRequest(this, metaData.getPagination().getCurrentPage() + 1);
@@ -163,6 +139,8 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
     @Override
     public void onBackPressed() {
         finish();
+        Intent intent = new Intent(ViewPropertiesActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
