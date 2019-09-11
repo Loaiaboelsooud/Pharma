@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.facebook.AccessToken;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class PrefUtil {
 
@@ -32,6 +36,24 @@ public class PrefUtil {
         editor.putString("fb_access_token", token);
         editor.apply(); // This line is IMPORTANT !!!
     }
+
+    public void saveDrugEye(JsonArray drugEyeJsonArray) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("drug_eye_json_array", drugEyeJsonArray.toString());
+        editor.apply(); // This line is IMPORTANT !!!
+    }
+
+    public JSONArray getDrugEyeJsonArray() throws JSONException {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        if ((prefs.getString("drug_eye_json_array", null) == null))
+            return null;
+        return new JSONArray(prefs.getString("drug_eye_json_array", null));
+
+
+    }
+
 
     public String getToken() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);

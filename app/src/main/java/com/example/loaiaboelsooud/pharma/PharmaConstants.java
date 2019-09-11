@@ -31,6 +31,15 @@ public class PharmaConstants extends Application {
     public static final String COMPANY = "company";
     public static final String WORKPLACE = "workplace";
     public static final String POSITION = "position";
+    public static final String BEARER = "Bearer ";
+    public static final String PROPERTIES = "properties/";
+    public static final String IMAGES = "/images";
+    public static final String JOBADS = "job-ads/";
+    public static final String NAME = "name";
+    public static final String ID = "id";
+    public static final String PRESCRIPTIONS = "prescriptions/";
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String API = "api/";
 
     public static String[] listedForArray;
     public static String[] typeArray;

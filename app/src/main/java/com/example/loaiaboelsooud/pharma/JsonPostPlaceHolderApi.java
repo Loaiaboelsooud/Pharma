@@ -19,23 +19,23 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface JsonPostPlaceHolderApi {
-    final String AUTHORIZATION = "Authorization";
 
-    @POST("auth/facebook")
+
+    @POST(PharmaConstants.API + "auth/facebook")
     Call<UserResponse> createUser(@Body User user);
 
-    @DELETE("auth/logout")
-    Call<Void> logoutUser(@Header(AUTHORIZATION) String token);
+    @DELETE(PharmaConstants.API + "auth/logout")
+    Call<Void> logoutUser(@Header(PharmaConstants.AUTHORIZATION) String token);
 
-    @GET("auth/user")
-    Call<UserResponse> getUser(@Header(AUTHORIZATION) String token);
+    @GET(PharmaConstants.API + "auth/user")
+    Call<UserResponse> getUser(@Header(PharmaConstants.AUTHORIZATION) String token);
 
-    @PUT("auth/refresh")
-    Call<UserResponse> refreshToken(@Header(AUTHORIZATION) String token);
+    @PUT(PharmaConstants.API + "auth/refresh")
+    Call<UserResponse> refreshToken(@Header(PharmaConstants.AUTHORIZATION) String token);
 
     @Multipart
-    @POST("prescriptions")
-    Call<PrescriptionsItemResponse> addPrescriptions(@Part MultipartBody.Part picture, @Part("description") RequestBody description, @Header(AUTHORIZATION) String token);
+    @POST(PharmaConstants.API + "prescriptions")
+    Call<PrescriptionsItemResponse> addPrescriptions(@Part MultipartBody.Part picture, @Part("description") RequestBody description, @Header(PharmaConstants.AUTHORIZATION) String token);
 
     @GET
     Call<PrescriptionsItemsResponse> getAllPrescriptions(@Url String url);
@@ -44,13 +44,13 @@ public interface JsonPostPlaceHolderApi {
     Call<PrescriptionsCommentsResponse> getAllPrescriptionsComments(@Url String url);
 
     @POST
-    Call<PrescriptionsCommentResponse> addPrescriptionsComments(@Header(AUTHORIZATION) String token, @Url String url, @Query("comment") String comment);
+    Call<PrescriptionsCommentResponse> addPrescriptionsComments(@Header(PharmaConstants.AUTHORIZATION) String token, @Url String url, @Query("comment") String comment);
 
     @GET
     Call<PropertiesItemsResponse> getAllProperties(@Url String url);
 
-    @POST("properties")
-    Call<PropertiesItemResponse> addProperties(@Header(AUTHORIZATION) String token, @Query("name") String name, @Query("city") String city,
+    @POST(PharmaConstants.API + "properties")
+    Call<PropertiesItemResponse> addProperties(@Header(PharmaConstants.AUTHORIZATION) String token, @Query("name") String name, @Query("city") String city,
                                                @Query("region") String region, @Query("address") String address, @Query("area") String area,
                                                @Query("listed_for") String listedFor, @Query("type") String type, @Query("price") int price,
                                                @Query("description") String description, @Query("notes") String notes,
@@ -64,21 +64,24 @@ public interface JsonPostPlaceHolderApi {
 
     @Multipart
     @POST()
-    Call<PropertiesImageResponse> addPropertiesImages(@Part List<MultipartBody.Part> images, @Header(AUTHORIZATION) String token, @Url String url);
+    Call<PropertiesImageResponse> addPropertiesImages(@Part List<MultipartBody.Part> images, @Header(PharmaConstants.AUTHORIZATION) String token, @Url String url);
 
     @GET
     Call<JobsItemsResponse> getAllJobs(@Url String url);
 
-    @POST("job-ads")
-    Call<JobsItemResponse> addJob(@Header(AUTHORIZATION) String token, @Query("name") String name, @Query("description") String description,
+    @POST(PharmaConstants.API + "job-ads")
+    Call<JobsItemResponse> addJob(@Header(PharmaConstants.AUTHORIZATION) String token, @Query("name") String name, @Query("description") String description,
                                   @Query("min_salary") int from, @Query("max_salary") int to,
                                   @Query("workplace") String workPlace, @Query("position") String position,
                                   @Query("city") String city, @Query("region") String region, @Query("address") String address,
-                                  @Query("mobile_numbers[]") List<String> mobileNumber, @Query("salary_type") String salaryTypeToBeRemved);
+                                  @Query("mobile_numbers[]") List<String> mobileNumber);
 
     @GET()
     Call<JobsItemsResponse> getFilteredJobs(@Url String url, @QueryMap() Map<String, String> jobsParam);
 
     @GET
     Call<PromotionsItemsResponse> getAllPromotions(@Url String url);
+
+    @GET("drug_index.json")
+    Call<DrugEyeResponse> getDrugEye();
 }

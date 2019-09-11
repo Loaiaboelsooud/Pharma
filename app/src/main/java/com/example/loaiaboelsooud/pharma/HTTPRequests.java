@@ -18,15 +18,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HTTPRequests extends AppCompatActivity {
-    IResult result;
-    Context context;
-    private final String BEARER = "Bearer ";
-    private final String PROPERTIES = "properties/";
-    private final String IMAGES = "/images";
-    private final String JOBADS = "job-ads/";
-    private final String NAME = "name";
-    private final String ID = "id";
-    private final String PRESCRIPTIONS = "prescriptions/";
+    private IResult result;
+    private Context context;
 
     //response.errorBody().string()
 
@@ -43,8 +36,8 @@ public class HTTPRequests extends AppCompatActivity {
     public void sendFBPostRequest(JSONObject jsonObject, final String fbToken, Activity activity) {
         try {
             User user = new User();
-            user.setName(jsonObject.getString(NAME));
-            user.setFacebookID(jsonObject.getString(ID));
+            user.setName(jsonObject.getString(PharmaConstants.NAME));
+            user.setFacebookID(jsonObject.getString(PharmaConstants.ID));
             user.setFacebookToken(fbToken);
             final PrefUtil prefUtil = new PrefUtil(activity);
             Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().createUser(user);
@@ -68,7 +61,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendFBGetRequest(Activity activity) {
         final PrefUtil prefUtil = new PrefUtil(activity);
-        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().getUser(BEARER + prefUtil.getToken());
+        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().getUser(PharmaConstants.BEARER + prefUtil.getToken());
         userCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -93,7 +86,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendFBPutRequest(Activity activity) {
         final PrefUtil prefUtil = new PrefUtil(activity);
-        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().refreshToken(BEARER + prefUtil.getToken());
+        Call<UserResponse> userCall = RetrofitClient.getInstance().getApi().refreshToken(PharmaConstants.BEARER + prefUtil.getToken());
         userCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -119,7 +112,7 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendFBDelRequest(final String fbToken) {
-        Call<Void> userCall = RetrofitClient.getInstance().getApi().logoutUser(BEARER + fbToken);
+        Call<Void> userCall = RetrofitClient.getInstance().getApi().logoutUser(PharmaConstants.BEARER + fbToken);
         userCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -133,7 +126,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPrescriptionsPostRequest(MultipartBody.Part imagePart, RequestBody description,
                                              final GetPrescriptionPostResult getPrescriptionPostResult, String token) {
-        Call<PrescriptionsItemResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, BEARER + token);
+        Call<PrescriptionsItemResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptions(imagePart, description, PharmaConstants.BEARER + token);
         userCall.enqueue(new Callback<PrescriptionsItemResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsItemResponse> call, Response<PrescriptionsItemResponse> response) {
@@ -152,7 +145,7 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendPrescriptionsGetRequest(final GetPrescriptionsList getPrescriptionsList, int pageNumber) {
-        Call<PrescriptionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions("prescriptions?page=" + pageNumber);
+        Call<PrescriptionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptions(PharmaConstants.API + "prescriptions?page=" + pageNumber);
         userCall.enqueue(new Callback<PrescriptionsItemsResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsItemsResponse> call, Response<PrescriptionsItemsResponse> response) {
@@ -170,7 +163,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPrescriptionsCommentGetRequest(final GetPrescriptionsCommentsList getPrescriptionsCommentsList, int prescriptionId, int pageNumber) {
         Call<PrescriptionsCommentsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptionsComments(
-                PRESCRIPTIONS + prescriptionId + "/comments?page=" + pageNumber);
+                PharmaConstants.API + PharmaConstants.PRESCRIPTIONS + prescriptionId + "/comments?page=" + pageNumber);
         userCall.enqueue(new Callback<PrescriptionsCommentsResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsCommentsResponse> call, Response<PrescriptionsCommentsResponse> response) {
@@ -189,7 +182,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPrescriptionsCommentPostRequest(String token, final GetPrescriptionsComment getPrescriptionsComment, int prescriptionId, String comment) {
         Call<PrescriptionsCommentResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptionsComments(
-                BEARER + token, PRESCRIPTIONS + prescriptionId + "/comments", comment);
+                PharmaConstants.BEARER + token, PharmaConstants.PRESCRIPTIONS + prescriptionId + "/comments", comment);
         userCall.enqueue(new Callback<PrescriptionsCommentResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsCommentResponse> call, Response<PrescriptionsCommentResponse> response) {
@@ -206,7 +199,7 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendPropertiesGetRequest(final GetPropertiesList getPropertiesList, int pageNumber) {
-        Call<PropertiesItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllProperties("properties?page=" + pageNumber);
+        Call<PropertiesItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllProperties(PharmaConstants.API + "properties?page=" + pageNumber);
         userCall.enqueue(new Callback<PropertiesItemsResponse>() {
             @Override
             public void onResponse(Call<PropertiesItemsResponse> call, Response<PropertiesItemsResponse> response) {
@@ -229,7 +222,7 @@ public class HTTPRequests extends AppCompatActivity {
                                           List<String> mobileNumbers, List<String> landLineNumbers, final List<MultipartBody.Part> images,
                                           final GetPropertiesPostResult getPropertiesPostResult) {
         Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().addProperties
-                (BEARER + token, name, city, region, address, area, listedFor,
+                (PharmaConstants.BEARER + token, name, city, region, address, area, listedFor,
                         type, price, description, notes, mobileNumbers, landLineNumbers);
         userCall.enqueue(new Callback<PropertiesItemResponse>() {
             @Override
@@ -252,7 +245,7 @@ public class HTTPRequests extends AppCompatActivity {
     public void sendPropertiesFilterGetRequest(Map propertiesParam,
                                                final GetPropertiesList getPropertiesList, int pageNumber) {
         Call<PropertiesItemsResponse> userCall = RetrofitClient.getInstance().getApi().getFilteredProperties
-                (PROPERTIES + "filter?page=" + pageNumber, propertiesParam);
+                (PharmaConstants.API + PharmaConstants.PROPERTIES + "filter?page=" + pageNumber, propertiesParam);
         userCall.enqueue(new Callback<PropertiesItemsResponse>() {
             @Override
             public void onResponse(Call<PropertiesItemsResponse> call, Response<PropertiesItemsResponse> response) {
@@ -272,7 +265,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPropertyGetRequest(final GetProperty getProperty, int id) {
         Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().getPropertyById(
-                PROPERTIES + id);
+                PharmaConstants.API + PharmaConstants.PROPERTIES + id);
         userCall.enqueue(new Callback<PropertiesItemResponse>() {
             @Override
             public void onResponse(Call<PropertiesItemResponse> call, Response<PropertiesItemResponse> response) {
@@ -291,7 +284,7 @@ public class HTTPRequests extends AppCompatActivity {
     public void sendPropertiesImagePostRequest(List<MultipartBody.Part> images, String token, int id,
                                                final GetPropertiesPostResult getPropertiesPostResult) {
         Call<PropertiesImageResponse> userCall = RetrofitClient.getInstance().getApi().addPropertiesImages
-                (images, BEARER + token, PROPERTIES + id + IMAGES);
+                (images, PharmaConstants.BEARER + token, PharmaConstants.API + PharmaConstants.PROPERTIES + id + PharmaConstants.IMAGES);
         userCall.enqueue(new Callback<PropertiesImageResponse>() {
             @Override
             public void onResponse(Call<PropertiesImageResponse> call, Response<PropertiesImageResponse> response) {
@@ -310,7 +303,7 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendJobsGetRequest(final GetJobsList getJobsList, int pageNumber) {
-        Call<JobsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllJobs("job-ads?page=" + pageNumber);
+        Call<JobsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllJobs(PharmaConstants.API + "job-ads?page=" + pageNumber);
         userCall.enqueue(new Callback<JobsItemsResponse>() {
             @Override
             public void onResponse(Call<JobsItemsResponse> call, Response<JobsItemsResponse> response) {
@@ -330,8 +323,8 @@ public class HTTPRequests extends AppCompatActivity {
                                    String workPlace, String position, String city, String region, String address,
                                    List<String> mobileNumbers, final GetJobPostResult getJobPostResult) {
         Call<JobsItemResponse> userCall = RetrofitClient.getInstance().getApi().addJob
-                (BEARER + token, name, description, from, to,
-                        workPlace, position, city, region, address, mobileNumbers, "per_hour");
+                (PharmaConstants.BEARER + token, name, description, from, to,
+                        workPlace, position, city, region, address, mobileNumbers);
         userCall.enqueue(new Callback<JobsItemResponse>() {
             @Override
             public void onResponse(Call<JobsItemResponse> call, Response<JobsItemResponse> response) {
@@ -351,7 +344,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendJobFilterGetRequest(Map jobsParam, final GetJobsList getJobsList, int pageNumber) {
         Call<JobsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getFilteredJobs
-                (JOBADS + "filter?page=" + pageNumber, jobsParam);
+                (PharmaConstants.API + PharmaConstants.JOBADS + "filter?page=" + pageNumber, jobsParam);
         userCall.enqueue(new Callback<JobsItemsResponse>() {
             @Override
             public void onResponse(Call<JobsItemsResponse> call, Response<JobsItemsResponse> response) {
@@ -370,7 +363,7 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public void sendPromotionsGetRequest(final GetPromotionsList getPromotionsList, int pageNumber) {
-        Call<PromotionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPromotions("promotions?page=" + pageNumber);
+        Call<PromotionsItemsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPromotions(PharmaConstants.API + "promotions?page=" + pageNumber);
         userCall.enqueue(new Callback<PromotionsItemsResponse>() {
             @Override
             public void onResponse(Call<PromotionsItemsResponse> call, Response<PromotionsItemsResponse> response) {
@@ -382,6 +375,23 @@ public class HTTPRequests extends AppCompatActivity {
             @Override
             public void onFailure(Call<PromotionsItemsResponse> call, Throwable t) {
                 getPromotionsList.failed();
+            }
+        });
+    }
+
+    public void sendDrugEyeGetRequest(final GetDrugEyeList getDrugEyeList, Activity activity) {
+        Call<DrugEyeResponse> userCall = RetrofitClient.getInstance().getApi().getDrugEye();
+        userCall.enqueue(new Callback<DrugEyeResponse>() {
+            @Override
+            public void onResponse(Call<DrugEyeResponse> call, Response<DrugEyeResponse> response) {
+                if (response.body() != null) {
+                    getDrugEyeList.insertAll(response.body().getDrugEyeItems());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DrugEyeResponse> call, Throwable t) {
+                getDrugEyeList.failed();
             }
         });
     }
@@ -452,6 +462,15 @@ public class HTTPRequests extends AppCompatActivity {
 
         void failed();
     }
+
+    public interface GetDrugEyeList {
+        void notifyList(List<DrugEyeItem> drugEyeItems);
+
+        void insertAll(List<DrugEyeItem> drugEyeItems);
+
+        void failed();
+    }
+
 
     public interface IResult {
 

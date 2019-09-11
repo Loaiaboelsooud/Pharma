@@ -16,7 +16,6 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -55,29 +54,33 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), SearchAndViewDrugEyeActivity.class);
+                        startActivity(intent);
+                        ;
                         break;
                     case 1:
-                        Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
-                        startActivity(intent);
-                        break;
-                    case 2:
-                        Intent intent2 = new Intent(getApplicationContext(), ViewPrescriptionsActivity.class);
+                        Intent intent2 = new Intent(getApplicationContext(), WebViewActivity.class);
                         startActivity(intent2);
                         break;
-                    case 3:
-                        Intent intent3 = new Intent(getApplicationContext(), ViewJobActivity.class);
-                        intent3.putExtra(PharmaConstants.ISFILTERED, false);
+                    case 2:
+                        Intent intent3 = new Intent(getApplicationContext(), ViewPrescriptionsActivity.class);
                         startActivity(intent3);
                         break;
-                    case 4:
-                        Intent intent4 = new Intent(getApplicationContext(), ViewPropertiesActivity.class);
+                    case 3:
+                        finish();
+                        Intent intent4 = new Intent(getApplicationContext(), ViewJobActivity.class);
                         intent4.putExtra(PharmaConstants.ISFILTERED, false);
                         startActivity(intent4);
                         break;
-                    case 5:
-                        Intent intent5 = new Intent(getApplicationContext(), ViewPromotionsActivity.class);
+                    case 4:
+                        finish();
+                        Intent intent5 = new Intent(getApplicationContext(), ViewPropertiesActivity.class);
+                        intent5.putExtra(PharmaConstants.ISFILTERED, false);
                         startActivity(intent5);
+                        break;
+                    case 5:
+                        Intent intent6 = new Intent(getApplicationContext(), ViewPromotionsActivity.class);
+                        startActivity(intent6);
                         break;
                 }
             }
@@ -161,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             View view1 = getLayoutInflater().inflate(R.layout.menu_data, null);
             //getting view in row_data
+            //TODO
             TextView name = view1.findViewById(R.id.fruits);
             ImageView image = view1.findViewById(R.id.images);
 

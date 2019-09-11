@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 public class NavMenuInt extends AppCompatActivity {
 
@@ -83,7 +82,9 @@ public class NavMenuInt extends AppCompatActivity {
         drugindexItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "under construction", Toast.LENGTH_SHORT).show();
+                finish();
+                Intent intent = new Intent(NavMenuInt.this, SearchAndViewDrugEyeActivity.class);
+                startActivity(intent);
             }
         });
         switch (NavMenuInt.this.getClass().getSimpleName()) {
@@ -101,6 +102,9 @@ public class NavMenuInt extends AppCompatActivity {
                 jobItem.setActionView(R.layout.toolbar_job_image_active);
                 break;
             case "ViewPromotionsActivity":
+                promotionsItem.setActionView(R.layout.toolbar_promotions_image_active);
+                break;
+            case "SearchAndViewDrugEyeActivity":
                 promotionsItem.setActionView(R.layout.toolbar_promotions_image_active);
                 break;
         }
