@@ -13,7 +13,22 @@ public class DrugEyeAsyncTasks {
 
     public static LiveData<List<DrugEyeItem>> getAlternatives(String drugName, DrugItemDao drugItemDao) {
 
-        return drugItemDao.findAlternatives(drugName);
+        return drugItemDao.findAlternatives("%" + drugName.toUpperCase() + "%");
+    }
+
+    public static LiveData<List<DrugEyeItem>> getSimilarities(String drugName, DrugItemDao drugItemDao) {
+
+        return drugItemDao.findSimilarities("%" + drugName.toUpperCase() + "%");
+    }
+
+    public static LiveData<List<DrugEyeItem>> getDrugEyeItems(String drugName, DrugItemDao drugItemDao) {
+
+        return drugItemDao.findDrugItems("%" + drugName.toUpperCase() + "%");
+    }
+
+    public static LiveData<DrugEyeItem> getDrugEyeItem(String drugName, DrugItemDao drugItemDao) {
+
+        return drugItemDao.findDrugItem(drugName.toUpperCase());
     }
 
     public static LiveData<List<DrugEyeItem>> getAll(DrugItemDao drugItemDao) {
@@ -36,19 +51,4 @@ public class DrugEyeAsyncTasks {
         }
     }
 
-    public static class FindAlternatives extends AsyncTask<String, DrugEyeItem, Void> {
-        private DrugItemDao drugItemDao;
-
-        public FindAlternatives(DrugItemDao drugItemDao) {
-            this.drugItemDao = drugItemDao;
-        }
-
-        @Override
-        protected Void doInBackground(String... drugName) {
-
-            drugItemDao.findAlternatives(drugName[0]);
-            return null;
-        }
-
-    }
 }

@@ -1,12 +1,17 @@
 package com.example.loaiaboelsooud.pharma;
 
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -22,17 +27,19 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
     private PrefUtil prefUtil;
     private RecyclerView.Adapter adapter;
     private ProgressBar progressBar;
+    private Button similaritiesButton, alternativesButton, viewButton;
+    private EditText drugEyeSearchKeyWord;
+    private List<DrugEyeItem> drugEyeItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final List<DrugEyeItem> drugEyeItems = new ArrayList<>();
+        drugEyeItems = new ArrayList<>();
         prefUtil = new PrefUtil(this);
+
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
-        DrugItemDao drugItemDao = RoomDatabaseClient.getInstance().drugItemDao();
-        List<DrugEyeItem> drugEyeItemss = DrugEyeAsyncTasks.getAlternatives("panadol", drugItemDao).getValue();
-
-
+        final DrugItemDao drugItemDao = RoomDatabaseClient.getInstance().drugItemDao();
+        checkDrugEyeVersion();
         //httpRequests.sendDrugEyeGetRequest(this, this);
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -43,16 +50,95 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
         drugEyeRecyclerView = findViewById(R.id.drug_eye_recycler);
         drugEyeRecyclerView.setLayoutManager(manager);
         progressBar = findViewById(R.id.drug_eye_get_progress);
-        progressBar.setVisibility(View.VISIBLE);
-        DrugEyeAsyncTasks.getAll(drugItemDao).observe(this, new Observer<List<DrugEyeItem>>() {
+        similaritiesButton = findViewById(R.id.drug_eye_similarities_button);
+        alternativesButton = findViewById(R.id.drug_eye_alternatives_button);
+        drugEyeSearchKeyWord = findViewById(R.id.drug_eye_search_key_word);
+        viewButton = findViewById(R.id.drug_eye_view_button);
+        viewButton.setVisibility(View.GONE);
+        drugEyeSearchKeyWord.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onChanged(@Nullable List<DrugEyeItem> drugEyeItemList) {
-                drugEyeItems.addAll(drugEyeItemList);
-                drugEyeRecyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-                progressBar.setVisibility(View.GONE);
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                drugEyeItems.clear();
+                if (!drugEyeSearchKeyWord.getText().toString().isEmpty() && drugEyeSearchKeyWord.getText().toString() != null) {
+                    DrugEyeAsyncTasks.getDrugEyeItems(drugEyeSearchKeyWord.getText().toString().toUpperCase(), drugItemDao).observe(SearchAndViewDrugEyeActivity.this, new Observer<List<DrugEyeItem>>() {
+                        @Override
+                        public void onChanged(@Nullable List<DrugEyeItem> drugEyeItemList) {
+                            drugEyeItems.addAll(drugEyeItemList);
+                            drugEyeRecyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    });
+                }
             }
         });
+        alternativesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (viewButton.getText() != null && !viewButton.getText().toString().isEmpty()) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    drugEyeItems.clear();
+                    DrugEyeAsyncTasks.getAlternatives(viewButton.getText().toString().toUpperCase(), drugItemDao).observe(SearchAndViewDrugEyeActivity.this, new Observer<List<DrugEyeItem>>() {
+                        @Override
+                        public void onChanged(@Nullable List<DrugEyeItem> drugEyeItemList) {
+                            drugEyeItems.addAll(drugEyeItemList);
+                            drugEyeRecyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    });
+                } else {
+                    Toast.makeText(SearchAndViewDrugEyeActivity.this, getString(R.string.drug_eye_select_drug), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        similaritiesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewButton.getText() != null && !viewButton.getText().toString().isEmpty()) {
+                    drugEyeItems.clear();
+                    progressBar.setVisibility(View.VISIBLE);
+                    DrugEyeAsyncTasks.getSimilarities(viewButton.getText().toString(), drugItemDao).observe(SearchAndViewDrugEyeActivity.this, new Observer<List<DrugEyeItem>>() {
+                        @Override
+                        public void onChanged(@Nullable List<DrugEyeItem> drugEyeItemList) {
+                            drugEyeItems.addAll(drugEyeItemList);
+                            drugEyeRecyclerView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    });
+                } else {
+                    Toast.makeText(SearchAndViewDrugEyeActivity.this, getString(R.string.drug_eye_select_drug), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        viewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drugEyeItems.clear();
+                Intent intent = new Intent(SearchAndViewDrugEyeActivity.this, DrugEyeViewActivity.class);
+                intent.putExtra("drug_name", viewButton.getText());
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        viewButton.setText("");
+        viewButton.setVisibility(View.GONE);
+        drugEyeSearchKeyWord.setText("");
     }
 
     @Override
@@ -83,17 +169,22 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
 
     }
 
+    private void checkDrugEyeVersion() {
+
+        PrefUtil prefUtil = new PrefUtil(this);
+        if (prefUtil.getDrugEyeVersion() == 0) {
+            httpRequests.sendDrugEyeVersionGetRequest(this);
+            httpRequests.sendDrugEyeGetRequest(this);
+        }
+
+
+    }
+
+
     @Override
     public void failed() {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
-    }
-
-    private void loadMore(MetaData metaData) {
-        if (metaData.getPagination().getTotalPages() > metaData.getPagination().getCurrentPage()) {
-            progressBar.setVisibility(View.VISIBLE);
-        }
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -102,9 +193,8 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
     }
 
     @Override
-    public void onDrugEyeClick(int druEyePosition) {
-     /*   Intent intent = new Intent(ViewPropertiesActivity.this, ViewPropertyActivity.class);
-        intent.putExtra("id", drugEyeItems.get(druEyePosition).getId());
-        startActivity(intent);*/
+    public void onDrugEyeClick(int drugEyePosition) {
+        viewButton.setText(drugEyeItems.get(drugEyePosition).getName());
+        viewButton.setVisibility(View.VISIBLE);
     }
 }

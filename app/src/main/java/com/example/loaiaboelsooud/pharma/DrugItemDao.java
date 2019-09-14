@@ -13,11 +13,17 @@ import java.util.List;
 @Dao
 public interface DrugItemDao {
 
-    @Query("SELECT * FROM Drugeyeitem WHERE `Active Ingredients` = (SELECT `Active Ingredients` FROM Drugeyeitem where 'Drug Name' Like :drugName LIMIT 1 )")
+    @Query("SELECT * FROM Drugeyeitem WHERE `Active Ingredients` LIKE (SELECT `Active Ingredients` FROM Drugeyeitem where `Drug Name` LIKE  :drugName  LIMIT 1 )")
     LiveData<List<DrugEyeItem>> findAlternatives(String drugName);
 
-    @Query("SELECT * FROM Drugeyeitem WHERE `Category` = (SELECT `Active Ingredients` FROM Drugeyeitem where 'Drug Name' Like :drugName LIMIT 1 )")
+    @Query("SELECT * FROM Drugeyeitem WHERE `Category` LIKE (SELECT `Category` FROM Drugeyeitem where `Drug Name` Like  :drugName LIMIT 1 )")
     LiveData<List<DrugEyeItem>> findSimilarities(String drugName);
+
+    @Query("SELECT * FROM Drugeyeitem WHERE `Drug Name` LIKE :drugName")
+    LiveData<List<DrugEyeItem>> findDrugItems(String drugName);
+
+    @Query("SELECT * FROM Drugeyeitem WHERE `Drug Name` is :drugName LIMIT 1")
+    LiveData<DrugEyeItem> findDrugItem(String drugName);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(DrugEyeItem... drugEyeItems);

@@ -20,7 +20,6 @@ import retrofit2.Response;
 public class HTTPRequests extends AppCompatActivity {
     private IResult result;
     private Context context;
-
     //response.errorBody().string()
 
     @Override
@@ -44,9 +43,12 @@ public class HTTPRequests extends AppCompatActivity {
             userCall.enqueue(new Callback<UserResponse>() {
                 @Override
                 public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                    UserResponse userResponse = response.body();
-                    String token = userResponse.getUser().getToken();
-                    prefUtil.saveAccessToken(token);
+                    User user = response.body().getUser();
+                    user.setExpireDate();
+                    prefUtil.saveFacebookUserInfo(user.getName(), user.getEmail(), user.getQualification(), user.getAvatar(), user.getJob()
+                            , user.getCity(), user.getExpiresIn());
+                    prefUtil.saveAccessToken(user.getToken());
+                    prefUtil.saveExpireDate(user.getExpireDate());
                 }
 
                 @Override
@@ -67,14 +69,8 @@ public class HTTPRequests extends AppCompatActivity {
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.body() != null) {
                     User user = response.body().getUser();
-                    String name = user.getName();
-                    String email = user.getEmail();
-                    String qualification = user.getQualification();
-                    String avatar = user.getAvatar();
-                    String job = user.getJob();
-                    String city = user.getCity();
-                    long expiresIn = user.getExpiresIn();
-                    prefUtil.saveFacebookUserInfo(name, email, qualification, avatar, job, city, expiresIn);
+                    prefUtil.saveFacebookUserInfo(user.getName(), user.getEmail(), user.getQualification(), user.getAvatar(), user.getJob()
+                            , user.getCity(), user.getExpiresIn());
                 }
             }
 
@@ -92,16 +88,9 @@ public class HTTPRequests extends AppCompatActivity {
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.body() != null) {
                     User user = response.body().getUser();
-                    String name = user.getName();
-                    String email = user.getEmail();
-                    String qualification = user.getQualification();
-                    String avatar = user.getAvatar();
-                    String job = user.getJob();
-                    String city = user.getCity();
-                    long expiresIn = user.getExpiresIn();
-                    String token = user.getToken();
-                    prefUtil.saveAccessToken(token);
-                    prefUtil.saveFacebookUserInfo(name, email, qualification, avatar, job, city, expiresIn);
+                    user.setExpireDate();
+                    prefUtil.saveExpireDate(user.getExpireDate());
+                    prefUtil.saveAccessToken(user.getToken());
                 }
             }
 
@@ -182,7 +171,7 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendPrescriptionsCommentPostRequest(String token, final GetPrescriptionsComment getPrescriptionsComment, int prescriptionId, String comment) {
         Call<PrescriptionsCommentResponse> userCall = RetrofitClient.getInstance().getApi().addPrescriptionsComments(
-                PharmaConstants.BEARER + token, PharmaConstants.PRESCRIPTIONS + prescriptionId + "/comments", comment);
+                PharmaConstants.BEARER + token, PharmaConstants.API + PharmaConstants.PRESCRIPTIONS + prescriptionId + "/comments", comment);
         userCall.enqueue(new Callback<PrescriptionsCommentResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsCommentResponse> call, Response<PrescriptionsCommentResponse> response) {
@@ -240,7 +229,6 @@ public class HTTPRequests extends AppCompatActivity {
             }
         });
     }
-
 
     public void sendPropertiesFilterGetRequest(Map propertiesParam,
                                                final GetPropertiesList getPropertiesList, int pageNumber) {
@@ -379,7 +367,24 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendDrugEyeGetRequest(final GetDrugEyeList getDrugEyeList, Activity activity) {
+    public void sendDrugEyeVersionGetRequest(Activity activity) {
+        final PrefUtil prefUtil = new PrefUtil(activity);
+        Call<DrugEyeVersion> userCall = RetrofitClient.getInstance().getApi().getDrugEyeVersion();
+        userCall.enqueue(new Callback<DrugEyeVersion>() {
+            @Override
+            public void onResponse(Call<DrugEyeVersion> call, Response<DrugEyeVersion> response) {
+                if (response.body() != null) {
+                    prefUtil.saveDrugEyeVersion(response.body().getDrugEyeVersion());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DrugEyeVersion> call, Throwable t) {
+            }
+        });
+    }
+
+    public void sendDrugEyeGetRequest(final GetDrugEyeList getDrugEyeList) {
         Call<DrugEyeResponse> userCall = RetrofitClient.getInstance().getApi().getDrugEye();
         userCall.enqueue(new Callback<DrugEyeResponse>() {
             @Override
@@ -400,25 +405,21 @@ public class HTTPRequests extends AppCompatActivity {
         void notifyList(List<PropertiesItem> propertiesItems, MetaData metaData);
 
         void failed();
-
     }
 
     public interface GetPromotionsList {
         void notifyList(List<PromotionsItem> promotionsItems, MetaData metaData);
 
         void failed();
-
     }
 
     public interface GetProperty {
         void notifyItem(PropertiesItem propertiesItems);
 
         void failed();
-
     }
 
     public interface GetPrescriptionsCommentsList {
-
         void notifyList(List<PrescriptionsComments> prescriptionsComments, MetaData metaData);
 
         void failed();
@@ -434,7 +435,6 @@ public class HTTPRequests extends AppCompatActivity {
         void notifyList(List<PrescriptionsItem> prescriptionsItems, MetaData metaData);
 
         void failed();
-
     }
 
     public interface GetPrescriptionPostResult {
@@ -449,12 +449,10 @@ public class HTTPRequests extends AppCompatActivity {
         void failed();
     }
 
-
     public interface GetJobsList {
         void notifyList(List<JobsItem> jobsItems, MetaData metaData);
 
         void failed();
-
     }
 
     public interface GetJobPostResult {
@@ -471,10 +469,7 @@ public class HTTPRequests extends AppCompatActivity {
         void failed();
     }
 
-
     public interface IResult {
-
     }
-
 }
 

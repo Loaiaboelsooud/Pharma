@@ -105,7 +105,7 @@ public class NavMenuInt extends AppCompatActivity {
                 promotionsItem.setActionView(R.layout.toolbar_promotions_image_active);
                 break;
             case "SearchAndViewDrugEyeActivity":
-                promotionsItem.setActionView(R.layout.toolbar_promotions_image_active);
+                drugindexItem.setActionView(R.layout.toolbar_drugindex_image_active);
                 break;
         }
         return super.onCreateOptionsMenu(menu);

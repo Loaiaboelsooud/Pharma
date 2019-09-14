@@ -2,6 +2,8 @@ package com.example.loaiaboelsooud.pharma;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Calendar;
+
 public class User {
     @SerializedName("id")
     private String id;
@@ -25,6 +27,8 @@ public class User {
     private String token;
     @SerializedName("expires_in")
     private long expiresIn;
+
+    private Calendar expireDate;
 
     public long getExpiresIn() {
         return expiresIn;
@@ -114,5 +118,14 @@ public class User {
         this.avatar = avatar;
     }
 
+    public Calendar getExpireDate() {
+        return expireDate;
+    }
 
+    public void setExpireDate() {
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.setTime(expireDate.getTime());
+        expireDate.set(Calendar.DATE, expireDate.get(Calendar.DATE) + 7);
+        this.expireDate = expireDate;
+    }
 }

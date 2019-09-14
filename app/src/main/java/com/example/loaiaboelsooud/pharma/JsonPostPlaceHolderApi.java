@@ -84,4 +84,7 @@ public interface JsonPostPlaceHolderApi {
 
     @GET("drug_index.json")
     Call<DrugEyeResponse> getDrugEye();
+
+    @GET(PharmaConstants.API + "drug-index-version")
+    Call<DrugEyeVersion> getDrugEyeVersion();
 }

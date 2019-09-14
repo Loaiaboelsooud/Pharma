@@ -19,13 +19,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Calendar;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    GridView gridView;
-    ImageView avatar;
-
-    int[] menuImages = {R.drawable.drug_index_menu, R.drawable.drug_interactions_menu, R.drawable.prescription_menu,
+    private GridView gridView;
+    private ImageView avatar;
+    private int[] menuImages = {R.drawable.drug_index_menu, R.drawable.drug_interactions_menu, R.drawable.prescription_menu,
             R.drawable.job_menu, R.drawable.properties_menu, R.drawable.promotions_menu};
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
+        refreshTokenIfExpired(httpRequests);
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -162,16 +164,26 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            View view1 = getLayoutInflater().inflate(R.layout.menu_data, null);
+            View menuView = getLayoutInflater().inflate(R.layout.menu_data, null);
             //getting view in row_data
             //TODO
-            TextView name = view1.findViewById(R.id.fruits);
-            ImageView image = view1.findViewById(R.id.images);
-
+            TextView name = menuView.findViewById(R.id.menu_text);
+            ImageView image = menuView.findViewById(R.id.images);
             name.setText(menuNames[i]);
             image.setImageResource(menuImages[i]);
-            return view1;
+            return menuView;
+        }
+    }
 
+    public void refreshTokenIfExpired(HTTPRequests httpRequests) {
+        final PrefUtil prefUtil = new PrefUtil(this);
+        if (prefUtil.isLoggedIn()) {
+            Calendar currentTime = Calendar.getInstance();
+            Calendar expireDate = prefUtil.getExpireDate();
+            currentTime.setTime(currentTime.getTime());
+            if (expireDate.before(currentTime)) {
+                httpRequests.sendFBPutRequest(this);
+            }
         }
 
     }

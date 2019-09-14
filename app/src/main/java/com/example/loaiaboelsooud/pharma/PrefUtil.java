@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.facebook.AccessToken;
-import com.google.gson.JsonArray;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import java.util.Calendar;
 
 public class PrefUtil {
 
@@ -36,24 +34,6 @@ public class PrefUtil {
         editor.putString("fb_access_token", token);
         editor.apply(); // This line is IMPORTANT !!!
     }
-
-    public void saveDrugEye(JsonArray drugEyeJsonArray) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("drug_eye_json_array", drugEyeJsonArray.toString());
-        editor.apply(); // This line is IMPORTANT !!!
-    }
-
-    public JSONArray getDrugEyeJsonArray() throws JSONException {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        if ((prefs.getString("drug_eye_json_array", null) == null))
-            return null;
-        return new JSONArray(prefs.getString("drug_eye_json_array", null));
-
-
-    }
-
 
     public String getToken() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
@@ -91,6 +71,33 @@ public class PrefUtil {
         user.setJob(prefs.getString("job", null));
         user.setCity(prefs.getString("city", null));
         return user;
+    }
+
+    public void saveExpireDate(Calendar expireDate) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("expire_date", expireDate.getTimeInMillis());
+        editor.apply();
+    }
+
+    public Calendar getExpireDate() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        long expireDateLongValue = prefs.getLong("expire_date", 0);
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.setTimeInMillis(expireDateLongValue);
+        return expireDate;
+    }
+
+    public void saveDrugEyeVersion(Long drugEyeVersion) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("drug_eye_version", drugEyeVersion);
+        editor.apply();
+    }
+
+    public Long getDrugEyeVersion() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        return prefs.getLong("drug_eye_version", 0);
     }
 
     public void hideKeyboard(Activity activity) {

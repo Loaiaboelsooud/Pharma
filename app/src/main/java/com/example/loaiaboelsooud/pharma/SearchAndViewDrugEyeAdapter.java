@@ -36,15 +36,14 @@ public class SearchAndViewDrugEyeAdapter extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         final DrugEyeItem drugEyeItem = drugEyeItems.get(position);
-        ((DrugEye) holder).name.setText(String.valueOf(drugEyeItem.getId()));
         ((DrugEye) holder).name.setText(drugEyeItem.getName());
         ((DrugEye) holder).activeIngredients.setText(drugEyeItem.getActiveIngredients());
-        ((DrugEye) holder).oldPrice.setText(String.valueOf(drugEyeItem.getOldPrice()));
+       /* ((DrugEye) holder).oldPrice.setText(String.valueOf(drugEyeItem.getOldPrice()));
         ((DrugEye) holder).newPrice.setText(String.valueOf(drugEyeItem.getNewPrice()));
-        ((DrugEye) holder).company.setText(drugEyeItem.getCompany());
+        ((DrugEye) holder).company.setText(drugEyeItem.getCompany());*/
         ((DrugEye) holder).category.setText(drugEyeItem.getCategory());
-        ((DrugEye) holder).packageSize.setText(drugEyeItem.getPackageSize());
-        ((DrugEye) holder).uses.setText(drugEyeItem.getUses());
+     /*   ((DrugEye) holder).packageSize.setText(drugEyeItem.getPackageSize());
+        ((DrugEye) holder).uses.setText(drugEyeItem.getUses());*/
     }
 
     @Override
@@ -62,15 +61,14 @@ public class SearchAndViewDrugEyeAdapter extends RecyclerView.Adapter<RecyclerVi
         public DrugEye(View drugEyeView, OnDrugEyeClickListener onDrugEyeClickListener) {
             super(drugEyeView);
             this.onDrugEyeClickListener = onDrugEyeClickListener;
-            id = drugEyeView.findViewById(R.id.drug_eye_adapter_id);
             name = drugEyeView.findViewById(R.id.drug_eye_adapter_name);
             activeIngredients = drugEyeView.findViewById(R.id.drug_eye_adapter_active_ingredients);
-            newPrice = drugEyeView.findViewById(R.id.drug_eye_adapter_new_price);
+            /*newPrice = drugEyeView.findViewById(R.id.drug_eye_adapter_new_price);
             oldPrice = drugEyeView.findViewById(R.id.drug_eye_adapter_old_price);
-            company = drugEyeView.findViewById(R.id.drug_eye_adapter_company);
+            company = drugEyeView.findViewById(R.id.drug_eye_adapter_company);*/
             category = drugEyeView.findViewById(R.id.drug_eye_adapter_category);
-            packageSize = drugEyeView.findViewById(R.id.drug_eye_adapter_package_size);
-            uses = drugEyeView.findViewById(R.id.drug_eye_adapter_uses);
+            /*packageSize = drugEyeView.findViewById(R.id.drug_eye_adapter_package_size);
+            uses = drugEyeView.findViewById(R.id.drug_eye_adapter_uses);*/
             drugEyeView.setOnClickListener(this);
         }
 

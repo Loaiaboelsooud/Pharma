@@ -67,6 +67,14 @@
     <string name="job_to_salary">الي</string>
     <string name="job_from_salary">من</string>
     <string name="job_post_button">نشر</string>
+    <string name="post_job_success">تم اضافة الوظيفة بنجاح</string>
+    <string name="job_filter_position">الوظيفة</string>
+    <string name="job_filter_work_place">المكان</string>
+    <string name="drug_eye_similarities_button">التشبهات</string>
+    <string name="drug_eye_alternatives_button">البدائل</string>
+    <string name="search">البحث</string>
+    <string name="drug_eye_select_drug">برجاء اختيار الدواء اولا</string>
+
     <string-array name="job_work_place_array">
         <item>صيدلية</item>
         <item>شركات ادوية</item>
@@ -81,10 +89,7 @@
         <item>مساعد صيدلي</item>
         <item>صيدلي</item>
     </string-array>
-    <string name="post_job_success">تم اضافة الوظيفة بنجاح</string>
 
-    <string name="job_filter_position">الوظيفة</string>
-    <string name="job_filter_work_place">المكان</string>
     <string-array name="job_filter_work_place_array">
         <item></item>
         <item>صيدلية</item>

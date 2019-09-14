@@ -64,6 +64,13 @@
     <string name="job_to_salary">to</string>
     <string name="job_from_salary">from</string>
     <string name="job_post_button">POST</string>
+    <string name="post_job_success">Your job is added successfully</string>
+    <string name="job_filter_position">Position</string>
+    <string name="job_filter_work_place">Workplace</string>
+    <string name="drug_eye_similarities_button">Similarities</string>
+    <string name="drug_eye_alternatives_button">Alternatives</string>
+    <string name="search">Search</string>
+    <string name="drug_eye_select_drug">Please choose a drug first</string>
     <string-array name="job_work_place_array">
         <item>pharmacy</item>
         <item>company</item>
@@ -78,9 +85,6 @@
         <item>assistant</item>
         <item>pharmacist</item>
     </string-array>
-    <string name="post_job_success">Your job is added successfully</string>
-    <string name="job_filter_position">Position</string>
-    <string name="job_filter_work_place">Workplace</string>
     <string-array name="job_filter_work_place_array">
         <item></item>
         <item>pharmacy</item>
