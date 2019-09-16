@@ -27,6 +27,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
     private boolean testbol = false;
     private int actualPage;
     private ProgressBar progressBar;
+    private FloatingActionButton addPrescriptionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +43,14 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         manager = new LinearLayoutManager(this);
         prescriptionsRecyclerView = findViewById(R.id.presecription_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        addPrescriptionButton = findViewById(R.id.add_prescription_button);
         progressBar = findViewById(R.id.presecription_get_progress);
         progressBar.setVisibility(View.VISIBLE);
         if (!prefUtil.isLoggedIn()) {
-            fab.hide();
+            addPrescriptionButton.hide();
             Toast.makeText(this, getString(R.string.Signin_prescriptions_toast), Toast.LENGTH_SHORT).show();
         } else {
-            fab.setOnClickListener(new View.OnClickListener() {
+            addPrescriptionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(ViewPrescriptionsActivity.this, AddPrescriptionsActivity.class);
@@ -81,6 +82,19 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
                     isScrolling = true;
                 }
+                if (prescriptionsItems.size() < 4) {
+                    if (prefUtil.isLoggedIn()) {
+                        if (newState == 1) {
+                            if (addPrescriptionButton.isShown()) {
+                                addPrescriptionButton.hide();
+                            }
+                        } else if (newState == 2) {
+                            if (!addPrescriptionButton.isShown()) {
+                                addPrescriptionButton.show();
+                            }
+                        }
+                    }
+                }
             }
 
             @Override
@@ -89,7 +103,17 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
                 currentItems = manager.getChildCount();
                 totalItems = manager.getItemCount();
                 scrollOutItems = manager.findFirstVisibleItemPosition();
-
+                if (prefUtil.isLoggedIn()) {
+                    if (dy > 0) {
+                        if (addPrescriptionButton.isShown()) {
+                            addPrescriptionButton.hide();
+                        }
+                    } else if (dy < 0) {
+                        if (!addPrescriptionButton.isShown()) {
+                            addPrescriptionButton.show();
+                        }
+                    }
+                }
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)
                         && (actualPage <= metaData.getPagination().getTotalPages())) {
                     loadMore(metaData);

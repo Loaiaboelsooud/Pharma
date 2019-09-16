@@ -18,9 +18,10 @@ public class FilterJobActivity extends NavMenuInt {
         setContentView(R.layout.activity_filter_job);
         intNavToolBar();
         PharmaConstants pharmaConstants = new PharmaConstants(this);
-        final Spinner positionSpinner, workPlaceSpinner;
+        final Spinner positionSpinner, workPlaceSpinner, citySpinner;
         positionSpinner = findViewById(R.id.job_filter_position);
         workPlaceSpinner = findViewById(R.id.job_filter_work_place);
+        citySpinner = findViewById(R.id.job_filter_city);
         searchButton = findViewById(R.id.job_search_button);
         jobParam = new HashMap();
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +32,9 @@ public class FilterJobActivity extends NavMenuInt {
                 }
                 if (PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()) != null) {
                     jobParam.put(PharmaConstants.WORKPLACE, PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()));
+                }
+                if (PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()) != null) {
+                    jobParam.put(PharmaConstants.CITIES, PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()));
                 }
                 finish();
                 Intent intent = new Intent(FilterJobActivity.this, ViewJobActivity.class);

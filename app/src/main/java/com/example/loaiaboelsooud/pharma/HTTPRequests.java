@@ -367,19 +367,21 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendDrugEyeVersionGetRequest(Activity activity) {
+    public void sendDrugEyeVersionGetRequest(Activity activity, final GetDrugEyeVersion getDrugEyeVersion) {
         final PrefUtil prefUtil = new PrefUtil(activity);
         Call<DrugEyeVersion> userCall = RetrofitClient.getInstance().getApi().getDrugEyeVersion();
         userCall.enqueue(new Callback<DrugEyeVersion>() {
             @Override
             public void onResponse(Call<DrugEyeVersion> call, Response<DrugEyeVersion> response) {
                 if (response.body() != null) {
-                    prefUtil.saveDrugEyeVersion(response.body().getDrugEyeVersion());
+                    Long drugEyeVersion = response.body().getDrugEyeVersion();
+                    getDrugEyeVersion.success(drugEyeVersion);
                 }
             }
 
             @Override
             public void onFailure(Call<DrugEyeVersion> call, Throwable t) {
+                getDrugEyeVersion.failed();
             }
         });
     }
@@ -462,9 +464,13 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public interface GetDrugEyeList {
-        void notifyList(List<DrugEyeItem> drugEyeItems);
-
         void insertAll(List<DrugEyeItem> drugEyeItems);
+
+        void failed();
+    }
+
+    public interface GetDrugEyeVersion {
+        void success(Long drugEyeVersion);
 
         void failed();
     }

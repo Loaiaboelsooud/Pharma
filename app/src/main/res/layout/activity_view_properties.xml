@@ -14,8 +14,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/properties_recycler"
@@ -33,22 +32,21 @@
             android:visibility="gone" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_properties_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|bottom"
-            android:layout_marginBottom="6dp"
-            android:src="@drawable/add_button" />
-
-        <android.support.design.widget.FloatingActionButton
             android:id="@+id/filter_properties_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_marginBottom="6dp"
+            android:layout_gravity="start|bottom"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/filter_button" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_properties_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/add_button" />
+
+
     </FrameLayout>
-
-
 </LinearLayout>

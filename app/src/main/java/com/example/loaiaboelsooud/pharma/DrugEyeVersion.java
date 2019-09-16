@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class DrugEyeVersion {
     @SerializedName("last_updated")
-    private long drugEyeVersion;
+    private Long drugEyeVersion;
 
-    public long getDrugEyeVersion() {
+    public Long getDrugEyeVersion() {
         return drugEyeVersion;
     }
 
-    public void setDrugEyeVersion(long drugEyeVersion) {
+    public void setDrugEyeVersion(Long drugEyeVersion) {
         this.drugEyeVersion = drugEyeVersion;
     }
 }

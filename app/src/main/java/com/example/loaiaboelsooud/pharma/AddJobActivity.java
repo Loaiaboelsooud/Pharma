@@ -28,15 +28,13 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
     }
 
     public void addJob(View view) {
-        EditText name, city, region, address, description, mobileNumbers, from, to;
-        Spinner positionSpinner, workPlaceSpinner;
+        EditText name, region, address, description, mobileNumbers, from, to;
+        Spinner positionSpinner, workPlaceSpinner, citySpinner;
         List<String> mobileNumbersList;
-        JobsItem jobsItem;
-        jobsItem = new JobsItem();
         mobileNumbersList = new ArrayList<String>();
         PrefUtil prefUtil = new PrefUtil(this);
         name = findViewById(R.id.job_name);
-        city = findViewById(R.id.job_city);
+        citySpinner = findViewById(R.id.job_city);
         region = findViewById(R.id.job_region);
         address = findViewById(R.id.job_address);
         positionSpinner = findViewById(R.id.job_position);
@@ -45,8 +43,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
         to = findViewById(R.id.job_to_salary);
         description = findViewById(R.id.job_description);
         mobileNumbers = findViewById(R.id.job_mobile);
-        if (city.getText().toString() != null && !city.getText().toString().isEmpty() &&
-                region.getText().toString() != null && !region.getText().toString().isEmpty() &&
+        if (region.getText().toString() != null && !region.getText().toString().isEmpty() &&
                 name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
                 mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()) {
@@ -67,8 +64,8 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
             httpRequests.sendJobPostRequest(prefUtil.getToken(), name.getText().toString(), description.getText().toString(),
                     paresedFrom, paresedTo, PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()),
                     PharmaConstants.positionMapAdd.get(positionSpinner.getSelectedItem().toString()),
-                    city.getText().toString(), region.getText().toString(), address.getText().toString(), mobileNumbersList,
-                    this);
+                    PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), region.getText().toString(),
+                    address.getText().toString(), mobileNumbersList, this);
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),
                     Toast.LENGTH_LONG).show();

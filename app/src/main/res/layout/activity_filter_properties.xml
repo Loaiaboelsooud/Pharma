@@ -47,6 +47,21 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/properties_filter_type_array" />
         </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/properties_filter_cities_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/properties_filter_city" />
+
+            <Spinner
+                android:id="@+id/properties_filter_cities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/cities_array_filter" />
+        </TableRow>
     </TableLayout>
 
     <Button

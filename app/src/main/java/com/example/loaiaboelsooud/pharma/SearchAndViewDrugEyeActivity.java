@@ -18,10 +18,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequests.GetDrugEyeList, SearchAndViewDrugEyeAdapter.OnDrugEyeClickListener {
+public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequests.GetDrugEyeList, HTTPRequests.GetDrugEyeVersion,
+        SearchAndViewDrugEyeAdapter.OnDrugEyeClickListener, DrugEyeAsyncTasks.OnInsertCompleted {
     public RecyclerView drugEyeRecyclerView;
-    private Boolean isScrolling = false, testbol = false;
-    private int currentItems, totalItems, scrollOutItems, actualPage;
     private LinearLayoutManager manager;
     private HTTPRequests httpRequests;
     private PrefUtil prefUtil;
@@ -30,6 +29,7 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
     private Button similaritiesButton, alternativesButton, viewButton;
     private EditText drugEyeSearchKeyWord;
     private List<DrugEyeItem> drugEyeItems;
+    private DrugItemDao drugItemDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,8 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
 
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
-        final DrugItemDao drugItemDao = RoomDatabaseClient.getInstance().drugItemDao();
+        drugItemDao = RoomDatabaseClient.getInstance().drugItemDao();
         checkDrugEyeVersion();
-        //httpRequests.sendDrugEyeGetRequest(this, this);
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_search_and_view_drug_eye);
@@ -141,45 +140,34 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
         drugEyeSearchKeyWord.setText("");
     }
 
-    @Override
-    public void notifyList(final List<DrugEyeItem> drugEyeItems) {
-      /*  if (!testbol) {
-            testbol = true;
-            actualPage = 0;
-            this.drugEyeItems = drugEyeItems;
-            adapter = new SearchAndViewDrugEyeAdapter(this, this.drugEyeItems.subList(0, 15), this);
-            drugEyeRecyclerView.setAdapter(adapter);
-        }
-        if (actualPage != 0) {
-            this.drugEyeItems.subList(actualPage + 15, actualPage + 30);
-        }
-        actualPage += 15;
-        adapter.notifyDataSetChanged();
-        progressBar.setVisibility(View.GONE);*/
+    private void checkDrugEyeVersion() {
+        httpRequests.sendDrugEyeVersionGetRequest(this, this);
+    }
 
+    @Override
+    public void success(Long newDrugEyeVersion) {
+        Long drugEyeVersion = prefUtil.getDrugEyeVersion();
+        if (!drugEyeVersion.equals(newDrugEyeVersion)) {
+            progressBar.setVisibility(View.VISIBLE);
+            DrugEyeAsyncTasks.deleteAll(drugItemDao);
+            httpRequests.sendDrugEyeGetRequest(this);
+            prefUtil.saveDrugEyeVersion(newDrugEyeVersion);
+            Toast.makeText(this, getString(R.string.drug_eye_updating), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, getString(R.string.drug_eye_up_to_date), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void insertAll(List<DrugEyeItem> drugEyeItemList) {
-        DrugItemDao drugItemDao = RoomDatabaseClient.getInstance().drugItemDao();
-        for (DrugEyeItem drugEyeItem : drugEyeItemList) {
-            DrugEyeAsyncTasks.insert(drugEyeItem, drugItemDao);
-        }
+        Toast.makeText(this, getString(R.string.drug_eye_updating), Toast.LENGTH_LONG).show();
+        DrugEyeAsyncTasks.insertAll(drugEyeItemList, drugItemDao, this);
+    }
+
+    public void insertSuccess() {
         progressBar.setVisibility(View.GONE);
-
+        Toast.makeText(this, getString(R.string.drug_eye_up_to_date), Toast.LENGTH_LONG).show();
     }
-
-    private void checkDrugEyeVersion() {
-
-        PrefUtil prefUtil = new PrefUtil(this);
-        if (prefUtil.getDrugEyeVersion() == 0) {
-            httpRequests.sendDrugEyeVersionGetRequest(this);
-            httpRequests.sendDrugEyeGetRequest(this);
-        }
-
-
-    }
-
 
     @Override
     public void failed() {

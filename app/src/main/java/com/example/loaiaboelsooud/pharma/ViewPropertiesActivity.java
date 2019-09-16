@@ -99,6 +99,23 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
                     isScrolling = true;
                 }
+                if (propertiesItems.size() < 4) {
+                    if (prefUtil.isLoggedIn()) {
+                        if (newState == 1 && addPropertiesButton.isShown() && filterPropertiesButton.isShown()) {
+                            addPropertiesButton.hide();
+                            filterPropertiesButton.hide();
+                        } else if (newState == 2 && !addPropertiesButton.isShown() && !filterPropertiesButton.isShown()) {
+                            addPropertiesButton.show();
+                            filterPropertiesButton.show();
+                        }
+                    } else {
+                        if (newState == 1 && filterPropertiesButton.isShown()) {
+                            filterPropertiesButton.hide();
+                        } else if (newState == 2 && !filterPropertiesButton.isShown()) {
+                            filterPropertiesButton.show();
+                        }
+                    }
+                }
             }
 
             @Override
@@ -107,12 +124,27 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
                 currentItems = manager.getChildCount();
                 totalItems = manager.getItemCount();
                 scrollOutItems = manager.findFirstVisibleItemPosition();
-
+                if (prefUtil.isLoggedIn()) {
+                    if (dy > 0 && addPropertiesButton.isShown() && filterPropertiesButton.isShown()) {
+                        addPropertiesButton.hide();
+                        filterPropertiesButton.hide();
+                    } else if (dy < 0 && !addPropertiesButton.isShown() && !filterPropertiesButton.isShown()) {
+                        addPropertiesButton.show();
+                        filterPropertiesButton.show();
+                    }
+                } else {
+                    if (dy > 0 && filterPropertiesButton.isShown()) {
+                        filterPropertiesButton.hide();
+                    } else if (dy < 0 && !filterPropertiesButton.isShown()) {
+                        filterPropertiesButton.show();
+                    }
+                }
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)
                         && (actualPage <= metaData.getPagination().getTotalPages())) {
                     loadMore(metaData);
                     isScrolling = false;
                 }
+
             }
         });
     }

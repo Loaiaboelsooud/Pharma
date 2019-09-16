@@ -35,6 +35,7 @@
     <string name="properties_price">السعر</string>
     <string name="properties_description">المواصفات</string>
     <string name="post_properties_fail">برجاء ادخال جميع البينات المطلوبة</string>
+    <string name="properties_filter_city">المحافظة</string>
     <string-array name="properties_listed_for_array">
         <item>شراء</item>
         <item>بيع</item>
@@ -74,6 +75,71 @@
     <string name="drug_eye_alternatives_button">البدائل</string>
     <string name="search">البحث</string>
     <string name="drug_eye_select_drug">برجاء اختيار الدواء اولا</string>
+    <string name="drug_eye_up_to_date">لا يوجد تحديث جديد</string>
+    <string name="drug_eye_updating">برجاء الانتظار جاري تحميل المحتوي...</string>
+
+
+    <string-array name="cities_array">
+        <item>اسوان</item>
+        <item>اسيوط</item>
+        <item>الاقصر</item>
+        <item>الاسكندرية</item>
+        <item>الاسماعيلية</item>
+        <item>البحرالاحمر</item>
+        <item>البحيرة</item>
+        <item>الجيزة</item>
+        <item>الدقهلية</item>
+        <item>السويس</item>
+        <item>الشرقية</item>
+        <item>الغربية</item>
+        <item>الفيوم</item>
+        <item>القاهرة</item>
+        <item>القليوبية</item>
+        <item>المنوفية</item>
+        <item>المينيا</item>
+        <item>الوادي الجديد</item>
+        <item>بني سويف</item>
+        <item>بورسعيد</item>
+        <item>جنوب سيناء</item>
+        <item>دمياط</item>
+        <item>سوهاج</item>
+        <item>شمال سيناء</item>
+        <item>قنا</item>
+        <item>كفرالشيخ</item>
+        <item>مطروح</item>
+        <item>الساحل الشمالي</item>
+    </string-array>
+    <string-array name="cities_array_filter">
+        <item></item>
+        <item>اسوان</item>
+        <item>اسيوط</item>
+        <item>الاقصر</item>
+        <item>الاسكندرية</item>
+        <item>الاسماعيلية</item>
+        <item>البحرالاحمر</item>
+        <item>البحيرة</item>
+        <item>الجيزة</item>
+        <item>الدقهلية</item>
+        <item>السويس</item>
+        <item>الشرقية</item>
+        <item>الغربية</item>
+        <item>الفيوم</item>
+        <item>القاهرة</item>
+        <item>القليوبية</item>
+        <item>المنوفية</item>
+        <item>المينيا</item>
+        <item>الوادي الجديد</item>
+        <item>بني سويف</item>
+        <item>بورسعيد</item>
+        <item>جنوب سيناء</item>
+        <item>دمياط</item>
+        <item>سوهاج</item>
+        <item>شمال سيناء</item>
+        <item>قنا</item>
+        <item>كفرالشيخ</item>
+        <item>مطروح</item>
+        <item>الساحل الشمالي</item>
+    </string-array>
 
     <string-array name="job_work_place_array">
         <item>صيدلية</item>

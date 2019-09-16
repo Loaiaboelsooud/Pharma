@@ -102,6 +102,23 @@ public class ViewJobActivity extends NavMenuInt implements HTTPRequests.GetJobsL
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
                     isScrolling = true;
                 }
+                if (jobsItem.size() < 3) {
+                    if (prefUtil.isLoggedIn()) {
+                        if (newState == 1 && addJobButton.isShown() && filterJobButton.isShown()) {
+                            addJobButton.hide();
+                            filterJobButton.hide();
+                        } else if (newState == 2 && !addJobButton.isShown() && !filterJobButton.isShown()) {
+                            addJobButton.show();
+                            filterJobButton.show();
+                        }
+                    } else {
+                        if (newState == 1 && filterJobButton.isShown()) {
+                            filterJobButton.hide();
+                        } else if (newState == 2 && !filterJobButton.isShown()) {
+                            filterJobButton.show();
+                        }
+                    }
+                }
             }
 
             @Override
@@ -110,7 +127,21 @@ public class ViewJobActivity extends NavMenuInt implements HTTPRequests.GetJobsL
                 currentItems = manager.getChildCount();
                 totalItems = manager.getItemCount();
                 scrollOutItems = manager.findFirstVisibleItemPosition();
-
+                if (prefUtil.isLoggedIn()) {
+                    if (dy > 0 && addJobButton.isShown() && filterJobButton.isShown()) {
+                        addJobButton.hide();
+                        filterJobButton.hide();
+                    } else if (dy < 0 && !addJobButton.isShown() && !filterJobButton.isShown()) {
+                        addJobButton.show();
+                        filterJobButton.show();
+                    }
+                } else {
+                    if (dy > 0 && filterJobButton.isShown()) {
+                        filterJobButton.hide();
+                    } else if (dy < 0 && !filterJobButton.isShown()) {
+                        filterJobButton.show();
+                    }
+                }
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)
                         && (actualPage <= metaData.getPagination().getTotalPages())) {
                     loadMore(metaData);

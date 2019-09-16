@@ -34,6 +34,7 @@
     <string name="properties_price">Price</string>
     <string name="properties_description">Description</string>
     <string name="post_properties_fail">Please fill all the required fields</string>
+    <string name="properties_filter_city">City</string>
     <string-array name="properties_listed_for_array">
         <item>selling</item>
         <item>buying</item>
@@ -71,6 +72,72 @@
     <string name="drug_eye_alternatives_button">Alternatives</string>
     <string name="search">Search</string>
     <string name="drug_eye_select_drug">Please choose a drug first</string>
+    <string name="drug_eye_up_to_date">Your List is updated</string>
+    <string name="drug_eye_updating">Please wait while your list is being updated...</string>
+
+
+    <string-array name="cities_array">
+        <item>Aswan</item>
+        <item>Asyut</item>
+        <item>Luxor</item>
+        <item>Alexandria</item>
+        <item>Ismailia</item>
+        <item>Red Sea</item>
+        <item>Beheira</item>
+        <item>Giza</item>
+        <item>Dakahlia</item>
+        <item>Suez</item>
+        <item>Sharqia</item>
+        <item>Gharbia</item>
+        <item>Fayoum</item>
+        <item>Cairo</item>
+        <item>Qalyubia</item>
+        <item>Monufia</item>
+        <item>Minya</item>
+        <item>New Valley</item>
+        <item>Beni Suef</item>
+        <item>Port Said</item>
+        <item>South Sinai</item>
+        <item>Damietta</item>
+        <item>Sohag</item>
+        <item>North Sinai</item>
+        <item>Qena</item>
+        <item>Kafr al-Sheikh</item>
+        <item>Matruh</item>
+        <item>North Coast</item>
+    </string-array>
+    <string-array name="cities_array_filter">
+        <item></item>
+        <item>Aswan</item>
+        <item>Asyut</item>
+        <item>Luxor</item>
+        <item>Alexandria</item>
+        <item>Ismailia</item>
+        <item>Red Sea</item>
+        <item>Beheira</item>
+        <item>Giza</item>
+        <item>Dakahlia</item>
+        <item>Suez</item>
+        <item>Sharqia</item>
+        <item>Gharbia</item>
+        <item>Fayoum</item>
+        <item>Cairo</item>
+        <item>Qalyubia</item>
+        <item>Monufia</item>
+        <item>Minya</item>
+        <item>New Valley</item>
+        <item>Beni Suef</item>
+        <item>Port Said</item>
+        <item>South Sinai</item>
+        <item>Damietta</item>
+        <item>Sohag</item>
+        <item>North Sinai</item>
+        <item>Qena</item>
+        <item>Kafr al-Sheikh</item>
+        <item>Matruh</item>
+        <item>North Coast</item>
+    </string-array>
+
     <string-array name="job_work_place_array">
         <item>pharmacy</item>
         <item>company</item>

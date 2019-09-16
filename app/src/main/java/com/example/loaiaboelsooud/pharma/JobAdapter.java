@@ -53,19 +53,12 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((Jobs) holder).description.setText(jobsItem.getDescription());
         ((Jobs) holder).position.setText(PharmaConstants.positionMapView.get(jobsItem.getPosition()));
         ((Jobs) holder).workPlace.setText(PharmaConstants.workPlaceMapView.get(jobsItem.getWorkPlace()));
-        ((Jobs) holder).city.setText(jobsItem.getCity());
+        ((Jobs) holder).city.setText(PharmaConstants.citiesMapView.get(jobsItem.getCity()));
         ((Jobs) holder).region.setText(jobsItem.getRegion());
         ((Jobs) holder).address.setText(jobsItem.getAddress());
         ((Jobs) holder).mobileNumber.setText(jobsItem.getMobileNumbers().get(0));
         ((Jobs) holder).updatedAt.setText(jobsItem.getUpdatedAt());
     }
-
-  /*  public void addPrescriptionComment() {
-        Intent intent = new Intent(ViewPrescriptionsActivity.this, PrescriptionsCommentsActivity.class);
-        startActivity(intent);
-        finish();
-
-    }*/
 
     @Override
     public int getItemCount() {

@@ -4,16 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Spinner;
 
 import java.util.HashMap;
 
 public class FilterPropertiesActivity extends NavMenuInt {
     private Button searchButton;
-    private CheckBox sellCheckBox, rentCheckBox, pharmacyCheckBox, warehouseCheckBox, factoryCheckBox, hospitalCheckBox;
     private HashMap<String, String> propertiesParam;
-    private Spinner listedForSpinner, typeSpinner;
+    private Spinner listedForSpinner, typeSpinner, citiesSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +21,7 @@ public class FilterPropertiesActivity extends NavMenuInt {
         final PharmaConstants pharmaConstants = new PharmaConstants(this);
         listedForSpinner = findViewById(R.id.properties_filter_listed_for);
         typeSpinner = findViewById(R.id.properties_filter_type);
+        citiesSpinner = findViewById(R.id.properties_filter_cities);
         searchButton = findViewById(R.id.properties_search_button);
         propertiesParam = new HashMap();
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +32,9 @@ public class FilterPropertiesActivity extends NavMenuInt {
                 }
                 if (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()) != null) {
                     propertiesParam.put(PharmaConstants.TYPE, PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()));
+                }
+                if (PharmaConstants.citiesMapAdd.get(citiesSpinner.getSelectedItem().toString()) != null) {
+                    propertiesParam.put(PharmaConstants.CITIES, PharmaConstants.citiesMapAdd.get(citiesSpinner.getSelectedItem().toString()));
                 }
                 finish();
                 Intent intent = new Intent(FilterPropertiesActivity.this, ViewPropertiesActivity.class);

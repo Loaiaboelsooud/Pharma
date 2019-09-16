@@ -132,10 +132,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/job_city" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/job_city"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:entries="@array/cities_array" />
 
             </TableRow>
 

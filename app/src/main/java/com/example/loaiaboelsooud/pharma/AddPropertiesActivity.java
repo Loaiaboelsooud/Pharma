@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -31,6 +32,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     private List<MultipartBody.Part> images;
     private ProgressBar progressBar;
     private PharmaConstants pharmaConstants;
+    private Button postButton, galleryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +41,19 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         intNavToolBar();
         progressBar = findViewById(R.id.properties_post_progress);
         pharmaConstants = new PharmaConstants(this);
+        postButton = findViewById(R.id.properties_post_button);
+        galleryButton = findViewById(R.id.properties_gallery_button);
     }
 
     public void addProperties(View view) {
-        EditText name, city, region, address, area, price, description, notes, mobileNumbers, landLineNumbers;
-        Spinner listedForSpinner, typeSpinner;
+        EditText name, region, address, area, price, description, notes, mobileNumbers, landLineNumbers;
+        Spinner listedForSpinner, typeSpinner, citiesSpinner;
         PrefUtil prefUtil = new PrefUtil(this);
         List<String> mobileNumbersList, landLineNumbersList;
         mobileNumbersList = new ArrayList<String>();
         landLineNumbersList = new ArrayList<String>();
         name = findViewById(R.id.properties_name);
-        city = findViewById(R.id.properties_city);
+        citiesSpinner = findViewById(R.id.properties_city);
         region = findViewById(R.id.properties_region);
         address = findViewById(R.id.properties_address);
         area = findViewById(R.id.properties_area);
@@ -62,8 +66,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         landLineNumbers = findViewById(R.id.properties_land_number);
         final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
-        if (city.getText().toString() != null && !city.getText().toString().isEmpty() &&
-                region.getText().toString() != null && !region.getText().toString().isEmpty() &&
+        if (region.getText().toString() != null && !region.getText().toString().isEmpty() &&
                 name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
                 mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()) {
@@ -74,14 +77,16 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                 landLineNumbersList.add(landLineNumbers.getText().toString());
             }
             progressBar.setVisibility(View.VISIBLE);
-
+            postButton.setEnabled(false);
+            galleryButton.setEnabled(false);
             int paresedPrice = 1;
             if (!price.getText().toString().equals("")) {
                 paresedPrice = Integer.parseInt(price.getText().toString());
             }
 
-            httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), city.getText().toString(), region.getText().toString()
-                    , address.getText().toString(), area.getText().toString(), pharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString()),
+            httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), pharmaConstants.citiesMapAdd.get(citiesSpinner.getSelectedItem().toString()),
+                    region.getText().toString(), address.getText().toString(), area.getText().toString(),
+                    pharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString()),
                     pharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()), paresedPrice, description.getText().toString(),
                     notes.getText().toString(), mobileNumbersList, landLineNumbersList, images, this);
 
@@ -127,7 +132,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
 
     private List<MultipartBody.Part> imageToFile(List<Bitmap> bitmapList) throws IOException {
         List<MultipartBody.Part> images = new ArrayList<>();
-        for (int i = 0; i < bitmapList.size(); i++) {
+        for (int i = 0; i < bitmapList.size() || i < 8; i++) {
             File photoFile;
             Uri photoURI;
             File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -163,6 +168,8 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     public void success() {
         finish();
         progressBar.setVisibility(View.GONE);
+        postButton.setEnabled(true);
+        galleryButton.setEnabled(true);
         Toast.makeText(this, getString(R.string.post_properties_success), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(AddPropertiesActivity.this, ViewPropertiesActivity.class);
         intent.putExtra(PharmaConstants.ISFILTERED, false);
@@ -172,6 +179,8 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     @Override
     public void failed() {
         progressBar.setVisibility(View.GONE);
+        postButton.setEnabled(true);
+        galleryButton.setEnabled(true);
         Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
     }
 
