@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/job_region" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/job_region"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

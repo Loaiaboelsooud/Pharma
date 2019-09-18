@@ -3,6 +3,7 @@ package com.example.loaiaboelsooud.pharma;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -13,9 +14,9 @@ import java.util.List;
 
 public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPostResult {
 
-
     private HTTPRequests httpRequests;
     private ProgressBar progressBar;
+    private Spinner citySpinner, regionSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +25,30 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
         intNavToolBar();
         PharmaConstants pharmaConstants = new PharmaConstants(this);
         progressBar = findViewById(R.id.job_post_progress);
+        citySpinner = findViewById(R.id.job_city);
+        regionSpinner = findViewById(R.id.job_region);
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+               /* ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.alexandria_regions, android.R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                regionSpinner.setAdapter(adapter);*/
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
     }
 
     public void addJob(View view) {
-        EditText name, region, address, description, mobileNumbers, from, to;
-        Spinner positionSpinner, workPlaceSpinner, citySpinner;
+        EditText name, address, description, mobileNumbers, from, to;
+        Spinner positionSpinner, workPlaceSpinner;
         List<String> mobileNumbersList;
         mobileNumbersList = new ArrayList<String>();
         PrefUtil prefUtil = new PrefUtil(this);
         name = findViewById(R.id.job_name);
-        citySpinner = findViewById(R.id.job_city);
-        region = findViewById(R.id.job_region);
         address = findViewById(R.id.job_address);
         positionSpinner = findViewById(R.id.job_position);
         workPlaceSpinner = findViewById(R.id.job_work_place);
@@ -43,8 +56,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
         to = findViewById(R.id.job_to_salary);
         description = findViewById(R.id.job_description);
         mobileNumbers = findViewById(R.id.job_mobile);
-        if (region.getText().toString() != null && !region.getText().toString().isEmpty() &&
-                name.getText().toString() != null && !name.getText().toString().isEmpty() &&
+        if (name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
                 mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()) {
             mobileNumbersList.clear();
@@ -64,7 +76,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
             httpRequests.sendJobPostRequest(prefUtil.getToken(), name.getText().toString(), description.getText().toString(),
                     paresedFrom, paresedTo, PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()),
                     PharmaConstants.positionMapAdd.get(positionSpinner.getSelectedItem().toString()),
-                    PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), region.getText().toString(),
+                    PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), regionSpinner.getSelectedItem().toString(),
                     address.getText().toString(), mobileNumbersList, this);
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),

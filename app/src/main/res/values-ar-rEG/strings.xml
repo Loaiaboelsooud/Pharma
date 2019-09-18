@@ -140,6 +140,480 @@
         <item>مطروح</item>
         <item>الساحل الشمالي</item>
     </string-array>
+    <string-array name="alexandria_regions">
+        <item>ابوقير</item>
+        <item>ابوتلات</item>
+        <item>عجمي</item>
+        <item>الحضرة</item>
+        <item>الابراهيمية</item>
+        <item>العمرية</item>
+        <item>العصافرة</item>
+        <item>العطارين</item>
+        <item>العوايد</item>
+        <item>الازاريطه</item>
+        <item>باكوس</item>
+        <item>بحري</item>
+        <item>بولكلي</item>
+        <item>برج العرب</item>
+        <item>كامب شيزار</item>
+        <item>كليوباترا</item>
+        <item>الدخيله</item>
+        <item>الضهريه</item>
+        <item>المكس</item>
+        <item>فلمنج</item>
+        <item>جناكليس</item>
+        <item>جليم</item>
+        <item>قباري</item>
+        <item>كرموز</item>
+        <item>كوم الدكة</item>
+        <item>اللبان</item>
+        <item>لوران</item>
+        <item>معمورة</item>
+        <item>المندرة</item>
+        <item>المنشية/محطة الرمل</item>
+        <item>ميامي</item>
+        <item>مينا البصل</item>
+        <item>محرم بيك</item>
+        <item>المنتزه</item>
+        <item>النخيل</item>
+        <item>النزهه</item>
+        <item>رشدي</item>
+        <item>سابا باشا</item>
+        <item>سان ستيفانو</item>
+        <item>شوتز</item>
+        <item>السيوف</item>
+        <item>الشاطبي</item>
+        <item>سيدي بشر</item>
+        <item>سيدي جابر</item>
+        <item>سموحة</item>
+        <item>سبورتنج</item>
+        <item>طوسون</item>
+        <item>فكتوريا</item>
+        <item>الورديان</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="cairo_regions">
+        <item>العاشر من رمضان</item>
+        <item>15 مايو</item>
+        <item>العباسية</item>
+        <item>عين شمس</item>
+        <item>العوامرية</item>
+        <item>المنيل</item>
+        <item>المزاح</item>
+        <item>العتبة</item>
+        <item>باب الشعرية</item>
+        <item>بيت الوطن</item>
+        <item>باساتين</item>
+        <item>بولاق</item>
+        <item>دار السلام</item>
+        <item>الدريسة</item>
+        <item>دون تاون كايرو</item>
+        <item>مدينة فيوتشر</item>
+        <item>الجمالية</item>
+        <item>جاردن سيتي</item>
+        <item>حدايق القبة</item>
+        <item>حدايق حلوان</item>
+        <item>هليوبلس</item>
+        <item>حلمية</item>
+        <item>حلمية الجديدة</item>
+        <item>حلوان</item>
+        <item>عزبة النخل</item>
+        <item>قطامية</item>
+        <item>خليفه</item>
+        <item>المعسرة</item>
+        <item>معادي</item>
+        <item>مدينتي</item>
+        <item>المرج</item>
+        <item>مصر القديمة</item>
+        <item>المطرية</item>
+        <item>المقطم</item>
+        <item>موسكي</item>
+        <item>منيرة الجديدة</item>
+        <item>موسترد</item>
+        <item>مدينة نصر</item>
+        <item>مصر الجديدة-الاندلس</item>
+        <item>مصر الجديدة-التجمع الخامس</item>
+        <item>مصر الجديدة-التجمع الاول</item>
+        <item>مصر الجديدة-لوتس</item>
+        <item>مصر الجديدة-اخري </item>
+        <item>مصر الجديدة-الرحاب </item>
+        <item>العاصمه الادارية الجديدة</item>
+        <item>هليوبلس الجديده</item>
+        <item>النزهه</item>
+        <item>مدينة العبور</item>
+        <item>قصر النيل</item>
+        <item>رمسيس</item>
+        <item>روض الفرج</item>
+        <item>الروضه</item>
+        <item>الساحل</item>
+        <item>مدينة السلام</item>
+        <item>السيدة زينب</item>
+        <item>الشربية</item>
+        <item>شيراتون</item>
+        <item>مدينة الشروق</item>
+        <item>شبرا</item>
+        <item>طيبين</item>
+        <item>المنطقه التالته</item>
+        <item>طره</item>
+        <item>الوايلي</item>
+        <item>زهراء المعادي</item>
+        <item>زمالك</item>
+        <item>الزاوية الحمراء</item>
+        <item>الزيتون</item>
+        <item>غمرا</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="giza_regions">
+        <item>6 اكتوبر</item>
+        <item>ابو رواش</item>
+        <item>العجوزة</item>
+        <item>ارض اللواء</item>
+        <item>عزيزية</item>
+        <item>بدراشين</item>
+        <item>بني سلامه</item>
+        <item>باراجيل</item>
+        <item>بشتيل</item>
+        <item>بولاق الدكرور</item>
+        <item>دهب</item>
+        <item>داهشور</item>
+        <item>الدقي</item>
+        <item>ال ايات</item>
+        <item>فيصل</item>
+        <item>حدايق 6 اكتوير</item>
+        <item>حدايق الاهرام</item>
+        <item>الهرم</item>
+        <item>الحرانية</item>
+        <item>الحوامدية</item>
+        <item>امبابة</item>
+        <item>كفر تحورمس</item>
+        <item>كرداسة</item>
+        <item>كيت كات</item>
+        <item>منصورية</item>
+        <item>مركز الجيزة</item>
+        <item>مريوطية</item>
+        <item>ميت عقبة</item>
+        <item>مهندسين</item>
+        <item>المنيب</item>
+        <item>نهيا</item>
+        <item>عمرانية</item>
+        <item>قصيم</item>
+        <item>المدينة الفرعونية</item>
+        <item>الرماية</item>
+        <item>صف</item>
+        <item>سفط</item>
+        <item>صحفيين</item>
+        <item>صقية مكي</item>
+        <item>سقارة</item>
+        <item>شيخ زايد</item>
+        <item>سوق العهد</item>
+        <item>ترسة</item>
+        <item>وردان</item>
+        <item>وراق</item>
+        <item>غرب سوميد</item>
+        <item>مناطق اخري </item>
+    </string-array>
+
+    <string-array name="asyut_regions">
+        <item>ابنوب</item>
+        <item>ابوتيج</item>
+        <item>اسيوط</item>
+        <item>بداري</item>
+        <item>دايروت</item>
+        <item>فتيح</item>
+        <item>غنايم</item>
+        <item>منفلوط</item>
+        <item>اسيوط الجديده</item>
+        <item>قصية</item>
+        <item>سحل السليم</item>
+        <item>صدفه</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="luxor_regions">
+        <item>ارمنت</item>
+        <item>بايادية</item>
+        <item>قصنا</item>
+        <item>الاقصر</item>
+        <item>قرنة</item>
+        <item>تود</item>
+        <item>زينيا</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="ismailia_regions">
+        <item>ابوسوير</item>
+        <item>فايد</item>
+        <item>الاسماعلية</item>
+        <item>غرب قنطرة</item>
+        <item>قصاصين</item>
+        <item>تل الكبير</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="redsea_regions">
+        <item>غردقه-الجونة</item>
+        <item>مرسي علم</item>
+        <item>القصير</item>
+        <item>راس غارب</item>
+        <item>سفاجة</item>
+        <item>سهل حشيش</item>
+        <item>شالاتين/حلايب</item>
+        <item>ابو رماض </item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="behira_regions">
+        <item>ابوحمص</item>
+        <item>ابو المطامير</item>
+        <item>بدر</item>
+        <item>دمنهور</item>
+        <item>دلنجات</item>
+        <item>ادكو</item>
+        <item>اتاي البارود</item>
+        <item>حوش عيسي</item>
+        <item>كفر الدوار</item>
+        <item>كوم حمادة</item>
+        <item>محمودية</item>
+        <item>نوبارية</item>
+        <item>رحمانية</item>
+        <item>رشيد</item>
+        <item>شبراخيت</item>
+        <item>وادي النطرون</item>
+        <item>مناطق اخري </item>
+    </string-array>
+
+    <string-array name="dakahlia_regions">
+        <item>اجا</item>
+        <item>اخطاب</item>
+        <item>بني عبيد</item>
+        <item>بلقاس</item>
+        <item>دكرنس</item>
+        <item>جمالية</item>
+        <item>منصوره</item>
+        <item>منزلة</item>
+        <item>مطرية</item>
+        <item>منة النصر</item>
+        <item>ميت غمر</item>
+        <item>ميت سلسيل</item>
+        <item>ناباروه</item>
+        <item>شربين</item>
+        <item>سنبلاوين</item>
+        <item>طلخه</item>
+        <item>طامه الامديد</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="suez_regions">
+        <item>عين السخنه</item>
+        <item>عربيين</item>
+        <item>اطاقه</item>
+        <item>فيصل</item>
+        <item>جناين</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="sharqia_regions">
+        <item>العاشر من رمضان</item>
+        <item>ابو حماد</item>
+        <item>ابوكبير</item>
+        <item>القنويات</item>
+        <item>اولاد صقر</item>
+        <item>بلبيس</item>
+        <item>درب نجم</item>
+        <item>فقوس</item>
+        <item>حلية</item>
+        <item>حسينية</item>
+        <item>ابراهيمية</item>
+        <item>كفر صقر</item>
+        <item>مشتول السوق</item>
+        <item>منيا القمح </item>
+        <item>نيو ساحلية </item>
+        <item>قرين</item>
+        <item>زقازيق</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="gharbia_regions">
+        <item>بايسون</item>
+        <item>كفرالزيات</item>
+        <item>محلة الكبري</item>
+        <item>قطور</item>
+        <item>سمنود</item>
+        <item>سنطة</item>
+        <item>طنطا</item>
+        <item>زفتا</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="fayoum_regions">
+        <item>عطسة</item>
+        <item>ابشواي</item>
+        <item>فيوم الجديدة</item>
+        <item>سينورس</item>
+        <item>طمية</item>
+        <item>يوسف الصديق</item>
+        <item>مناطق اخري </item>
+    </string-array>
+
+    <string-array name="qalyubia_regions">
+        <item></item>
+        <item></item>
+        <item>بهتيم</item>
+        <item>بنها</item>
+        <item>العبور</item>
+        <item>كفر صقر</item>
+        <item>خنكة</item>
+        <item>خسوس</item>
+        <item>قها</item>
+        <item>قليوب</item>
+        <item>قناطر الخيرية</item>
+        <item>شربين القناطر</item>
+        <item>شبرا الخيمة</item>
+        <item>طوخ</item>
+        <item>زاوية الحمراء</item>
+        <item>مناطق اخري </item>
+    </string-array>
+
+    <string-array name="monufia_regions">
+        <item>اشمون</item>
+        <item>باجور</item>
+        <item>بركة السبع</item>
+        <item>منوف</item>
+        <item>ميت العز</item>
+        <item>قويسنا</item>
+        <item>سادات</item>
+        <item>سرس الليان</item>
+        <item>شبين الكوم</item>
+        <item>شهده</item>
+        <item>تالا</item>
+        <item>حامول</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="minya_regions">
+        <item>ابوقرقاس</item>
+        <item>ادوا</item>
+        <item>بني مازار</item>
+        <item>دير ماواس</item>
+        <item>مغاغة</item>
+        <item>مالاوي</item>
+        <item>مطاي</item>
+        <item>منيا الجديدة</item>
+        <item>سملوط</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="newvalley_regions">
+        <item>بلاط</item>
+        <item>دخلة</item>
+        <item>فرافرة</item>
+        <item>خرجة</item>
+        <item>مط</item>
+        <item>باريس</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="benisuef_regions">
+        <item>الفيشن</item>
+        <item>الواسطي</item>
+        <item>بيبا</item>
+        <item>احناسيا</item>
+        <item>نصار</item>
+        <item>بني سويف الجديد</item>
+        <item>سماسطة</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="portsaid_regions">
+        <item>منطقه العرب</item>
+        <item>منطقه دواهي</item>
+        <item>منطقه جنوب</item>
+        <item>منطقه مناخ</item>
+        <item>بور فؤاد</item>
+        <item>منطقه شرق</item>
+        <item>منطقه الزهور</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="southsinai_regions">
+        <item>ابو رديس</item>
+        <item>ابو زينيمة</item>
+        <item>دهب</item>
+        <item>نويبع</item>
+        <item>راس صدر</item>
+        <item>شرم الشيخ</item>
+        <item>سانت كترين</item>
+        <item>طابة</item>
+        <item>تور سيناء</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="damietta_regions">
+        <item>عزبة البرج</item>
+        <item>فرسقور</item>
+        <item>كفر البطيخ</item>
+        <item>كفر سعد</item>
+        <item>ميت ابوغلاب</item>
+        <item>دمياط الجديدة</item>
+        <item>راس البر</item>
+        <item>روضة</item>
+        <item>سارو</item>
+        <item>زرقة</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="sohag_regions">
+        <item>اخنبم</item>
+        <item>الاسيراط</item>
+        <item>دار السلام</item>
+        <item>جيرجة</item>
+        <item>جهينة</item>
+        <item>مرغة</item>
+        <item>منشاة</item>
+        <item>سقلطة</item>
+        <item>طهطة</item>
+        <item>طامة</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="northsinai_regions">
+        <item>عريش</item>
+        <item>بر العبيد</item>
+        <item>حسنة</item>
+        <item>نخل</item>
+        <item>رفح</item>
+        <item>شيخ زايد</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="qena_regions">
+        <item>ابو طشط</item>
+        <item>فرشوت</item>
+        <item>جوفت</item>
+        <item>نجع حمادي</item>
+        <item>نقادة</item>
+        <item>قوس</item>
+        <item>السمطة</item>
+        <item>دشنا</item>
+        <item>وقف</item>
+        <item>البراحمة</item>
+        <item>الاشراف</item>
+        <item>قنا المحافظة</item>
+        <item>الكلاحيل</item>
+        <item>مناطق اخري</item>
+    </string-array>
+    <string-array name="kafralsheikh_regions">
+        <item>مطوبس</item>
+        <item>قالين</item>
+        <item>رياض</item>
+        <item>سيدي سالم</item>
+        <item>كفر الشيخ المدينة</item>
+        <item>الحامول بيلا </item>
+        <item>بيلة</item>
+        <item>بلطيم</item>
+        <item>مناطق اخري </item>
+        <item>سخا</item>
+        <item>سيدي غازي</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="matruh_regions">
+        <item>العلمين</item>
+        <item>براني</item>
+        <item>ضبعة</item>
+        <item>الحمام</item>
+        <item>مارينا</item>
+        <item>مرسي مطروح</item>
+        <item>نجلة</item>
+        <item>سلوم</item>
+        <item>سيوة</item>
+        <item>راس الحكمة</item>
+        <item>سيدي عبد الرحمن</item>
+        <item>مناطق اخري </item>
+    </string-array>
+
 
     <string-array name="job_work_place_array">
         <item>صيدلية</item>
