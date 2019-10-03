@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //httpRequests.sendFBPutRequest(this);
+        // httpRequests.sendFBPutRequest(this);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LayoutInflater myinflater = getLayoutInflater();
 
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent2);
                         break;
                     case 2:
+                        finish();
                         Intent intent3 = new Intent(getApplicationContext(), ViewPrescriptionsActivity.class);
                         startActivity(intent3);
                         break;

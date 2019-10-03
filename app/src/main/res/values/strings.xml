@@ -9,9 +9,11 @@
     <string name="drug_index">Drug Index</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>
-    <string name="prescriptions_gallery_button_string">Upload from gallery</string>
-    <string name="prescriptions_camera_button_string">Open camera</string>
+    <string name="prescriptions_gallery_button_string">Gallery</string>
+    <string name="prescriptions_camera_button_string">Camera</string>
     <string name="prescriptions_post_button_string">POST</string>
+    <string name="prescriptions_description_hint">add small description...</string>
+    <string name="prescriptions_description">Add prescriptions</string>
     <string name="comments_button_string">Comment</string>
     <string name="Signin_comment_toast">You must Sign-in to add a comment</string>
     <string name="Signin_prescriptions_toast">You must Sign-in to add a prescription</string>
@@ -217,7 +219,7 @@
         <item>Izbat an Nakhl</item>
         <item>Katameya</item>
         <item>Khalifa</item>
-        <item>Ma'sara</item>
+        <item>Maasara</item>
         <item>Maadi</item>
         <item>Madinaty</item>
         <item>Marg</item>
@@ -551,7 +553,7 @@
         <item>Girga</item>
         <item>Juhaynah</item>
         <item>Maragha</item>
-        <item>Monasha'a</item>
+        <item>Monashaa</item>
         <item>Sakaltah</item>
         <item>Tahta</item>
         <item>Tama</item>

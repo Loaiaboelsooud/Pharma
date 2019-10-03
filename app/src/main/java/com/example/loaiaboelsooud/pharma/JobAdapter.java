@@ -54,7 +54,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((Jobs) holder).position.setText(PharmaConstants.positionMapView.get(jobsItem.getPosition()));
         ((Jobs) holder).workPlace.setText(PharmaConstants.workPlaceMapView.get(jobsItem.getWorkPlace()));
         ((Jobs) holder).city.setText(PharmaConstants.citiesMapView.get(jobsItem.getCity()));
-        ((Jobs) holder).region.setText(jobsItem.getRegion());
+        ((Jobs) holder).region.setText(PharmaConstants.regionsMapView.get(jobsItem.getRegion()));
         ((Jobs) holder).address.setText(jobsItem.getAddress());
         ((Jobs) holder).mobileNumber.setText(jobsItem.getMobileNumbers().get(0));
         ((Jobs) holder).updatedAt.setText(jobsItem.getUpdatedAt());

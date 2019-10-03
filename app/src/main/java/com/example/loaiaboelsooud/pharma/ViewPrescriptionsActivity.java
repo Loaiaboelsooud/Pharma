@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequests.GetPrescriptionsList {
+public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequests.GetPrescriptionsList, PrescriptionsAdapter.OnPrescriptionsClickListener {
     public RecyclerView prescriptionsRecyclerView;
     public List<PrescriptionsItem> prescriptionsItems;
     private Boolean isScrolling = false;
@@ -39,7 +39,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_view_prescriptions);
         intNavToolBar();
-        adapter = new prescriptionsAdapter(this, prescriptionsItems);
+        adapter = new PrescriptionsAdapter(this, prescriptionsItems, this);
         manager = new LinearLayoutManager(this);
         prescriptionsRecyclerView = findViewById(R.id.presecription_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
@@ -66,7 +66,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
             testbol = true;
             actualPage = metaData.getPagination().getCurrentPage();
             this.prescriptionsItems = prescriptionsItems;
-            adapter = new prescriptionsAdapter(this, this.prescriptionsItems);
+            adapter = new PrescriptionsAdapter(this, this.prescriptionsItems, this);
             prescriptionsRecyclerView.setAdapter(adapter);
         }
         if (actualPage != 1) {
@@ -144,4 +144,11 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         startActivity(intent);
     }
 
+    @Override
+    public void onPrescriptionsClick(int prescriptionPosition) {
+        Intent intent = new Intent(ViewPrescriptionsActivity.this, PrescriptionsCommentsActivity.class);
+        intent.putExtra("postId", prescriptionsItems.get(prescriptionPosition).getId());
+        intent.putExtra("picture", prescriptionsItems.get(prescriptionPosition).getImage());
+        startActivity(intent);
+    }
 }

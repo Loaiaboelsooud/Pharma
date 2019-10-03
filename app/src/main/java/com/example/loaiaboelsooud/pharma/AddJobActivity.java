@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -27,12 +28,16 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
         progressBar = findViewById(R.id.job_post_progress);
         citySpinner = findViewById(R.id.job_city);
         regionSpinner = findViewById(R.id.job_region);
+
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-               /* ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.alexandria_regions, android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                regionSpinner.setAdapter(adapter);*/
+                if (PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()) != null) {
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(AddJobActivity.this,
+                            PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()), android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    regionSpinner.setAdapter(adapter);
+                }
             }
 
             @Override
@@ -76,7 +81,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
             httpRequests.sendJobPostRequest(prefUtil.getToken(), name.getText().toString(), description.getText().toString(),
                     paresedFrom, paresedTo, PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()),
                     PharmaConstants.positionMapAdd.get(positionSpinner.getSelectedItem().toString()),
-                    PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), regionSpinner.getSelectedItem().toString(),
+                    PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()),
                     address.getText().toString(), mobileNumbersList, this);
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),

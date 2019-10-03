@@ -8,6 +8,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -33,6 +35,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     private ProgressBar progressBar;
     private PharmaConstants pharmaConstants;
     private Button postButton, galleryButton;
+    private Spinner citySpinner, regionSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,26 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         pharmaConstants = new PharmaConstants(this);
         postButton = findViewById(R.id.properties_post_button);
         galleryButton = findViewById(R.id.properties_gallery_button);
+
+        citySpinner = findViewById(R.id.properties_city);
+        regionSpinner = findViewById(R.id.properties_region);
+
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()) != null) {
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(AddPropertiesActivity.this,
+                            PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()), android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    regionSpinner.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
     }
 
     public void addProperties(View view) {
@@ -53,8 +76,6 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         mobileNumbersList = new ArrayList<String>();
         landLineNumbersList = new ArrayList<String>();
         name = findViewById(R.id.properties_name);
-        citiesSpinner = findViewById(R.id.properties_city);
-        region = findViewById(R.id.properties_region);
         address = findViewById(R.id.properties_address);
         area = findViewById(R.id.properties_area);
         listedForSpinner = findViewById(R.id.properties_listed_for);
@@ -66,8 +87,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         landLineNumbers = findViewById(R.id.properties_land_number);
         final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
-        if (region.getText().toString() != null && !region.getText().toString().isEmpty() &&
-                name.getText().toString() != null && !name.getText().toString().isEmpty() &&
+        if (name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
                 mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()) {
             mobileNumbersList.clear();
@@ -84,8 +104,8 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                 paresedPrice = Integer.parseInt(price.getText().toString());
             }
 
-            httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), pharmaConstants.citiesMapAdd.get(citiesSpinner.getSelectedItem().toString()),
-                    region.getText().toString(), address.getText().toString(), area.getText().toString(),
+            httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), pharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()),
+                    PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()), address.getText().toString(), area.getText().toString(),
                     pharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString()),
                     pharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()), paresedPrice, description.getText().toString(),
                     notes.getText().toString(), mobileNumbersList, landLineNumbersList, images, this);

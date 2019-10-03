@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">فارما</string>
+    <string name="app_name">درج ديل</string>
     <string name="test_head">البرنامج</string>
     <string name="job">فرص عمل </string>
     <string name="promotions">عروض شهرية</string>
@@ -10,9 +10,11 @@
     <string name="drug_index">فهرس الادوية</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>
-    <string name="prescriptions_gallery_button_string">تحميل من معرض الصور</string>
-    <string name="prescriptions_camera_button_string">تحميل من الكاميرا</string>
+    <string name="prescriptions_gallery_button_string">المعرض</string>
+    <string name="prescriptions_camera_button_string">الكاميرا</string>
     <string name="prescriptions_post_button_string">نشر روشتة</string>
+    <string name="prescriptions_description_hint">اضف نص قصير...</string>
+    <string name="prescriptions_description">اضافة روشتة</string>
     <string name="comments_button_string">تعليق</string>
     <string name="Signin_comment_toast">يجب تسجيل الدخول لاضافة تعليق</string>
     <string name="Signin_prescriptions_toast">يجب تسجيل الدخول لاضافة روشتة</string>

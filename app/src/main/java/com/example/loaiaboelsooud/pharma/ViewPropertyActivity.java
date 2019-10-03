@@ -52,7 +52,7 @@ public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.Get
     @Override
     public void notifyItem(PropertiesItem propertiesItem) {
         TextView uploaderName, propertyDescription, propertyAddress, propertyArea, propertyNotes;
-        ImageView uploaderAvatar, picture;
+        ImageView uploaderAvatar;
         PropertiesImage propertiesImage = propertiesItem.getImages();
         adapter = new PropertiesImagesAdapter(this, propertiesImage, this);
         propertiesImagesRecyclerView.setAdapter(adapter);

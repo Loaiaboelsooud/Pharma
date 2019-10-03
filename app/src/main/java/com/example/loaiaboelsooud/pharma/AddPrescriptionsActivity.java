@@ -11,7 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,19 +28,27 @@ import okhttp3.RequestBody;
 public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests.GetPrescriptionPostResult {
     private static final int REQUEST_CAPTURE_IMAGE = 100;
     private static final int REQUEST_GALLERY_IMAGE = 1234;
-    private ImageView uploadedPic;
+    private ImageView uploadedPic, userAvatar;
+    ;
     private EditText description;
     private PrescriptionsItem prescriptionsItem;
     private MultipartBody.Part imagePart;
     private ProgressBar progressBar;
-
+    private TextView userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prescriptions);
         intNavToolBar();
+        PrefUtil prefUtil = new PrefUtil(this);
+        userAvatar = findViewById(R.id.presecription_user_profile_picture);
+        userName = findViewById(R.id.presecription_user_name);
         progressBar = findViewById(R.id.presecription_post_progress);
         prescriptionsItem = new PrescriptionsItem();
+        User loggedInUser = prefUtil.getFacebookUserInfo();
+        String imageUrl = loggedInUser.getAvatar() + "picture?width=250&height=250";
+        userName.setText(loggedInUser.getName());
+        Glide.with(this).load(imageUrl).placeholder(R.drawable.ic_loading).dontAnimate().into(userAvatar);
     }
 
     public void addPrescriptions(View view) {

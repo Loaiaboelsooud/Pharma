@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/properties_region" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/properties_region"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />

@@ -40,25 +40,24 @@
                     android:textSize="15dp" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/presecription_image"
-                android:layout_width="fill_parent"
-                android:layout_height="150dp" />
-
-            <TextView
-                android:id="@+id/presecription_description"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="20dp" />
+                android:layout_height="200dp">
 
+                <ImageView
+                    android:id="@+id/presecription_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-            <Button
-                android:id="@+id/presecription_comment_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comments_button_string" />
-
+                <TextView
+                    android:id="@+id/presecription_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="#FF0"
+                    android:text="TextView"
+                    android:textSize="20dp"
+                    android:layout_gravity="bottom" />
+            </FrameLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </tools:FrameLayout>
