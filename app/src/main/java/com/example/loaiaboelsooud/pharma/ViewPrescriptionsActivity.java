@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
     private int actualPage;
     private ProgressBar progressBar;
     private FloatingActionButton addPrescriptionButton;
+    private TextView prescriptionsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         prescriptionsRecyclerView = findViewById(R.id.presecription_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
         addPrescriptionButton = findViewById(R.id.add_prescription_button);
+        prescriptionsText = findViewById(R.id.prescriptions_text);
         progressBar = findViewById(R.id.presecription_get_progress);
         progressBar.setVisibility(View.VISIBLE);
         if (!prefUtil.isLoggedIn()) {
@@ -108,10 +111,24 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
                         if (addPrescriptionButton.isShown()) {
                             addPrescriptionButton.hide();
                         }
+                        if ((prescriptionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) > 25) {
+                            prescriptionsText.setTextSize((prescriptionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) - 1);
+                        }
                     } else if (dy < 0) {
                         if (!addPrescriptionButton.isShown()) {
                             addPrescriptionButton.show();
                         }
+                        if ((prescriptionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) < 35)
+                            prescriptionsText.setTextSize((prescriptionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) + 1);
+                    }
+                } else {
+                    if (dy > 0) {
+                        if ((prescriptionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) > 25) {
+                            prescriptionsText.setTextSize((prescriptionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) - 1);
+                        }
+                    } else if (dy < 0) {
+                        if ((prescriptionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) < 35)
+                            prescriptionsText.setTextSize((prescriptionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) + 1);
                     }
                 }
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)

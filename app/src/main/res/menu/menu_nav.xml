@@ -2,48 +2,55 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/menu_nav">
+
     <item
         android:id="@+id/action_offers"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/toolbar_promotions_image"
+        android:layout_weight="1"
         android:title=""
+        app:actionLayout="@layout/toolbar_promotions_image"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_buysell"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/toolbar_properties_image"
+        android:layout_weight="1"
         android:title=""
+        app:actionLayout="@layout/toolbar_properties_image"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_job"
-        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/toolbar_job_image"
         android:title=""
+        app:actionLayout="@layout/toolbar_job_image"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_presecription"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/toolbar_presecription_iamge"
+        android:layout_weight="1"
         android:title=""
+        app:actionLayout="@layout/toolbar_presecription_iamge"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_druginteraction"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/toolbar_druginteraction_image"
         android:title=""
+        android:layout_weight="1"
+        app:actionLayout="@layout/toolbar_druginteraction_image"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_drugindex"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:actionLayout="@layout/toolbar_drugindex_image"
         android:title=""
+        android:layout_weight="1"
+        app:actionLayout="@layout/toolbar_drugindex_image"
         app:showAsAction="always" />
 
 </menu>

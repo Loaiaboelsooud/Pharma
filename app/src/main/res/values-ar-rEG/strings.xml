@@ -22,6 +22,7 @@
     <string name="no_internet">يرجي التأكد من وجود انترنت</string>
     <string name="post_prescriptions_success">تم اضافة الروشتة بنجاح</string>
     <string name="post_prescriptions_fail">يجب اضافة صورة و تعليق لاضافة روشتة</string>
+    <string name="prescriptions_text">الروشتة</string>
     <string name="post_properties_success">تم اضافة الاعلان بنجاح</string>
     <string name="properties_city"><font color='#cc0029'>*</font>المحافظة</string>
     <string name="properties_region"><font color='#cc0029'>*</font>المنطقة</string>

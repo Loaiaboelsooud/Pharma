@@ -46,7 +46,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="paddingPercent" value="10" />
+                                                <entry key="opacityPercent" value="60" />
+                                                <entry key="paddingPercent" value="5" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -58,8 +59,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Loai Aboelsooud\Desktop\BG.png" />
-                                      <entry key="outputName" value="ic_background" />
+                                      <entry key="imageAsset" value="E:\pharma pics\DrugDeal\Jump bar\properties_toolbar_active.png" />
+                                      <entry key="outputName" value="properties_toolbar_active" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -70,6 +71,17 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="backgroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="scalingPercent" value="2" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="foregroundClipArt">
                                         <value>
                                           <PersistentState>
@@ -97,8 +109,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundImage" value="C:\Users\Loai Aboelsooud\Desktop\WhatsApp Image 2019-09-21 at 4.18.38 PM.jpeg" />
-                                      <entry key="foregroundLayerName" value="ic_action2" />
+                                      <entry key="foregroundImage" value="E:\pharma pics\DrugDeal\Jump bar\properties_toolbar_active.png" />
+                                      <entry key="outputName" value="properties_toolbar_active" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -180,6 +192,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

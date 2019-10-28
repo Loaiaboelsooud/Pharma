@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/main_shape"
     tools:context=".MainActivity">
 
     <include
@@ -16,6 +17,6 @@
         android:id="@+id/menugridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"></GridView>
+        android:numColumns="2" />
 
 </android.support.constraint.ConstraintLayout>

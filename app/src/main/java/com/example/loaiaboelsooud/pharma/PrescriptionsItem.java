@@ -11,6 +11,8 @@ public class PrescriptionsItem {
     String description;
     @SerializedName("id")
     int id;
+    @SerializedName("created_at")
+    String createdAt;
 
     public String getImage() {
         return image;
@@ -36,6 +38,13 @@ public class PrescriptionsItem {
         this.id = id;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public UserResponse getUserResponse() {
         return userResponse;

@@ -38,12 +38,13 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final PrescriptionsItem prescriptionsItem = prescriptionsItems.get(position);
         ((Prescriptions) holder).uploaderName.setText(prescriptionsItem.getUserResponse().getUser().getName());
-        Glide.with(context).load((prescriptionsItem.getUserResponse().getUser().getAvatar())).
+        Glide.with(context).load((prescriptionsItem.getUserResponse().getUser().getAvatar() + "picture?width=250&height=250")).
                 placeholder(R.drawable.ic_loading).dontAnimate().
                 into(((Prescriptions) holder).uploaderAvatar);
         Glide.with(context).load((prescriptionsItem.getImage())).placeholder(R.drawable.ic_loading).
                 into(((Prescriptions) holder).picture);
         ((Prescriptions) holder).description.setText(prescriptionsItem.getDescription());
+        ((Prescriptions) holder).createdAt.setText(prescriptionsItem.getCreatedAt());
     }
 
     @Override
@@ -54,7 +55,7 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public class Prescriptions extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView uploaderName, description;
+        private TextView uploaderName, description, createdAt;
         private ImageView uploaderAvatar, picture;
         private OnPrescriptionsClickListener onPrescriptionsClickListener;
 
@@ -65,6 +66,7 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
             uploaderAvatar = prescriptionsView.findViewById(R.id.presecription_user_profile_picture);
             picture = prescriptionsView.findViewById(R.id.presecription_image);
             description = prescriptionsView.findViewById(R.id.presecription_description);
+            createdAt = prescriptionsView.findViewById(R.id.presecription_created_at);
             prescriptionsView.setOnClickListener(this);
         }
 
