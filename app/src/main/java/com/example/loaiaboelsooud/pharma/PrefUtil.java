@@ -111,4 +111,12 @@ public class PrefUtil {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    public static String splitDateTime(String dateTime) {
+        String[] dateTimeArray = dateTime.split(" ");
+        String dateTimeSplited = dateTimeArray[0].concat(" ").concat(dateTimeArray[1]).concat(" ").concat(dateTimeArray[2])
+                .concat("      ").concat(dateTimeArray[3]).concat(" ").concat(dateTimeArray[4]);
+        return dateTimeSplited;
+
+    }
+
 }

@@ -165,7 +165,11 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
     public void onPrescriptionsClick(int prescriptionPosition) {
         Intent intent = new Intent(ViewPrescriptionsActivity.this, PrescriptionsCommentsActivity.class);
         intent.putExtra("postId", prescriptionsItems.get(prescriptionPosition).getId());
-        intent.putExtra("picture", prescriptionsItems.get(prescriptionPosition).getImage());
+        intent.putExtra("image", prescriptionsItems.get(prescriptionPosition).getImage());
+        intent.putExtra("userName", prescriptionsItems.get(prescriptionPosition).getUserResponse().getUser().getName());
+        intent.putExtra("profilePicture", prescriptionsItems.get(prescriptionPosition).getUserResponse().getUser().getAvatar());
+        intent.putExtra("createdAT", prescriptionsItems.get(prescriptionPosition).getCreatedAt());
+
         startActivity(intent);
     }
 }

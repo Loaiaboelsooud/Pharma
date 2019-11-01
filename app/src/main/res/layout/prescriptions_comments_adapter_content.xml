@@ -28,12 +28,12 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/presecription_user_profile_picture"
+                    android:id="@+id/prescription_user_profile_picture"
                     android:layout_width="25dp"
                     android:layout_height="25dp" />
 
                 <TextView
-                    android:id="@+id/presecription_user_name"
+                    android:id="@+id/prescription_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="TextView"

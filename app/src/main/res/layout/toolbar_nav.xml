@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@null"
     android:elevation="4dp"
-    app:popupTheme="@style/AppTheme"
+    app:theme="@style/AppTheme.Toolbar"
     android:gravity="center_vertical|start"
     app:contentInsetStartWithNavigation="0dp"
     android:contentInsetLeft="0dp"
@@ -20,6 +20,15 @@
     <android.support.v7.widget.ActionMenuView
         android:id="@+id/menu_nav"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:contentInsetStartWithNavigation="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetStart="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp" />
 
 </android.support.v7.widget.Toolbar>

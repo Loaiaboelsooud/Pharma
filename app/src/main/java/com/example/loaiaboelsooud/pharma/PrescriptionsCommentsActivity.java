@@ -3,6 +3,7 @@ package com.example.loaiaboelsooud.pharma;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ablanco.zoomy.Zoomy;
@@ -18,7 +21,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class PrescriptionsCommentsActivity extends NavMenuInt implements
+public class PrescriptionsCommentsActivity extends AppCompatActivity implements
         HTTPRequests.GetPrescriptionsCommentsList, HTTPRequests.GetPrescriptionsComment {
     public RecyclerView prescriptionsRecyclerView;
     public List<PrescriptionsComments> prescriptionsComments;
@@ -30,16 +33,21 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
     private RecyclerView.Adapter adapter;
     private boolean testbol = false;
     private EditText commentText;
-    private ImageView picture;
-    private String imageUrl;
+    private TextView userName, createdAT;
+    private ImageView image, profilePicture;
+    private String imageUrl, profilePictureUrl, userNameString, createdATString;
     private ImageButton addCommentButton;
     private ProgressBar progressBar;
+    private LinearLayout addCommentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
         postId = extras.getInt("postId");
-        imageUrl = extras.getString("picture");
+        imageUrl = extras.getString("image");
+        profilePictureUrl = extras.getString("profilePicture");
+        userNameString = extras.getString("userName");
+        createdATString = extras.getString("createdAT");
         prefUtil = new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
@@ -47,22 +55,34 @@ public class PrescriptionsCommentsActivity extends NavMenuInt implements
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_prescriptions_comments);
-        intNavToolBar();
         adapter = new PrescriptionsCommentsAdapter(this, prescriptionsComments);
-        manager = new LinearLayoutManager(this);
+        manager = new LinearLayoutManager(this) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         prescriptionsRecyclerView = findViewById(R.id.presecription_comment_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
-        picture = findViewById(R.id.presecription_image);
+        image = findViewById(R.id.prescription_image);
         progressBar = findViewById(R.id.presecriptions_comments_progress);
-        Zoomy.Builder builder = new Zoomy.Builder(this).target(picture);
+        Zoomy.Builder builder = new Zoomy.Builder(this).target(image);
         builder.register();
+        addCommentLayout = findViewById(R.id.add_comment_layout);
+        userName = findViewById(R.id.prescription_user_name);
+        createdAT = findViewById(R.id.prescription_created_at);
+        profilePicture = findViewById(R.id.prescription_user_profile_picture);
         commentText = findViewById(R.id.commentText);
-        Glide.with(this).load(imageUrl).into(picture);
+        userName.setText(userNameString);
+        createdAT.setText(PrefUtil.splitDateTime(createdATString));
+        Glide.with(this).load(profilePictureUrl).into(profilePicture);
+        Glide.with(this).load(imageUrl).into(image);
         progressBar.setVisibility(View.VISIBLE);
         if (!prefUtil.isLoggedIn()) {
             addCommentButton = findViewById(R.id.addCommentButton);
             addCommentButton.setVisibility(View.GONE);
             commentText.setVisibility(View.GONE);
+            addCommentLayout.setVisibility(View.GONE);
             Toast.makeText(this, getString(R.string.Signin_comment_toast), Toast.LENGTH_SHORT).show();
         }
     }

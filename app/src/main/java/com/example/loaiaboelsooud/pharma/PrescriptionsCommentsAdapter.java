@@ -46,14 +46,13 @@ public class PrescriptionsCommentsAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     public class Prescriptions extends RecyclerView.ViewHolder {
-        private TextView uploaderName;
+        private TextView uploaderName, description;
         private ImageView uploaderAvatar;
-        private TextView description;
 
         public Prescriptions(View prescriptionsView) {
             super(prescriptionsView);
-            uploaderName = prescriptionsView.findViewById(R.id.presecription_user_name);
-            uploaderAvatar = prescriptionsView.findViewById(R.id.presecription_user_profile_picture);
+            uploaderName = prescriptionsView.findViewById(R.id.prescription_user_name);
+            uploaderAvatar = prescriptionsView.findViewById(R.id.prescription_user_profile_picture);
             description = prescriptionsView.findViewById(R.id.presecription_comment);
         }
     }

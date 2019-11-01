@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="-20dp"
+        android:layout_marginBottom="-15dp"
         android:elevation="12dp"
         card_view:cardCornerRadius="10dp">
 
@@ -26,23 +26,24 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/presecription_user_profile_picture"
+                    android:id="@+id/prescription_user_profile_picture"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="40px"
-                    android:layout_marginTop="5px" />
+                    android:layout_marginTop="12px" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="15px">
+                    android:layout_marginStart="15px"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/presecription_user_name"
+                        android:id="@+id/prescription_user_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="sans-serif-condensed-medium"
@@ -50,11 +51,13 @@
                         android:textSize="20dp" />
 
                     <TextView
-                        android:id="@+id/presecription_created_at"
+                        android:id="@+id/prescription_created_at"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="TextView"
-                        android:textSize="15dp" />
+                        android:textColor="@color/colorRed"
+                        android:textSize="15dp"
+                        android:layout_marginTop="-5dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -63,20 +66,27 @@
                 android:layout_height="200dp">
 
                 <ImageView
-                    android:id="@+id/presecription_image"
+                    android:id="@+id/prescription_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop" />
 
-                <TextView
-                    android:id="@+id/presecription_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#7FFFFFFF"
-                    android:gravity="center"
-                    android:text="TextView"
-                    android:textSize="20dp" />
+                    android:background="@color/colorTextOverLay">
+
+                    <TextView
+                        android:id="@+id/presecription_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:maxLines="3"
+                        android:text="TextView"
+                        android:textSize="20dp" />
+                </RelativeLayout>
             </FrameLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

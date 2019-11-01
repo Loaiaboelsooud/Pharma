@@ -41,8 +41,8 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
         setContentView(R.layout.activity_add_prescriptions);
         intNavToolBar();
         PrefUtil prefUtil = new PrefUtil(this);
-        userAvatar = findViewById(R.id.presecription_user_profile_picture);
-        userName = findViewById(R.id.presecription_user_name);
+        userAvatar = findViewById(R.id.prescription_user_profile_picture);
+        userName = findViewById(R.id.prescription_user_name);
         progressBar = findViewById(R.id.presecription_post_progress);
         prescriptionsItem = new PrescriptionsItem();
         User loggedInUser = prefUtil.getFacebookUserInfo();

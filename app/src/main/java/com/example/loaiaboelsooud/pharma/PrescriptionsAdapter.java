@@ -18,9 +18,9 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
     private List<PrescriptionsItem> prescriptionsItems;
     private User user;
     private OnPrescriptionsClickListener onPrescriptionsClickListener;
+    private PrefUtil prefUtil;
 
     public PrescriptionsAdapter(Context context, List<PrescriptionsItem> prescriptionsItems, OnPrescriptionsClickListener onPrescriptionsClickListener) {
-
         this.context = context;
         this.prescriptionsItems = prescriptionsItems;
         this.onPrescriptionsClickListener = onPrescriptionsClickListener;
@@ -44,7 +44,7 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
         Glide.with(context).load((prescriptionsItem.getImage())).placeholder(R.drawable.ic_loading).
                 into(((Prescriptions) holder).picture);
         ((Prescriptions) holder).description.setText(prescriptionsItem.getDescription());
-        ((Prescriptions) holder).createdAt.setText(prescriptionsItem.getCreatedAt());
+        ((Prescriptions) holder).createdAt.setText(PrefUtil.splitDateTime(prescriptionsItem.getCreatedAt()));
     }
 
     @Override
@@ -62,11 +62,11 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
         public Prescriptions(View prescriptionsView, OnPrescriptionsClickListener onPrescriptionsClickListener) {
             super(prescriptionsView);
             this.onPrescriptionsClickListener = onPrescriptionsClickListener;
-            uploaderName = prescriptionsView.findViewById(R.id.presecription_user_name);
-            uploaderAvatar = prescriptionsView.findViewById(R.id.presecription_user_profile_picture);
-            picture = prescriptionsView.findViewById(R.id.presecription_image);
+            uploaderName = prescriptionsView.findViewById(R.id.prescription_user_name);
+            uploaderAvatar = prescriptionsView.findViewById(R.id.prescription_user_profile_picture);
+            picture = prescriptionsView.findViewById(R.id.prescription_image);
             description = prescriptionsView.findViewById(R.id.presecription_description);
-            createdAt = prescriptionsView.findViewById(R.id.presecription_created_at);
+            createdAt = prescriptionsView.findViewById(R.id.prescription_created_at);
             prescriptionsView.setOnClickListener(this);
         }
 
