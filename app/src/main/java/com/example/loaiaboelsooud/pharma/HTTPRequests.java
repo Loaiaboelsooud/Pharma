@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -153,14 +154,20 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendPrescriptionsCommentGetRequest(final GetPrescriptionsCommentsList getPrescriptionsCommentsList, int prescriptionId, int pageNumber) {
+    public void sendPrescriptionsCommentGetRequest(final GetPrescriptionsCommentsList getPrescriptionsCommentsList, int prescriptionId, final int pageNumber) {
         Call<PrescriptionsCommentsResponse> userCall = RetrofitClient.getInstance().getApi().getAllPrescriptionsComments(
                 PharmaConstants.API + PharmaConstants.PRESCRIPTIONS + prescriptionId + "/comments?page=" + pageNumber);
         userCall.enqueue(new Callback<PrescriptionsCommentsResponse>() {
             @Override
             public void onResponse(Call<PrescriptionsCommentsResponse> call, Response<PrescriptionsCommentsResponse> response) {
                 if (response.body() != null) {
-                    getPrescriptionsCommentsList.notifyList(response.body().getPrescriptionsComments(),
+                    List<PrescriptionsComments> prescriptionsCommentsList = new ArrayList<PrescriptionsComments>();
+                    //to handle the 1st element in the prescriptionsCommentsAdapter which is the image
+                    if (pageNumber == 1) {
+                        prescriptionsCommentsList.add(null);
+                    }
+                    prescriptionsCommentsList.addAll(response.body().getPrescriptionsComments());
+                    getPrescriptionsCommentsList.notifyList(prescriptionsCommentsList,
                             response.body().getMetaData());
                 }
             }

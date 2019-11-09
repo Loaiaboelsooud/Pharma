@@ -49,7 +49,7 @@ public class PromotionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 placeholder(R.drawable.ic_loading).dontAnimate().
                 into(((Promotions) holder).picture);
         ((PromotionsAdapter.Promotions) holder).description.setText(promotionsItem.getDescription());
-        ((Promotions) holder).createdAt.setText(promotionsItem.getCreatedAt());
+        ((Promotions) holder).createdAt.setText(PrefUtil.splitDateTime(promotionsItem.getCreatedAt()));
         ((Promotions) holder).company.setText(promotionsItem.getCompany());
     }
 

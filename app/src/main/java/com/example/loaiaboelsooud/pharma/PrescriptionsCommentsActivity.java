@@ -1,5 +1,6 @@
 package com.example.loaiaboelsooud.pharma;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,19 +11,14 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.ablanco.zoomy.Zoomy;
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 public class PrescriptionsCommentsActivity extends AppCompatActivity implements
-        HTTPRequests.GetPrescriptionsCommentsList, HTTPRequests.GetPrescriptionsComment {
+        HTTPRequests.GetPrescriptionsCommentsList, HTTPRequests.GetPrescriptionsComment, PrescriptionsCommentsAdapter.OnPrescriptionsImageClickListener {
     public RecyclerView prescriptionsRecyclerView;
     public List<PrescriptionsComments> prescriptionsComments;
     private Boolean isScrolling = false;
@@ -33,8 +29,6 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
     private RecyclerView.Adapter adapter;
     private boolean testbol = false;
     private EditText commentText;
-    private TextView userName, createdAT;
-    private ImageView image, profilePicture;
     private String imageUrl, profilePictureUrl, userNameString, createdATString;
     private ImageButton addCommentButton;
     private ProgressBar progressBar;
@@ -55,28 +49,15 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_prescriptions_comments);
-        adapter = new PrescriptionsCommentsAdapter(this, prescriptionsComments);
-        manager = new LinearLayoutManager(this) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
+        adapter = new PrescriptionsCommentsAdapter(this, this, this.prescriptionsComments, userNameString, profilePictureUrl, createdATString, imageUrl);
+        manager = new LinearLayoutManager(this);
         prescriptionsRecyclerView = findViewById(R.id.presecription_comment_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
-        image = findViewById(R.id.prescription_image);
         progressBar = findViewById(R.id.presecriptions_comments_progress);
-        Zoomy.Builder builder = new Zoomy.Builder(this).target(image);
-        builder.register();
+        /*Zoomy.Builder builder = new Zoomy.Builder(this).target(image);
+        builder.register();*/
         addCommentLayout = findViewById(R.id.add_comment_layout);
-        userName = findViewById(R.id.prescription_user_name);
-        createdAT = findViewById(R.id.prescription_created_at);
-        profilePicture = findViewById(R.id.prescription_user_profile_picture);
         commentText = findViewById(R.id.commentText);
-        userName.setText(userNameString);
-        createdAT.setText(PrefUtil.splitDateTime(createdATString));
-        Glide.with(this).load(profilePictureUrl).into(profilePicture);
-        Glide.with(this).load(imageUrl).into(image);
         progressBar.setVisibility(View.VISIBLE);
         if (!prefUtil.isLoggedIn()) {
             addCommentButton = findViewById(R.id.addCommentButton);
@@ -112,7 +93,7 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
             testbol = true;
             actualPage = metaData.getPagination().getCurrentPage();
             this.prescriptionsComments = prescriptionsComments;
-            adapter = new PrescriptionsCommentsAdapter(this, this.prescriptionsComments);
+            adapter = new PrescriptionsCommentsAdapter(this, this, this.prescriptionsComments, userNameString, profilePictureUrl, createdATString, imageUrl);
             prescriptionsRecyclerView.setAdapter(adapter);
         }
         if (actualPage != 1) {
@@ -133,10 +114,16 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
 
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+
                 super.onScrolled(recyclerView, dx, dy);
                 currentItems = manager.getChildCount();
                 totalItems = manager.getItemCount();
                 scrollOutItems = manager.findFirstVisibleItemPosition();
+               /* if (dy > 0) {
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                } else if (dy < 0) {
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                }*/
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)
                         && (actualPage <= metaData.getPagination().getTotalPages())) {
                     loadMore(metaData);
@@ -157,15 +144,18 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
             progressBar.setVisibility(View.VISIBLE);
             httpRequests.sendPrescriptionsCommentGetRequest(this, postId,
                     metaData.getPagination().getCurrentPage() + 1);
-            adapter.notifyDataSetChanged();
         }
     }
 
     @Override
     public void onBackPressed() {
         finish();
-
     }
 
-
+    @Override
+    public void onPrescriptionsImageClick(String imageURI) {
+        Intent intent = new Intent(this, PrescriptionsFullScreenImageActivity.class);
+        intent.putExtra("imageURI", imageURI);
+        startActivity(intent);
+    }
 }

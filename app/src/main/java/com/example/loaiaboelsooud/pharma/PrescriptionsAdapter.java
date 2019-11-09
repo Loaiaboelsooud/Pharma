@@ -16,9 +16,7 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private Context context;
     private List<PrescriptionsItem> prescriptionsItems;
-    private User user;
     private OnPrescriptionsClickListener onPrescriptionsClickListener;
-    private PrefUtil prefUtil;
 
     public PrescriptionsAdapter(Context context, List<PrescriptionsItem> prescriptionsItems, OnPrescriptionsClickListener onPrescriptionsClickListener) {
         this.context = context;
@@ -30,8 +28,7 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<RecyclerView.View
     public PrescriptionsAdapter.Prescriptions onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View row = inflater.inflate(R.layout.prescriptions_adapter_content, parent, false);
-        Prescriptions prescriptions = new Prescriptions(row, onPrescriptionsClickListener);
-        return prescriptions;
+        return new Prescriptions(row, onPrescriptionsClickListener);
     }
 
     @Override

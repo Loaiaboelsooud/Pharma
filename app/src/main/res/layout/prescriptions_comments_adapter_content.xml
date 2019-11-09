@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tools:FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".PrescriptionsCommentsActivity">
 
     <!-- A CardView that contains a TextView -->
@@ -28,12 +27,12 @@
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/prescription_user_profile_picture"
+                    android:id="@+id/prescription_commenter_profile_picture"
                     android:layout_width="25dp"
                     android:layout_height="25dp" />
 
                 <TextView
-                    android:id="@+id/prescription_user_name"
+                    android:id="@+id/prescription_commenter_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="TextView"
@@ -49,5 +48,5 @@
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</tools:FrameLayout>
+</LinearLayout>
 
