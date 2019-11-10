@@ -5,22 +5,24 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
     android:orientation="horizontal"
+    android:background="@drawable/rectangle_shape"
     tools:context=".ViewPromotionsActivity">
 
     <!-- A CardView that contains a TextView -->
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="-10dp"
-        android:elevation="12dp"
-        card_view:cardCornerRadius="10dp">
+        card_view:cardCornerRadius="10dp"
+        android:elevation="12dp">
 
         <LinearLayout
             android:id="@+id/user_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="25dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -66,14 +68,14 @@
                         android:layout_height="100dp" />
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/promotions_adapter_created_at"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:textColor="@color/colorRed"
-            android:textSize="15dp" />
+            <TextView
+                android:id="@+id/promotions_adapter_created_at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorRed"
+                android:textSize="15dp" />
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </tools:FrameLayout>

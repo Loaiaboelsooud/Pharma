@@ -16,19 +16,16 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private List<JobsItem> jobsItems;
-    private User user;
 
     public JobAdapter(Context context, List<JobsItem> jobsItems) {
-
         this.context = context;
         this.jobsItems = jobsItems;
-
     }
 
     @Override
     public JobAdapter.Jobs onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        PharmaConstants pharmaConstants = new PharmaConstants(this.context);
+        new PharmaConstants(this.context);
         View row = inflater.inflate(R.layout.job_adapter_content, parent, false);
         JobAdapter.Jobs job = new JobAdapter.Jobs(row);
         return job;
@@ -36,14 +33,6 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        /*RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.ic_pic_error)
-                .priority(Priority.HIGH);
-*/
-
-
         final JobsItem jobsItem = jobsItems.get(position);
         ((Jobs) holder).uploaderName.setText(jobsItem.getUserResponse().getUser().getName());
         Glide.with(context).load((jobsItem.getUserResponse().getUser().getAvatar())).
@@ -57,7 +46,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((Jobs) holder).region.setText(PharmaConstants.regionsMapView.get(jobsItem.getRegion()));
         ((Jobs) holder).address.setText(jobsItem.getAddress());
         ((Jobs) holder).mobileNumber.setText(jobsItem.getMobileNumbers().get(0));
-        ((Jobs) holder).updatedAt.setText(jobsItem.getUpdatedAt());
+        ((Jobs) holder).updatedAt.setText(PrefUtil.splitDateTime(jobsItem.getUpdatedAt()));
     }
 
     @Override

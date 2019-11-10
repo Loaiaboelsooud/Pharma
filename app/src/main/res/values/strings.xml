@@ -5,7 +5,7 @@
     <string name="promotions">PROMOTIONS</string>
     <string name="drug_interactions">DRUG INTERACTIONS</string>
     <string name="prescription">PRESCRIPTIONS</string>
-    <string name="buy_sell">SELL, BUY AND RENT</string>
+    <string name="buy_sell">SELL, BUY&amp;RENT</string>
     <string name="drug_index">DRUG INDEX</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_color"
     android:orientation="vertical"
     tools:context=".ViewPropertiesActivity">
 
@@ -14,39 +15,63 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rectangle_shape">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/properties_recycler"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ProgressBar
-            android:id="@+id/properties_get_progress"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:visibility="gone" />
+            android:orientation="vertical">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/filter_properties_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|bottom"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/filter_button" />
+            <TextView
+                android:id="@+id/properties_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20px"
+                android:fontFamily="@font/arbfonts_swissra_ultra_light"
+                android:text="@string/buy_sell"
+                android:textColor="@color/colorRed"
+                android:textSize="35dp"
+                android:textStyle="bold" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_properties_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/add_button" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/properties_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ProgressBar
+                    android:id="@+id/properties_get_progress"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/filter_properties_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/filter_button" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/add_properties_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/add_button" />
 
 
+            </FrameLayout>
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>

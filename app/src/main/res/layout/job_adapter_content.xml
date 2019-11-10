@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tools:FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,33 +10,54 @@
     <!-- A CardView that contains a TextView -->
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="270dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="-15dp"
         android:elevation="12dp"
-        card_view:cardCornerRadius="6dp">
+        card_view:cardCornerRadius="10dp">
 
         <LinearLayout
-            android:id="@+id/view_foreground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="25dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/job_adapter_user_profile_picture"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp" />
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="40px"
+                    android:layout_marginTop="12px" />
 
-                <TextView
-                    android:id="@+id/job_adapter_user_name"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="TextView"
-                    android:textSize="15dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15px"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/job_adapter_user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="TextView"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/job_adapter_updated_at"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="-5dp"
+                        android:text="TextView"
+                        android:textColor="@color/colorRed"
+                        android:textSize="15dp" />
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -96,12 +116,6 @@
                 android:text="TextView"
                 android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/job_adapter_updated_at"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
-                android:textSize="15dp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </tools:FrameLayout>

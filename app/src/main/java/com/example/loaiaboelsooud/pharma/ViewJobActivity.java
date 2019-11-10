@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class ViewJobActivity extends NavMenuInt implements HTTPRequests.GetJobsL
     private FloatingActionButton addJobButton, filterJobButton;
     private ProgressBar progressBar;
     private Map<String, String> jobParam;
+    private TextView jobText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class ViewJobActivity extends NavMenuInt implements HTTPRequests.GetJobsL
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_view_job);
         intNavToolBar();
+        jobText = findViewById(R.id.job_text);
         adapter = new JobAdapter(this, jobsItem);
         manager = new LinearLayoutManager(this);
         jobRecyclerView = findViewById(R.id.job_recycler);
@@ -128,18 +131,38 @@ public class ViewJobActivity extends NavMenuInt implements HTTPRequests.GetJobsL
                 totalItems = manager.getItemCount();
                 scrollOutItems = manager.findFirstVisibleItemPosition();
                 if (prefUtil.isLoggedIn()) {
-                    if (dy > 0 && addJobButton.isShown() && filterJobButton.isShown()) {
-                        addJobButton.hide();
-                        filterJobButton.hide();
-                    } else if (dy < 0 && !addJobButton.isShown() && !filterJobButton.isShown()) {
-                        addJobButton.show();
-                        filterJobButton.show();
+                    if (dy > 0) {
+                        if (addJobButton.isShown() && filterJobButton.isShown()) {
+                            addJobButton.hide();
+                            filterJobButton.hide();
+                        }
+                        if ((jobText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) > 25) {
+                            jobText.setTextSize((jobText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) - 1);
+                        }
+                    } else if (dy < 0) {
+                        if (!addJobButton.isShown() && !filterJobButton.isShown()) {
+                            addJobButton.show();
+                            filterJobButton.show();
+                        }
+                        if ((jobText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) < 35) {
+                            jobText.setTextSize((jobText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) + 1);
+                        }
                     }
                 } else {
-                    if (dy > 0 && filterJobButton.isShown()) {
-                        filterJobButton.hide();
-                    } else if (dy < 0 && !filterJobButton.isShown()) {
-                        filterJobButton.show();
+                    if (dy > 0) {
+                        if (filterJobButton.isShown()) {
+                            filterJobButton.hide();
+                        }
+                        if ((jobText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) > 25) {
+                            jobText.setTextSize((jobText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) - 1);
+                        }
+                    } else if (dy < 0) {
+                        if (!filterJobButton.isShown()) {
+                            filterJobButton.show();
+                        }
+                        if ((jobText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) < 35) {
+                            jobText.setTextSize((jobText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) + 1);
+                        }
                     }
                 }
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)

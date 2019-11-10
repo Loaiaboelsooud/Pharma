@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_color"
     android:orientation="vertical"
     tools:context=".ViewPrescriptionsActivity">
@@ -14,54 +14,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:background="@drawable/rectangle_shape"
-        android:orientation="vertical">
+        android:background="@drawable/rectangle_shape">
 
-        <TextView
-            android:id="@+id/prescriptions_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20px"
-            android:fontFamily="@font/arbfonts_swissra_ultra_light"
-            android:textStyle="bold"
-            android:text="@string/prescriptions_text"
-            android:textColor="@color/colorRed"
-            android:textSize="35dp" />
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/presecription_recycler"
+            <TextView
+                android:id="@+id/prescriptions_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20px"
+                android:fontFamily="@font/arbfonts_swissra_ultra_light"
+                android:text="@string/prescriptions_text"
+                android:textColor="@color/colorRed"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10px"
-                android:layout_marginRight="10px" />
+                android:layout_height="wrap_content">
 
-            <ProgressBar
-                android:id="@+id/presecription_get_progress"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:visibility="gone" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/presecription_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10px"
+                    android:layout_marginRight="10px" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/add_prescription_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
-                android:backgroundTint="@color/colorRed"
-                app:maxImageSize="57dp"
-                android:src="@drawable/add_button" />
-        </FrameLayout>
-    </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/presecription_get_progress"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/add_prescription_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@color/colorRed"
+                    android:src="@drawable/add_button"
+                    app:maxImageSize="57dp" />
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

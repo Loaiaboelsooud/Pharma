@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
     private FloatingActionButton addPropertiesButton, filterPropertiesButton;
     private ProgressBar progressBar;
     private HashMap<String, String> propertiesParam;
+    private TextView propertiesText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
         addPropertiesButton = findViewById(R.id.add_properties_button);
         progressBar = findViewById(R.id.properties_get_progress);
         progressBar.setVisibility(View.VISIBLE);
+        propertiesText = findViewById(R.id.properties_text);
         filterPropertiesButton = findViewById(R.id.filter_properties_button);
         if (!prefUtil.isLoggedIn()) {
             addPropertiesButton.hide();
@@ -125,22 +128,44 @@ public class ViewPropertiesActivity extends NavMenuInt implements HTTPRequests.G
                 totalItems = manager.getItemCount();
                 scrollOutItems = manager.findFirstVisibleItemPosition();
                 if (prefUtil.isLoggedIn()) {
-                    if (dy > 0 && addPropertiesButton.isShown() && filterPropertiesButton.isShown()) {
-                        addPropertiesButton.hide();
-                        filterPropertiesButton.hide();
-                    } else if (dy < 0 && !addPropertiesButton.isShown() && !filterPropertiesButton.isShown()) {
-                        addPropertiesButton.show();
-                        filterPropertiesButton.show();
+                    if (dy > 0) {
+                        if (addPropertiesButton.isShown() && filterPropertiesButton.isShown()) {
+                            addPropertiesButton.hide();
+                            filterPropertiesButton.hide();
+                        }
+                        if ((propertiesText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) > 25) {
+                            propertiesText.setTextSize((propertiesText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) - 1);
+                        }
+                    } else if (dy < 0) {
+                        if (!addPropertiesButton.isShown() && !filterPropertiesButton.isShown()) {
+                            addPropertiesButton.show();
+                            filterPropertiesButton.show();
+                        }
+                        if ((propertiesText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) < 35) {
+                            propertiesText.setTextSize((propertiesText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) + 1);
+                        }
                     }
                 } else {
-                    if (dy > 0 && filterPropertiesButton.isShown()) {
-                        filterPropertiesButton.hide();
-                    } else if (dy < 0 && !filterPropertiesButton.isShown()) {
-                        filterPropertiesButton.show();
+                    if (dy > 0) {
+                        if (filterPropertiesButton.isShown()) {
+                            filterPropertiesButton.hide();
+                        }
+                        if ((propertiesText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) > 25) {
+                            propertiesText.setTextSize((propertiesText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) - 1);
+                        }
+                    } else if (dy < 0) {
+                        if (!filterPropertiesButton.isShown()) {
+                            filterPropertiesButton.show();
+                        }
+                        if ((propertiesText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) < 35) {
+                            propertiesText.setTextSize((propertiesText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) + 1);
+                        }
                     }
                 }
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)
-                        && (actualPage <= metaData.getPagination().getTotalPages())) {
+                        && (actualPage <= metaData.getPagination().
+
+                        getTotalPages())) {
                     loadMore(metaData);
                     isScrolling = false;
                 }

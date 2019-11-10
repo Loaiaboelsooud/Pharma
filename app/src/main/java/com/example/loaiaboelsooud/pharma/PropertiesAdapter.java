@@ -29,7 +29,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public PropertiesAdapter.Properties onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        PharmaConstants pharmaConstants = new PharmaConstants(this.context);
+        new PharmaConstants(this.context);
         View row = inflater.inflate(R.layout.properties_adapter_content, parent, false);
         PropertiesAdapter.Properties properties = new PropertiesAdapter.Properties(row, onPropertiesClickListener);
         return properties;
@@ -52,7 +52,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ((Properties) holder).propertiesName.setText(propertiesItem.getName());
         ((Properties) holder).listedFor.setText(pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()));
         ((Properties) holder).type.setText(pharmaConstants.typeMapView.get(propertiesItem.getType()));
-        ((Properties) holder).updatedAt.setText(propertiesItem.getUpdatedAt());
+        ((Properties) holder).updatedAt.setText(PrefUtil.splitDateTime(propertiesItem.getUpdatedAt()));
     }
 
     @Override

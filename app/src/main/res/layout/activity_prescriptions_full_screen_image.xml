@@ -10,7 +10,7 @@
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
 
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/prescription_image_full_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -7,9 +7,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -23,7 +23,7 @@ public class PrescriptionsFullScreenImageActivity extends AppCompatActivity {
     private static final boolean AUTO_HIDE = true;
 
     private String imageURI;
-    private ImageView prescriptionImage;
+    private PhotoView prescriptionImage;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
