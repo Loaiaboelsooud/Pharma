@@ -1,6 +1,7 @@
 package com.example.loaiaboelsooud.pharma;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.context = context;
         this.propertiesItems = propertiesItems;
         this.onPropertiesClickListener = onPropertiesClickListener;
+
     }
 
     @Override
@@ -32,6 +34,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         new PharmaConstants(this.context);
         View row = inflater.inflate(R.layout.properties_adapter_content, parent, false);
         PropertiesAdapter.Properties properties = new PropertiesAdapter.Properties(row, onPropertiesClickListener);
+
         return properties;
     }
 
@@ -49,10 +52,20 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else {
             Glide.with(context).clear(((PropertiesAdapter.Properties) holder).picture);
         }
+
+        if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()).equals(pharmaConstants.listedForArray[0])) {
+            ((Properties) holder).listedFor.setTextColor(Color.parseColor("#EF0F45"));
+        } else if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()).equals(pharmaConstants.listedForArray[2])) {
+            ((Properties) holder).listedFor.setTextColor(Color.parseColor("#ffb300"));
+        }
         ((Properties) holder).propertiesName.setText(propertiesItem.getName());
         ((Properties) holder).listedFor.setText(pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()));
         ((Properties) holder).type.setText(pharmaConstants.typeMapView.get(propertiesItem.getType()));
         ((Properties) holder).updatedAt.setText(PrefUtil.splitDateTime(propertiesItem.getUpdatedAt()));
+        ((Properties) holder).price.setText(String.valueOf(propertiesItem.getPrice()));
+        ((Properties) holder).city.setText(pharmaConstants.citiesMapView.get(propertiesItem.getCity()));
+        ((Properties) holder).region.setText(pharmaConstants.regionsMapView.get(propertiesItem.getRegion()));
+        ((Properties) holder).area.setText(propertiesItem.getArea());
     }
 
     @Override
@@ -63,7 +76,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class Properties extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView uploaderName, propertiesName, listedFor, type, updatedAt;
+        private TextView uploaderName, propertiesName, listedFor, type, updatedAt, city, region, area, price;
         private ImageView uploaderAvatar, picture;
         private OnPropertiesClickListener onPropertiesClickListener;
 
@@ -78,6 +91,10 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             propertiesName = propertiesView.findViewById(R.id.properties_adapter_name);
             type = propertiesView.findViewById(R.id.properties_adapter_type);
             listedFor = propertiesView.findViewById(R.id.properties_adapter_listed_for);
+            area = propertiesView.findViewById(R.id.properties_adapter_area);
+            city = propertiesView.findViewById(R.id.properties_adapter_city);
+            region = propertiesView.findViewById(R.id.properties_adapter_region);
+            price = propertiesView.findViewById(R.id.properties_adapter_price);
             propertiesView.setOnClickListener(this);
         }
 

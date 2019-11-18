@@ -6,6 +6,8 @@
     <color name="colorRed">#EF0F45</color>
     <color name="colorTextOverLay">#7FFFFFFF</color>
     <color name="colorGrey">#e5e5e5</color>
+    <color name="colorDarkGrey">#dddddd</color>
     <color name="black_overlay">#e5e5e5</color>
+    <color name="colorTransparent">#00000000</color>
 
 </resources>

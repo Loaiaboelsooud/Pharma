@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.GetProperty, PropertiesImagesAdapter.OnPropertiesClickListener {
     private HTTPRequests httpRequests;
     private ProgressBar progressBar;
@@ -22,11 +24,12 @@ public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.Get
     private RecyclerView.Adapter adapter;
     private LinearLayoutManager manager;
     public RecyclerView propertiesImagesRecyclerView;
+    private PropertiesImage propertiesImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        PrefUtil prefUtil = new PrefUtil(this);
+        new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
         super.onCreate(savedInstanceState);
@@ -53,8 +56,8 @@ public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.Get
     public void notifyItem(PropertiesItem propertiesItem) {
         TextView uploaderName, propertyDescription, propertyAddress, propertyArea, propertyNotes;
         ImageView uploaderAvatar;
-        PropertiesImage propertiesImage = propertiesItem.getImages();
-        adapter = new PropertiesImagesAdapter(this, propertiesImage, this);
+        this.propertiesImage = propertiesItem.getImages();
+        adapter = new PropertiesImagesAdapter(this, this.propertiesImage, this);
         propertiesImagesRecyclerView.setAdapter(adapter);
         propertyDescription = findViewById(R.id.property_description);
         propertyAddress = findViewById(R.id.property_address);
@@ -82,6 +85,12 @@ public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.Get
 
     @Override
     public void onPropertiesClick(int propertiesPosition) {
-
+        Intent intent = new Intent(this, FullScreenImageActivity.class);
+        ArrayList<String> imageURIS = new ArrayList<String>();
+        for (int i = 0; i < this.propertiesImage.getData().size(); i++) {
+            imageURIS.add(this.propertiesImage.getData().get(i).getUrl());
+        }
+        intent.putStringArrayListExtra("imageURIS", imageURIS);
+        startActivity(intent);
     }
 }

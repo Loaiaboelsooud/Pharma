@@ -11,10 +11,15 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrescriptionsCommentsActivity extends AppCompatActivity implements
@@ -29,10 +34,12 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
     private RecyclerView.Adapter adapter;
     private boolean testbol = false;
     private EditText commentText;
-    private String imageUrl, profilePictureUrl, userNameString, createdATString;
+    private String imageUrl, profilePictureUrl, userNameString, createdATString, descriptionText;
     private ImageButton addCommentButton;
     private ProgressBar progressBar;
     private LinearLayout addCommentLayout;
+    private TextView uploaderName, createdAt, description;
+    private ImageView uploaderAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,7 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
         profilePictureUrl = extras.getString("profilePicture");
         userNameString = extras.getString("userName");
         createdATString = extras.getString("createdAT");
+        descriptionText = extras.getString("description");
         prefUtil = new PrefUtil(this);
         httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
@@ -49,11 +57,18 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_prescriptions_comments);
-        adapter = new PrescriptionsCommentsAdapter(this, this, this.prescriptionsComments, userNameString, profilePictureUrl, createdATString, imageUrl);
+        adapter = new PrescriptionsCommentsAdapter(this, this, this.prescriptionsComments, imageUrl, descriptionText);
         manager = new LinearLayoutManager(this);
         prescriptionsRecyclerView = findViewById(R.id.presecription_comment_recycler);
         prescriptionsRecyclerView.setLayoutManager(manager);
         progressBar = findViewById(R.id.presecriptions_comments_progress);
+        uploaderName = findViewById(R.id.prescription_uploader_name);
+        uploaderAvatar = findViewById(R.id.prescription_uploader_profile_picture);
+        createdAt = findViewById(R.id.prescription_created_at);
+        uploaderName.setText(userNameString);
+        Glide.with(this).load(profilePictureUrl + "picture?width=250&height=250").
+                into(uploaderAvatar);
+        createdAt.setText(createdATString);
         /*Zoomy.Builder builder = new Zoomy.Builder(this).target(image);
         builder.register();*/
         addCommentLayout = findViewById(R.id.add_comment_layout);
@@ -93,7 +108,7 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
             testbol = true;
             actualPage = metaData.getPagination().getCurrentPage();
             this.prescriptionsComments = prescriptionsComments;
-            adapter = new PrescriptionsCommentsAdapter(this, this, this.prescriptionsComments, userNameString, profilePictureUrl, createdATString, imageUrl);
+            adapter = new PrescriptionsCommentsAdapter(this, this, this.prescriptionsComments, imageUrl, descriptionText);
             prescriptionsRecyclerView.setAdapter(adapter);
         }
         if (actualPage != 1) {
@@ -154,8 +169,10 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
 
     @Override
     public void onPrescriptionsImageClick(String imageURI) {
-        Intent intent = new Intent(this, PrescriptionsFullScreenImageActivity.class);
-        intent.putExtra("imageURI", imageURI);
+        Intent intent = new Intent(this, FullScreenImageActivity.class);
+        ArrayList<String> imageURIS = new ArrayList<String>();
+        imageURIS.add(imageURI);
+        intent.putStringArrayListExtra("imageURIS", imageURIS);
         startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -60,7 +61,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|bottom"
                     android:layout_marginBottom="16dp"
-                    android:src="@drawable/filter_button" />
+                    android:backgroundTint="@color/colorRed"
+                    android:src="@drawable/filter_button"
+                    app:maxImageSize="57dp" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/add_properties_button"
@@ -68,9 +71,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
                     android:layout_marginBottom="16dp"
-                    android:src="@drawable/add_button" />
-
-
+                    android:backgroundTint="@color/colorRed"
+                    android:src="@drawable/add_button"
+                    app:maxImageSize="57dp" />
             </FrameLayout>
         </LinearLayout>
     </FrameLayout>

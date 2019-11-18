@@ -48,9 +48,12 @@ public class PromotionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Glide.with(context).load((promotionsItem.getImage())).
                 placeholder(R.drawable.ic_loading).dontAnimate().
                 into(((Promotions) holder).picture);
+        Glide.with(context).load((promotionsItem.getCompanyImage())).
+                placeholder(R.drawable.ic_loading).dontAnimate().
+                into(((Promotions) holder).companyProfilePicture);
         ((PromotionsAdapter.Promotions) holder).description.setText(promotionsItem.getDescription());
         ((Promotions) holder).createdAt.setText(PrefUtil.splitDateTime(promotionsItem.getCreatedAt()));
-        ((Promotions) holder).company.setText(promotionsItem.getCompany());
+        ((Promotions) holder).companyName.setText(promotionsItem.getCompany());
     }
 
   /*  public void addPrescriptionComment() {
@@ -68,14 +71,15 @@ public class PromotionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class Promotions extends RecyclerView.ViewHolder {
-        private TextView name, description, company, createdAt;
-        private ImageView picture;
+        private TextView name, description, companyName, createdAt;
+        private ImageView picture, companyProfilePicture;
 
 
         public Promotions(View promotionsView) {
             super(promotionsView);
             name = promotionsView.findViewById(R.id.promotions_adapter_name);
-            company = promotionsView.findViewById(R.id.promotions_adapter_company);
+            companyName = promotionsView.findViewById(R.id.promotions_adapter_company_name);
+            companyProfilePicture = promotionsView.findViewById(R.id.promotions_adapter_company_profile_picture);
             picture = promotionsView.findViewById(R.id.promotions_adapter_image);
             createdAt = promotionsView.findViewById(R.id.promotions_adapter_created_at);
             description = promotionsView.findViewById(R.id.promotions_adapter_description);

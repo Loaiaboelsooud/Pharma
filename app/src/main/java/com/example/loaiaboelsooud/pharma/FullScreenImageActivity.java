@@ -3,28 +3,31 @@ package com.example.loaiaboelsooud.pharma;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
+
+import java.util.List;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class PrescriptionsFullScreenImageActivity extends AppCompatActivity {
+public class FullScreenImageActivity extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
      */
     private static final boolean AUTO_HIDE = true;
 
-    private String imageURI;
+    private List<String> imageURIS;
     private PhotoView prescriptionImage;
-
+    private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
      * user interaction before hiding the system UI.
@@ -91,15 +94,17 @@ public class PrescriptionsFullScreenImageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prescriptions_full_screen_image);
+        setContentView(R.layout.activity_full_screen_image);
         Bundle extras = getIntent().getExtras();
-        imageURI = extras.getString("imageURI");
-        prescriptionImage = findViewById(R.id.prescription_image_full_screen);
-        Glide.with(this).load(imageURI).into(prescriptionImage);
+        imageURIS = extras.getStringArrayList("imageURIS");
         mVisible = true;
+        viewPager = (ViewPager) findViewById(R.id.image_full_screen);
+        viewPagerAdapter = new ViewPagerAdapter(this, imageURIS);
+        viewPager.setAdapter(viewPagerAdapter);
         mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.prescription_image_full_screen);
+        mContentView = findViewById(R.id.image_full_screen);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {

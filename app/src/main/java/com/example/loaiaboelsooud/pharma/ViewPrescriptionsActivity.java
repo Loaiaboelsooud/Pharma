@@ -169,7 +169,7 @@ public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequest
         intent.putExtra("userName", prescriptionsItems.get(prescriptionPosition).getUserResponse().getUser().getName());
         intent.putExtra("profilePicture", prescriptionsItems.get(prescriptionPosition).getUserResponse().getUser().getAvatar());
         intent.putExtra("createdAT", prescriptionsItems.get(prescriptionPosition).getCreatedAt());
-
+        intent.putExtra("description", prescriptionsItems.get(prescriptionPosition).getDescription());
         startActivity(intent);
     }
 }

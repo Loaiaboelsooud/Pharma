@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".PrescriptionsFullScreenImageActivity">
+    tools:context=".FullScreenImageActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/prescription_image_full_screen"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/image_full_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

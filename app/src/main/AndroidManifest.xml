@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PrescriptionsFullScreenImageActivity"
+            android:name=".FullScreenImageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_prescriptions_image" />
         <activity android:name=".DrugEyeViewActivity" />

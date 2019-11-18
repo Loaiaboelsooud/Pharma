@@ -29,7 +29,6 @@ import okhttp3.RequestBody;
 
 public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.GetPropertiesPostResult {
 
-    private static final int REQUEST_CAPTURE_IMAGE = 100;
     private static final int REQUEST_GALLERY_IMAGE = 1234;
     private List<MultipartBody.Part> images;
     private ProgressBar progressBar;
@@ -152,7 +151,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
 
     private List<MultipartBody.Part> imageToFile(List<Bitmap> bitmapList) throws IOException {
         List<MultipartBody.Part> images = new ArrayList<>();
-        for (int i = 0; i < bitmapList.size() || i < 8; i++) {
+        for (int i = 0; i < bitmapList.size(); i++) {
             File photoFile;
             Uri photoURI;
             File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);

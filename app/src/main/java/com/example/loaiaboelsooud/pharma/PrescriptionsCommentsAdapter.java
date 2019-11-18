@@ -15,19 +15,17 @@ import java.util.List;
 public class PrescriptionsCommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<PrescriptionsComments> prescriptionsComments;
-    private String uploaderName, uploaderAvatar, createdAt, prescriptionsImage;
+    private String prescriptionsImage, prescriptionsDescription;
     private static final int prescriptionsCommentsType = 0;
     private static final int prescriptionsImageType = 1;
     private OnPrescriptionsImageClickListener onPrescriptionsImageClickListener;
 
-    public PrescriptionsCommentsAdapter(Context context, OnPrescriptionsImageClickListener onPrescriptionsImageClickListener, List<PrescriptionsComments> prescriptionsComments, String uploaderName, String uploaderAvatar, String createdAt,
-                                        String prescriptionsImage) {
+    public PrescriptionsCommentsAdapter(Context context, OnPrescriptionsImageClickListener onPrescriptionsImageClickListener, List<PrescriptionsComments> prescriptionsComments,
+                                        String prescriptionsImage, String prescriptionsDescription) {
         this.context = context;
         this.prescriptionsComments = prescriptionsComments;
-        this.uploaderName = uploaderName;
-        this.uploaderAvatar = uploaderAvatar;
-        this.createdAt = createdAt;
         this.prescriptionsImage = prescriptionsImage;
+        this.prescriptionsDescription = prescriptionsDescription;
         this.onPrescriptionsImageClickListener = onPrescriptionsImageClickListener;
     }
 
@@ -49,10 +47,7 @@ public class PrescriptionsCommentsAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int itemType = getItemViewType(position);
         if (itemType == 1) {
-            ((PrescriptionsImageHolder) holder).uploaderName.setText(uploaderName);
-            Glide.with(context).load(uploaderAvatar).
-                    into(((PrescriptionsImageHolder) holder).uploaderAvatar);
-            ((PrescriptionsImageHolder) holder).createdAt.setText(createdAt);
+            ((PrescriptionsImageHolder) holder).prescriptionDescription.setText(prescriptionsDescription);
             Glide.with(context).load(prescriptionsImage).
                     into(((PrescriptionsImageHolder) holder).prescriptionImage);
         } else {
@@ -93,16 +88,14 @@ public class PrescriptionsCommentsAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     public class PrescriptionsImageHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView uploaderName, createdAt;
-        private ImageView uploaderAvatar, prescriptionImage;
+        private ImageView prescriptionImage;
+        private TextView prescriptionDescription;
         private OnPrescriptionsImageClickListener onPrescriptionsImageClickListener;
 
         public PrescriptionsImageHolder(View prescriptionsImageView, OnPrescriptionsImageClickListener onPrescriptionsImageClickListener) {
             super(prescriptionsImageView);
             this.onPrescriptionsImageClickListener = onPrescriptionsImageClickListener;
-            uploaderName = prescriptionsImageView.findViewById(R.id.prescription_uploader_name);
-            uploaderAvatar = prescriptionsImageView.findViewById(R.id.prescription_uploader_profile_picture);
-            createdAt = prescriptionsImageView.findViewById(R.id.prescription_created_at);
+            prescriptionDescription = prescriptionsImageView.findViewById(R.id.prescription_description);
             prescriptionImage = prescriptionsImageView.findViewById(R.id.prescription_image);
             prescriptionsImageView.setOnClickListener(this);
         }

@@ -15,6 +15,8 @@ public class PromotionsItem {
     int id;
     @SerializedName("name")
     String name;
+    @SerializedName("company_image_url")
+    String companyImage;
 
     public String getCompany() {
         return company;
@@ -62,5 +64,13 @@ public class PromotionsItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCompanyImage() {
+        return companyImage;
+    }
+
+    public void setCompanyImage(String companyImage) {
+        this.companyImage = companyImage;
     }
 }
