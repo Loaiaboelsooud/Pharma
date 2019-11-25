@@ -53,8 +53,8 @@ public interface JsonPostPlaceHolderApi {
     Call<PropertiesItemResponse> addProperties(@Header(PharmaConstants.AUTHORIZATION) String token, @Query("name") String name, @Query("city") String city,
                                                @Query("region") String region, @Query("address") String address, @Query("area") String area,
                                                @Query("listed_for") String listedFor, @Query("type") String type, @Query("price") int price,
-                                               @Query("description") String description, @Query("notes") String notes,
-                                               @Query("mobile_numbers[]") List<String> mobileNumber, @Query("landline_numbers[]") List<String> landLineNumbers);
+                                               @Query("description") String description, @Query("average_daily_income") int averageDailyIncome,
+                                               @Query("mobile_numbers[]") List<String> mobileNumber, @Query("status") String status);
 
     @GET()
     Call<PropertiesItemsResponse> getFilteredProperties(@Url String url, @QueryMap() Map<String, String> propertiesParam);

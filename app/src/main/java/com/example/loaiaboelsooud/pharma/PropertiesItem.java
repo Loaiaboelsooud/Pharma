@@ -39,6 +39,10 @@ public class PropertiesItem {
     private String updatedAt;
     @SerializedName("area")
     private String area;
+    @SerializedName("status")
+    private String status;
+    @SerializedName("average_daily_income")
+    private int averageDailyIncome;
 
     public String getCity() {
         return city;
@@ -174,5 +178,21 @@ public class PropertiesItem {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getAverageDailyIncome() {
+        return averageDailyIncome;
+    }
+
+    public void setAverageDailyIncome(int averageDailyIncome) {
+        this.averageDailyIncome = averageDailyIncome;
     }
 }

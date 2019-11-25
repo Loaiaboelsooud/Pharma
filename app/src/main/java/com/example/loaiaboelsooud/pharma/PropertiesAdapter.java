@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -43,7 +44,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         final PropertiesItem propertiesItem = propertiesItems.get(position);
         ((Properties) holder).uploaderName.setText(propertiesItem.getUserResponse().getUser().getName());
-        Glide.with(context).load((propertiesItem.getUserResponse().getUser().getAvatar())).
+        Glide.with(context).load((propertiesItem.getUserResponse().getUser().getAvatar() + "picture?width=250&height=250")).
                 placeholder(R.drawable.ic_loading).dontAnimate().
                 into(((Properties) holder).uploaderAvatar);
         if (propertiesItem.getImages().getData().size() != 0) {
@@ -53,10 +54,12 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             Glide.with(context).clear(((PropertiesAdapter.Properties) holder).picture);
         }
 
-        if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()).equals(pharmaConstants.listedForArray[0])) {
-            ((Properties) holder).listedFor.setTextColor(Color.parseColor("#EF0F45"));
-        } else if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()).equals(pharmaConstants.listedForArray[2])) {
-            ((Properties) holder).listedFor.setTextColor(Color.parseColor("#ffb300"));
+        if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()) != null) {
+            if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()).equals(pharmaConstants.listedForArray[0])) {
+                ((Properties) holder).listedFor.setTextColor(Color.parseColor("#EF0F45"));
+            } else if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()).equals(pharmaConstants.listedForArray[1])) {
+                ((Properties) holder).listedFor.setTextColor(Color.parseColor("#ffb300"));
+            }
         }
         ((Properties) holder).propertiesName.setText(propertiesItem.getName());
         ((Properties) holder).listedFor.setText(pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()));
@@ -65,7 +68,19 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ((Properties) holder).price.setText(String.valueOf(propertiesItem.getPrice()));
         ((Properties) holder).city.setText(pharmaConstants.citiesMapView.get(propertiesItem.getCity()));
         ((Properties) holder).region.setText(pharmaConstants.regionsMapView.get(propertiesItem.getRegion()));
-        ((Properties) holder).area.setText(propertiesItem.getArea());
+        ((Properties) holder).status.setText(pharmaConstants.statusMapView.get(propertiesItem.getStatus()));
+        if (propertiesItem.getArea() != null) {
+            ((Properties) holder).area.setText(propertiesItem.getArea());
+        } else {
+            ((Properties) holder).areaLayout.setVisibility(View.GONE);
+        }
+        if (propertiesItem.getAverageDailyIncome() > 1) {
+            ((Properties) holder).averageDailyIncome.setText(String.valueOf(propertiesItem.getAverageDailyIncome()));
+        } else {
+            ((Properties) holder).averageDailyIncomeLayout.setVisibility(View.GONE);
+        }
+
+
     }
 
     @Override
@@ -76,10 +91,10 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class Properties extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView uploaderName, propertiesName, listedFor, type, updatedAt, city, region, area, price;
+        private TextView uploaderName, propertiesName, listedFor, type, updatedAt, city, region, area, price, averageDailyIncome, status;
         private ImageView uploaderAvatar, picture;
+        private LinearLayout averageDailyIncomeLayout, areaLayout;
         private OnPropertiesClickListener onPropertiesClickListener;
-
 
         public Properties(View propertiesView, OnPropertiesClickListener propertiesClickListener) {
             super(propertiesView);
@@ -95,6 +110,10 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             city = propertiesView.findViewById(R.id.properties_adapter_city);
             region = propertiesView.findViewById(R.id.properties_adapter_region);
             price = propertiesView.findViewById(R.id.properties_adapter_price);
+            averageDailyIncome = propertiesView.findViewById(R.id.properties_adapter_average_daily_income);
+            status = propertiesView.findViewById(R.id.properties_adapter_status);
+            areaLayout = propertiesView.findViewById(R.id.properties_adapter_area_layout);
+            averageDailyIncomeLayout = propertiesView.findViewById(R.id.properties_adapter_average_daily_income_layout);
             propertiesView.setOnClickListener(this);
         }
 

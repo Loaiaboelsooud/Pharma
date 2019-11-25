@@ -217,12 +217,12 @@ public class HTTPRequests extends AppCompatActivity {
     public void sendPropertiesPostRequest(final String token, String name,
                                           String city, String region, String address,
                                           String area, String listedFor, String type,
-                                          int price, String description, String notes,
-                                          List<String> mobileNumbers, List<String> landLineNumbers, final List<MultipartBody.Part> images,
+                                          int price, String description, int averageDailyIncome,
+                                          List<String> mobileNumbers, String status, final List<MultipartBody.Part> images,
                                           final GetPropertiesPostResult getPropertiesPostResult) {
         Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().addProperties
                 (PharmaConstants.BEARER + token, name, city, region, address, area, listedFor,
-                        type, price, description, notes, mobileNumbers, landLineNumbers);
+                        type, price, description, averageDailyIncome, mobileNumbers, status);
         userCall.enqueue(new Callback<PropertiesItemResponse>() {
             @Override
             public void onResponse(Call<PropertiesItemResponse> call, Response<PropertiesItemResponse> response) {

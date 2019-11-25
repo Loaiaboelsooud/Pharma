@@ -24,23 +24,31 @@
     <string name="post_prescriptions_fail">يجب اضافة صورة و تعليق لاضافة روشتة</string>
     <string name="prescriptions_text">الروشتة</string>
     <string name="post_properties_success">تم اضافة الاعلان بنجاح</string>
-    <string name="properties_city"><font color='#cc0029'>*</font>المحافظة</string>
-    <string name="properties_region"><font color='#cc0029'>*</font>المنطقة</string>
-    <string name="properties_name"><font color='#cc0029'>*</font>الاسم</string>
+    <string name="properties_city">المحافظة<font color='#cc0029'>*</font></string>
+    <string name="properties_region">المنطقة<font color='#cc0029'>*</font></string>
+    <string name="properties_name">الاسم<font color='#cc0029'>*</font></string>
     <string name="properties_size">المساحة</string>
     <string name="properties_profit">العائد</string>
-    <string name="properties_address"><font color='#cc0029'>*</font>العنوان بالتفصيل</string>
+    <string name="properties_address">العنوان بالتفصيل<font color='#cc0029'>*</font></string>
     <string name="properties_mobile">الموبيل<font color='#cc0029'>*</font></string>
     <string name="properties_land_number">الرقم الارضي</string>
     <string name="properties_notes">ملاحظات</string>
     <string name="properties_listed_for">سبب البيع</string>
-    <string name="properties_type">النوع</string>
+    <string name="properties_type">النوع<font color='#cc0029'>*</font></string>
     <string name="properties_price">السعر</string>
-    <string name="properties_description">المواصفات</string>
+    <string name="properties_description">المواصفات<font color='#cc0029'>*</font></string>
+    <string name="properties_average_daily_income">معدل الدخل اليومي</string>
+    <string name="properties_status">الحاله<font color='#cc0029'>*</font></string>
     <string name="post_properties_fail">برجاء ادخال جميع البينات المطلوبة</string>
+    <string name="mobile_properties_fail">رقم الموبيل يجب ان يكون اكثر من 10 ارقام</string>
+    <string name="address_properties_fail">العنوان يجب ان يكون اكثر من 10 حروف </string>
     <string name="properties_filter_city">المحافظة</string>
+    <string name="properties_pharmacy_name">اسم الصيدليه<font color='#cc0029'>*</font></string>
+    <string name="properties_warehouse_name">اسم المخزن<font color='#cc0029'>*</font></string>
+    <string name="properties_factory_name">اسم المصنع<font color='#cc0029'>*</font></string>
+    <string name="properties_hospital_name">اسم المستشفي<font color='#cc0029'>*</font></string>
+    <string name="LE">ج.م</string>
     <string-array name="properties_listed_for_array">
-        <item>شراء</item>
         <item>بيع</item>
         <item>ايجار</item>
     </string-array>
@@ -602,6 +610,24 @@
         <item>سيدي غازي</item>
         <item>مناطق اخري </item>
     </string-array>
+    <string-array name="aswan_regions">
+        <item>ابو الريش</item>
+        <item>ابوسمبل</item>
+        <item>مدينه اسوان</item>
+        <item>البصيليه</item>
+        <item>دراو</item>
+        <item>ادفو</item>
+        <item>كلابشه</item>
+        <item>كومبو</item>
+        <item>نصر النوبه</item>
+        <item>الرديسيه</item>
+        <item>صحاري</item>
+        <item>مناطق اخري </item>
+    </string-array>
+    <string-array name="northcoast_regions">
+        <item>الساحل الشمالي</item>
+        <item>مناطق اخري </item>
+    </string-array>
     <string-array name="matruh_regions">
         <item>العلمين</item>
         <item>براني</item>
@@ -652,7 +678,6 @@
 
     <string-array name="properties_filter_listed_for_array">
         <item></item>
-        <item>شراء</item>
         <item>بيع</item>
         <item>ايجار</item>
     </string-array>
@@ -663,5 +688,8 @@
         <item>مصانع ادوية</item>
         <item>مستشفيات</item>
     </string-array>
-
+    <string-array name="properties_status_array">
+        <item>مفتوح</item>
+        <item>مغلق</item>
+    </string-array>
 </resources>

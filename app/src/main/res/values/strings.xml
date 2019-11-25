@@ -33,15 +33,24 @@
     <string name="properties_land_number">Land Line Number</string>
     <string name="properties_notes">Notes</string>
     <string name="properties_listed_for">Listed For</string>
-    <string name="properties_type">Type</string>
+    <string name="properties_type">Type<font color='#cc0029'>*</font></string>
     <string name="properties_price">Price</string>
-    <string name="properties_description">Description</string>
+    <string name="properties_description">Description<font color='#cc0029'>*</font></string>
     <string name="post_properties_fail">Please fill all the required fields</string>
+    <string name="mobile_properties_fail">Mobile number must be longer than 10 numbers</string>
+    <string name="address_properties_fail">Address must be longer than 10 letters</string>
     <string name="properties_filter_city">City</string>
+    <string name="properties_average_daily_income">Average daily income</string>
+    <string name="properties_status">Status<font color='#cc0029'>*</font></string>
+    <string name="properties_pharmacy_name">Pharmacy name<font color='#cc0029'>*</font></string>
+    <string name="properties_warehouse_name">Warehouse name<font color='#cc0029'>*</font></string>
+    <string name="properties_factory_name">Factory name<font color='#cc0029'>*</font></string>
+    <string name="properties_hospital_name">Hospital name<font color='#cc0029'>*</font></string>
+    <string name="LE">L.E</string>
+
     <string-array name="properties_listed_for_array">
-        <item>selling</item>
-        <item>buying</item>
-        <item>renting</item>
+        <item>SELLING</item>
+        <item>RENTING</item>
     </string-array>
     <string-array name="properties_type_array">
         <item>pharmacy</item>
@@ -601,6 +610,24 @@
         <item>Sedi Ghazi</item>
         <item>other places </item>
     </string-array>
+    <string-array name="aswan_regions">
+        <item>Abo al raish</item>
+        <item>Abou simbel</item>
+        <item>Aswan city</item>
+        <item>Basiliah</item>
+        <item>Daraw</item>
+        <item>Edfu</item>
+        <item>Kalabsha</item>
+        <item>Kom ombo</item>
+        <item>Nasr al noba</item>
+        <item>Rdesiah</item>
+        <item>Sahara</item>
+        <item>other places </item>
+    </string-array>
+    <string-array name="northcoast_regions">
+        <item>North coast</item>
+        <item>other places </item>
+    </string-array>
     <string-array name="matruh_regions">
         <item>Alamein</item>
         <item>Barany</item>
@@ -648,9 +675,8 @@
     </string-array>
     <string-array name="properties_filter_listed_for_array">
         <item></item>
-        <item>selling</item>
-        <item>buying</item>
-        <item>renting</item>
+        <item>BUY</item>
+        <item>RENT</item>
     </string-array>
     <string-array name="properties_filter_type_array">
         <item></item>
@@ -658,6 +684,10 @@
         <item>warehouse</item>
         <item>factory</item>
         <item>hospital</item>
+    </string-array>
+    <string-array name="properties_status_array">
+        <item>opened</item>
+        <item>closed</item>
     </string-array>
 
     <string name="title_activity_login">Sign in</string>

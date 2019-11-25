@@ -15,7 +15,6 @@ public class PharmaConstants extends Application {
 
     public static final String SELLING = "selling";
     public static final String RENTING = "renting";
-    public static final String BUYING = "buying";
     public static final String PHARMACY = "pharmacy";
     public static final String WAREHOUSE = "warehouse";
     public static final String FACTORY = "factory";
@@ -31,6 +30,8 @@ public class PharmaConstants extends Application {
     public static final String COMPANY = "company";
     public static final String WORKPLACE = "workplace";
     public static final String POSITION = "position";
+    public static final String OPENED = "open";
+    public static final String CLOSED = "closed";
     public static final String BEARER = "Bearer ";
     public static final String PROPERTIES = "properties/";
     public static final String IMAGES = "/images";
@@ -486,11 +487,24 @@ public class PharmaConstants extends Application {
     public static final String RASELHEKMA = "ras el Hekma";
     public static final String SEDIABDELRAHMAN = "Sedi Abdelrahman";
 
+    public static final String ABOELRAISH = "Abo al raish";
+    public static final String ABOUSIMBEL = "Abou simbel";
+    public static final String ASWANCITY = "Aswan city";
+    public static final String BASILIAH = "Basiliah";
+    public static final String DARAW = "Daraw";
+    public static final String EDFU = "Edfu";
+    public static final String KALABSHA = "Kalabsha";
+    public static final String KOMOMBO = "Kom ombo";
+    public static final String NASRALNOBA = "Nasr al noba";
+    public static final String RDESIAH = "Rdesiah";
+    public static final String SAHARA = "Sahara";
+
     public static String[] listedForArray;
     public static String[] typeArray;
     public static String[] positionArray;
     public static String[] workPlaceArray;
     public static String[] citiesArray;
+    public static String[] statusArray;
 
     public static String[] aswanArray;
     public static String[] asyutArray;
@@ -527,7 +541,8 @@ public class PharmaConstants extends Application {
     public static final Map<String, String> positionMapView = new HashMap<String, String>();
     public static final Map<String, String> workPlaceMapView = new HashMap<String, String>();
     public static final Map<String, String> citiesMapView = new HashMap<String, String>();
-    public static final Map<String, String> regionsMapAdd = new HashMap<String, String>();
+    public static final Map<String, String> regionsMapView = new HashMap<String, String>();
+    public static final Map<String, String> statusMapView = new HashMap<String, String>();
 
     public static final Map<String, Integer> citesToRegionStringsMap = new HashMap<String, Integer>();
 
@@ -536,7 +551,8 @@ public class PharmaConstants extends Application {
     public static final Map<String, String> listedForMapAdd = new HashMap<String, String>();
     public static final Map<String, String> typeMapAdd = new HashMap<String, String>();
     public static final Map<String, String> citiesMapAdd = new HashMap<String, String>();
-    public static final Map<String, String> regionsMapView = new HashMap<String, String>();
+    public static final Map<String, String> regionsMapAdd = new HashMap<String, String>();
+    public static final Map<String, String> statusMapAdd = new HashMap<String, String>();
 
     public PharmaConstants(Context context) {
         this.mContext = context;
@@ -547,7 +563,6 @@ public class PharmaConstants extends Application {
 
         listedForMapView.put(SELLING, listedForArray[0]);
         listedForMapView.put(RENTING, listedForArray[1]);
-        listedForMapView.put(BUYING, listedForArray[2]);
 
         typeMapView.put(PHARMACY, typeArray[0]);
         typeMapView.put(WAREHOUSE, typeArray[1]);
@@ -556,7 +571,6 @@ public class PharmaConstants extends Application {
 
         listedForMapAdd.put(listedForArray[0], SELLING);
         listedForMapAdd.put(listedForArray[1], RENTING);
-        listedForMapAdd.put(listedForArray[2], BUYING);
 
         typeMapAdd.put(typeArray[0], PHARMACY);
         typeMapAdd.put(typeArray[1], WAREHOUSE);
@@ -589,6 +603,14 @@ public class PharmaConstants extends Application {
         workPlaceMapAdd.put(workPlaceArray[1], COMPANY);
         workPlaceMapAdd.put(workPlaceArray[2], FACTORY);
         workPlaceMapAdd.put(workPlaceArray[3], WAREHOUSE);
+
+        statusArray = res.getStringArray(R.array.properties_status_array);
+
+        statusMapView.put(OPENED, statusArray[0]);
+        statusMapView.put(CLOSED, statusArray[1]);
+
+        statusMapAdd.put(statusArray[0], OPENED);
+        statusMapAdd.put(statusArray[1], CLOSED);
 
         citiesArray = res.getStringArray(R.array.cities_array);
 
@@ -676,6 +698,8 @@ public class PharmaConstants extends Application {
         citesToRegionStringsMap.put(QENA, R.array.qena_regions);
         citesToRegionStringsMap.put(KAFRALSHEIKH, R.array.kafralsheikh_regions);
         citesToRegionStringsMap.put(MATRUH, R.array.matruh_regions);
+        citesToRegionStringsMap.put(ASWAN, R.array.aswan_regions);
+        citesToRegionStringsMap.put(NORTHCOAST, R.array.northcoast_regions);
 
         alexandriaArray = res.getStringArray(R.array.alexandria_regions);
 
@@ -1452,6 +1476,38 @@ public class PharmaConstants extends Application {
         regionsMapAdd.put(damiettaArray[7], RODAH);
         regionsMapAdd.put(damiettaArray[8], SARO);
         regionsMapAdd.put(damiettaArray[9], ZARQA);
+
+        aswanArray = res.getStringArray(R.array.aswan_regions);
+
+        regionsMapView.put(ABOELRAISH, aswanArray[0]);
+        regionsMapView.put(ABOUSIMBEL, aswanArray[1]);
+        regionsMapView.put(ASWANCITY, aswanArray[2]);
+        regionsMapView.put(BASILIAH, aswanArray[3]);
+        regionsMapView.put(DARAW, aswanArray[4]);
+        regionsMapView.put(EDFU, aswanArray[5]);
+        regionsMapView.put(KALABSHA, aswanArray[6]);
+        regionsMapView.put(KOMOMBO, aswanArray[7]);
+        regionsMapView.put(NASRALNOBA, aswanArray[8]);
+        regionsMapView.put(RDESIAH, aswanArray[9]);
+        regionsMapView.put(SAHARA, aswanArray[10]);
+
+        regionsMapAdd.put(aswanArray[0], ABOELRAISH);
+        regionsMapAdd.put(aswanArray[1], ABOUSIMBEL);
+        regionsMapAdd.put(aswanArray[2], ASWANCITY);
+        regionsMapAdd.put(aswanArray[3], BASILIAH);
+        regionsMapAdd.put(aswanArray[4], DARAW);
+        regionsMapAdd.put(aswanArray[5], EDFU);
+        regionsMapAdd.put(aswanArray[6], KALABSHA);
+        regionsMapAdd.put(aswanArray[7], KOMOMBO);
+        regionsMapAdd.put(aswanArray[8], NASRALNOBA);
+        regionsMapAdd.put(aswanArray[9], RDESIAH);
+        regionsMapAdd.put(aswanArray[10], SAHARA);
+
+        northcoastArray = res.getStringArray(R.array.northcoast_regions);
+
+        regionsMapView.put(NORTHCOAST, northcoastArray[0]);
+
+        regionsMapAdd.put(northcoastArray[0], NORTHCOAST);
 
         sohagArray = res.getStringArray(R.array.sohag_regions);
 

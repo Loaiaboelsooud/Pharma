@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -34,13 +35,13 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     private ProgressBar progressBar;
     private PharmaConstants pharmaConstants;
     private Button postButton, galleryButton;
-    private Spinner citySpinner, regionSpinner;
+    private Spinner citySpinner, regionSpinner, typeSpinner;
+    private TextView propertyName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_properties);
-        intNavToolBar();
         progressBar = findViewById(R.id.properties_post_progress);
         pharmaConstants = new PharmaConstants(this);
         postButton = findViewById(R.id.properties_post_button);
@@ -48,7 +49,8 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
 
         citySpinner = findViewById(R.id.properties_city);
         regionSpinner = findViewById(R.id.properties_region);
-
+        typeSpinner = findViewById(R.id.properties_type);
+        propertyName = findViewById(R.id.properties_name_text);
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -57,6 +59,37 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                             PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()), android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     regionSpinner.setAdapter(adapter);
+                    regionSpinner.setEnabled(true);
+                } else {
+                    regionSpinner.setAdapter(null);
+                    regionSpinner.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()) != null) {
+                    switch (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString())) {
+                        case PharmaConstants.PHARMACY:
+                            propertyName.setText(getString(R.string.properties_pharmacy_name));
+                            break;
+                        case PharmaConstants.HOSPITAL:
+                            propertyName.setText(getString(R.string.properties_hospital_name));
+                            break;
+                        case PharmaConstants.WAREHOUSE:
+                            propertyName.setText(getString(R.string.properties_warehouse_name));
+                            break;
+                        case PharmaConstants.FACTORY:
+                            propertyName.setText(getString(R.string.properties_factory_name));
+                            break;
+                    }
+
                 }
             }
 
@@ -68,47 +101,58 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     }
 
     public void addProperties(View view) {
-        EditText name, region, address, area, price, description, notes, mobileNumbers, landLineNumbers;
-        Spinner listedForSpinner, typeSpinner, citiesSpinner;
+        EditText name, address, area, price, description, mobileNumber, averageDailyIncome, mobileNumber2;
+        Spinner listedForSpinner, statusSpinner;
         PrefUtil prefUtil = new PrefUtil(this);
-        List<String> mobileNumbersList, landLineNumbersList;
+        List<String> mobileNumbersList;
+        int parsedPrice = 1, parsedAverageDailyIncome = 1;
         mobileNumbersList = new ArrayList<String>();
-        landLineNumbersList = new ArrayList<String>();
         name = findViewById(R.id.properties_name);
         address = findViewById(R.id.properties_address);
         area = findViewById(R.id.properties_area);
         listedForSpinner = findViewById(R.id.properties_listed_for);
-        typeSpinner = findViewById(R.id.properties_type);
+        statusSpinner = findViewById(R.id.properties_status);
         price = findViewById(R.id.properties_price);
         description = findViewById(R.id.properties_description);
-        notes = findViewById(R.id.properties_notes);
-        mobileNumbers = findViewById(R.id.properties_mobile);
-        landLineNumbers = findViewById(R.id.properties_land_number);
+        averageDailyIncome = findViewById(R.id.properties_average_daily_income);
+        mobileNumber = findViewById(R.id.properties_mobile);
+        mobileNumber2 = findViewById(R.id.properties_mobile2);
+
         final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
         });
         if (name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
-                mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()) {
+                mobileNumber.getText().toString() != null && !mobileNumber.getText().toString().isEmpty()
+                && description.getText().toString() != null && !description.getText().toString().isEmpty()) {
             mobileNumbersList.clear();
-            mobileNumbersList.add(mobileNumbers.getText().toString());
-            if (landLineNumbers.getText().toString() != null && !landLineNumbers.getText().toString().equals("")) {
-                landLineNumbersList.clear();
-                landLineNumbersList.add(landLineNumbers.getText().toString());
-            }
             progressBar.setVisibility(View.VISIBLE);
-            postButton.setEnabled(false);
-            galleryButton.setEnabled(false);
-            int paresedPrice = 1;
-            if (!price.getText().toString().equals("")) {
-                paresedPrice = Integer.parseInt(price.getText().toString());
+            mobileNumbersList.add(mobileNumber.getText().toString());
+            if (mobileNumber2.getText().toString() != null && !mobileNumber2.getText().toString().isEmpty()) {
+                mobileNumbersList.add(mobileNumber2.getText().toString());
             }
-
-            httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), pharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()),
-                    PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()), address.getText().toString(), area.getText().toString(),
-                    pharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString()),
-                    pharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()), paresedPrice, description.getText().toString(),
-                    notes.getText().toString(), mobileNumbersList, landLineNumbersList, images, this);
-
+            if (!price.getText().toString().equals("")) {
+                parsedPrice = Integer.parseInt(price.getText().toString());
+            }
+            if (!averageDailyIncome.getText().toString().equals("")) {
+                parsedAverageDailyIncome = Integer.parseInt(averageDailyIncome.getText().toString());
+            }
+            if (address.getText().toString().length() < 11) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(this, getString(R.string.address_properties_fail),
+                        Toast.LENGTH_LONG).show();
+            } else if (mobileNumber.getText().toString().length() < 11) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(this, getString(R.string.mobile_properties_fail),
+                        Toast.LENGTH_LONG).show();
+            } else {
+                postButton.setEnabled(false);
+                galleryButton.setEnabled(false);
+                httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), pharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()),
+                        PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()), address.getText().toString(), area.getText().toString(),
+                        pharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString()),
+                        pharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()), parsedPrice, description.getText().toString(),
+                        parsedAverageDailyIncome, mobileNumbersList, pharmaConstants.statusMapAdd.get(statusSpinner.getSelectedItem().toString()), images, this);
+            }
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),
                     Toast.LENGTH_LONG).show();
