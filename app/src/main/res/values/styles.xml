@@ -10,6 +10,10 @@
         <item name="actionButtonStyle">@style/ActionButtonStyle</item>
     </style>
 
+    <style name="whiteTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="actionButtonStyle">@style/ActionButtonStyle</item>
     </style>

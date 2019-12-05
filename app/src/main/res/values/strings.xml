@@ -47,6 +47,7 @@
     <string name="properties_factory_name">Factory name<font color='#cc0029'>*</font></string>
     <string name="properties_hospital_name">Hospital name<font color='#cc0029'>*</font></string>
     <string name="LE">L.E</string>
+    <string name="LE_H">L.E/H</string>
 
     <string-array name="properties_listed_for_array">
         <item>SELLING</item>
@@ -70,13 +71,17 @@
     <string name="job_region">Region<font color='#cc0029'>*</font></string>
     <string name="job_name">Name<font color='#cc0029'>*</font></string>
     <string name="job_mobile">Mobile<font color='#cc0029'>*</font></string>
+    <string name="job_email">Email<font color='#cc0029'>*</font></string>
     <string name="job_description">Description<font color='#cc0029'>*</font></string>
     <string name="job_position">Position<font color='#cc0029'>*</font></string>
     <string name="job_work_place">Workplace<font color='#cc0029'>*</font></string>
     <string name="job_range_salary">Salary ٍRange</string>
-    <string name="job_to_salary">to</string>
-    <string name="job_from_salary">from</string>
-    <string name="job_post_button">POST</string>
+    <string name="job_to_salary">To</string>
+    <string name="job_from_salary">From</string>
+    <string name="job_run_this_ad_until">Run this ad until</string>
+    <string name="job_negotiable">Negotiable</string>
+    <string name="job_new_opportunity">NEW JOB OPPORTUNITY</string>
+    <string name="job_post_button">Publish This Ad</string>
     <string name="post_job_success">Your job is added successfully</string>
     <string name="job_filter_position">Position</string>
     <string name="job_filter_work_place">Workplace</string>
@@ -148,6 +153,9 @@
         <item>Kafr al-Sheikh</item>
         <item>Matruh</item>
         <item>North Coast</item>
+    </string-array>
+    <string-array name="regions_array">
+        <item></item>
     </string-array>
     <string-array name="alexandria_regions">
         <item>AbuQir</item>

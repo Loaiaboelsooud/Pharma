@@ -48,6 +48,7 @@
     <string name="properties_factory_name">اسم المصنع<font color='#cc0029'>*</font></string>
     <string name="properties_hospital_name">اسم المستشفي<font color='#cc0029'>*</font></string>
     <string name="LE">ج.م</string>
+    <string name="LE_H">ج.م/س</string>
     <string-array name="properties_listed_for_array">
         <item>بيع</item>
         <item>ايجار</item>
@@ -72,6 +73,7 @@
     <string name="job_region">المنطقة<font color='#cc0029'>*</font></string>
     <string name="job_name">الاسم<font color='#cc0029'>*</font></string>
     <string name="job_mobile">الموبيل<font color='#cc0029'>*</font></string>
+    <string name="job_email">بريد الكتروني<font color='#cc0029'>*</font></string>
     <string name="job_description">التفاصيل<font color='#cc0029'>*</font></string>
     <string name="job_position">الوظيفة<font color='#cc0029'>*</font></string>
     <string name="job_work_place">المكان<font color='#cc0029'>*</font></string>
@@ -82,6 +84,9 @@
     <string name="post_job_success">تم اضافة الوظيفة بنجاح</string>
     <string name="job_filter_position">الوظيفة</string>
     <string name="job_filter_work_place">المكان</string>
+    <string name="job_run_this_ad_until">هذا الاعلان يعمل حتي</string>
+    <string name="job_negotiable">يناقش</string>
+    <string name="job_new_opportunity">وظيفه جديدة</string>
     <string name="drug_eye_similarities_button">التشبهات</string>
     <string name="drug_eye_alternatives_button">البدائل</string>
     <string name="search">البحث</string>

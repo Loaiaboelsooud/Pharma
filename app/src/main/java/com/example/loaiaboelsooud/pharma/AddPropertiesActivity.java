@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.srodrigo.androidhintspinner.HintAdapter;
+import me.srodrigo.androidhintspinner.HintSpinner;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -36,7 +38,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     private PharmaConstants pharmaConstants;
     private Button postButton, galleryButton;
     private Spinner citySpinner, regionSpinner, typeSpinner;
-    private TextView propertyName;
+    private EditText propertyName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         citySpinner = findViewById(R.id.properties_city);
         regionSpinner = findViewById(R.id.properties_region);
         typeSpinner = findViewById(R.id.properties_type);
-        propertyName = findViewById(R.id.properties_name_text);
+        propertyName = findViewById(R.id.properties_name);
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -77,16 +79,16 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                 if (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()) != null) {
                     switch (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString())) {
                         case PharmaConstants.PHARMACY:
-                            propertyName.setText(getString(R.string.properties_pharmacy_name));
+                            propertyName.setHint(getString(R.string.properties_pharmacy_name));
                             break;
                         case PharmaConstants.HOSPITAL:
-                            propertyName.setText(getString(R.string.properties_hospital_name));
+                            propertyName.setHint(getString(R.string.properties_hospital_name));
                             break;
                         case PharmaConstants.WAREHOUSE:
-                            propertyName.setText(getString(R.string.properties_warehouse_name));
+                            propertyName.setHint(getString(R.string.properties_warehouse_name));
                             break;
                         case PharmaConstants.FACTORY:
-                            propertyName.setText(getString(R.string.properties_factory_name));
+                            propertyName.setHint(getString(R.string.properties_factory_name));
                             break;
                     }
 
@@ -195,14 +197,16 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
 
     private List<MultipartBody.Part> imageToFile(List<Bitmap> bitmapList) throws IOException {
         List<MultipartBody.Part> images = new ArrayList<>();
-        for (int i = 0; i < bitmapList.size(); i++) {
+        int size = bitmapList.size() >= 8 ? 8 : bitmapList.size();
+        for (int i = 0; i < size; i++) {
             File photoFile;
             Uri photoURI;
             File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             photoFile = File.createTempFile("file", ".jpg", storageDir);
             photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmapList.get(i).compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+            bitmapList.get(i).compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+
             byte[] bitmapdata = bos.toByteArray();
             try {
                 FileOutputStream fos = new FileOutputStream(photoFile);

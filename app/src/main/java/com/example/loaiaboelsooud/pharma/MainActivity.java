@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             Calendar expireDate = prefUtil.getExpireDate();
             currentTime.setTime(currentTime.getTime());
             if (expireDate.before(currentTime)) {
-                httpRequests.sendFBDelRequest(prefUtil.getToken());
+                httpRequests.sendFBPutRequest(this);
             }
         }
 

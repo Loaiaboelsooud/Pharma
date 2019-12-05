@@ -29,17 +29,16 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
     private static final int REQUEST_CAPTURE_IMAGE = 100;
     private static final int REQUEST_GALLERY_IMAGE = 1234;
     private ImageView uploadedPic, userAvatar;
-    ;
     private EditText description;
     private PrescriptionsItem prescriptionsItem;
     private MultipartBody.Part imagePart;
     private ProgressBar progressBar;
     private TextView userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prescriptions);
-        intNavToolBar();
         PrefUtil prefUtil = new PrefUtil(this);
         userAvatar = findViewById(R.id.prescription_user_profile_picture);
         userName = findViewById(R.id.prescription_user_name);

@@ -3,102 +3,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorGrey"
     android:orientation="vertical"
     tools:context=".AddPrescriptionsActivity">
 
-    <include
-        android:id="@+id/toolbar_nav"
-        layout="@layout/toolbar_nav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        android:textColor="#ef0f44"
-        android:text="@string/prescriptions_description" />
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/prescription_user_profile_picture"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
         <TextView
-            android:id="@+id/prescription_user_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="TextView"
-            android:textSize="30dp"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prescriptions_description"
+            android:textColor="#ef0f44"
+            android:textSize="35dp"
             android:textStyle="bold" />
-    </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="15dp">
 
-    <EditText
-        android:id="@+id/presecription_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="5"
-        android:hint="@string/prescriptions_description_hint" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/prescription_user_profile_picture"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/prescription_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="TextView"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/comment_shape">
+
+            <EditText
+                android:id="@+id/presecription_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prescriptions_description_hint"
+                android:lines="5" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_margin="5dp">
+
+            <Button
+                android:id="@+id/presecription_gallery_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/gallery_button"
+                android:onClick="openGalleryIntent"
+                android:text="@string/prescriptions_gallery_button_string"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/presecription_camera_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/camera_button"
+                android:onClick="openCameraIntent"
+                android:text="@string/prescriptions_camera_button_string"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/presecription_gallery_button"
-            android:layout_width="0dp"
+            android:id="@+id/presecription_post_button"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:onClick="openGalleryIntent"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:background="@drawable/gallery_button"
-            android:text="@string/prescriptions_gallery_button_string" />
+            android:layout_gravity="center"
+            android:background="@color/colorRed"
+            android:onClick="addPrescriptions"
+            android:text="@string/prescriptions_post_button_string"
+            android:textColor="@color/colorWhite"
+            android:layout_marginVertical="20dp"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/presecription_camera_button"
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/uploaded_pic"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="openCameraIntent"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:background="@drawable/camera_button"
-            android:text="@string/prescriptions_camera_button_string" />
+            android:layout_gravity="center"
+            tools:srcCompat="@tools:sample/avatars" />
 
+        <ProgressBar
+            android:id="@+id/presecription_post_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/presecription_post_button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="addPrescriptions"
-        android:background="#ef0f44"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:text="@string/prescriptions_post_button_string" />
-
-    <ImageView
-        android:id="@+id/uploaded_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ProgressBar
-        android:id="@+id/presecription_post_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 </LinearLayout>

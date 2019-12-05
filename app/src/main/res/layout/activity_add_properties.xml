@@ -22,213 +22,144 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TableLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:stretchColumns="1">
+                android:orientation="vertical">
 
-                <TableRow>
+                <Spinner
+                    android:id="@+id/properties_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/properties_type_array" />
 
-                    <TextView
-                        android:id="@+id/properties_type_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_type" />
+                <EditText
+                    android:id="@+id/properties_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/properties_pharmacy_name" />
 
-                    <Spinner
-                        android:id="@+id/properties_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/properties_type_array" />
-                </TableRow>
+                <EditText
+                    android:id="@+id/properties_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/properties_size"
+                    android:inputType="phone" />
 
+                <Spinner
+                    android:id="@+id/properties_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/cities_array" />
 
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/properties_city_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_city" />
-
-                    <Spinner
-                        android:id="@+id/properties_city"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/cities_array" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/properties_region_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_region" />
-
-                    <Spinner
-                        android:id="@+id/properties_region"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/properties_name_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_pharmacy_name" />
-
-                    <EditText
-                        android:id="@+id/properties_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/properties_area_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_size" />
-
-                    <EditText
-                        android:id="@+id/properties_area"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/properties_address_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_address" />
-
-                    <EditText
-                        android:id="@+id/properties_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/properties_listed_for_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_listed_for" />
-
-                    <Spinner
-                        android:id="@+id/properties_listed_for"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/properties_listed_for_array" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/properties_status_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_status" />
-
-                    <Spinner
-                        android:id="@+id/properties_status"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/properties_status_array" />
-
-                </TableRow>
+                <Spinner
+                    android:id="@+id/properties_region"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
 
-                <TableRow>
+                <EditText
+                    android:id="@+id/properties_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/properties_address"
+                    android:lines="2" />
+
+                <Spinner
+                    android:id="@+id/properties_listed_for"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/properties_listed_for_array" />
+
+                <Spinner
+                    android:id="@+id/properties_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/properties_status_array" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/properties_price_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/properties_price" />
+                        android:text="@string/properties_price"
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/properties_price"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="phone" />
 
-                </TableRow>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
-                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/LE"
+                        android:textColor="@color/colorRed"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/properties_average_daily_income_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/properties_average_daily_income" />
+                        android:text="@string/properties_average_daily_income"
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/properties_average_daily_income"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="phone" />
 
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/properties_mobile_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_mobile" />
-
-                    <EditText
-                        android:id="@+id/properties_mobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone" />
-
-                </TableRow>
-
-                <TableRow>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/properties_mobile2"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="phone" />
+                        android:text="@string/LE"
+                        android:textColor="@color/colorRed"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                </TableRow>
+                <EditText
+                    android:id="@+id/properties_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/properties_mobile"
+                    android:inputType="phone" />
 
-                <TableRow>
+                <EditText
+                    android:id="@+id/properties_mobile2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/properties_mobile"
+                    android:inputType="phone" />
 
-                    <TextView
-                        android:id="@+id/properties_description_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/properties_description" />
-
-                    <EditText
-                        android:id="@+id/properties_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </TableRow>
+                <EditText
+                    android:id="@+id/properties_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/properties_description"
+                    android:lines="3" />
 
                 <Button
                     android:id="@+id/properties_gallery_button"
@@ -245,8 +176,7 @@
                     android:layout_gravity="center"
                     android:onClick="addProperties"
                     android:text="@string/prescriptions_post_button_string" />
-
-            </TableLayout>
+            </LinearLayout>
         </ScrollView>
     </FrameLayout>
 

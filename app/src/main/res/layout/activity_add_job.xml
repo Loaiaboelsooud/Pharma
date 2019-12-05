@@ -6,195 +6,193 @@
     android:orientation="vertical"
     tools:context=".AddJobActivity">
 
-    <include
-        android:id="@+id/toolbar_nav"
-        layout="@layout/toolbar_nav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/job_new_opportunity_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/job_new_opportunity"
+        android:textColor="@color/colorRed"
+        android:textSize="23sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="1">
+            android:orientation="vertical">
 
-            <TableRow>
+            <EditText
+                android:id="@+id/job_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/job_name" />
 
-                <TextView
-                    android:id="@+id/job_name_text"
+            <EditText
+                android:id="@+id/job_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/job_description" />
+
+            <TextView
+                android:id="@+id/job_salary_range_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/job_range_salary"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/job_negotiable"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/job_name" />
-
-                <EditText
-                    android:id="@+id/job_name"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-            </TableRow>
-
-            <TableRow>
-
                 <TextView
-                    android:id="@+id/job_description_text"
+                    android:id="@+id/job_negotiable_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/job_description" />
+                    android:text="@string/job_negotiable"
+                    android:textSize="15dp" />
 
-                <EditText
-                    android:id="@+id/job_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
-            </TableRow>
+            </LinearLayout>
 
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/job_salary_range_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/job_range_salary" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/job_from_salary_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/job_from_salary" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/job_from_salary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </TableRow>
-
-            <TableRow>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/job_from_salary" />
 
                 <TextView
-                    android:id="@+id/job_to_salary_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/job_to_salary" />
+                    android:text="@string/LE_H"
+                    android:textColor="@color/colorRed" />
 
                 <EditText
                     android:id="@+id/job_to_salary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </TableRow>
-
-            <TableRow>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/job_to_salary" />
 
                 <TextView
-                    android:id="@+id/job_work_place_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/job_work_place" />
+                    android:text="@string/LE_H"
+                    android:textColor="@color/colorRed" />
+            </LinearLayout>
 
-                <Spinner
-                    android:id="@+id/job_work_place"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/job_work_place_array" />
+            <Spinner
+                android:id="@+id/job_work_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:entries="@array/job_work_place_array" />
 
-            </TableRow>
+            <Spinner
+                android:id="@+id/job_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:entries="@array/job_position_array" />
 
-            <TableRow>
+            <Spinner
+                android:id="@+id/job_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:entries="@array/cities_array" />
+
+
+            <Spinner
+                android:id="@+id/job_region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp" />
+
+            <EditText
+                android:id="@+id/job_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/job_address"
+                android:lines="3" />
+
+
+            <EditText
+                android:id="@+id/job_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/job_mobile"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/job_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/job_email"
+                android:inputType="textEmailAddress" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/job_position_text"
+                    android:id="@+id/job_run_this_ad_until_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/job_position" />
-
-                <Spinner
-                    android:id="@+id/job_position"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/job_position_array" />
-
-            </TableRow>
-
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/job_city_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/job_city" />
-
-                <Spinner
-                    android:id="@+id/job_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/cities_array" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/job_region_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/job_region" />
-
-                <Spinner
-                    android:id="@+id/job_region"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/job_address_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/job_address" />
+                    android:text="@string/job_run_this_ad_until"
+                    android:textSize="15dp" />
 
                 <EditText
-                    android:id="@+id/job_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/job_mobile_text"
+                    android:id="@+id/job_run_this_ad_until_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/job_mobile" />
+                    android:enabled="false"
+                    android:inputType="date" />
 
-                <EditText
-                    android:id="@+id/job_mobile"
-                    android:layout_width="match_parent"
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/job_run_this_ad_until_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="phone" />
-
-            </TableRow>
+                    android:background="@drawable/date" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/job_post_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:background="@color/colorRed"
                 android:onClick="addJob"
-                android:text="@string/job_post_button" />
-
-        </TableLayout>
+                android:text="@string/job_post_button"
+                android:textSize="25dp"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+        </LinearLayout>
     </ScrollView>
 
     <ProgressBar
