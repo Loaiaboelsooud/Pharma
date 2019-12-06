@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.srodrigo.androidhintspinner.HintAdapter;
@@ -37,8 +38,9 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     private ProgressBar progressBar;
     private PharmaConstants pharmaConstants;
     private Button postButton, galleryButton;
-    private Spinner citySpinner, regionSpinner, typeSpinner;
+    private Spinner citySpinner, regionSpinner, typeSpinner, statusSpinner, listedForSpinner;
     private EditText propertyName;
+    private TextView imagesCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,63 +50,111 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         pharmaConstants = new PharmaConstants(this);
         postButton = findViewById(R.id.properties_post_button);
         galleryButton = findViewById(R.id.properties_gallery_button);
-
+        imagesCount = findViewById(R.id.properties_images_count);
         citySpinner = findViewById(R.id.properties_city);
         regionSpinner = findViewById(R.id.properties_region);
         typeSpinner = findViewById(R.id.properties_type);
+        statusSpinner = findViewById(R.id.properties_status);
+        listedForSpinner = findViewById(R.id.properties_listed_for);
         propertyName = findViewById(R.id.properties_name);
-        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()) != null) {
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(AddPropertiesActivity.this,
-                            PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()), android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    regionSpinner.setAdapter(adapter);
-                    regionSpinner.setEnabled(true);
-                } else {
-                    regionSpinner.setAdapter(null);
-                    regionSpinner.setEnabled(false);
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
+        initCitySpinner();
+        initListedForSpinner();
+        initRegionSpinner();
+        initStatusSpinner();
+        initTypeSpinner();
+    }
 
-        });
-        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()) != null) {
-                    switch (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString())) {
-                        case PharmaConstants.PHARMACY:
-                            propertyName.setHint(getString(R.string.properties_pharmacy_name));
-                            break;
-                        case PharmaConstants.HOSPITAL:
-                            propertyName.setHint(getString(R.string.properties_hospital_name));
-                            break;
-                        case PharmaConstants.WAREHOUSE:
-                            propertyName.setHint(getString(R.string.properties_warehouse_name));
-                            break;
-                        case PharmaConstants.FACTORY:
-                            propertyName.setHint(getString(R.string.properties_factory_name));
-                            break;
+    private void initCitySpinner() {
+        HintSpinner<String> hintSpinner = new HintSpinner<>(
+                citySpinner,
+                new HintAdapter<>(this, R.string.properties_city, Arrays.asList(getResources().getStringArray(R.array.cities_array))),
+                new HintSpinner.Callback<String>() {
+                    @Override
+                    public void onItemSelected(int position, String itemAtPosition) {
+                        if (PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()) != null) {
+                            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(AddPropertiesActivity.this,
+                                    PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()), android.R.layout.simple_spinner_item);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            regionSpinner.setAdapter(adapter);
+                            regionSpinner.setEnabled(true);
+                        } else {
+                            regionSpinner.setAdapter(null);
+                            regionSpinner.setEnabled(false);
+                        }
                     }
+                });
+        hintSpinner.init();
+    }
 
-                }
-            }
+    private void initRegionSpinner() {
+        regionSpinner.setEnabled(false);
+        HintSpinner<String> hintSpinner = new HintSpinner<>(
+                regionSpinner,
+                new HintAdapter<>(this, R.string.properties_region, Arrays.asList(getResources().getStringArray(R.array.regions_array))),
+                new HintSpinner.Callback<String>() {
+                    @Override
+                    public void onItemSelected(int position, String itemAtPosition) {
+                    }
+                });
+        hintSpinner.init();
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
+    private void initTypeSpinner() {
+        HintSpinner<String> hintSpinner = new HintSpinner<>(
+                typeSpinner,
+                new HintAdapter<>(this, R.string.properties_type, Arrays.asList(getResources().getStringArray(R.array.properties_type_array))),
+                new HintSpinner.Callback<String>() {
+                    @Override
+                    public void onItemSelected(int position, String itemAtPosition) {
+                        if (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()) != null) {
+                            switch (PharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString())) {
+                                case PharmaConstants.PHARMACY:
+                                    propertyName.setHint(getString(R.string.properties_pharmacy_name));
+                                    break;
+                                case PharmaConstants.HOSPITAL:
+                                    propertyName.setHint(getString(R.string.properties_hospital_name));
+                                    break;
+                                case PharmaConstants.WAREHOUSE:
+                                    propertyName.setHint(getString(R.string.properties_warehouse_name));
+                                    break;
+                                case PharmaConstants.FACTORY:
+                                    propertyName.setHint(getString(R.string.properties_factory_name));
+                                    break;
+                            }
 
-        });
+                        }
+                    }
+                });
+        hintSpinner.init();
+    }
+
+    private void initStatusSpinner() {
+        HintSpinner<String> hintSpinner = new HintSpinner<>(
+                statusSpinner,
+                new HintAdapter<>(this, R.string.properties_status, Arrays.asList(getResources().getStringArray(R.array.properties_status_array))),
+                new HintSpinner.Callback<String>() {
+                    @Override
+                    public void onItemSelected(int position, String itemAtPosition) {
+                    }
+                });
+        hintSpinner.init();
+    }
+
+    private void initListedForSpinner() {
+        HintSpinner<String> hintSpinner = new HintSpinner<>(
+                listedForSpinner,
+                new HintAdapter<>(this, R.string.properties_listed_for, Arrays.asList(getResources().getStringArray(R.array.properties_listed_for_array))),
+                new HintSpinner.Callback<String>() {
+                    @Override
+                    public void onItemSelected(int position, String itemAtPosition) {
+                    }
+                });
+        hintSpinner.init();
     }
 
     public void addProperties(View view) {
         EditText name, address, area, price, description, mobileNumber, averageDailyIncome, mobileNumber2;
-        Spinner listedForSpinner, statusSpinner;
         PrefUtil prefUtil = new PrefUtil(this);
         List<String> mobileNumbersList;
         int parsedPrice = 1, parsedAverageDailyIncome = 1;
@@ -125,7 +175,10 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         if (name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
                 mobileNumber.getText().toString() != null && !mobileNumber.getText().toString().isEmpty()
-                && description.getText().toString() != null && !description.getText().toString().isEmpty()) {
+                && description.getText().toString() != null && !description.getText().toString().isEmpty()
+                && regionSpinner.getSelectedItem().toString() != null && citySpinner.getSelectedItem().toString() != null
+                && statusSpinner.getSelectedItem().toString() != null && listedForSpinner.getSelectedItem().toString() != null
+                && typeSpinner.getSelectedItem().toString() != null) {
             mobileNumbersList.clear();
             progressBar.setVisibility(View.VISIBLE);
             mobileNumbersList.add(mobileNumber.getText().toString());
@@ -220,6 +273,8 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
             MultipartBody.Part body = MultipartBody.Part.createFormData("images[]", photoFile.getName(), reqFile);
             images.add(body);
         }
+
+        imagesCount.setText(getResources().getQuantityString(R.plurals.images_count, size, size));
         return images;
     }
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorGrey"
     android:orientation="vertical"
     tools:context=".AddJobActivity">
 
@@ -189,8 +190,8 @@
                 android:background="@color/colorRed"
                 android:onClick="addJob"
                 android:text="@string/job_post_button"
-                android:textSize="25dp"
                 android:textColor="@color/colorWhite"
+                android:textSize="25dp"
                 android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>

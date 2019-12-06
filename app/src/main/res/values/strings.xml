@@ -22,6 +22,7 @@
     <string name="post_prescriptions_success">Your prescription is added successfully</string>
     <string name="post_prescriptions_fail">Please choose an image and write a description</string>
     <string name="prescriptions_text">PRESCRIPTIONS</string>
+    <string name="properties_text">ENROLL YOUR FACILITY FOR RENTING OR SELLING </string>
     <string name="post_properties_success">Your property is added successfully</string>
     <string name="properties_city">City<font color='#cc0029'>*</font></string>
     <string name="properties_region">region<font color='#cc0029'>*</font></string>
@@ -30,13 +31,16 @@
     <string name="properties_profit">Profit</string>
     <string name="properties_address">Address<font color='#cc0029'>*</font></string>
     <string name="properties_mobile">Mobile<font color='#cc0029'>*</font></string>
+    <string name="properties_mobile2">Mobile2</string>
     <string name="properties_land_number">Land Line Number</string>
     <string name="properties_notes">Notes</string>
-    <string name="properties_listed_for">Listed For</string>
+    <string name="properties_listed_for">Listed For<font color='#cc0029'>*</font></string>
     <string name="properties_type">Type<font color='#cc0029'>*</font></string>
     <string name="properties_price">Price</string>
     <string name="properties_description">Description<font color='#cc0029'>*</font></string>
     <string name="post_properties_fail">Please fill all the required fields</string>
+    <string name="properties_price_per_month">*PlEASE MAKE SURE THAT YOUR PRICE <b>PER MONTH</b> </string>
+    <string name="properties_average_daily">*PLEASE MAKE SURE THAT THIS IS YOUR <b>DAILY</b>  INCOME</string>
     <string name="mobile_properties_fail">Mobile number must be longer than 10 numbers</string>
     <string name="address_properties_fail">Address must be longer than 10 letters</string>
     <string name="properties_filter_city">City</string>
@@ -48,6 +52,7 @@
     <string name="properties_hospital_name">Hospital name<font color='#cc0029'>*</font></string>
     <string name="LE">L.E</string>
     <string name="LE_H">L.E/H</string>
+    <string name="m_square">m²</string>
 
     <string-array name="properties_listed_for_array">
         <item>SELLING</item>
@@ -91,6 +96,11 @@
     <string name="drug_eye_select_drug">Please choose a drug first</string>
     <string name="drug_eye_up_to_date">Your List is updated</string>
     <string name="drug_eye_updating">Please wait while your list is being updated...</string>
+
+    <plurals name="images_count">
+        <item quantity="one">%1$s image is selected press <b>Publish</b> to upload</item>
+        <item quantity="other">%1$s images are selected press <b>Publish</b> to upload</item>
+    </plurals>
 
 
     <string-array name="cities_array">

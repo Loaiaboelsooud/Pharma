@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -63,7 +64,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                runThisAdUntilText.setText(day + "/" + month + "/" + year);
+                                runThisAdUntilText.setText(day + "/" + new DateFormatSymbols().getMonths()[month] + "/" + year);
                             }
                         }, year, month, day);
                 datePickerDialog.show();
@@ -74,7 +75,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
     private void initCitySpinner() {
         HintSpinner<String> hintSpinner = new HintSpinner<>(
                 citySpinner,
-                new HintAdapter<>(this, R.string.job_city, Arrays.asList(String.valueOf(R.array.cities_array))),
+                new HintAdapter<>(this, R.string.job_city, Arrays.asList(getResources().getStringArray(R.array.cities_array))),
                 new HintSpinner.Callback<String>() {
                     @Override
                     public void onItemSelected(int position, String itemAtPosition) {
@@ -83,6 +84,10 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
                                     PharmaConstants.citesToRegionStringsMap.get(PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem()).toString()), android.R.layout.simple_spinner_item);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             regionSpinner.setAdapter(adapter);
+                            regionSpinner.setEnabled(true);
+                        } else {
+                            regionSpinner.setAdapter(null);
+                            regionSpinner.setEnabled(false);
                         }
                     }
                 });
@@ -90,9 +95,10 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
     }
 
     private void initRegionSpinner() {
+        regionSpinner.setEnabled(false);
         HintSpinner<String> hintSpinner = new HintSpinner<>(
                 regionSpinner,
-                new HintAdapter<>(this, R.string.job_region, Arrays.asList(String.valueOf(R.array.regions_array))),
+                new HintAdapter<>(this, R.string.job_region, Arrays.asList(getResources().getStringArray(R.array.regions_array))),
                 new HintSpinner.Callback<String>() {
                     @Override
                     public void onItemSelected(int position, String itemAtPosition) {
@@ -104,7 +110,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
     private void initWorkPlaceSpinner() {
         HintSpinner<String> hintSpinner = new HintSpinner<>(
                 workPlaceSpinner,
-                new HintAdapter<>(this, R.string.job_work_place, Arrays.asList(String.valueOf(R.array.job_work_place_array))),
+                new HintAdapter<>(this, R.string.job_work_place, Arrays.asList(getResources().getStringArray(R.array.job_work_place_array))),
                 new HintSpinner.Callback<String>() {
                     @Override
                     public void onItemSelected(int position, String itemAtPosition) {
@@ -117,7 +123,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
     private void initPositionSpinner() {
         HintSpinner<String> hintSpinner = new HintSpinner<>(
                 positionSpinner,
-                new HintAdapter<>(this, R.string.job_position, Arrays.asList(String.valueOf(R.array.job_position_array))),
+                new HintAdapter<>(this, R.string.job_position, Arrays.asList(getResources().getStringArray(R.array.job_position_array))),
                 new HintSpinner.Callback<String>() {
                     @Override
                     public void onItemSelected(int position, String itemAtPosition) {
