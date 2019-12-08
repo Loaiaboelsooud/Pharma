@@ -7,8 +7,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 public class NavMenuInt extends AppCompatActivity {
+    private ImageButton promotionsImageButton, propertiesImageButton, jobImageButton,
+            prescriptionImageButton, drugInteractionsImageButton, drugIndexImageButton;
 
     public void intNavToolBar() {
         Toolbar toolbar = findViewById(R.id.toolbar_nav);
@@ -19,10 +22,15 @@ public class NavMenuInt extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_nav, menu);
+        promotionsImageButton = findViewById(R.id.promotions_image_button);
+        propertiesImageButton = findViewById(R.id.properties_image_button);
+        jobImageButton = findViewById(R.id.job_image_button);
+        prescriptionImageButton = findViewById(R.id.prescription_image_button);
+        drugInteractionsImageButton = findViewById(R.id.drug_interactions_image_button);
+        drugIndexImageButton = findViewById(R.id.drug_index_image_button);
 
-        final MenuItem promotionsItem = menu.findItem(R.id.action_offers);
-        promotionsItem.getActionView().setOnClickListener(new View.OnClickListener() {
+
+        promotionsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -31,8 +39,7 @@ public class NavMenuInt extends AppCompatActivity {
             }
         });
 
-        final MenuItem propertiesItem = menu.findItem(R.id.action_buysell);
-        propertiesItem.getActionView().setOnClickListener(new View.OnClickListener() {
+        propertiesImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -42,8 +49,7 @@ public class NavMenuInt extends AppCompatActivity {
             }
         });
 
-        final MenuItem jobItem = menu.findItem(R.id.action_job);
-        jobItem.getActionView().setOnClickListener(new View.OnClickListener() {
+        jobImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -53,8 +59,7 @@ public class NavMenuInt extends AppCompatActivity {
             }
         });
 
-        final MenuItem presecriptionItem = menu.findItem(R.id.action_presecription);
-        presecriptionItem.getActionView().setOnClickListener(new View.OnClickListener() {
+        prescriptionImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -63,23 +68,16 @@ public class NavMenuInt extends AppCompatActivity {
             }
         });
 
-        final MenuItem druginteractionItem = menu.findItem(R.id.action_druginteraction);
-        druginteractionItem.getActionView().setOnClickListener(new View.OnClickListener() {
+        drugInteractionsImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* if (!NavMenuInt.this.getClass().getSimpleName().equals("WebViewActivity")) {
-                    druginteractionItem.setActionView(
-                            R.layout.toolbar_druginteraction_image_active);*/
                 finish();
                 Intent intent = new Intent(NavMenuInt.this, WebViewActivity.class);
                 startActivity(intent);
-            }/* else
-                    Toast.makeText(getApplicationContext(), "unable to go", Toast.LENGTH_SHORT).show();
-            }*/
+            }
         });
 
-        final MenuItem drugindexItem = menu.findItem(R.id.action_drugindex);
-        drugindexItem.getActionView().setOnClickListener(new View.OnClickListener() {
+        drugIndexImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -87,25 +85,61 @@ public class NavMenuInt extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         switch (NavMenuInt.this.getClass().getSimpleName()) {
             case "WebViewActivity":
-                druginteractionItem.setActionView(
-                        R.layout.toolbar_druginteraction_image_active);
+                drugInteractionsImageButton.setImageResource(R.drawable.drug_interactions_toolbar_active);
+                prescriptionImageButton.setEnabled(true);
+                promotionsImageButton.setEnabled(true);
+                drugInteractionsImageButton.setEnabled(false);
+                propertiesImageButton.setEnabled(true);
+                jobImageButton.setEnabled(true);
+                drugIndexImageButton.setEnabled(true);
                 break;
             case "ViewPrescriptionsActivity":
-                presecriptionItem.setActionView(R.layout.toolbar_presecription_image_active);
+                prescriptionImageButton.setImageResource(R.drawable.prescription_toolbar_active);
+                prescriptionImageButton.setEnabled(false);
+                promotionsImageButton.setEnabled(true);
+                drugInteractionsImageButton.setEnabled(true);
+                propertiesImageButton.setEnabled(true);
+                jobImageButton.setEnabled(true);
+                drugIndexImageButton.setEnabled(true);
                 break;
             case "ViewPropertiesActivity":
-                propertiesItem.setActionView(R.layout.toolbar_properties_image_active);
+                propertiesImageButton.setImageResource(R.drawable.properties_toolbar_active);
+                prescriptionImageButton.setEnabled(true);
+                promotionsImageButton.setEnabled(true);
+                drugInteractionsImageButton.setEnabled(true);
+                propertiesImageButton.setEnabled(false);
+                jobImageButton.setEnabled(true);
+                drugIndexImageButton.setEnabled(true);
                 break;
             case "ViewJobActivity":
-                jobItem.setActionView(R.layout.toolbar_job_image_active);
+                jobImageButton.setImageResource(R.drawable.job_toolbar_active);
+                prescriptionImageButton.setEnabled(true);
+                promotionsImageButton.setEnabled(true);
+                drugInteractionsImageButton.setEnabled(true);
+                propertiesImageButton.setEnabled(true);
+                jobImageButton.setEnabled(false);
+                drugIndexImageButton.setEnabled(true);
                 break;
             case "ViewPromotionsActivity":
-                promotionsItem.setActionView(R.layout.toolbar_promotions_image_active);
+                promotionsImageButton.setImageResource(R.drawable.promotions_toolbar_active);
+                prescriptionImageButton.setEnabled(true);
+                promotionsImageButton.setEnabled(false);
+                drugInteractionsImageButton.setEnabled(true);
+                propertiesImageButton.setEnabled(true);
+                jobImageButton.setEnabled(true);
+                drugIndexImageButton.setEnabled(true);
                 break;
             case "SearchAndViewDrugEyeActivity":
-                drugindexItem.setActionView(R.layout.toolbar_drugindex_image_active);
+                drugIndexImageButton.setImageResource(R.drawable.drug_index_toolbar_active);
+                prescriptionImageButton.setEnabled(true);
+                promotionsImageButton.setEnabled(true);
+                drugInteractionsImageButton.setEnabled(true);
+                propertiesImageButton.setEnabled(true);
+                jobImageButton.setEnabled(true);
+                drugIndexImageButton.setEnabled(false);
                 break;
         }
         return super.onCreateOptionsMenu(menu);

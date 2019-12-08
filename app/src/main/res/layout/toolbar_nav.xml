@@ -1,34 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@null"
     android:elevation="4dp"
-    app:theme="@style/AppTheme.Toolbar"
     android:gravity="center_vertical|start"
-    app:contentInsetStartWithNavigation="0dp"
-    android:contentInsetLeft="0dp"
-    android:contentInsetStart="0dp"
-    android:contentInsetRight="0dp"
-    android:contentInsetEnd="0dp"
-    app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp"
-    app:contentInsetRight="0dp"
-    app:contentInsetEnd="0dp">
+    app:theme="@style/AppTheme.Toolbar">
 
-    <android.support.v7.widget.ActionMenuView
-        android:id="@+id/menu_nav"
+
+    <ImageButton
+        android:id="@+id/promotions_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:contentInsetStartWithNavigation="0dp"
-        android:contentInsetLeft="0dp"
-        android:contentInsetStart="0dp"
-        android:contentInsetRight="0dp"
-        android:contentInsetEnd="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetEnd="0dp" />
+        android:background="@null"
+        android:src="@drawable/promotions_toolbar" />
+
+    <ImageButton
+        android:id="@+id/properties_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/properties_toolbar" />
+
+    <ImageButton
+        android:id="@+id/job_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/job_toolbar" />
+
+    <ImageButton
+        android:id="@+id/prescription_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/prescription_toolbar" />
+
+    <ImageButton
+        android:id="@+id/drug_interactions_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/drug_interactions_toolbar" />
+
+    <ImageButton
+        android:id="@+id/drug_index_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/drug_index_toolbar" />
 
 </android.support.v7.widget.Toolbar>
