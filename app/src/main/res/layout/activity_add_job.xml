@@ -78,26 +78,30 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:inputType="number"
                     android:hint="@string/job_from_salary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/LE_H"
-                    android:textColor="@color/colorRed" />
+                    android:textColor="@color/colorRed"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/job_to_salary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:inputType="number"
                     android:hint="@string/job_to_salary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/LE_H"
-                    android:textColor="@color/colorRed" />
+                    android:textColor="@color/colorRed"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <Spinner
@@ -156,14 +160,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/job_run_this_ad_until_text"
+                    android:id="@+id/job_due_date_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/job_run_this_ad_until"
                     android:textSize="15dp" />
 
                 <EditText
-                    android:id="@+id/job_run_this_ad_until_date"
+                    android:id="@+id/job_due_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
@@ -175,24 +179,32 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/job_run_this_ad_until_button"
+                    android:id="@+id/job_due_date_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/date" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/job_post_button"
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:background="@color/colorRed"
-                android:onClick="addJob"
-                android:text="@string/job_post_button"
-                android:textColor="@color/colorWhite"
-                android:textSize="25dp"
-                android:textStyle="bold" />
+                card_view:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/job_post_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/colorRed"
+                    android:onClick="addJob"
+                    android:text="@string/job_post_button"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
 

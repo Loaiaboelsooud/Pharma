@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_color"
     android:orientation="vertical"
     tools:context=".FilterJobActivity">
 
@@ -12,67 +13,74 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rectangle_shape">
 
-        <TextView
-            android:id="@+id/job_filter_work_place_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/job_filter_work_place" />
-
-        <Spinner
-            android:id="@+id/job_filter_work_place"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/job_filter_work_place_array" />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/job_filter_text"
+                android:textColor="@color/colorRed"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/job_filter_position_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/job_filter_position" />
+            <Spinner
+                android:id="@+id/job_filter_work_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:entries="@array/job_filter_work_place_array" />
 
-        <Spinner
-            android:id="@+id/job_filter_position"
+            <Spinner
+                android:id="@+id/job_filter_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:entries="@array/job_filter_position_array" />
+
+            <Spinner
+                android:id="@+id/job_filter_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:entries="@array/cities_array_filter" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/job_filter_position_array" />
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/job_filter_city_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/properties_filter_city" />
-
-        <Spinner
-            android:id="@+id/job_filter_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/cities_array_filter" />
-
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/job_search_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/properties_filter_button_string" />
-
+                <Button
+                    android:id="@+id/job_search_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorRed"
+                    android:text="@string/filter_button_string"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

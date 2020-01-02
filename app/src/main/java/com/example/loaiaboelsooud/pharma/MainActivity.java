@@ -25,7 +25,6 @@ import java.util.Calendar;
 public class MainActivity extends MainMenuInt {
 
     private GridView gridView;
-    private ImageView avatar;
     private int[] menuImages = {R.drawable.drug_index_menu, R.drawable.drug_interactions_menu, R.drawable.prescription_menu,
             R.drawable.job_menu, R.drawable.properties_menu, R.drawable.promotions_menu};
 

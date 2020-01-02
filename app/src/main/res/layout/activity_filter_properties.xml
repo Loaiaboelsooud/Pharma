@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_color"
     android:orientation="vertical"
     tools:context=".FilterPropertiesActivity">
 
@@ -12,62 +13,74 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TableLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="1">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rectangle_shape">
 
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/properties_filter_listed_for_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/properties_listed_for" />
+                android:layout_margin="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/properties_filter_text"
+                android:textColor="@color/colorRed"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/properties_filter_listed_for"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:entries="@array/properties_filter_listed_for_array" />
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/properties_filter_type_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/properties_type" />
 
             <Spinner
                 android:id="@+id/properties_filter_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:entries="@array/properties_filter_type_array" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/properties_filter_cities_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/properties_filter_city" />
 
             <Spinner
                 android:id="@+id/properties_filter_cities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:entries="@array/cities_array_filter" />
-        </TableRow>
-    </TableLayout>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/properties_search_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/properties_filter_button_string" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical">
 
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/properties_search_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorRed"
+                    android:text="@string/filter_button_string"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

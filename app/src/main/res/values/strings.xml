@@ -9,9 +9,9 @@
     <string name="drug_index">DRUG INDEX</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>
-    <string name="prescriptions_gallery_button_string">Gallery</string>
-    <string name="prescriptions_camera_button_string">Camera</string>
-    <string name="prescriptions_post_button_string">POST</string>
+    <string name="prescriptions_gallery_button_string">  Upload form Gallery</string>
+    <string name="prescriptions_camera_button_string">Open Camera</string>
+    <string name="prescriptions_post_button_string">Publish This Ad</string>
     <string name="prescriptions_description_hint">add small description...</string>
     <string name="prescriptions_description">Add prescriptions</string>
     <string name="comments_button_string">Comment</string>
@@ -64,13 +64,16 @@
         <item>factory</item>
         <item>hospital</item>
     </string-array>
-    <string name="properties_filter_button_string">Search</string>
+    <string name="filter_button_string">Apply Filter</string>
     <string name="properties_filter_sell_string">Properties for sale</string>
     <string name="properties_filter_rent_string">Properties for rent</string>
     <string name="properties_filter_pharmacy_string">Pharmacy</string>
     <string name="properties_filter_warehouse_string">Warehouse</string>
     <string name="properties_filter_factory_string">Factory</string>
     <string name="properties_filter_hospital_string">Hospital</string>
+    <string name="properties_filter_listed_for">Listed For</string>
+    <string name="properties_filter_type">Type</string>
+    <string name="properties_filter_text">Filter Properties</string>
     <string name="job_city">City<font color='#cc0029'>*</font></string>
     <string name="job_address">Address<font color='#cc0029'>*</font></string>
     <string name="job_region">Region<font color='#cc0029'>*</font></string>
@@ -90,6 +93,9 @@
     <string name="post_job_success">Your job is added successfully</string>
     <string name="job_filter_position">Position</string>
     <string name="job_filter_work_place">Workplace</string>
+    <string name="job_filter_text">Filter Job Opportunities</string>
+    <string name="job_hiring">HIRING</string>
+    <string name="job_closed">CLOSED</string>
     <string name="drug_eye_similarities_button">Similarities</string>
     <string name="drug_eye_alternatives_button">Alternatives</string>
     <string name="search">Search</string>

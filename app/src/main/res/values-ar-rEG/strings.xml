@@ -65,14 +65,16 @@
         <item>مصانع ادوية</item>
         <item>مستشفيات</item>
     </string-array>
-    <string name="properties_filter_button_string">بحث</string>
+    <string name="filter_button_string">طبق الفلتر</string>
     <string name="properties_filter_sell_string">بيع</string>
     <string name="properties_filter_rent_string">ايجار</string>
     <string name="properties_filter_pharmacy_string">صيدلية</string>
     <string name="properties_filter_warehouse_string">مخزن ادوية</string>
     <string name="properties_filter_factory_string">مصنع ادوية</string>
     <string name="properties_filter_hospital_string">مستشفي</string>
-
+    <string name="properties_filter_listed_for">سبب البيع</string>
+    <string name="properties_filter_type">النوع</string>
+    <string name="properties_filter_text">فلتر الوحدات</string>
     <string name="job_city">المدينة<font color='#cc0029'>*</font></string>
     <string name="job_address">العنوان<font color='#cc0029'>*</font></string>
     <string name="job_region">المنطقة<font color='#cc0029'>*</font></string>
@@ -89,9 +91,12 @@
     <string name="post_job_success">تم اضافة الوظيفة بنجاح</string>
     <string name="job_filter_position">الوظيفة</string>
     <string name="job_filter_work_place">المكان</string>
+    <string name="job_filter_text">فلتر وظائف العمل</string>
     <string name="job_run_this_ad_until">هذا الاعلان يعمل حتي</string>
     <string name="job_negotiable">يناقش</string>
     <string name="job_new_opportunity">وظيفه جديدة</string>
+    <string name="job_hiring">يقبل التوظيف</string>
+    <string name="job_closed">انتهي</string>
     <string name="drug_eye_similarities_button">التشبهات</string>
     <string name="drug_eye_alternatives_button">البدائل</string>
     <string name="search">البحث</string>

@@ -4,9 +4,9 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -29,9 +30,10 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
     private Spinner citySpinner, regionSpinner, workPlaceSpinner, positionSpinner;
     private Calendar calendar;
     private Button dateButton;
-    private EditText runThisAdUntilText;
+    private EditText dueDate;
     private DatePickerDialog datePickerDialog;
-    int year, month, day;
+    private int year, month, day;
+    private String dueDateString = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,8 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
         regionSpinner = findViewById(R.id.job_region);
         workPlaceSpinner = findViewById(R.id.job_work_place);
         positionSpinner = findViewById(R.id.job_position);
-        dateButton = findViewById(R.id.job_run_this_ad_until_button);
-        runThisAdUntilText = findViewById(R.id.job_run_this_ad_until_date);
+        dateButton = findViewById(R.id.job_due_date_button);
+        dueDate = findViewById(R.id.job_due_date);
         initCitySpinner();
         initRegionSpinner();
         initWorkPlaceSpinner();
@@ -64,7 +66,8 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                runThisAdUntilText.setText(day + "/" + new DateFormatSymbols().getMonths()[month] + "/" + year);
+                                dueDate.setText(day + "/" + new DateFormatSymbols().getMonths()[month] + "/" + year);
+                                dueDateString = day + "-" + month + "-" + year;
                             }
                         }, year, month, day);
                 datePickerDialog.show();
@@ -135,28 +138,33 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
 
 
     public void addJob(View view) {
-        EditText name, address, description, mobileNumbers, from, to;
-        Spinner positionSpinner, workPlaceSpinner;
+        EditText name, address, description, mobileNumbers, from, to, dueDate;
+        CheckBox negotiable;
         List<String> mobileNumbersList;
         mobileNumbersList = new ArrayList<String>();
         PrefUtil prefUtil = new PrefUtil(this);
         name = findViewById(R.id.job_name);
         address = findViewById(R.id.job_address);
-        positionSpinner = findViewById(R.id.job_position);
-        workPlaceSpinner = findViewById(R.id.job_work_place);
         from = findViewById(R.id.job_from_salary);
         to = findViewById(R.id.job_to_salary);
         description = findViewById(R.id.job_description);
         mobileNumbers = findViewById(R.id.job_mobile);
+        negotiable = findViewById(R.id.job_negotiable);
         if (name.getText().toString() != null && !name.getText().toString().isEmpty() &&
+                description.getText().toString() != null && !description.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
-                mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()) {
+                mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()
+                && regionSpinner.getSelectedItemId() < regionSpinner.getCount()
+                && citySpinner.getSelectedItemId() < citySpinner.getCount()
+                && workPlaceSpinner.getSelectedItemId() < workPlaceSpinner.getCount()
+                && positionSpinner.getSelectedItemId() < positionSpinner.getCount()) {
             mobileNumbersList.clear();
             mobileNumbersList.add(mobileNumbers.getText().toString());
             progressBar.setVisibility(View.VISIBLE);
             final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             });
             int paresedFrom = 0, paresedTo = 0;
+            String dueDateString = null;
             if (!from.getText().toString().equals("")) {
                 paresedFrom = Integer.parseInt(from.getText().toString());
             }
@@ -169,7 +177,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
                     paresedFrom, paresedTo, PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()),
                     PharmaConstants.positionMapAdd.get(positionSpinner.getSelectedItem().toString()),
                     PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()),
-                    address.getText().toString(), mobileNumbersList, this);
+                    address.getText().toString(), mobileNumbersList, this.dueDateString, negotiable.isChecked() ? "1" : "0", this);
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),
                     Toast.LENGTH_LONG).show();

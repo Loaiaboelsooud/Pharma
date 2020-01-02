@@ -176,9 +176,9 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
                 mobileNumber.getText().toString() != null && !mobileNumber.getText().toString().isEmpty()
                 && description.getText().toString() != null && !description.getText().toString().isEmpty()
-                && regionSpinner.getSelectedItem().toString() != null && citySpinner.getSelectedItem().toString() != null
-                && statusSpinner.getSelectedItem().toString() != null && listedForSpinner.getSelectedItem().toString() != null
-                && typeSpinner.getSelectedItem().toString() != null) {
+                && regionSpinner.getSelectedItemId() < regionSpinner.getCount() && citySpinner.getSelectedItemId() < citySpinner.getCount()
+                && statusSpinner.getSelectedItemId() < statusSpinner.getCount() && listedForSpinner.getSelectedItemId() < listedForSpinner.getCount()
+                && typeSpinner.getSelectedItemId() < typeSpinner.getCount()) {
             mobileNumbersList.clear();
             progressBar.setVisibility(View.VISIBLE);
             mobileNumbersList.add(mobileNumber.getText().toString());

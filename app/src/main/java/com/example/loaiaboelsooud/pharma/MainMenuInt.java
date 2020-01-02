@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
@@ -15,6 +16,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainMenuInt extends AppCompatActivity {
     private Activity activity;
     private CircleImageView profilePicture;
+    private TextView profileName;
 
     public void intMainToolBar(Activity activity) {
         Toolbar toolbar = findViewById(R.id.toolbar_main);
@@ -33,11 +35,15 @@ public class MainMenuInt extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        profilePicture = findViewById(R.id.toolbar_profile_picture);
+        profileName = findViewById(R.id.toolbar_profile_name);
         if (isLoggedIn()) {
             PrefUtil prefUtil = new PrefUtil(activity);
             User user = prefUtil.getFacebookUserInfo();
-            profilePicture = findViewById(R.id.toolbar_profile_picture);
-            Glide.with(activity).load(user.getAvatar() + "picture?width=250&height=250").into(profilePicture);
+            profileName.setText(user.getName());
+            Glide.with(activity).load(user.getAvatar() + "picture?width=100&height=100").into(profilePicture);
+        } else {
+            Glide.with(activity).load(R.drawable.ic_action_settings).into(profilePicture);
         }
         profilePicture.setOnClickListener(new View.OnClickListener() {
             @Override

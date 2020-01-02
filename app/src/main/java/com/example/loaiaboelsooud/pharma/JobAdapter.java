@@ -1,6 +1,8 @@
 package com.example.loaiaboelsooud.pharma;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,13 +42,21 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 into(((Jobs) holder).uploaderAvatar);
         ((Jobs) holder).name.setText(jobsItem.getName());
         ((Jobs) holder).description.setText(jobsItem.getDescription());
-        ((Jobs) holder).position.setText(PharmaConstants.positionMapView.get(jobsItem.getPosition()));
+        ((Jobs) holder).position.setText(PharmaConstants.positionMapView.get(jobsItem.getPosition()).toUpperCase());
         ((Jobs) holder).workPlace.setText(PharmaConstants.workPlaceMapView.get(jobsItem.getWorkPlace()));
         ((Jobs) holder).city.setText(PharmaConstants.citiesMapView.get(jobsItem.getCity()));
         ((Jobs) holder).region.setText(PharmaConstants.regionsMapView.get(jobsItem.getRegion()));
         ((Jobs) holder).address.setText(jobsItem.getAddress());
         ((Jobs) holder).mobileNumber.setText(jobsItem.getMobileNumbers().get(0));
         ((Jobs) holder).updatedAt.setText(PrefUtil.splitDateTime(jobsItem.getUpdatedAt()));
+        ((Jobs) holder).salary.setText(String.valueOf((jobsItem.getMinSalary() + jobsItem.getMaxSalary()) / 2));
+        if (jobsItem.getStatus().equals(PharmaConstants.HIRING)) {
+            ((Jobs) holder).status.setText(context.getResources().getString(R.string.job_hiring));
+            ((Jobs) holder).status.setTextColor(Color.parseColor("#a7bd56"));
+        } else if (jobsItem.getStatus().equals(PharmaConstants.CLOSED)) {
+            ((Jobs) holder).status.setText(context.getResources().getString(R.string.job_closed));
+            ((Jobs) holder).status.setTextColor(Color.parseColor("#ef0f44"));
+        }
     }
 
     @Override
@@ -57,7 +67,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class Jobs extends RecyclerView.ViewHolder {
-        private TextView uploaderName, name, description, position, workPlace, city, region, address, mobileNumber, updatedAt;
+        private TextView uploaderName, name, description, position, workPlace, city, region, address, mobileNumber, updatedAt, status, salary;
         private ImageView uploaderAvatar;
 
         public Jobs(View prescriptionsView) {
@@ -73,6 +83,9 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             address = prescriptionsView.findViewById(R.id.job_adapter_address);
             mobileNumber = prescriptionsView.findViewById(R.id.job_adapter_mobile);
             updatedAt = prescriptionsView.findViewById(R.id.job_adapter_updated_at);
+            status = prescriptionsView.findViewById(R.id.job_adapter_status);
+            salary = prescriptionsView.findViewById(R.id.job_adapter_salary);
+
         }
     }
 }

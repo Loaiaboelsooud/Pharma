@@ -32,6 +32,12 @@ public class JobsItem {
     @SerializedName("updated_at")
     private String updatedAt;
 
+    @SerializedName("status")
+    private String status;
+
+    @SerializedName("salary_negotiable")
+    private Boolean negotiable;
+
     public String getUpdatedAt() {
         return updatedAt;
     }
@@ -134,5 +140,21 @@ public class JobsItem {
 
     public void setMobileNumbers(List<String> mobileNumbers) {
         this.mobileNumbers = mobileNumbers;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Boolean getNegotiable() {
+        return negotiable;
+    }
+
+    public void setNegotiable(Boolean negotiable) {
+        this.negotiable = negotiable;
     }
 }
