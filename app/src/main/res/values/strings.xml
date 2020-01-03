@@ -9,8 +9,8 @@
     <string name="drug_index">DRUG INDEX</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>
-    <string name="prescriptions_gallery_button_string">  Upload form Gallery</string>
-    <string name="prescriptions_camera_button_string">Open Camera</string>
+    <string name="prescriptions_gallery_button_string">Gallery</string>
+    <string name="prescriptions_camera_button_string">Camera</string>
     <string name="prescriptions_post_button_string">Publish This Ad</string>
     <string name="prescriptions_description_hint">add small description...</string>
     <string name="prescriptions_description">Add prescriptions</string>
