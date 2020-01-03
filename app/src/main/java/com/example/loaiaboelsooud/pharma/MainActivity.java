@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
 
 import java.util.Calendar;
 
@@ -119,7 +120,8 @@ public class MainActivity extends MainMenuInt {
             Calendar expireDate = prefUtil.getExpireDate();
             currentTime.setTime(currentTime.getTime());
             if (expireDate.before(currentTime)) {
-                httpRequests.sendFBPutRequest(this);
+                LoginManager.getInstance().logOut();
+                //httpRequests.sendFBPutRequest(this);
             }
         }
 

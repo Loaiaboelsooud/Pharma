@@ -12,7 +12,8 @@ public class PharmaConstants extends Application {
     private static Resources res;
 
     public static final String ISFILTERED = "isFiltered";
-    public static final String HIRING = "Hiring";
+    public static final String JOB_HIRING = "Hiring";
+    public static final String JOB_CLOSED = "Closed";
     public static final String SELLING = "selling";
     public static final String RENTING = "renting";
     public static final String PHARMACY = "pharmacy";

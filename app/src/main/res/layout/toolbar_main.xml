@@ -7,12 +7,20 @@
     android:gravity="center"
     app:contentInsetStart="0dp">
 
+    <ImageView
+        android:id="@+id/toolbar_settings_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_settings"
+        android:visibility="gone" />
+
     <FrameLayout
-        android:id="@+id/profile_frame"
+        android:id="@+id/toolbar_profile_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/comment_shape">
+        android:background="@drawable/comment_shape"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,8 +37,8 @@
                 android:id="@+id/toolbar_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
                 android:layout_margin="2dp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </FrameLayout>

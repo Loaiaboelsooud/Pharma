@@ -208,7 +208,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
@@ -220,7 +220,7 @@
 
                 <TextView
                     android:id="@+id/properties_user_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:textSize="20dp" />
@@ -232,24 +232,24 @@
 
                 <TextView
                     android:id="@+id/properties_adapter_price"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="right"
-                    android:textStyle="bold"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:fontFamily="sans-serif-condensed-medium"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/properties_adapter_LE"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textStyle="bold"
                     android:layout_gravity="right"
-                    android:textSize="20dp"
+                    android:text="@string/LE"
                     android:textColor="@color/colorRed"
-                    android:text="@string/LE" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,7 +69,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 dueDate.setText(day + "/" + new DateFormatSymbols().getMonths()[month] + "/" + year);
-                                dueDateString = day + "-" + month + "-" + year;
+                                dueDateString = year + "-" + month + "-" + day;
                             }
                         }, year, month, day);
                 datePickerDialog.show();

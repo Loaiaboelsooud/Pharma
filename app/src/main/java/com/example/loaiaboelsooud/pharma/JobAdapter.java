@@ -47,13 +47,23 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((Jobs) holder).city.setText(PharmaConstants.citiesMapView.get(jobsItem.getCity()));
         ((Jobs) holder).region.setText(PharmaConstants.regionsMapView.get(jobsItem.getRegion()));
         ((Jobs) holder).address.setText(jobsItem.getAddress());
-        ((Jobs) holder).mobileNumber.setText(jobsItem.getMobileNumbers().get(0));
+        if (jobsItem.getMobileNumbers() != null && !jobsItem.getMobileNumbers().isEmpty()) {
+            ((Jobs) holder).mobileNumber.setText(jobsItem.getMobileNumbers().get(0));
+        }
         ((Jobs) holder).updatedAt.setText(PrefUtil.splitDateTime(jobsItem.getUpdatedAt()));
-        ((Jobs) holder).salary.setText(String.valueOf((jobsItem.getMinSalary() + jobsItem.getMaxSalary()) / 2));
-        if (jobsItem.getStatus().equals(PharmaConstants.HIRING)) {
+        if (jobsItem.getNegotiable()) {
+            ((Jobs) holder).salary.setText(context.getResources().getString(R.string.job_negotiable).toUpperCase());
+            ((Jobs) holder).salary.setTextColor(Color.argb(63, 51, 51, 51));
+            ((Jobs) holder).LE_H.setVisibility(View.GONE);
+        } else {
+            ((Jobs) holder).salary.setText(String.valueOf((jobsItem.getMinSalary() + jobsItem.getMaxSalary()) / 2));
+            ((Jobs) holder).salary.setTextColor(Color.parseColor("#333333"));
+            ((Jobs) holder).LE_H.setVisibility(View.VISIBLE);
+        }
+        if (jobsItem.getStatus().equals(PharmaConstants.JOB_HIRING)) {
             ((Jobs) holder).status.setText(context.getResources().getString(R.string.job_hiring));
             ((Jobs) holder).status.setTextColor(Color.parseColor("#a7bd56"));
-        } else if (jobsItem.getStatus().equals(PharmaConstants.CLOSED)) {
+        } else if (jobsItem.getStatus().equals(PharmaConstants.JOB_CLOSED)) {
             ((Jobs) holder).status.setText(context.getResources().getString(R.string.job_closed));
             ((Jobs) holder).status.setTextColor(Color.parseColor("#ef0f44"));
         }
@@ -67,7 +77,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class Jobs extends RecyclerView.ViewHolder {
-        private TextView uploaderName, name, description, position, workPlace, city, region, address, mobileNumber, updatedAt, status, salary;
+        private TextView uploaderName, name, description, position, workPlace, city, region, address, mobileNumber, updatedAt, status, salary, LE_H;
         private ImageView uploaderAvatar;
 
         public Jobs(View prescriptionsView) {
@@ -85,6 +95,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             updatedAt = prescriptionsView.findViewById(R.id.job_adapter_updated_at);
             status = prescriptionsView.findViewById(R.id.job_adapter_status);
             salary = prescriptionsView.findViewById(R.id.job_adapter_salary);
+            LE_H = prescriptionsView.findViewById(R.id.job_adapter_LE_H);
 
         }
     }
