@@ -31,7 +31,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.GetPropertiesPostResult {
+public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.GetPropertiesPostResult, HTTPRequests.DeleteProperty {
 
     private static final int REQUEST_GALLERY_IMAGE = 1234;
     private List<MultipartBody.Part> images;
@@ -191,6 +191,9 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
             if (!averageDailyIncome.getText().toString().equals("")) {
                 parsedAverageDailyIncome = Integer.parseInt(averageDailyIncome.getText().toString());
             }
+            if (area.getText().toString() == null || area.getText().toString().isEmpty() || area.getText().toString() == "") {
+                area.setText("0");
+            }
             if (address.getText().toString().length() < 11) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(this, getString(R.string.address_properties_fail),
@@ -199,6 +202,10 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(this, getString(R.string.mobile_properties_fail),
                         Toast.LENGTH_LONG).show();
+            } else if (name.getText().toString().length() < 4) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(this, getString(R.string.name_properties_fail),
+                        Toast.LENGTH_LONG).show();
             } else {
                 postButton.setEnabled(false);
                 galleryButton.setEnabled(false);
@@ -206,7 +213,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                         PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()), address.getText().toString(), area.getText().toString(),
                         pharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString()),
                         pharmaConstants.typeMapAdd.get(typeSpinner.getSelectedItem().toString()), parsedPrice, description.getText().toString(),
-                        parsedAverageDailyIncome, mobileNumbersList, pharmaConstants.statusMapAdd.get(statusSpinner.getSelectedItem().toString()), images, this);
+                        parsedAverageDailyIncome, mobileNumbersList, pharmaConstants.statusMapAdd.get(statusSpinner.getSelectedItem().toString()), images, this, this);
             }
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),
@@ -269,8 +276,10 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), photoFile);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("images[]", photoFile.getName(), reqFile);
+            ImageCompression imageCompression = new ImageCompression(this);
+            File compressedImageFile = new File(imageCompression.compressImage(photoFile.getAbsolutePath()));
+            RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), compressedImageFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("images[]", compressedImageFile.getName(), reqFile);
             images.add(body);
         }
 

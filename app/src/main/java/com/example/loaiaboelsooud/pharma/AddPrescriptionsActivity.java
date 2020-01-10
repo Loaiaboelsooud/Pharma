@@ -164,9 +164,9 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
             e.printStackTrace();
         }*/
         ImageCompression imageCompression = new ImageCompression(this);
-        File file = new File(imageCompression.compressImage(photoFile.getAbsolutePath()));
-        RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), reqFile);
+        File compressedImageFile = new File(imageCompression.compressImage(photoFile.getAbsolutePath()));
+        RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), compressedImageFile );
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image", compressedImageFile .getName(), reqFile);
         return body;
     }
 

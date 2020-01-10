@@ -46,6 +46,7 @@
     <string name="properties_average_daily"><b>اليومي</b>*برجاء الاتأكد من ان هذا هو دخلك </string>
     <string name="mobile_properties_fail">رقم الموبيل يجب ان يكون اكثر من 10 ارقام</string>
     <string name="address_properties_fail">العنوان يجب ان يكون اكثر من 10 حروف </string>
+    <string name="name_properties_fail">الاسم يجب ان يكون اكثر من 3 حروف</string>
     <string name="properties_filter_city">المحافظة</string>
     <string name="properties_pharmacy_name">اسم الصيدليه<font color='#cc0029'>*</font></string>
     <string name="properties_warehouse_name">اسم المخزن<font color='#cc0029'>*</font></string>

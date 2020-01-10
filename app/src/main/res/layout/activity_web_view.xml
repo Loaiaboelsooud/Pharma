@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:background="@drawable/rectangle_shape">
+        android:paddingTop="15dp"
+        android:background="@drawable/web_view_shape">
 
         <WebView
             android:id="@+id/webview"

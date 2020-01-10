@@ -44,12 +44,14 @@ public class HTTPRequests extends AppCompatActivity {
             userCall.enqueue(new Callback<UserResponse>() {
                 @Override
                 public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                    User user = response.body().getUser();
-                    user.setExpireDate();
-                    prefUtil.saveFacebookUserInfo(user.getName(), user.getEmail(), user.getQualification(), user.getAvatar(), user.getJob()
-                            , user.getCity(), user.getExpiresIn());
-                    prefUtil.saveAccessToken(user.getToken());
-                    prefUtil.saveExpireDate(user.getExpireDate());
+                    if (response.body() != null) {
+                        User user = response.body().getUser();
+                        user.setExpireDate();
+                        prefUtil.saveFacebookUserInfo(user.getName(), user.getEmail(), user.getQualification(), user.getAvatar(), user.getJob()
+                                , user.getCity(), user.getExpiresIn());
+                        prefUtil.saveAccessToken(user.getToken());
+                        prefUtil.saveExpireDate(user.getExpireDate());
+                    }
                 }
 
                 @Override
@@ -95,9 +97,6 @@ public class HTTPRequests extends AppCompatActivity {
                 }
             }
 
-            /*eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kcnVnZGVhbGFwcC5jb21cL2FwaVwvYXV0aFwvcmVmcmVzaCIsI
-            mlhdCI6MTU2OTg3NjE3OCwiZXhwIjoxNTcwNDgxMDYwLCJuYmYiOjE1Njk4NzYyNjAsImp0aSI6IldTRE12Z3pYdDJYblZFYmQiLCJzdWIiO
-            jIsInBydiI6IjNkMDliZjA5MDZiNDc3NGYwNzUxMjhmODU4ODgyZTM1OWRmNDNhODkifQ.E_gnZKxSt1UVHR2e8JBVsMtCXISGnhTESaUAZOmbyK0*/
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
             }
@@ -219,7 +218,7 @@ public class HTTPRequests extends AppCompatActivity {
                                           String area, String listedFor, String type,
                                           int price, String description, int averageDailyIncome,
                                           List<String> mobileNumbers, String status, final List<MultipartBody.Part> images,
-                                          final GetPropertiesPostResult getPropertiesPostResult) {
+                                          final GetPropertiesPostResult getPropertiesPostResult, final DeleteProperty deleteProperty) {
         Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().addProperties
                 (PharmaConstants.BEARER + token, name, city, region, address, area, listedFor,
                         type, price, description, averageDailyIncome, mobileNumbers, status);
@@ -227,7 +226,7 @@ public class HTTPRequests extends AppCompatActivity {
             @Override
             public void onResponse(Call<PropertiesItemResponse> call, Response<PropertiesItemResponse> response) {
                 if (response.body() != null) {
-                    sendPropertiesImagePostRequest(images, token, response.body().getPropertiesItem().getId(), getPropertiesPostResult);
+                    sendPropertiesImagePostRequest(images, token, response.body().getPropertiesItem().getId(), getPropertiesPostResult, deleteProperty);
                 } else {
                     getPropertiesPostResult.failed();
                 }
@@ -236,6 +235,24 @@ public class HTTPRequests extends AppCompatActivity {
             @Override
             public void onFailure(Call<PropertiesItemResponse> call, Throwable t) {
                 getPropertiesPostResult.failed();
+            }
+        });
+    }
+
+    public void sendPropertyDeleteRequest(final DeleteProperty deleteProperty, final String token, final int id) {
+        Call<PropertiesItemResponse> userCall = RetrofitClient.getInstance().getApi().deletePropertyById(PharmaConstants.BEARER + token,
+                PharmaConstants.API + PharmaConstants.PROPERTIES + id);
+        userCall.enqueue(new Callback<PropertiesItemResponse>() {
+            @Override
+            public void onResponse(Call<PropertiesItemResponse> call, Response<PropertiesItemResponse> response) {
+                if (response.body() != null) {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PropertiesItemResponse> call, Throwable t) {
+                sendPropertyDeleteRequest(deleteProperty, token, id);
+                deleteProperty.failed();
             }
         });
     }
@@ -279,8 +296,8 @@ public class HTTPRequests extends AppCompatActivity {
         });
     }
 
-    public void sendPropertiesImagePostRequest(List<MultipartBody.Part> images, String token, int id,
-                                               final GetPropertiesPostResult getPropertiesPostResult) {
+    public void sendPropertiesImagePostRequest(List<MultipartBody.Part> images, final String token, final int id,
+                                               final GetPropertiesPostResult getPropertiesPostResult, final DeleteProperty deleteProperty) {
         Call<PropertiesImageResponse> userCall = RetrofitClient.getInstance().getApi().addPropertiesImages
                 (images, PharmaConstants.BEARER + token, PharmaConstants.API + PharmaConstants.PROPERTIES + id + PharmaConstants.IMAGES);
         userCall.enqueue(new Callback<PropertiesImageResponse>() {
@@ -289,6 +306,7 @@ public class HTTPRequests extends AppCompatActivity {
                 if (response.body() != null) {
                     getPropertiesPostResult.success();
                 } else {
+                    sendPropertyDeleteRequest(deleteProperty, token, id);
                     getPropertiesPostResult.failed();
                 }
             }
@@ -296,6 +314,7 @@ public class HTTPRequests extends AppCompatActivity {
             @Override
             public void onFailure(Call<PropertiesImageResponse> call, Throwable t) {
                 getPropertiesPostResult.failed();
+                sendPropertyDeleteRequest(deleteProperty, token, id);
             }
         });
     }
@@ -319,10 +338,10 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendJobPostRequest(final String token, String name, String description, int from, int to,
                                    String workPlace, String position, String city, String region, String address,
-                                   List<String> mobileNumbers,String dueDate,String negotiable ,final GetJobPostResult getJobPostResult) {
+                                   List<String> mobileNumbers, String dueDate, String negotiable, final GetJobPostResult getJobPostResult) {
         Call<JobsItemResponse> userCall = RetrofitClient.getInstance().getApi().addJob
                 (PharmaConstants.BEARER + token, name, description, from, to,
-                        workPlace, position, city, region, address, mobileNumbers,dueDate,negotiable);
+                        workPlace, position, city, region, address, mobileNumbers, dueDate, negotiable);
         userCall.enqueue(new Callback<JobsItemResponse>() {
             @Override
             public void onResponse(Call<JobsItemResponse> call, Response<JobsItemResponse> response) {
@@ -428,6 +447,10 @@ public class HTTPRequests extends AppCompatActivity {
     public interface GetProperty {
         void notifyItem(PropertiesItem propertiesItems);
 
+        void failed();
+    }
+
+    public interface DeleteProperty {
         void failed();
     }
 

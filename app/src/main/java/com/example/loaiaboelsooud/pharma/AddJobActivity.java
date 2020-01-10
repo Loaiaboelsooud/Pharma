@@ -7,16 +7,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.facebook.login.LoginManager;
-
 import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -32,10 +30,11 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
     private Spinner citySpinner, regionSpinner, workPlaceSpinner, positionSpinner;
     private Calendar calendar;
     private Button dateButton;
-    private EditText dueDate;
+    private EditText dueDate, from, to;
     private DatePickerDialog datePickerDialog;
-    private int year, month, day;
+    private int year, month, day, adjustedMonth;
     private String dueDateString = null;
+    private CheckBox negotiableCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +48,34 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
         positionSpinner = findViewById(R.id.job_position);
         dateButton = findViewById(R.id.job_due_date_button);
         dueDate = findViewById(R.id.job_due_date);
+        from = findViewById(R.id.job_from_salary);
+        to = findViewById(R.id.job_to_salary);
+        negotiableCheckBox = findViewById(R.id.job_negotiable);
+        initNegotiableCheckBox();
         initCitySpinner();
         initRegionSpinner();
         initWorkPlaceSpinner();
         initPositionSpinner();
         initDatePicker();
+    }
+
+    private void initNegotiableCheckBox() {
+        negotiableCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                                                          @Override
+                                                          public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                              if (isChecked) {
+                                                                  from.setEnabled(false);
+                                                                  to.setEnabled(false);
+                                                                  from.setText("");
+                                                                  to.setText("");
+                                                              } else {
+                                                                  from.setEnabled(true);
+                                                                  to.setEnabled(true);
+                                                              }
+                                                          }
+                                                      }
+        );
     }
 
     private void initDatePicker() {
@@ -69,7 +91,8 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 dueDate.setText(day + "/" + new DateFormatSymbols().getMonths()[month] + "/" + year);
-                                dueDateString = year + "-" + month + "-" + day;
+                                adjustedMonth = month + 1;
+                                dueDateString = year + "-" + adjustedMonth + "-" + day;
                             }
                         }, year, month, day);
                 datePickerDialog.show();
@@ -140,18 +163,14 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
 
 
     public void addJob(View view) {
-        EditText name, address, description, mobileNumbers, from, to, dueDate;
-        CheckBox negotiable;
+        EditText name, address, description, mobileNumbers;
         List<String> mobileNumbersList;
         mobileNumbersList = new ArrayList<String>();
         PrefUtil prefUtil = new PrefUtil(this);
         name = findViewById(R.id.job_name);
         address = findViewById(R.id.job_address);
-        from = findViewById(R.id.job_from_salary);
-        to = findViewById(R.id.job_to_salary);
         description = findViewById(R.id.job_description);
         mobileNumbers = findViewById(R.id.job_mobile);
-        negotiable = findViewById(R.id.job_negotiable);
         if (name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 description.getText().toString() != null && !description.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
@@ -166,7 +185,6 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
             final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             });
             int paresedFrom = 0, paresedTo = 0;
-            String dueDateString = null;
             if (!from.getText().toString().equals("")) {
                 paresedFrom = Integer.parseInt(from.getText().toString());
             }
@@ -174,12 +192,25 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
             if (!to.getText().toString().equals("")) {
                 paresedTo = Integer.parseInt(to.getText().toString());
             }
-
-            httpRequests.sendJobPostRequest(prefUtil.getToken(), name.getText().toString(), description.getText().toString(),
-                    paresedFrom, paresedTo, PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()),
-                    PharmaConstants.positionMapAdd.get(positionSpinner.getSelectedItem().toString()),
-                    PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()),
-                    address.getText().toString(), mobileNumbersList, this.dueDateString, negotiable.isChecked() ? "1" : "0", this);
+            if (address.getText().toString().length() < 11) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(this, getString(R.string.address_properties_fail),
+                        Toast.LENGTH_LONG).show();
+            } else if (mobileNumbers.getText().toString().length() < 11) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(this, getString(R.string.mobile_properties_fail),
+                        Toast.LENGTH_LONG).show();
+            } else if (name.getText().toString().length() < 4) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(this, getString(R.string.name_properties_fail),
+                        Toast.LENGTH_LONG).show();
+            } else {
+                httpRequests.sendJobPostRequest(prefUtil.getToken(), name.getText().toString(), description.getText().toString(),
+                        paresedFrom, paresedTo, PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()),
+                        PharmaConstants.positionMapAdd.get(positionSpinner.getSelectedItem().toString()),
+                        PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()),
+                        address.getText().toString(), mobileNumbersList, this.dueDateString, negotiableCheckBox.isChecked() ? "1" : "0", this);
+            }
         } else {
             Toast.makeText(this, getString(R.string.post_properties_fail),
                     Toast.LENGTH_LONG).show();

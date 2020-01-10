@@ -41,8 +41,9 @@
     <string name="post_properties_fail">Please fill all the required fields</string>
     <string name="properties_price_per_month">*PlEASE MAKE SURE THAT YOUR PRICE <b>PER MONTH</b> </string>
     <string name="properties_average_daily">*PLEASE MAKE SURE THAT THIS IS YOUR <b>DAILY</b>  INCOME</string>
-    <string name="mobile_properties_fail">Mobile number must be longer than 10 numbers</string>
-    <string name="address_properties_fail">Address must be longer than 10 letters</string>
+    <string name="mobile_properties_fail">Mobile number Field must be longer than 10 numbers</string>
+    <string name="address_properties_fail">Address Field must be longer than 10 letters</string>
+    <string name="name_properties_fail">Name Field must be longer than 3 letters</string>
     <string name="properties_filter_city">City</string>
     <string name="properties_average_daily_income">Average daily income</string>
     <string name="properties_status">Status<font color='#cc0029'>*</font></string>
