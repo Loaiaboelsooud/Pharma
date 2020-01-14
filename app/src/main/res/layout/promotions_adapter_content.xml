@@ -17,12 +17,12 @@
         <LinearLayout
             android:id="@+id/user_profile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="25dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
@@ -31,16 +31,15 @@
                     android:id="@+id/promotions_adapter_company_profile_picture"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="40px"
-                    android:layout_marginTop="12px" />
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="12dp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="15px"
-                    android:layoutDirection="ltr"
+                    android:layout_marginStart="15dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -48,7 +47,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="sans-serif-condensed-medium"
-                        android:layoutDirection="ltr"
                         android:textSize="20dp" />
 
                     <TextView
@@ -86,16 +84,16 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:background="@color/colorDarkGrey"
+                    android:background="@color/colorDarkGray"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/promotions_adapter_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_margin="10dp" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/promotions_adapter_description"
@@ -103,6 +101,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>

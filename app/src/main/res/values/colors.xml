@@ -5,10 +5,11 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorRed">#EF0F45</color>
     <color name="colorTextOverLay">#7FFFFFFF</color>
-    <color name="colorGrey">#e5e5e5</color>
-    <color name="colorDarkGrey">#dddddd</color>
-    <color name="black_overlay">#e5e5e5</color>
+    <color name="colorGray">#e5e5e5</color>
+    <color name="colorDarkGray">#dddddd</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorWhite">#ffffff</color>
-
+    <color name="colorEclipse">#404040</color>
+    <color name="colorGray86">#dbdbdb</color>
+    <color name="colorGray77">#c4c4c4</color>
 </resources>

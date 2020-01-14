@@ -72,6 +72,9 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
             httpRequests.sendPrescriptionsPostRequest(imagePart, descriptionPart, this, prefUtil.getToken());
 
         } else {
+            postButton.setEnabled(true);
+            galleryButton.setEnabled(true);
+            cameraButton.setEnabled(true);
             Toast.makeText(this, getString(R.string.post_prescriptions_fail),
                     Toast.LENGTH_LONG).show();
         }

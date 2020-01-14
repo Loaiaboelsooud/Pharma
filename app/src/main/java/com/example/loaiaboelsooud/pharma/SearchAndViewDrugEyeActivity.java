@@ -3,14 +3,17 @@ package com.example.loaiaboelsooud.pharma;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -53,7 +56,6 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
         alternativesButton = findViewById(R.id.drug_eye_alternatives_button);
         drugEyeSearchKeyWord = findViewById(R.id.drug_eye_search_key_word);
         viewButton = findViewById(R.id.drug_eye_view_button);
-        viewButton.setVisibility(View.GONE);
         drugEyeSearchKeyWord.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
@@ -66,6 +68,9 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
             @Override
             public void afterTextChanged(Editable arg0) {
                 drugEyeItems.clear();
+                viewButton.setVisibility(View.GONE);
+                similaritiesButton.setVisibility(View.GONE);
+                alternativesButton.setVisibility(View.GONE);
                 if (!drugEyeSearchKeyWord.getText().toString().isEmpty() && drugEyeSearchKeyWord.getText().toString() != null) {
                     DrugEyeAsyncTasks.getDrugEyeItems(drugEyeSearchKeyWord.getText().toString().toUpperCase(), drugItemDao).observe(SearchAndViewDrugEyeActivity.this, new Observer<List<DrugEyeItem>>() {
                         @Override
@@ -137,7 +142,10 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
         super.onStart();
         viewButton.setText("");
         viewButton.setVisibility(View.GONE);
+        similaritiesButton.setVisibility(View.GONE);
+        alternativesButton.setVisibility(View.GONE);
         drugEyeSearchKeyWord.setText("");
+        drugEyeItems.clear();
     }
 
     private void checkDrugEyeVersion() {
@@ -184,5 +192,7 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
     public void onDrugEyeClick(int drugEyePosition) {
         viewButton.setText(drugEyeItems.get(drugEyePosition).getName());
         viewButton.setVisibility(View.VISIBLE);
+        similaritiesButton.setVisibility(View.VISIBLE);
+        alternativesButton.setVisibility(View.VISIBLE);
     }
 }

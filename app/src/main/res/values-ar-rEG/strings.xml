@@ -32,7 +32,7 @@
     <string name="properties_profit">العائد</string>
     <string name="properties_address">العنوان بالتفصيل<font color='#cc0029'>*</font></string>
     <string name="properties_mobile">الموبيل<font color='#cc0029'>*</font></string>
-    <string name="properties_mobile2">الموبيل2</string>
+    <string name="properties_mobile2">الموبي ثاني</string>
     <string name="properties_land_number">الرقم الارضي</string>
     <string name="properties_notes">ملاحظات</string>
     <string name="properties_listed_for">سبب البيع<font color='#cc0029'>*</font></string>
@@ -42,8 +42,8 @@
     <string name="properties_average_daily_income">معدل الدخل اليومي</string>
     <string name="properties_status">الحاله<font color='#cc0029'>*</font></string>
     <string name="post_properties_fail">برجاء ادخال جميع البينات المطلوبة</string>
-    <string name="properties_price_per_month"><b>شهري</b>*برجاء التأكد من ان المبلغ </string>
-    <string name="properties_average_daily"><b>اليومي</b>*برجاء الاتأكد من ان هذا هو دخلك </string>
+    <string name="properties_price_per_month"> *برجاء التأكد من ان المبلغ <b>شهري</b> </string>
+    <string name="properties_average_daily">*برجاء الاتأكد من ان هذا هو دخلك <b>اليومي</b> </string>
     <string name="mobile_properties_fail">رقم الموبيل يجب ان يكون اكثر من 10 ارقام</string>
     <string name="address_properties_fail">العنوان يجب ان يكون اكثر من 10 حروف </string>
     <string name="name_properties_fail">الاسم يجب ان يكون اكثر من 3 حروف</string>
@@ -54,6 +54,8 @@
     <string name="properties_hospital_name">اسم المستشفي<font color='#cc0029'>*</font></string>
     <string name="LE">ج.م</string>
     <string name="LE_H">ج.م/س</string>
+    <string name="LE_Month">ج.م/ش</string>
+    <string name="LE_Day">ج.م/ي</string>
     <string name="m_square">²م</string>
     <string-array name="properties_listed_for_array">
         <item>بيع</item>
@@ -102,6 +104,13 @@
     <string name="drug_eye_alternatives_button">البدائل</string>
     <string name="search">البحث</string>
     <string name="drug_eye_select_drug">برجاء اختيار الدواء اولا</string>
+    <string name="drug_eye_text">درج اندكس</string>
+    <string name="drug_eye_old_price">السعر القديم</string>
+    <string name="drug_eye_new_price">السعر الجديد</string>
+    <string name="drug_eye_category">الفئه</string>
+    <string name="drug_eye_active_ingredients">المواد الفعاله</string>
+    <string name="drug_eye_manufacturing_company">الشركه المصنعه</string>
+    <string name="drug_eye_additional_information">معلومات اضافيه</string>
     <string name="drug_eye_up_to_date">لا يوجد تحديث جديد</string>
     <string name="drug_eye_updating">برجاء الانتظار جاري تحميل المحتوي...</string>
     <plurals name="images_count" tools:ignore="MissingQuantity">

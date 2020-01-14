@@ -57,11 +57,13 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()) != null) {
             if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()).equals(pharmaConstants.listedForArray[0])) {
                 ((Properties) holder).listedFor.setTextColor(Color.parseColor("#EF0F45"));
+                ((Properties) holder).priceUnit.setText(context.getResources().getString(R.string.LE));
             } else if (pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()).equals(pharmaConstants.listedForArray[1])) {
                 ((Properties) holder).listedFor.setTextColor(Color.parseColor("#ffb300"));
+                ((Properties) holder).priceUnit.setText(context.getResources().getString(R.string.LE_Month));
             }
         }
-        ((Properties) holder).propertiesName.setText(propertiesItem.getName());
+        ((Properties) holder).propertiesName.setText(propertiesItem.getName().toUpperCase());
         ((Properties) holder).listedFor.setText(pharmaConstants.listedForMapView.get(propertiesItem.getListedFor()));
         ((Properties) holder).type.setText(pharmaConstants.typeMapView.get(propertiesItem.getType()));
         ((Properties) holder).updatedAt.setText(PrefUtil.splitDateTime(propertiesItem.getUpdatedAt()));
@@ -91,7 +93,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class Properties extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView uploaderName, propertiesName, listedFor, type, updatedAt, city, region, area, price, averageDailyIncome, status;
+        private TextView uploaderName, propertiesName, listedFor, type, updatedAt, city, region, area, price, averageDailyIncome, status,priceUnit;
         private ImageView uploaderAvatar, picture;
         private LinearLayout averageDailyIncomeLayout, areaLayout;
         private OnPropertiesClickListener onPropertiesClickListener;
@@ -114,6 +116,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             status = propertiesView.findViewById(R.id.properties_adapter_status);
             areaLayout = propertiesView.findViewById(R.id.properties_adapter_area_layout);
             averageDailyIncomeLayout = propertiesView.findViewById(R.id.properties_adapter_average_daily_income_layout);
+            priceUnit=propertiesView.findViewById(R.id.properties_adapter_price_Unit);
             propertiesView.setOnClickListener(this);
         }
 

@@ -40,7 +40,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     private Button postButton, galleryButton;
     private Spinner citySpinner, regionSpinner, typeSpinner, statusSpinner, listedForSpinner;
     private EditText propertyName;
-    private TextView imagesCount;
+    private TextView imagesCount, priceUnit, rentingHint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,8 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         statusSpinner = findViewById(R.id.properties_status);
         listedForSpinner = findViewById(R.id.properties_listed_for);
         propertyName = findViewById(R.id.properties_name);
-
+        priceUnit = findViewById(R.id.properties_price_unit);
+        rentingHint = findViewById(R.id.properties_renting_text_hint);
         initCitySpinner();
         initListedForSpinner();
         initRegionSpinner();
@@ -148,6 +149,18 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                 new HintSpinner.Callback<String>() {
                     @Override
                     public void onItemSelected(int position, String itemAtPosition) {
+
+                        switch (PharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString())) {
+                            case PharmaConstants.SELLING:
+                                rentingHint.setVisibility(View.GONE);
+                                priceUnit.setText(getResources().getString(R.string.LE));
+                                break;
+                            case PharmaConstants.RENTING:
+                                rentingHint.setVisibility(View.VISIBLE);
+                                priceUnit.setText(getResources().getString(R.string.LE_Month));
+                                break;
+                        }
+
                     }
                 });
         hintSpinner.init();

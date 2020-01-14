@@ -2,6 +2,8 @@
 package com.example.loaiaboelsooud.pharma;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ public class SearchAndViewDrugEyeAdapter extends RecyclerView.Adapter<RecyclerVi
     private List<DrugEyeItem> drugEyeItems;
     private OnDrugEyeClickListener onDrugEyeClickListener;
     private PharmaConstants pharmaConstants;
+    private int row_index=-1;
 
     public SearchAndViewDrugEyeAdapter(Context context, List<DrugEyeItem> drugEyeItems, OnDrugEyeClickListener onDrugEyeClickListener) {
         this.context = context;
@@ -33,17 +36,28 @@ public class SearchAndViewDrugEyeAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
 
         final DrugEyeItem drugEyeItem = drugEyeItems.get(position);
         ((DrugEye) holder).name.setText(drugEyeItem.getName());
-        ((DrugEye) holder).activeIngredients.setText(drugEyeItem.getActiveIngredients());
-       /* ((DrugEye) holder).oldPrice.setText(String.valueOf(drugEyeItem.getOldPrice()));
         ((DrugEye) holder).newPrice.setText(String.valueOf(drugEyeItem.getNewPrice()));
-        ((DrugEye) holder).company.setText(drugEyeItem.getCompany());*/
         ((DrugEye) holder).category.setText(drugEyeItem.getCategory());
-     /*   ((DrugEye) holder).packageSize.setText(drugEyeItem.getPackageSize());
-        ((DrugEye) holder).uses.setText(drugEyeItem.getUses());*/
+
+        ((DrugEye) holder).drugEyeAdapterCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                row_index=position;
+                notifyDataSetChanged();
+            }
+        });
+        if(row_index==position){
+            ((DrugEye) holder).drugEyeAdapterCardView.setCardBackgroundColor(Color.parseColor("#f8f8f8"));
+            onDrugEyeClickListener.onDrugEyeClick(position);
+        }
+        else
+        {
+            ((DrugEye) holder).drugEyeAdapterCardView.setCardBackgroundColor(Color.parseColor("#dbdbdb"));
+        }
     }
 
     @Override
@@ -54,7 +68,8 @@ public class SearchAndViewDrugEyeAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     public class DrugEye extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView id, name, activeIngredients, newPrice, oldPrice, company, category, packageSize, uses;
+        private TextView name, newPrice, category;
+        private CardView drugEyeAdapterCardView;
         private OnDrugEyeClickListener onDrugEyeClickListener;
 
 
@@ -62,18 +77,15 @@ public class SearchAndViewDrugEyeAdapter extends RecyclerView.Adapter<RecyclerVi
             super(drugEyeView);
             this.onDrugEyeClickListener = onDrugEyeClickListener;
             name = drugEyeView.findViewById(R.id.drug_eye_adapter_name);
-            activeIngredients = drugEyeView.findViewById(R.id.drug_eye_adapter_active_ingredients);
-            /*newPrice = drugEyeView.findViewById(R.id.drug_eye_adapter_new_price);
-            oldPrice = drugEyeView.findViewById(R.id.drug_eye_adapter_old_price);
-            company = drugEyeView.findViewById(R.id.drug_eye_adapter_company);*/
+            newPrice = drugEyeView.findViewById(R.id.drug_eye_adapter_new_price);
             category = drugEyeView.findViewById(R.id.drug_eye_adapter_category);
-            /*packageSize = drugEyeView.findViewById(R.id.drug_eye_adapter_package_size);
-            uses = drugEyeView.findViewById(R.id.drug_eye_adapter_uses);*/
+            drugEyeAdapterCardView = drugEyeView.findViewById(R.id.drug_eye_adapter_card_view);
             drugEyeView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+            //drugEyeAdapterCardView.setCardBackgroundColor(Color.parseColor("#f8f8f8"));
             onDrugEyeClickListener.onDrugEyeClick(getAdapterPosition());
         }
     }

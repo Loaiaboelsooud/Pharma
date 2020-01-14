@@ -29,7 +29,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
     private ProgressBar progressBar;
     private Spinner citySpinner, regionSpinner, workPlaceSpinner, positionSpinner;
     private Calendar calendar;
-    private Button dateButton;
+    private Button dateButton,postButton;
     private EditText dueDate, from, to;
     private DatePickerDialog datePickerDialog;
     private int year, month, day, adjustedMonth;
@@ -50,6 +50,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
         dueDate = findViewById(R.id.job_due_date);
         from = findViewById(R.id.job_from_salary);
         to = findViewById(R.id.job_to_salary);
+        postButton=findViewById(R.id.job_post_button);
         negotiableCheckBox = findViewById(R.id.job_negotiable);
         initNegotiableCheckBox();
         initCitySpinner();
@@ -163,6 +164,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
 
 
     public void addJob(View view) {
+        postButton.setEnabled(false);
         EditText name, address, description, mobileNumbers;
         List<String> mobileNumbersList;
         mobileNumbersList = new ArrayList<String>();
@@ -212,6 +214,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
                         address.getText().toString(), mobileNumbersList, this.dueDateString, negotiableCheckBox.isChecked() ? "1" : "0", this);
             }
         } else {
+            postButton.setEnabled(true);
             Toast.makeText(this, getString(R.string.post_properties_fail),
                     Toast.LENGTH_LONG).show();
         }
@@ -237,6 +240,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
 
     @Override
     public void failed() {
+        postButton.setEnabled(true);
         progressBar.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
     }

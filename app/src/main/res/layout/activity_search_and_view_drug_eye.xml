@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_color"
     android:orientation="vertical"
     tools:context=".SearchAndViewDrugEyeActivity">
 
@@ -12,64 +13,111 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/drug_eye_search_key_word"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:hint="@string/search" />
-
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/drug_eye_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ProgressBar
-            android:id="@+id/drug_eye_get_progress"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:visibility="gone" />
-
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/drug_eye_view_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rectangle_shape">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/drug_eye_similarities_button"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/drug_eye_text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/drug_eye_similarities_button" />
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/arbfonts_swissra_ultra_light"
+                android:text="@string/drug_eye_text"
+                android:textColor="@color/colorRed"
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/drug_eye_alternatives_button"
-                android:layout_width="0dp"
+
+            <EditText
+                android:id="@+id/drug_eye_search_key_word"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/drug_eye_alternatives_button" />
+                android:layout_gravity="top"
+                android:inputType="text"
+                android:hint="@string/search" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/drug_eye_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ProgressBar
+                    android:id="@+id/drug_eye_get_progress"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/drug_eye_view_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/radius_color_red_shape"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/drug_eye_similarities_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/radius_color_gray77_shape"
+                        android:text="@string/drug_eye_similarities_button"
+                        android:textColor="@color/colorRed"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/drug_eye_alternatives_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/radius_color_gray77_shape"
+                        android:text="@string/drug_eye_alternatives_button"
+                        android:textColor="@color/colorRed"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

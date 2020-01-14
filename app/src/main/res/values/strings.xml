@@ -12,7 +12,7 @@
     <string name="prescriptions_gallery_button_string">Gallery</string>
     <string name="prescriptions_camera_button_string">Camera</string>
     <string name="prescriptions_post_button_string">Publish This Ad</string>
-    <string name="prescriptions_description_hint">add small description...</string>
+    <string name="prescriptions_description_hint">Add small description...</string>
     <string name="prescriptions_description">Add prescriptions</string>
     <string name="comments_button_string">Comment</string>
     <string name="Signin_comment_toast">You must Sign-in to add a comment</string>
@@ -31,13 +31,13 @@
     <string name="properties_profit">Profit</string>
     <string name="properties_address">Address<font color='#cc0029'>*</font></string>
     <string name="properties_mobile">Mobile<font color='#cc0029'>*</font></string>
-    <string name="properties_mobile2">Mobile2</string>
+    <string name="properties_mobile2">Second Mobile</string>
     <string name="properties_land_number">Land Line Number</string>
     <string name="properties_notes">Notes</string>
     <string name="properties_listed_for">Listed For<font color='#cc0029'>*</font></string>
     <string name="properties_type">Type<font color='#cc0029'>*</font></string>
     <string name="properties_price">Price</string>
-    <string name="properties_description">Description<font color='#cc0029'>*</font></string>
+    <string name="properties_description">Description, For Example you can write about mwhat you facility special. or if it has a WIFI ,a place for storage<font color='#cc0029'>*</font></string>
     <string name="post_properties_fail">Please fill all the required fields</string>
     <string name="properties_price_per_month">*PlEASE MAKE SURE THAT YOUR PRICE <b>PER MONTH</b> </string>
     <string name="properties_average_daily">*PLEASE MAKE SURE THAT THIS IS YOUR <b>DAILY</b>  INCOME</string>
@@ -53,6 +53,8 @@
     <string name="properties_hospital_name">Hospital name<font color='#cc0029'>*</font></string>
     <string name="LE">L.E</string>
     <string name="LE_H">L.E/H</string>
+    <string name="LE_Month">L.E/M</string>
+    <string name="LE_Day">L.E/D</string>
     <string name="m_square">m²</string>
 
     <string-array name="properties_listed_for_array">
@@ -60,10 +62,10 @@
         <item>RENTING</item>
     </string-array>
     <string-array name="properties_type_array">
-        <item>pharmacy</item>
-        <item>warehouse</item>
-        <item>factory</item>
-        <item>hospital</item>
+        <item>Pharmacy</item>
+        <item>Warehouse</item>
+        <item>Factory</item>
+        <item>Hospital</item>
     </string-array>
     <string name="filter_button_string">Apply Filter</string>
     <string name="properties_filter_sell_string">Properties for sale</string>
@@ -101,6 +103,13 @@
     <string name="drug_eye_alternatives_button">Alternatives</string>
     <string name="search">Search</string>
     <string name="drug_eye_select_drug">Please choose a drug first</string>
+    <string name="drug_eye_text">DRUG INDEX</string>
+    <string name="drug_eye_old_price">OLD PRICE</string>
+    <string name="drug_eye_new_price">NEW PRICE</string>
+    <string name="drug_eye_category">CATEGORY</string>
+    <string name="drug_eye_active_ingredients">ACTIVE INGREDIENTS</string>
+    <string name="drug_eye_manufacturing_company">MANUFACTURING COMPANY</string>
+    <string name="drug_eye_additional_information">ADDITIONAL INFORMATION</string>
     <string name="drug_eye_up_to_date">Your List is updated</string>
     <string name="drug_eye_updating">Please wait while your list is being updated...</string>
 
@@ -669,50 +678,50 @@
     </string-array>
 
     <string-array name="job_work_place_array">
-        <item>pharmacy</item>
-        <item>company</item>
-        <item>factory</item>
-        <item>warehouse</item>
+        <item>Pharmacy</item>
+        <item>Company</item>
+        <item>Factory</item>
+        <item>Warehouse</item>
     </string-array>
     <string-array name="job_position_array">
-        <item>manager</item>
-        <item>second pharmacist</item>
-        <item>open and close</item>
-        <item>intern</item>
-        <item>assistant</item>
-        <item>pharmacist</item>
+        <item>Manager</item>
+        <item>Second pharmacist</item>
+        <item>Open And Close</item>
+        <item>Intern</item>
+        <item>Assistant</item>
+        <item>Pharmacist</item>
     </string-array>
     <string-array name="job_filter_work_place_array">
         <item></item>
-        <item>pharmacy</item>
-        <item>company</item>
-        <item>factory</item>
-        <item>warehouse</item>
+        <item>Pharmacy</item>
+        <item>Company</item>
+        <item>Factory</item>
+        <item>Warehouse</item>
     </string-array>
     <string-array name="job_filter_position_array">
         <item></item>
-        <item>manager</item>
-        <item>second pharmacist</item>
-        <item>open and close</item>
-        <item>intern</item>
-        <item>assistant</item>
-        <item>pharmacist</item>
+        <item>Manager</item>
+        <item>Second pharmacist</item>
+        <item>Open AND Close</item>
+        <item>Intern</item>
+        <item>Assistant</item>
+        <item>Pharmacist</item>
     </string-array>
     <string-array name="properties_filter_listed_for_array">
         <item></item>
-        <item>BUY</item>
-        <item>RENT</item>
+        <item>SELLING</item>
+        <item>RENTING</item>
     </string-array>
     <string-array name="properties_filter_type_array">
         <item></item>
-        <item>pharmacy</item>
-        <item>warehouse</item>
-        <item>factory</item>
-        <item>hospital</item>
+        <item>Pharmacy</item>
+        <item>Warehouse</item>
+        <item>Factory</item>
+        <item>Hospital</item>
     </string-array>
     <string-array name="properties_status_array">
-        <item>opened</item>
-        <item>closed</item>
+        <item>Opened</item>
+        <item>Closed</item>
     </string-array>
 
     <string name="title_activity_login">Sign in</string>

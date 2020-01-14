@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 public class DrugEyeViewActivity extends NavMenuInt {
-    private TextView id, name, activeIngredients, newPrice, oldPrice, company, category, packageSize, uses;
+    private TextView id, name, activeIngredients, newPrice, oldPrice, company, category, uses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,6 @@ public class DrugEyeViewActivity extends NavMenuInt {
         oldPrice = findViewById(R.id.drug_eye_old_price);
         company = findViewById(R.id.drug_eye_company);
         category = findViewById(R.id.drug_eye_category);
-        packageSize = findViewById(R.id.drug_eye_package_size);
         uses = findViewById(R.id.drug_eye_uses);
         final DrugItemDao drugItemDao = RoomDatabaseClient.getInstance().drugItemDao();
         DrugEyeAsyncTasks.getDrugEyeItem(getIntent().getStringExtra("drug_name"), drugItemDao).observe(this, new Observer<DrugEyeItem>() {
@@ -31,7 +30,6 @@ public class DrugEyeViewActivity extends NavMenuInt {
                 newPrice.setText(String.valueOf(drugEyeItem.getNewPrice()));
                 company.setText(drugEyeItem.getCompany());
                 category.setText(drugEyeItem.getCategory());
-                packageSize.setText(drugEyeItem.getPackageSize());
                 uses.setText(drugEyeItem.getUses());
             }
         });
