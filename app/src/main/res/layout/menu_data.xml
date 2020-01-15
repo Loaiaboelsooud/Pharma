@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/images"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="@dimen/menu_image"
+        android:layout_height="@dimen/menu_image"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:src="@drawable/promotions_menu" />
 
     <TextView

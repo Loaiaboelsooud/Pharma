@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/gradient_color"
     android:orientation="vertical"
     tools:context=".DrugEyeViewActivity">
@@ -15,7 +15,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:background="@drawable/rectangle_shape">
 
@@ -31,13 +31,21 @@
                 android:id="@+id/drug_eye_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/colorRed"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/colorGray" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
@@ -62,6 +70,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -69,7 +79,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
                             android:textColor="@color/colorEclipse"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -78,7 +87,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="3dp"
-                            android:layout_marginTop="10dp"
                             android:text="@string/LE"
                             android:textColor="@color/colorRed"
                             android:textSize="15sp"
@@ -105,6 +113,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -112,7 +122,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
                             android:textColor="@color/colorWhite"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -121,7 +130,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="3dp"
-                            android:layout_marginTop="10dp"
                             android:text="@string/LE"
                             android:textColor="@color/colorWhite"
                             android:textSize="15sp"
@@ -151,7 +159,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="7dp"
                     android:textColor="@color/colorEclipse"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -178,7 +187,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="7dp"
                     android:textColor="@color/colorEclipse"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -206,7 +216,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="7dp"
                     android:textColor="@color/colorEclipse"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -233,7 +244,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/colorEclipse"
                     android:textSize="15sp"
                     android:textStyle="bold" />

@@ -3,60 +3,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@null"
     android:elevation="4dp"
     android:gravity="center_vertical|start"
     app:contentInsetStart="0dp"
     app:theme="@style/AppTheme.Toolbar">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/promotions_image_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@null"
-        android:adjustViewBounds="true"
-        android:src="@drawable/promotions_toolbar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
-    <ImageButton
-        android:id="@+id/properties_image_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@null"
-        android:adjustViewBounds="true"
-        android:src="@drawable/properties_toolbar" />
+            <ImageButton
+                android:id="@+id/promotions_image_button"
+                android:layout_width="@dimen/toolbar_image"
+                android:layout_height="@dimen/toolbar_image"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/promotions_toolbar" />
 
-    <ImageButton
-        android:id="@+id/job_image_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@null"
-        android:adjustViewBounds="true"
-        android:src="@drawable/job_toolbar" />
+            <ImageButton
+                android:id="@+id/properties_image_button"
+                android:layout_width="@dimen/toolbar_image"
+                android:layout_height="@dimen/toolbar_image"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/properties_toolbar" />
 
-    <ImageButton
-        android:id="@+id/prescription_image_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@null"
-        android:adjustViewBounds="true"
-        android:src="@drawable/prescription_toolbar" />
+            <ImageButton
+                android:id="@+id/job_image_button"
+                android:layout_width="@dimen/toolbar_image"
+                android:layout_height="@dimen/toolbar_image"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/job_toolbar" />
 
-    <ImageButton
-        android:id="@+id/drug_interactions_image_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@null"
-        android:adjustViewBounds="true"
-        android:src="@drawable/drug_interactions_toolbar" />
+            <ImageButton
+                android:id="@+id/prescription_image_button"
+                android:layout_width="@dimen/toolbar_image"
+                android:layout_height="@dimen/toolbar_image"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/prescription_toolbar" />
 
-    <ImageButton
-        android:id="@+id/drug_index_image_button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@null"
-        android:adjustViewBounds="true"
-        android:src="@drawable/drug_index_toolbar" />
+            <ImageButton
+                android:id="@+id/drug_interactions_image_button"
+                android:layout_width="@dimen/toolbar_image"
+                android:layout_height="@dimen/toolbar_image"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/drug_interactions_toolbar" />
 
+            <ImageButton
+                android:id="@+id/drug_index_image_button"
+                android:layout_width="@dimen/toolbar_image"
+                android:layout_height="@dimen/toolbar_image"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/drug_index_toolbar" />
+        </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.Toolbar>
