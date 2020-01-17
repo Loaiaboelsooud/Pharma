@@ -46,7 +46,6 @@
         <activity android:name=".AddPropertiesActivity" />
         <activity
             android:name=".AddPrescriptionsActivity"
-            android:theme="@style/whiteTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".EditAccActivity" />
         <activity android:name=".HTTPRequests" />

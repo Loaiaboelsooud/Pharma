@@ -52,6 +52,16 @@
     <string name="properties_warehouse_name">اسم المخزن<font color='#cc0029'>*</font></string>
     <string name="properties_factory_name">اسم المصنع<font color='#cc0029'>*</font></string>
     <string name="properties_hospital_name">اسم المستشفي<font color='#cc0029'>*</font></string>
+    <string name="property_listed_for">سبب البيع</string>
+    <string name="property_price">السعر</string>
+    <string name="property_current_status">الحاله</string>
+    <string name="property_address">العنوان</string>
+    <string name="property_space">المساحه</string>
+    <string name="property_average_daily_income">الدخل اليومي</string>
+    <string name="property_contact">التواصل:</string>
+    <string name="property_tel">تليفون</string>
+    <string name="property_description">المواصافات</string>
+    <string name="property_category">الفئه</string>
     <string name="LE">ج.م</string>
     <string name="LE_H">ج.م/س</string>
     <string name="LE_Month">ج.م/ش</string>

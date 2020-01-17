@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
+    android:layout_marginBottom="4dp"
     android:orientation="horizontal"
     tools:context=".ViewPrescriptionsActivity">
 
@@ -88,6 +88,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:maxLines="3"
+                        android:textStyle="bold"
                         android:text="TextView"
                         android:textSize="20dp" />
                 </RelativeLayout>

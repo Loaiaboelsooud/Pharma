@@ -165,7 +165,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
 
     public void addJob(View view) {
         postButton.setEnabled(false);
-        EditText name, address, description, mobileNumbers;
+        EditText name, address, description, mobileNumbers,email;
         List<String> mobileNumbersList;
         mobileNumbersList = new ArrayList<String>();
         PrefUtil prefUtil = new PrefUtil(this);
@@ -173,9 +173,11 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
         address = findViewById(R.id.job_address);
         description = findViewById(R.id.job_description);
         mobileNumbers = findViewById(R.id.job_mobile);
+        email=findViewById(R.id.job_email);
         if (name.getText().toString() != null && !name.getText().toString().isEmpty() &&
                 description.getText().toString() != null && !description.getText().toString().isEmpty() &&
                 address.getText().toString() != null && !address.getText().toString().isEmpty() &&
+                email.getText().toString() != null && !email.getText().toString().isEmpty() &&
                 mobileNumbers.getText().toString() != null && !mobileNumbers.getText().toString().isEmpty()
                 && regionSpinner.getSelectedItemId() < regionSpinner.getCount()
                 && citySpinner.getSelectedItemId() < citySpinner.getCount()
@@ -211,7 +213,7 @@ public class AddJobActivity extends NavMenuInt implements HTTPRequests.GetJobPos
                         paresedFrom, paresedTo, PharmaConstants.workPlaceMapAdd.get(workPlaceSpinner.getSelectedItem().toString()),
                         PharmaConstants.positionMapAdd.get(positionSpinner.getSelectedItem().toString()),
                         PharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()), PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()),
-                        address.getText().toString(), mobileNumbersList, this.dueDateString, negotiableCheckBox.isChecked() ? "1" : "0", this);
+                        address.getText().toString(), mobileNumbersList, this.dueDateString, negotiableCheckBox.isChecked() ? "1" : "0",email.getText().toString() ,this);
             }
         } else {
             postButton.setEnabled(true);

@@ -70,7 +70,16 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ((Properties) holder).price.setText(String.valueOf(propertiesItem.getPrice()));
         ((Properties) holder).city.setText(pharmaConstants.citiesMapView.get(propertiesItem.getCity()));
         ((Properties) holder).region.setText(pharmaConstants.regionsMapView.get(propertiesItem.getRegion()));
-        ((Properties) holder).status.setText(pharmaConstants.statusMapView.get(propertiesItem.getStatus()));
+
+        if (pharmaConstants.statusMapView.get(propertiesItem.getStatus()) != null) {
+            if (propertiesItem.getStatus().equals(pharmaConstants.CLOSED)) {
+                ((Properties) holder).status.setTextColor(Color.parseColor("#EF0F45"));
+            } else if (propertiesItem.getStatus().equals(pharmaConstants.OPENED)) {
+                ((Properties) holder).status.setTextColor(Color.parseColor("#a7bd56"));
+            }
+            ((Properties) holder).status.setText(pharmaConstants.statusMapView.get(propertiesItem.getStatus()));
+        }
+
         if (propertiesItem.getArea() != null) {
             ((Properties) holder).area.setText(propertiesItem.getArea());
         } else {
@@ -93,7 +102,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class Properties extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView uploaderName, propertiesName, listedFor, type, updatedAt, city, region, area, price, averageDailyIncome, status,priceUnit;
+        private TextView uploaderName, propertiesName, listedFor, type, updatedAt, city, region, area, price, averageDailyIncome, status, priceUnit;
         private ImageView uploaderAvatar, picture;
         private LinearLayout averageDailyIncomeLayout, areaLayout;
         private OnPropertiesClickListener onPropertiesClickListener;
@@ -116,7 +125,7 @@ public class PropertiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             status = propertiesView.findViewById(R.id.properties_adapter_status);
             areaLayout = propertiesView.findViewById(R.id.properties_adapter_area_layout);
             averageDailyIncomeLayout = propertiesView.findViewById(R.id.properties_adapter_average_daily_income_layout);
-            priceUnit=propertiesView.findViewById(R.id.properties_adapter_price_Unit);
+            priceUnit = propertiesView.findViewById(R.id.properties_adapter_price_Unit);
             propertiesView.setOnClickListener(this);
         }
 

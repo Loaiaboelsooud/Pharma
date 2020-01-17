@@ -31,12 +31,12 @@ public class JobsItem {
     int id;
     @SerializedName("updated_at")
     private String updatedAt;
-
     @SerializedName("status")
     private String status;
-
     @SerializedName("salary_negotiable")
     private Boolean negotiable;
+    @SerializedName("contact_email")
+    private String email;
 
     public String getUpdatedAt() {
         return updatedAt;
@@ -156,5 +156,13 @@ public class JobsItem {
 
     public void setNegotiable(Boolean negotiable) {
         this.negotiable = negotiable;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

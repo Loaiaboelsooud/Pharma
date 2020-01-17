@@ -338,10 +338,10 @@ public class HTTPRequests extends AppCompatActivity {
 
     public void sendJobPostRequest(final String token, String name, String description, int from, int to,
                                    String workPlace, String position, String city, String region, String address,
-                                   List<String> mobileNumbers, String dueDate, String negotiable, final GetJobPostResult getJobPostResult) {
+                                   List<String> mobileNumbers, String dueDate, String negotiable, String email, final GetJobPostResult getJobPostResult) {
         Call<JobsItemResponse> userCall = RetrofitClient.getInstance().getApi().addJob
                 (PharmaConstants.BEARER + token, name, description, from, to,
-                        workPlace, position, city, region, address, mobileNumbers, dueDate, negotiable);
+                        workPlace, position, city, region, address, mobileNumbers, dueDate, negotiable, email);
         userCall.enqueue(new Callback<JobsItemResponse>() {
             @Override
             public void onResponse(Call<JobsItemResponse> call, Response<JobsItemResponse> response) {

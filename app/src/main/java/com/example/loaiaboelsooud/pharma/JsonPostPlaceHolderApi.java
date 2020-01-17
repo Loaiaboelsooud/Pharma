@@ -77,7 +77,7 @@ public interface JsonPostPlaceHolderApi {
                                   @Query("min_salary") int from, @Query("max_salary") int to,
                                   @Query("workplace") String workPlace, @Query("position") String position,
                                   @Query("city") String city, @Query("region") String region, @Query("address") String address,
-                                  @Query("mobile_numbers[]") List<String> mobileNumber, @Query("due_date") String dueDate, @Query("salary_negotiable") String negotiable);
+                                  @Query("mobile_numbers[]") List<String> mobileNumber, @Query("due_date") String dueDate, @Query("salary_negotiable") String negotiable, @Query("contact_email") String email);
 
     @GET()
     Call<JobsItemsResponse> getFilteredJobs(@Url String url, @QueryMap() Map<String, String> jobsParam);

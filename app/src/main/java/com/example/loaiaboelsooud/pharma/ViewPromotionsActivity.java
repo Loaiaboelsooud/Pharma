@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class ViewPromotionsActivity extends NavMenuInt implements HTTPRequests.G
     private PrefUtil prefUtil;
     private RecyclerView.Adapter adapter;
     private ProgressBar progressBar;
+    private TextView promotionsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ViewPromotionsActivity extends NavMenuInt implements HTTPRequests.G
         intNavToolBar();
         adapter = new PromotionsAdapter(this, promotionsItems);
         manager = new LinearLayoutManager(this);
+        promotionsText=findViewById(R.id.promotions_text);
         promotionsRecyclerView = findViewById(R.id.promotions_recycler);
         promotionsRecyclerView.setLayoutManager(manager);
         progressBar = findViewById(R.id.promotions_get_progress);
@@ -79,6 +82,16 @@ public class ViewPromotionsActivity extends NavMenuInt implements HTTPRequests.G
                     loadMore(metaData);
                     isScrolling = false;
                 }
+                if (dy > 0) {
+                    if ((promotionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) > 25) {
+                        promotionsText.setTextSize((promotionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) - 1);
+                    }
+                } else if (dy < 0) {
+                    if ((promotionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) < 35) {
+                        promotionsText.setTextSize((promotionsText.getTextSize() / getResources().getDisplayMetrics().scaledDensity) + 1);
+                    }
+                }
+
             }
         });
     }

@@ -26,7 +26,7 @@ public class DrugEyeAsyncTasks {
 
     public static LiveData<List<DrugEyeItem>> getDrugEyeItems(String drugName, DrugItemDao drugItemDao) {
 
-        return drugItemDao.findDrugItems("%" + drugName.toUpperCase() + "%");
+        return drugItemDao.findDrugItems(  drugName.toUpperCase() + "%");
     }
 
     public static LiveData<DrugEyeItem> getDrugEyeItem(String drugName, DrugItemDao drugItemDao) {

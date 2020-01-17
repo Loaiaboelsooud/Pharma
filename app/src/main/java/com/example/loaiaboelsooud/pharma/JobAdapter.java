@@ -47,6 +47,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((Jobs) holder).city.setText(PharmaConstants.citiesMapView.get(jobsItem.getCity()));
         ((Jobs) holder).region.setText(PharmaConstants.regionsMapView.get(jobsItem.getRegion()));
         ((Jobs) holder).address.setText(jobsItem.getAddress());
+        ((Jobs) holder).email.setText(jobsItem.getEmail());
         if (jobsItem.getMobileNumbers() != null && !jobsItem.getMobileNumbers().isEmpty()) {
             ((Jobs) holder).mobileNumber.setText(jobsItem.getMobileNumbers().get(0));
         }
@@ -77,7 +78,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class Jobs extends RecyclerView.ViewHolder {
-        private TextView uploaderName, name, description, position, workPlace, city, region, address, mobileNumber, updatedAt, status, salary, LE_H;
+        private TextView uploaderName, name, description, position, workPlace, city, region, address, mobileNumber, updatedAt, status, salary, email, LE_H;
         private ImageView uploaderAvatar;
 
         public Jobs(View prescriptionsView) {
@@ -91,6 +92,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             city = prescriptionsView.findViewById(R.id.job_adapter_city);
             region = prescriptionsView.findViewById(R.id.job_adapter_region);
             address = prescriptionsView.findViewById(R.id.job_adapter_address);
+            email = prescriptionsView.findViewById(R.id.job_adapter_email);
             mobileNumber = prescriptionsView.findViewById(R.id.job_adapter_mobile);
             updatedAt = prescriptionsView.findViewById(R.id.job_adapter_updated_at);
             status = prescriptionsView.findViewById(R.id.job_adapter_status);

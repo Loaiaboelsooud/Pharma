@@ -3,11 +3,9 @@ package com.example.loaiaboelsooud.pharma;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -56,26 +54,40 @@ public class ViewPropertyActivity extends NavMenuInt implements HTTPRequests.Get
 
     @Override
     public void notifyItem(PropertiesItem propertiesItem) {
-        TextView propertyName, uploaderName, propertyDescription, propertyAddress, propertyArea, propertyNotes, propertyCreatedAt;
+        TextView name, uploaderName, description, address, area, price, listedFor, type, status, averageDailyIncome, city, region, mobile;
         ImageView uploaderAvatar;
         this.propertiesImage = propertiesItem.getImages();
         adapter = new PropertiesImagesAdapter(this, this.propertiesImage, this);
         propertiesImagesRecyclerView.setAdapter(adapter);
-        propertyName = findViewById(R.id.property_name);
-        propertyDescription = findViewById(R.id.property_description);
-        propertyAddress = findViewById(R.id.property_address);
-        propertyArea = findViewById(R.id.property_area);
-        propertyNotes = findViewById(R.id.property_notes);
-        propertyCreatedAt = findViewById(R.id.property_created_at);
+        name = findViewById(R.id.property_name);
+        description = findViewById(R.id.property_description);
+        address = findViewById(R.id.property_address);
+        city = findViewById(R.id.property_city);
+        region = findViewById(R.id.property_region);
+        area = findViewById(R.id.property_area);
+        price = findViewById(R.id.property_price);
+        listedFor = findViewById(R.id.property_listed_for);
+        type = findViewById(R.id.property_type);
+        status = findViewById(R.id.property_status);
+        averageDailyIncome = findViewById(R.id.property_average_daily_income);
         uploaderAvatar = findViewById(R.id.property_user_profile_picture);
         uploaderName = findViewById(R.id.property_user_name);
-        propertyDescription.setText(propertiesItem.getDescription());
-        propertyAddress.setText(propertiesItem.getAddress());
-        propertyArea.setText(propertiesItem.getArea());
-        propertyNotes.setText(propertiesItem.getNotes());
-        propertyCreatedAt.setText(PrefUtil.splitDateTime(propertiesItem.getCreatedAt()));
+        mobile = findViewById(R.id.property_mobile);
+        description.setText(propertiesItem.getDescription());
+        address.setText(propertiesItem.getAddress());
+        city.setText(PharmaConstants.citiesMapView.get(propertiesItem.getCity()));
+        region.setText(PharmaConstants.regionsMapView.get(propertiesItem.getRegion()));
+        status.setText(PharmaConstants.statusMapView.get(propertiesItem.getStatus()));
+        type.setText(PharmaConstants.typeMapView.get(propertiesItem.getType()));
+        listedFor.setText(PharmaConstants.listedForMapView.get(propertiesItem.getListedFor()));
+        averageDailyIncome.setText(String.valueOf(propertiesItem.getAverageDailyIncome()));
+        price.setText(String.valueOf(propertiesItem.getPrice()));
+        area.setText(propertiesItem.getArea());
+        if (propertiesItem.getMobileNumber().size() > 0) {
+            mobile.setText(String.valueOf(propertiesItem.getMobileNumber().get(0)));
+        }
         phoneNumber = propertiesItem.getMobileNumber().get(0);
-        propertyName.setText(propertiesItem.getName());
+        name.setText(propertiesItem.getName());
         uploaderName.setText(propertiesItem.getUserResponse().getUser().getName());
         Glide.with(this).load((propertiesItem.getUserResponse().getUser().getAvatar() + "picture?width=250&height=250")).
                 placeholder(R.drawable.ic_loading).dontAnimate().
