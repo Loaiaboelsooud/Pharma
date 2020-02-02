@@ -54,7 +54,7 @@ public class JobAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((Jobs) holder).updatedAt.setText(PrefUtil.splitDateTime(jobsItem.getUpdatedAt()));
         if (jobsItem.getNegotiable()) {
             ((Jobs) holder).salary.setText(context.getResources().getString(R.string.job_negotiable).toUpperCase());
-            ((Jobs) holder).salary.setTextColor(Color.argb(63, 51, 51, 51));
+            ((Jobs) holder).salary.setTextColor(Color.parseColor("#a1333333"));
             ((Jobs) holder).LE_H.setVisibility(View.GONE);
         } else {
             ((Jobs) holder).salary.setText(String.valueOf((jobsItem.getMinSalary() + jobsItem.getMaxSalary()) / 2));

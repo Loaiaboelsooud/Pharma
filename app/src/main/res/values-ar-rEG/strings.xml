@@ -10,11 +10,14 @@
     <string name="drug_index">فهرس الادوية</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>
+    <string name="prescriptions_upload_string">اضف صورةالروشته</string>
+    <string name="prescriptions_loaded_string">تم تحميل الروشته</string>
+    <string name="prescriptions_publish_string">اضغط نشر لتجد اجابات</string>
     <string name="prescriptions_gallery_button_string">المعرض</string>
     <string name="prescriptions_camera_button_string">الكاميرا</string>
     <string name="prescriptions_post_button_string">نشر روشتة</string>
-    <string name="prescriptions_description_hint">اضف نص قصير...</string>
-    <string name="prescriptions_description">اضافة روشتة</string>
+    <string name="prescriptions_description_hint">ضع اسئلتك هنا !</string>
+    <string name="prescriptions_description">اضافة روشتة جديده :</string>
     <string name="comments_button_string">تعليق</string>
     <string name="Signin_comment_toast">يجب تسجيل الدخول لاضافة تعليق</string>
     <string name="Signin_prescriptions_toast">يجب تسجيل الدخول لاضافة روشتة</string>
@@ -25,22 +28,25 @@
     <string name="prescriptions_text">الروشتة</string>
     <string name="properties_text">سجل تسهيلك للاستئجار أو البيع</string>
     <string name="post_properties_success">تم اضافة الاعلان بنجاح</string>
-    <string name="properties_city">المحافظة<font color='#cc0029'>*</font></string>
-    <string name="properties_region">المنطقة<font color='#cc0029'>*</font></string>
-    <string name="properties_name">الاسم<font color='#cc0029'>*</font></string>
+    <string name="properties_city"><font color='#cc0029'>*</font>المحافظة</string>
+    <string name="properties_region"><font color='#cc0029'>*</font>المنطقة</string>
+    <string name="properties_name"><font color='#cc0029'>*</font>الاسم</string>
     <string name="properties_size">المساحة</string>
     <string name="properties_profit">العائد</string>
-    <string name="properties_address">العنوان بالتفصيل<font color='#cc0029'>*</font></string>
-    <string name="properties_mobile">الموبيل<font color='#cc0029'>*</font></string>
+    <string name="properties_address"><font color='#cc0029'>*</font>العنوان بالتفصيل</string>
+    <string name="properties_mobile"><font color='#cc0029'>*</font>الموبيل</string>
     <string name="properties_mobile2">الموبي ثاني</string>
     <string name="properties_land_number">الرقم الارضي</string>
     <string name="properties_notes">ملاحظات</string>
-    <string name="properties_listed_for">سبب البيع<font color='#cc0029'>*</font></string>
-    <string name="properties_type">النوع<font color='#cc0029'>*</font></string>
+    <string name="properties_listed_for"><font color='#cc0029'>*</font>سبب البيع</string>
+    <string name="properties_type"><font color='#cc0029'>*</font>النوع</string>
     <string name="properties_price">السعر</string>
-    <string name="properties_description">المواصفات<font color='#cc0029'>*</font></string>
+    <string name="properties_description">المواصفات</string>
     <string name="properties_average_daily_income">معدل الدخل اليومي</string>
-    <string name="properties_status">الحاله<font color='#cc0029'>*</font></string>
+    <string name="properties_mobile_phone">رقم الموبيل</string>
+    <string name="properties_gallery_button_string">تحميل من المعرض</string>
+    <string name="properties_post_button_string">انشر هذا الاعلان</string>
+    <string name="properties_status"><font color='#cc0029'>*</font>الحاله</string>
     <string name="post_properties_fail">برجاء ادخال جميع البينات المطلوبة</string>
     <string name="properties_price_per_month"> *برجاء التأكد من ان المبلغ <b>شهري</b> </string>
     <string name="properties_average_daily">*برجاء الاتأكد من ان هذا هو دخلك <b>اليومي</b> </string>
@@ -48,10 +54,10 @@
     <string name="address_properties_fail">العنوان يجب ان يكون اكثر من 10 حروف </string>
     <string name="name_properties_fail">الاسم يجب ان يكون اكثر من 3 حروف</string>
     <string name="properties_filter_city">المحافظة</string>
-    <string name="properties_pharmacy_name">اسم الصيدليه<font color='#cc0029'>*</font></string>
-    <string name="properties_warehouse_name">اسم المخزن<font color='#cc0029'>*</font></string>
-    <string name="properties_factory_name">اسم المصنع<font color='#cc0029'>*</font></string>
-    <string name="properties_hospital_name">اسم المستشفي<font color='#cc0029'>*</font></string>
+    <string name="properties_pharmacy_name"><font color='#cc0029'>*</font>اسم الصيدليه</string>
+    <string name="properties_warehouse_name"><font color='#cc0029'>*</font>اسم المخزن</string>
+    <string name="properties_factory_name"><font color='#cc0029'>*</font>اسم المصنع</string>
+    <string name="properties_hospital_name"><font color='#cc0029'>*</font>اسم المستشفي</string>
     <string name="property_listed_for">سبب البيع</string>
     <string name="property_price">السعر</string>
     <string name="property_current_status">الحاله</string>
@@ -59,7 +65,7 @@
     <string name="property_space">المساحه</string>
     <string name="property_average_daily_income">الدخل اليومي</string>
     <string name="property_contact">التواصل:</string>
-    <string name="property_tel">تليفون</string>
+    <string name="property_tel">تليفون:</string>
     <string name="property_description">المواصافات</string>
     <string name="property_category">الفئه</string>
     <string name="LE">ج.م</string>
@@ -88,15 +94,15 @@
     <string name="properties_filter_listed_for">سبب البيع</string>
     <string name="properties_filter_type">النوع</string>
     <string name="properties_filter_text">فلتر الوحدات</string>
-    <string name="job_city">المدينة<font color='#cc0029'>*</font></string>
-    <string name="job_address">العنوان<font color='#cc0029'>*</font></string>
-    <string name="job_region">المنطقة<font color='#cc0029'>*</font></string>
-    <string name="job_name">الاسم<font color='#cc0029'>*</font></string>
-    <string name="job_mobile">الموبيل<font color='#cc0029'>*</font></string>
-    <string name="job_email">بريد الكتروني<font color='#cc0029'>*</font></string>
-    <string name="job_description">التفاصيل<font color='#cc0029'>*</font></string>
-    <string name="job_position">الوظيفة<font color='#cc0029'>*</font></string>
-    <string name="job_work_place">المكان<font color='#cc0029'>*</font></string>
+    <string name="job_city"><font color='#cc0029'>*</font>المدينة</string>
+    <string name="job_address"><font color='#cc0029'>*</font>العنوان</string>
+    <string name="job_region"><font color='#cc0029'>*</font>المنطقة</string>
+    <string name="job_name"><font color='#cc0029'>*</font>الاسم</string>
+    <string name="job_mobile"><font color='#cc0029'>*</font>الموبيل</string>
+    <string name="job_email"><font color='#cc0029'>*</font>بريد الكتروني</string>
+    <string name="job_description"><font color='#cc0029'>*</font>التفاصيل</string>
+    <string name="job_position"><font color='#cc0029'>*</font>الوظيفة</string>
+    <string name="job_work_place"><font color='#cc0029'>*</font>المكان</string>
     <string name="job_range_salary">حدود المرتب</string>
     <string name="job_to_salary">الي</string>
     <string name="job_from_salary">من</string>

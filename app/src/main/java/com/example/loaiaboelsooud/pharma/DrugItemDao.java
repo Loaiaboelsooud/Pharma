@@ -18,8 +18,9 @@ public interface DrugItemDao {
     @Query("SELECT * FROM Drugeyeitem WHERE `Category` LIKE (SELECT `Category` FROM Drugeyeitem where `Drug Name` Like  :drugName LIMIT 1 )")
     LiveData<List<DrugEyeItem>> findSimilarities(String drugName);
 
-    @Query("SELECT * FROM Drugeyeitem WHERE `Drug Name` LIKE :drugName")
-    LiveData<List<DrugEyeItem>> findDrugItems(String drugName);
+    @Query("SELECT * FROM Drugeyeitem WHERE `Drug Name`LIKE :firstWord and `Drug Name` LIKE :secondWord and `Drug Name` LIKE  :thirdWord and `Drug Name` LIKE :forthWord")
+    LiveData<List<DrugEyeItem>> findDrugItems(String firstWord, String secondWord, String thirdWord, String forthWord);
+
 
     @Query("SELECT * FROM Drugeyeitem WHERE `Drug Name` is :drugName LIMIT 1")
     LiveData<DrugEyeItem> findDrugItem(String drugName);
@@ -33,8 +34,11 @@ public interface DrugItemDao {
     @Query("SELECT * FROM Drugeyeitem Limit 15")
     LiveData<List<DrugEyeItem>> getAll();
 
-    @Query("DELETE from DrugEyeItem")
+    @Query("DELETE from DrugEyeitem")
     void deleteAll();
+
+    @Query("SELECT count(*) FROM DrugEyeitem")
+    LiveData<Integer> countData();
 
 
 }

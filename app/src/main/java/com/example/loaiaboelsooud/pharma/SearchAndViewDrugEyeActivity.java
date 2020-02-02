@@ -1,25 +1,24 @@
 package com.example.loaiaboelsooud.pharma;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequests.GetDrugEyeList, HTTPRequests.GetDrugEyeVersion,
         SearchAndViewDrugEyeAdapter.OnDrugEyeClickListener, DrugEyeAsyncTasks.OnInsertCompleted {
@@ -71,8 +70,11 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
                 viewButton.setVisibility(View.GONE);
                 similaritiesButton.setVisibility(View.GONE);
                 alternativesButton.setVisibility(View.GONE);
-                if (!drugEyeSearchKeyWord.getText().toString().isEmpty() && drugEyeSearchKeyWord.getText().toString() != null) {
-                    DrugEyeAsyncTasks.getDrugEyeItems(drugEyeSearchKeyWord.getText().toString().toUpperCase(), drugItemDao).observe(SearchAndViewDrugEyeActivity.this, new Observer<List<DrugEyeItem>>() {
+                if (drugEyeSearchKeyWord.getText().toString() != null && !drugEyeSearchKeyWord.getText().toString().trim().isEmpty()) {
+                    String[] words = drugEyeSearchKeyWord.getText().toString().trim().split(" ");
+                    DrugEyeAsyncTasks.getDrugEyeItems(words.length >= 1 ? words[0].toUpperCase().trim() : "", words.length >= 2 ? words[1].toUpperCase() : "",
+                            words.length >= 3 ? words[2].toUpperCase() : "", words.length >= 4 ? words[3].toUpperCase() : ""
+                            , drugItemDao).observe(SearchAndViewDrugEyeActivity.this, new Observer<List<DrugEyeItem>>() {
                         @Override
                         public void onChanged(@Nullable List<DrugEyeItem> drugEyeItemList) {
                             drugEyeItems.addAll(drugEyeItemList);
@@ -81,6 +83,9 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
                             progressBar.setVisibility(View.GONE);
                         }
                     });
+                } else {
+                    drugEyeItems.clear();
+                    adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -153,17 +158,32 @@ public class SearchAndViewDrugEyeActivity extends NavMenuInt implements HTTPRequ
     }
 
     @Override
-    public void success(Long newDrugEyeVersion) {
-        Long drugEyeVersion = prefUtil.getDrugEyeVersion();
+    public void success(final Long newDrugEyeVersion) {
+        final Long drugEyeVersion = prefUtil.getDrugEyeVersion();
+
         if (!drugEyeVersion.equals(newDrugEyeVersion)) {
-            progressBar.setVisibility(View.VISIBLE);
-            DrugEyeAsyncTasks.deleteAll(drugItemDao);
-            httpRequests.sendDrugEyeGetRequest(this);
-            prefUtil.saveDrugEyeVersion(newDrugEyeVersion);
-            Toast.makeText(this, getString(R.string.drug_eye_updating), Toast.LENGTH_LONG).show();
+            updateDrugEye(newDrugEyeVersion);
         } else {
-            Toast.makeText(this, getString(R.string.drug_eye_up_to_date), Toast.LENGTH_LONG).show();
+            DrugEyeAsyncTasks.countAll(drugItemDao).observe(SearchAndViewDrugEyeActivity.this, new Observer<Integer>() {
+                @Override
+                public void onChanged(@Nullable Integer count) {
+                    if (count < 10000) {
+                        updateDrugEye(newDrugEyeVersion);
+                    } else {
+                        insertSuccess();
+                    }
+                }
+            });
         }
+    }
+
+    private void updateDrugEye(Long newDrugEyeVersion) {
+        progressBar.setVisibility(View.VISIBLE);
+        DrugEyeAsyncTasks.deleteAll(drugItemDao);
+        httpRequests.sendDrugEyeGetRequest(this);
+        prefUtil.saveDrugEyeVersion(newDrugEyeVersion);
+        Toast.makeText(this, getString(R.string.drug_eye_updating), Toast.LENGTH_LONG).show();
+
     }
 
     @Override

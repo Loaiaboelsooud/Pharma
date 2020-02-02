@@ -9,57 +9,51 @@
     android:orientation="vertical"
     tools:context=".PrescriptionsCommentsActivity">
 
-    <!-- A CardView that contains a TextView -->
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
+        android:id="@+id/view_foreground"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:cardBackgroundColor="@color/colorTransparent"
-        card_view:cardElevation="0dp"
-        card_view:cardPreventCornerOverlap="false">
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/prescription_commenter_profile_picture"
+            android:layout_width="37dp"
+            android:layout_height="37dp" />
 
         <LinearLayout
-            android:id="@+id/view_foreground"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical"
+            android:textDirection="locale">
 
+            <TextView
+                android:id="@+id/prescription_commenter_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/arbfonts_swissra_bold"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/prescription_commenter_profile_picture"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="3dp" />
-
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="3dp">
+                android:layout_marginTop="3dp"
+                android:background="@drawable/comment_shape">
 
                 <TextView
-                    android:id="@+id/prescription_commenter_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:textSize="15dp" />
-
-                <FrameLayout
+                    android:id="@+id/presecription_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/comment_shape">
-
-                    <TextView
-                        android:id="@+id/presecription_comment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:textSize="20dp" />
-                </FrameLayout>
-            </LinearLayout>
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="23sp" />
+            </FrameLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 </LinearLayout>
 

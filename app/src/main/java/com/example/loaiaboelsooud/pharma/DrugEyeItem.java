@@ -12,31 +12,31 @@ public class DrugEyeItem {
     @PrimaryKey
     @SerializedName("id")
     @ColumnInfo(name = "id")
-    int id;
+    private int id;
     @SerializedName("Drug Name")
     @ColumnInfo(name = "Drug Name")
-    String name;
+    private String name;
     @SerializedName("Active Ingredients")
     @ColumnInfo(name = "Active Ingredients")
-    String activeIngredients;
+    private String activeIngredients;
     @SerializedName("New Price")
     @ColumnInfo(name = "New Price")
-    float newPrice;
+    private float newPrice;
     @SerializedName("Old Price")
     @ColumnInfo(name = "Old Price")
-    float oldPrice;
+    private float oldPrice;
     @SerializedName("Company")
     @ColumnInfo(name = "Company")
-    String company;
+    private String company;
     @SerializedName("Category")
     @ColumnInfo(name = "Category")
-    String category;
+    private String category;
     @SerializedName("Package Size")
     @ColumnInfo(name = "Package Size")
-    String packageSize;
+    private String packageSize;
     @SerializedName("Uses")
     @ColumnInfo(name = "Uses")
-    String uses;
+    private String uses;
 
     public int getId() {
         return id;

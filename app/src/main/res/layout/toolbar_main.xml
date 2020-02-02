@@ -15,6 +15,21 @@
         android:visibility="gone" />
 
     <FrameLayout
+        android:id="@+id/toolbar_profile_facebook_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/comment_shape"
+        android:visibility="gone">
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/toolbar_profile_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

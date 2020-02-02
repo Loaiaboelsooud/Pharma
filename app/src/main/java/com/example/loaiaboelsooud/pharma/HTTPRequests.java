@@ -123,7 +123,7 @@ public class HTTPRequests extends AppCompatActivity {
             @Override
             public void onResponse(Call<PrescriptionsItemResponse> call, Response<PrescriptionsItemResponse> response) {
                 if (response.body() != null) {
-                    getPrescriptionPostResult.success();
+                    getPrescriptionPostResult.success(response.body().getPrescriptionsItem());
                 } else {
                     getPrescriptionPostResult.failed();
                 }
@@ -473,7 +473,7 @@ public class HTTPRequests extends AppCompatActivity {
     }
 
     public interface GetPrescriptionPostResult {
-        void success();
+        void success(PrescriptionsItem prescriptionsItem);
 
         void failed();
     }

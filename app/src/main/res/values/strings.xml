@@ -5,15 +5,18 @@
     <string name="promotions">OFFERS</string>
     <string name="drug_interactions">DRUG INTERACTIONS</string>
     <string name="prescription">PRESCRIPTIONS</string>
-    <string name="buy_sell">SELL, BUY&amp;RENT</string>
+    <string name="buy_sell">SELL, BUY, RENT</string>
     <string name="drug_index">DRUG INDEX</string>
     <string name="facebook_app_id">241355193451426</string>
     <string name="fb_login_protocol_scheme">fb241355193451426</string>
+    <string name="prescriptions_upload_string">UPLOAD YOUR PRESCRIPTION</string>
+    <string name="prescriptions_loaded_string">PRESCRIPTION LOADED</string>
+    <string name="prescriptions_publish_string">PRESS PUBLISH TO GET ANSWERS</string>
     <string name="prescriptions_gallery_button_string">Gallery</string>
     <string name="prescriptions_camera_button_string">Camera</string>
-    <string name="prescriptions_post_button_string">Publish This Ad</string>
-    <string name="prescriptions_description_hint">Add small description...</string>
-    <string name="prescriptions_description">Add prescriptions</string>
+    <string name="prescriptions_post_button_string">PUBLISH</string>
+    <string name="prescriptions_description_hint">PLACE YOUR QUESTIONS HERE !</string>
+    <string name="prescriptions_description">ADD NEW  PRESCRIPTION :</string>
     <string name="comments_button_string">Comment</string>
     <string name="Signin_comment_toast">You must Sign-in to add a comment</string>
     <string name="Signin_prescriptions_toast">You must Sign-in to add a prescription</string>
@@ -24,20 +27,21 @@
     <string name="prescriptions_text">PRESCRIPTIONS</string>
     <string name="properties_text">ENROLL YOUR FACILITY FOR RENTING OR SELLING </string>
     <string name="post_properties_success">Your property is added successfully</string>
-    <string name="properties_city">City<font color='#cc0029'>*</font></string>
-    <string name="properties_region">region<font color='#cc0029'>*</font></string>
-    <string name="properties_name">Name<font color='#cc0029'>*</font></string>
-    <string name="properties_size">Area</string>
+    <string name="properties_city"><font color='#cc0029'>*</font>City</string>
+    <string name="properties_region"><font color='#cc0029'>*</font>Region</string>
+    <string name="properties_name"><font color='#cc0029'>*</font>Name</string>
+    <string name="properties_size">SPACE AREA</string>
     <string name="properties_profit">Profit</string>
-    <string name="properties_address">Address<font color='#cc0029'>*</font></string>
-    <string name="properties_mobile">Mobile<font color='#cc0029'>*</font></string>
+    <string name="properties_address"><font color='#cc0029'>*</font>Address</string>
+    <string name="properties_mobile"><font color='#cc0029'>*</font>Mobile</string>
     <string name="properties_mobile2">Second Mobile</string>
     <string name="properties_land_number">Land Line Number</string>
     <string name="properties_notes">Notes</string>
-    <string name="properties_listed_for">Listed For<font color='#cc0029'>*</font></string>
-    <string name="properties_type">Type<font color='#cc0029'>*</font></string>
-    <string name="properties_price">Price</string>
-    <string name="properties_description">Description, For Example you can write about what makes your facility special. or if it has a WIFI ,a place for storage<font color='#cc0029'>*</font></string>
+    <string name="properties_listed_for"><font color='#cc0029'>*</font>Listed For</string>
+    <string name="properties_type"><font color='#cc0029'>*</font>Type</string>
+    <string name="properties_price">EXPECTED PRICE</string>
+    <string name="properties_mobile_phone">MOBILE PHONE</string>
+    <string name="properties_description">Description, For Example you can write about what makes your facility special. or if it has a WIFI ,a place for storage</string>
     <string name="post_properties_fail">Please fill all the required fields</string>
     <string name="properties_price_per_month">*PlEASE MAKE SURE THAT YOUR PRICE <b>PER MONTH</b> </string>
     <string name="properties_average_daily">*PLEASE MAKE SURE THAT THIS IS YOUR <b>DAILY</b>  INCOME</string>
@@ -45,12 +49,12 @@
     <string name="address_properties_fail">Address Field must be longer than 10 letters</string>
     <string name="name_properties_fail">Name Field must be longer than 3 letters</string>
     <string name="properties_filter_city">City</string>
-    <string name="properties_average_daily_income">Average daily income</string>
-    <string name="properties_status">Status<font color='#cc0029'>*</font></string>
-    <string name="properties_pharmacy_name">Pharmacy name<font color='#cc0029'>*</font></string>
-    <string name="properties_warehouse_name">Warehouse name<font color='#cc0029'>*</font></string>
-    <string name="properties_factory_name">Factory name<font color='#cc0029'>*</font></string>
-    <string name="properties_hospital_name">Hospital name<font color='#cc0029'>*</font></string>
+    <string name="properties_average_daily_income">AVERAGE INCOME</string>
+    <string name="properties_status"><font color='#cc0029'>*</font>Status</string>
+    <string name="properties_pharmacy_name"><font color='#cc0029'>*</font>Pharmacy name</string>
+    <string name="properties_warehouse_name"><font color='#cc0029'>*</font>Warehouse name</string>
+    <string name="properties_factory_name"><font color='#cc0029'>*</font>Factory name</string>
+    <string name="properties_hospital_name"><font color='#cc0029'>*</font>Hospital name</string>
     <string name="property_listed_for">LISTED FOR</string>
     <string name="property_price">PRICE</string>
     <string name="property_current_status">CURRENT STATUS</string>
@@ -65,7 +69,7 @@
     <string name="LE_H">L.E/H</string>
     <string name="LE_Month">L.E/M</string>
     <string name="LE_Day">L.E/D</string>
-    <string name="m_square">m²</string>
+    <string name="m_square">M²</string>
 
     <string-array name="properties_listed_for_array">
         <item>SELLING</item>
@@ -87,20 +91,22 @@
     <string name="properties_filter_listed_for">Listed For</string>
     <string name="properties_filter_type">Type</string>
     <string name="properties_filter_text">Filter Properties</string>
-    <string name="job_city">City<font color='#cc0029'>*</font></string>
-    <string name="job_address">Address<font color='#cc0029'>*</font></string>
-    <string name="job_region">Region<font color='#cc0029'>*</font></string>
-    <string name="job_name">Name<font color='#cc0029'>*</font></string>
-    <string name="job_mobile">Mobile<font color='#cc0029'>*</font></string>
-    <string name="job_email">Email<font color='#cc0029'>*</font></string>
-    <string name="job_description">Description<font color='#cc0029'>*</font></string>
-    <string name="job_position">Position<font color='#cc0029'>*</font></string>
-    <string name="job_work_place">Workplace<font color='#cc0029'>*</font></string>
-    <string name="job_range_salary">Salary ٍRange</string>
-    <string name="job_to_salary">To</string>
-    <string name="job_from_salary">From</string>
-    <string name="job_run_this_ad_until">Run this ad until</string>
-    <string name="job_negotiable">Negotiable</string>
+    <string name="properties_gallery_button_string">Upload From Gallery</string>
+    <string name="properties_post_button_string">Publish This Ad</string>
+    <string name="job_city"><font color='#cc0029'>*</font>CITY</string>
+    <string name="job_address"><font color='#cc0029'>*</font>ADDRESS</string>
+    <string name="job_region"><font color='#cc0029'>*</font>REGION</string>
+    <string name="job_name"><font color='#cc0029'>*</font>COMPANY NAME</string>
+    <string name="job_mobile"><font color='#cc0029'>*</font>MOBILE</string>
+    <string name="job_email"><font color='#cc0029'>*</font>EMAIL</string>
+    <string name="job_description"><font color='#cc0029'>*</font>DESCRIPTION</string>
+    <string name="job_position"><font color='#cc0029'>*</font>POSITION</string>
+    <string name="job_work_place"><font color='#cc0029'>*</font>WORKPLACE</string>
+    <string name="job_range_salary">SALARY ٍRANGE</string>
+    <string name="job_to_salary">TO</string>
+    <string name="job_from_salary">FROM</string>
+    <string name="job_run_this_ad_until">RUN THIS AD UNTIL</string>
+    <string name="job_negotiable">NEGOTIABLE</string>
     <string name="job_new_opportunity">NEW JOB OPPORTUNITY</string>
     <string name="job_post_button">Publish This Ad</string>
     <string name="post_job_success">Your job is added successfully</string>

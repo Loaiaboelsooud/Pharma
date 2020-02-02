@@ -310,14 +310,12 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
 
     @Override
     public void success() {
-        finish();
         progressBar.setVisibility(View.GONE);
-        postButton.setEnabled(true);
-        galleryButton.setEnabled(true);
-        Toast.makeText(this, getString(R.string.post_properties_success), Toast.LENGTH_LONG).show();
+        finish();
         Intent intent = new Intent(AddPropertiesActivity.this, ViewPropertiesActivity.class);
         intent.putExtra(PharmaConstants.ISFILTERED, false);
         startActivity(intent);
+        Toast.makeText(this, getString(R.string.post_properties_success), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -14,6 +14,7 @@ public class DrugEyeAsyncTasks {
     public static void insertAll(List<DrugEyeItem> drugEyeItemList, DrugItemDao drugItemDao, OnInsertCompleted onInsertCompleted) {
         new DrugEyeAsyncTasks.InsertDrugEyeItems(drugItemDao, onInsertCompleted).execute(drugEyeItemList);
     }
+
     public static LiveData<List<DrugEyeItem>> getAlternatives(String drugName, DrugItemDao drugItemDao) {
 
         return drugItemDao.findAlternatives("%" + drugName.toUpperCase() + "%");
@@ -24,9 +25,10 @@ public class DrugEyeAsyncTasks {
         return drugItemDao.findSimilarities("%" + drugName.toUpperCase() + "%");
     }
 
-    public static LiveData<List<DrugEyeItem>> getDrugEyeItems(String drugName, DrugItemDao drugItemDao) {
+    public static LiveData<List<DrugEyeItem>> getDrugEyeItems(String firstWord, String secondWord, String thirdWord, String forthWord, DrugItemDao drugItemDao) {
 
-        return drugItemDao.findDrugItems(  drugName.toUpperCase() + "%");
+        return drugItemDao.findDrugItems(firstWord.toUpperCase() + "%", "%" + secondWord.toUpperCase() + "%", "%" + thirdWord.toUpperCase() + "%"
+                , "%" + forthWord.toUpperCase() + "%");
     }
 
     public static LiveData<DrugEyeItem> getDrugEyeItem(String drugName, DrugItemDao drugItemDao) {
@@ -41,6 +43,11 @@ public class DrugEyeAsyncTasks {
     public static LiveData<List<DrugEyeItem>> getAll(DrugItemDao drugItemDao) {
 
         return drugItemDao.getAll();
+    }
+
+    public static LiveData<Integer> countAll(DrugItemDao drugItemDao) {
+
+        return drugItemDao.countData();
     }
 
     public static class InsertDrugEyeItem extends AsyncTask<DrugEyeItem, Void, OnInsertCompleted> {

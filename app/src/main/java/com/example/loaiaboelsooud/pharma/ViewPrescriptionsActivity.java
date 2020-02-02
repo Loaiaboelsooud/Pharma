@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequests.GetPrescriptionsList, PrescriptionsAdapter.OnPrescriptionsClickListener {
+public class ViewPrescriptionsActivity extends NavMenuInt implements HTTPRequests.GetPrescriptionsList, PrescriptionsAdapter.OnPrescriptionsClickListener{
     public RecyclerView prescriptionsRecyclerView;
     public List<PrescriptionsItem> prescriptionsItems;
     private Boolean isScrolling = false;

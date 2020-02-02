@@ -30,7 +30,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/job_filter_text"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/colorPinkishRed"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -75,7 +75,7 @@
                     android:id="@+id/job_search_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorRed"
+                    android:background="@color/colorPinkishRed"
                     android:text="@string/filter_button_string"
                     android:textColor="@color/colorWhite"
                     android:textSize="25sp"

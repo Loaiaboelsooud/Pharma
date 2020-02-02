@@ -29,34 +29,31 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/promotions_adapter_company_profile_picture"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="12dp" />
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginTop="4dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="8dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/promotions_adapter_company_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:textSize="20dp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arbfonts_swissra_medium"
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/promotions_adapter_created_at"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="-5dp"
-                        android:text="TextView"
-                        android:textColor="@color/colorRed"
-                        android:textSize="15dp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:textColor="@color/colorPinkishRed"
+                        android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -75,7 +72,7 @@
                     <ImageView
                         android:id="@+id/promotions_adapter_image"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="157dp"
                         android:scaleType="fitXY" />
                 </LinearLayout>
 
@@ -84,24 +81,30 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:background="@color/colorDarkGray"
+                    android:background="@color/colorWhiteSmoke"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/promotions_adapter_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/promotions_adapter_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:textColor="@color/colorLightDark"
+                            android:layoutDirection="locale"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/promotions_adapter_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginEnd="8dp"
+                        android:layoutDirection="locale"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>

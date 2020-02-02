@@ -22,19 +22,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/drug_eye_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/arbfonts_swissra_ultra_light"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/arbfonts_swissra_bold"
                 android:text="@string/drug_eye_text"
-                android:textColor="@color/colorRed"
-                android:textSize="35sp"
+                android:textColor="@color/colorPinkishRed"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
 
@@ -43,8 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:inputType="text"
-                android:hint="@string/search" />
+                android:hint="@string/search"
+                android:inputType="text" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -81,26 +81,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
+                    android:layout_marginBottom="9dp"
                     android:background="@drawable/radius_color_red_shape"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorWhiteTwo"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp">
 
                     <Button
                         android:id="@+id/drug_eye_similarities_button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="3dp"
                         android:background="@drawable/radius_color_gray77_shape"
                         android:text="@string/drug_eye_similarities_button"
-                        android:textColor="@color/colorRed"
+                        android:textColor="@color/colorPinkishRed"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         android:visibility="gone" />
 
@@ -108,12 +110,13 @@
                         android:id="@+id/drug_eye_alternatives_button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:layout_weight="1"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginBottom="3dp"
                         android:background="@drawable/radius_color_gray77_shape"
+                        android:fontFamily="@font/arbfonts_swissra_bold"
                         android:text="@string/drug_eye_alternatives_button"
-                        android:textColor="@color/colorRed"
+                        android:textColor="@color/colorPinkishRed"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         android:visibility="gone" />
                 </LinearLayout>

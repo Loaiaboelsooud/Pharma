@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,7 +38,7 @@ public class PrescriptionsCommentsActivity extends AppCompatActivity implements
     private String imageUrl, profilePictureUrl, userNameString, createdATString, descriptionText;
     private ImageButton addCommentButton;
     private ProgressBar progressBar;
-    private LinearLayout addCommentLayout;
+    private FrameLayout addCommentLayout;
     private TextView uploaderName, createdAt, description;
     private ImageView uploaderAvatar;
 

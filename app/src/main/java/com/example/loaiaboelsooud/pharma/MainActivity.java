@@ -1,16 +1,8 @@
 package com.example.loaiaboelsooud.pharma;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,9 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.facebook.login.LoginManager;
 
 import java.util.Calendar;
@@ -40,7 +30,7 @@ public class MainActivity extends MainMenuInt {
         });
         intMainToolBar(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        refreshTokenIfExpired(httpRequests);
+        logoutIfTokenIsExpired(httpRequests);
         final PrefUtil prefUtil = new PrefUtil(this);
 
         gridView = findViewById(R.id.menugridview);
@@ -118,7 +108,7 @@ public class MainActivity extends MainMenuInt {
         }
     }
 
-    public void refreshTokenIfExpired(HTTPRequests httpRequests) {
+    public void logoutIfTokenIsExpired(HTTPRequests httpRequests) {
         final PrefUtil prefUtil = new PrefUtil(this);
         if (prefUtil.isLoggedIn()) {
             Calendar currentTime = Calendar.getInstance();

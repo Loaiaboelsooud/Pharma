@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
     private ProgressBar progressBar;
     private TextView userName;
     private Button postButton, galleryButton, cameraButton;
+    private LinearLayout imageLayout;
     private File photoFile;
     private Uri photoURI;
 
@@ -43,6 +45,7 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_prescriptions);
+        intNavToolBar();
         PrefUtil prefUtil = new PrefUtil(this);
         userAvatar = findViewById(R.id.prescription_user_profile_picture);
         userName = findViewById(R.id.prescription_user_name);
@@ -50,6 +53,7 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
         galleryButton = findViewById(R.id.presecription_gallery_button);
         cameraButton = findViewById(R.id.presecription_camera_button);
         postButton = findViewById(R.id.presecription_post_button);
+        imageLayout = findViewById(R.id.prescription_image_layout);
         prescriptionsItem = new PrescriptionsItem();
         User loggedInUser = prefUtil.getFacebookUserInfo();
         String imageUrl = loggedInUser.getAvatar() + "picture?width=250&height=250";
@@ -70,7 +74,9 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
             final HTTPRequests httpRequests = new HTTPRequests(this, new HTTPRequests.IResult() {
             });
             httpRequests.sendPrescriptionsPostRequest(imagePart, descriptionPart, this, prefUtil.getToken());
-
+            postButton.setEnabled(false);
+            galleryButton.setEnabled(false);
+            cameraButton.setEnabled(false);
         } else {
             postButton.setEnabled(true);
             galleryButton.setEnabled(true);
@@ -111,8 +117,6 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                uploadedPic = findViewById(R.id.uploaded_pic);
-                uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
 
             } else if (requestCode == REQUEST_GALLERY_IMAGE) {
                 try {
@@ -133,9 +137,10 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                uploadedPic = findViewById(R.id.uploaded_pic);
-                uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
             }
+            uploadedPic = findViewById(R.id.uploaded_pic);
+            uploadedPic.setImageBitmap(Bitmap.createScaledBitmap(imageBitmap, 400, 400, false));
+            imageLayout.setVisibility(View.VISIBLE);
             try {
                 imagePart = imageToFile(imageBitmap);
             } catch (IOException e) {
@@ -168,8 +173,8 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
         }*/
         ImageCompression imageCompression = new ImageCompression(this);
         File compressedImageFile = new File(imageCompression.compressImage(photoFile.getAbsolutePath()));
-        RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), compressedImageFile );
-        MultipartBody.Part body = MultipartBody.Part.createFormData("image", compressedImageFile .getName(), reqFile);
+        RequestBody reqFile = RequestBody.create(MediaType.parse(getContentResolver().getType(photoURI)), compressedImageFile);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("image", compressedImageFile.getName(), reqFile);
         return body;
     }
 
@@ -180,10 +185,7 @@ public class AddPrescriptionsActivity extends NavMenuInt implements HTTPRequests
     }
 
     @Override
-    public void success() {
-        postButton.setEnabled(true);
-        galleryButton.setEnabled(true);
-        cameraButton.setEnabled(true);
+    public void success(PrescriptionsItem prescriptionsItem) {
         finish();
         progressBar.setVisibility(View.GONE);
         Toast.makeText(this, getString(R.string.post_prescriptions_success), Toast.LENGTH_LONG).show();
