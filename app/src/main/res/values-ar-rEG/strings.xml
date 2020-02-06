@@ -58,16 +58,16 @@
     <string name="properties_warehouse_name"><font color='#cc0029'>*</font>اسم المخزن</string>
     <string name="properties_factory_name"><font color='#cc0029'>*</font>اسم المصنع</string>
     <string name="properties_hospital_name"><font color='#cc0029'>*</font>اسم المستشفي</string>
-    <string name="property_listed_for">سبب البيع</string>
-    <string name="property_price">السعر</string>
-    <string name="property_current_status">الحاله</string>
-    <string name="property_address">العنوان</string>
-    <string name="property_space">المساحه</string>
-    <string name="property_average_daily_income">الدخل اليومي</string>
+    <string name="property_listed_for">سبب البيع:</string>
+    <string name="property_price">السعر:</string>
+    <string name="property_current_status">الحاله:</string>
+    <string name="property_address">العنوان:</string>
+    <string name="property_space">المساحه:</string>
+    <string name="property_average_daily_income">الدخل اليومي:</string>
     <string name="property_contact">التواصل:</string>
     <string name="property_tel">تليفون:</string>
-    <string name="property_description">المواصافات</string>
-    <string name="property_category">الفئه</string>
+    <string name="property_description">المواصافات:</string>
+    <string name="property_category">الفئه:</string>
     <string name="LE">ج.م</string>
     <string name="LE_H">ج.م/س</string>
     <string name="LE_Month">ج.م/ش</string>
@@ -135,37 +135,6 @@
     </plurals>
 
     <string-array name="cities_array">
-        <item>اسوان</item>
-        <item>اسيوط</item>
-        <item>الاقصر</item>
-        <item>الاسكندرية</item>
-        <item>الاسماعيلية</item>
-        <item>البحرالاحمر</item>
-        <item>البحيرة</item>
-        <item>الجيزة</item>
-        <item>الدقهلية</item>
-        <item>السويس</item>
-        <item>الشرقية</item>
-        <item>الغربية</item>
-        <item>الفيوم</item>
-        <item>القاهرة</item>
-        <item>القليوبية</item>
-        <item>المنوفية</item>
-        <item>المينيا</item>
-        <item>الوادي الجديد</item>
-        <item>بني سويف</item>
-        <item>بورسعيد</item>
-        <item>جنوب سيناء</item>
-        <item>دمياط</item>
-        <item>سوهاج</item>
-        <item>شمال سيناء</item>
-        <item>قنا</item>
-        <item>كفرالشيخ</item>
-        <item>مطروح</item>
-        <item>الساحل الشمالي</item>
-    </string-array>
-    <string-array name="cities_array_filter">
-        <item></item>
         <item>اسوان</item>
         <item>اسيوط</item>
         <item>الاقصر</item>
@@ -686,8 +655,6 @@
         <item>سيدي عبد الرحمن</item>
         <item>مناطق اخري </item>
     </string-array>
-
-
     <string-array name="job_work_place_array">
         <item>صيدلية</item>
         <item>شركات ادوية</item>
@@ -704,14 +671,12 @@
     </string-array>
 
     <string-array name="job_filter_work_place_array">
-        <item></item>
         <item>صيدلية</item>
         <item>شركات ادوية</item>
         <item>مصانع ادوية</item>
         <item>شركات توزيع ادوية و مخازن</item>
     </string-array>
     <string-array name="job_filter_position_array">
-        <item></item>
         <item>مدير</item>
         <item>صيدلي ثان</item>
         <item>مدير فتح و اغلاق</item>
@@ -721,12 +686,10 @@
     </string-array>
 
     <string-array name="properties_filter_listed_for_array">
-        <item></item>
         <item>بيع</item>
         <item>ايجار</item>
     </string-array>
     <string-array name="properties_filter_type_array">
-        <item></item>
         <item>صيدلية</item>
         <item>شركات توزيع ادوية و مخازن</item>
         <item>مصانع ادوية</item>

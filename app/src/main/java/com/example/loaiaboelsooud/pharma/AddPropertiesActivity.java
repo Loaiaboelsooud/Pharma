@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,10 +38,11 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     private List<MultipartBody.Part> images;
     private ProgressBar progressBar;
     private PharmaConstants pharmaConstants;
-    private Button postButton, galleryButton;
+    private Button postButton;
     private Spinner citySpinner, regionSpinner, typeSpinner, statusSpinner, listedForSpinner;
     private EditText propertyName;
     private TextView imagesCount, priceUnit, rentingHint;
+    private LinearLayout galleryLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         progressBar = findViewById(R.id.properties_post_progress);
         pharmaConstants = new PharmaConstants(this);
         postButton = findViewById(R.id.properties_post_button);
-        galleryButton = findViewById(R.id.properties_gallery_button);
+        galleryLayout = findViewById(R.id.properties_gallery_layout);
         imagesCount = findViewById(R.id.properties_images_count);
         citySpinner = findViewById(R.id.properties_city);
         regionSpinner = findViewById(R.id.properties_region);
@@ -64,6 +66,16 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         initRegionSpinner();
         initStatusSpinner();
         initTypeSpinner();
+        galleryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    openPropertiesGalleryIntent();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void initCitySpinner() {
@@ -221,7 +233,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
                         Toast.LENGTH_LONG).show();
             } else {
                 postButton.setEnabled(false);
-                galleryButton.setEnabled(false);
+                galleryLayout.setEnabled(false);
                 httpRequests.sendPropertiesPostRequest(prefUtil.getToken(), name.getText().toString(), pharmaConstants.citiesMapAdd.get(citySpinner.getSelectedItem().toString()),
                         PharmaConstants.regionsMapAdd.get(regionSpinner.getSelectedItem().toString()), address.getText().toString(), area.getText().toString(),
                         pharmaConstants.listedForMapAdd.get(listedForSpinner.getSelectedItem().toString()),
@@ -234,7 +246,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
         }
     }
 
-    public void openPropertiesGalleryIntent(View view) throws IOException {
+    public void openPropertiesGalleryIntent() throws IOException {
         Intent pictureIntent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pictureIntent.setType("image/*");
@@ -322,7 +334,7 @@ public class AddPropertiesActivity extends NavMenuInt implements HTTPRequests.Ge
     public void failed() {
         progressBar.setVisibility(View.GONE);
         postButton.setEnabled(true);
-        galleryButton.setEnabled(true);
+        galleryLayout.setEnabled(true);
         Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
     }
 

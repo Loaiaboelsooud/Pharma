@@ -55,16 +55,16 @@
     <string name="properties_warehouse_name"><font color='#cc0029'>*</font>Warehouse name</string>
     <string name="properties_factory_name"><font color='#cc0029'>*</font>Factory name</string>
     <string name="properties_hospital_name"><font color='#cc0029'>*</font>Hospital name</string>
-    <string name="property_listed_for">LISTED FOR</string>
-    <string name="property_price">PRICE</string>
-    <string name="property_current_status">CURRENT STATUS</string>
-    <string name="property_address">ADDRESS</string>
-    <string name="property_space">space</string>
-    <string name="property_average_daily_income">AVERAGE DAILY INCOME</string>
+    <string name="property_listed_for">LISTED FOR:</string>
+    <string name="property_price">PRICE:</string>
+    <string name="property_current_status">CURRENT STATUS:</string>
+    <string name="property_address">ADDRESS:</string>
+    <string name="property_space">SPACE:</string>
+    <string name="property_average_daily_income">AVERAGE DAILY INCOME:</string>
     <string name="property_contact">CONTACT:</string>
     <string name="property_tel">TEL:</string>
-    <string name="property_description">DESCRIPTION</string>
-    <string name="property_category">CATEGORY</string>
+    <string name="property_description">DESCRIPTION:</string>
+    <string name="property_category">CATEGORY:</string>
     <string name="LE">L.E</string>
     <string name="LE_H">L.E/H</string>
     <string name="LE_Month">L.E/M</string>
@@ -136,37 +136,6 @@
 
 
     <string-array name="cities_array">
-        <item>Aswan</item>
-        <item>Asyut</item>
-        <item>Luxor</item>
-        <item>Alexandria</item>
-        <item>Ismailia</item>
-        <item>Red Sea</item>
-        <item>Beheira</item>
-        <item>Giza</item>
-        <item>Dakahlia</item>
-        <item>Suez</item>
-        <item>Sharqia</item>
-        <item>Gharbia</item>
-        <item>Fayoum</item>
-        <item>Cairo</item>
-        <item>Qalyubia</item>
-        <item>Monufia</item>
-        <item>Minya</item>
-        <item>New Valley</item>
-        <item>Beni Suef</item>
-        <item>Port Said</item>
-        <item>South Sinai</item>
-        <item>Damietta</item>
-        <item>Sohag</item>
-        <item>North Sinai</item>
-        <item>Qena</item>
-        <item>Kafr al-Sheikh</item>
-        <item>Matruh</item>
-        <item>North Coast</item>
-    </string-array>
-    <string-array name="cities_array_filter">
-        <item></item>
         <item>Aswan</item>
         <item>Asyut</item>
         <item>Luxor</item>
@@ -708,14 +677,12 @@
         <item>Pharmacist</item>
     </string-array>
     <string-array name="job_filter_work_place_array">
-        <item></item>
         <item>Pharmacy</item>
         <item>Company</item>
         <item>Factory</item>
         <item>Warehouse</item>
     </string-array>
     <string-array name="job_filter_position_array">
-        <item></item>
         <item>Manager</item>
         <item>Second pharmacist</item>
         <item>Open AND Close</item>
@@ -724,12 +691,10 @@
         <item>Pharmacist</item>
     </string-array>
     <string-array name="properties_filter_listed_for_array">
-        <item></item>
         <item>SELLING</item>
         <item>RENTING</item>
     </string-array>
     <string-array name="properties_filter_type_array">
-        <item></item>
         <item>Pharmacy</item>
         <item>Warehouse</item>
         <item>Factory</item>

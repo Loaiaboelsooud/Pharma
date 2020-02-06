@@ -56,9 +56,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="19dp"
                     android:layout_marginBottom="10dp"
-                    android:maxLength="25"
                     android:hint="@string/properties_name"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:maxLength="25" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -129,9 +129,9 @@
                     android:layout_marginEnd="19dp"
                     android:layout_marginBottom="10dp"
                     android:hint="@string/properties_address"
-                    android:maxLength="100"
                     android:inputType="text"
-                    android:lines="2" />
+                    android:lines="2"
+                    android:maxLength="100" />
 
                 <Spinner
                     android:id="@+id/properties_listed_for"
@@ -241,7 +241,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="-15dp"
                             android:inputType="number"
-                            android:maxLength="5"/>
+                            android:maxLength="5" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -297,16 +297,16 @@
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:hint="@string/properties_mobile"
-                            android:maxLength="11"
-                            android:inputType="phone" />
+                            android:inputType="phone"
+                            android:maxLength="11" />
 
                         <EditText
                             android:id="@+id/properties_mobile2"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:maxLength="11"
                             android:hint="@string/properties_mobile2"
-                            android:inputType="phone" />
+                            android:inputType="phone"
+                            android:maxLength="11" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -332,24 +332,39 @@
                     android:textColor="@color/colorPinkishRed"
                     android:textSize="10sp" />
 
-                <Button
-                    android:id="@+id/properties_gallery_button"
+                <LinearLayout
+                    android:id="@+id/properties_gallery_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="37dp"
                     android:layout_marginEnd="37dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/radius_color_gray77_shape"
-                    android:drawableStart="@drawable/gallery_button"
-                    android:fontFamily="@font/arbfonts_swissra_bold"
-                    android:onClick="openPropertiesGalleryIntent"
-                    android:textAllCaps="false"
-                    android:paddingStart="40dp"
-                    android:textAlignment="textStart"
-                    android:text="@string/properties_gallery_button_string"
-                    android:textColor="@color/colorRed"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="39dp"
+                        android:layout_height="39dp"
+                        android:layout_marginStart="36.5dp"
+                        android:layout_marginTop="4.5dp"
+                        android:layout_marginEnd="9dp"
+                        android:layout_marginBottom="3.5dp"
+                        android:background="@drawable/gallery_button" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9.5dp"
+                        android:layout_marginEnd="9.5dp"
+                        android:fontFamily="@font/arbfonts_swissra_bold"
+                        android:text="@string/properties_gallery_button_string"
+                        android:textColor="@color/colorPinkishRed"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/properties_post_button"
@@ -359,11 +374,11 @@
                     android:layout_marginStart="37dp"
                     android:layout_marginEnd="37dp"
                     android:layout_marginBottom="50dp"
-                    android:textAllCaps="false"
                     android:background="@drawable/radius_color_red_shape"
                     android:fontFamily="@font/arbfonts_swissra_bold"
                     android:onClick="addProperties"
                     android:text="@string/properties_post_button_string"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="17sp"
                     android:textStyle="bold" />
